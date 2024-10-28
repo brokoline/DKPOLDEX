@@ -54,28 +54,6 @@ fun FavoritesScreen(onBackClick: () -> Unit = {}) {
                     FavoriteCard()
                 }
             }
-        },
-        bottomBar = {
-            BottomAppBar(
-                containerColor = Color(0xFFFF6F61),
-                content = {
-                    Button(
-                        onClick = onBackClick,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(20.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = Color.White)
-                    ) {
-                        Text(
-                            text = "Tilbage til hovedmenu",
-                            color = Color(0xFFFF6F61),
-                            style = MaterialTheme.typography.bodyMedium.copy(
-                                fontWeight = FontWeight.Bold,
-                                fontSize = 20.sp)
-                        )
-                    }
-                }
-            )
         }
     )
 }
