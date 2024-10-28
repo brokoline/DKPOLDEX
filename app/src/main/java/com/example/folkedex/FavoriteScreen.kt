@@ -47,9 +47,10 @@ fun FavoritesScreen(onBackClick: () -> Unit = {}) {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues)
-                    .padding(horizontal = 16.dp)
+                    .padding(horizontal = 26.dp)
+                    .padding(vertical = 26.dp)
             ) {
-                items(5) {
+                items(3) {
                     FavoriteCard()
                 }
             }
@@ -62,13 +63,15 @@ fun FavoritesScreen(onBackClick: () -> Unit = {}) {
                         onClick = onBackClick,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(8.dp),
+                            .padding(20.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = Color.White)
                     ) {
                         Text(
                             text = "Tilbage til hovedmenu",
                             color = Color(0xFFFF6F61),
-                            style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold)
+                            style = MaterialTheme.typography.bodyMedium.copy(
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 20.sp)
                         )
                     }
                 }
@@ -124,7 +127,9 @@ fun FavoriteCard() {
                     )
                     Text(
                         text = "Partinavn",
-                        style = MaterialTheme.typography.bodyMedium.copy(color = Color.White)
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            color = Color.White,
+                            )
                     )
                 }
 
@@ -135,7 +140,7 @@ fun FavoriteCard() {
                     Icon(
                         imageVector = Icons.Default.Favorite,
                         contentDescription = "Favorite",
-                        tint = Color.White
+                        tint = Color.White,
                     )
                 }
             }
