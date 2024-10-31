@@ -19,6 +19,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.folkedex.ui.theme.FolkeDexTheme
 import com.example.folkedex.ui.theme.FavoritesScreen
+//import com.example.folkedex.PartyScreen
+import com.example.folkedex.ui.theme.Party
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +37,13 @@ class MainActivity : ComponentActivity() {
                     }
                     composable("favorites") {
                         FavoritesScreen(onBackClick = {
+                            navController.navigate("main") {
+                                popUpTo("main") { inclusive = true }
+                            }
+                        })
+                    }
+                    composable("Moderaterne") {
+                        Party(onBackClick = {
                             navController.navigate("main") {
                                 popUpTo("main") { inclusive = true }
                             }
@@ -63,6 +72,11 @@ fun MainScreen(navController: NavHostController) {
                     onClick = { navController.navigate("favorites") }
                 ) {
                     Text(text = "Gå til Favoritter")
+                }
+                Button(
+                    onClick = { navController.navigate("Moderaterne") }
+                ) {
+                    Text(text = "Moderaterne     ")
                 }
             }
         }
