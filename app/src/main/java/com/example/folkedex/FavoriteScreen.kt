@@ -3,6 +3,7 @@ package com.example.folkedex.ui.theme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
@@ -16,10 +17,18 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 
+data class Politiker(val navn: String, val parti: String)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FavoritesScreen(onBackClick: () -> Unit = {}) {
+    // Dummy-data til politikere
+    val politikere = listOf(
+        Politiker(navn = "Mette Frederiksen", parti = "Socialdemokratiet"),
+        Politiker(navn = "Jakob Ellemann-Jensen", parti = "Venstre"),
+        Politiker(navn = "Lars Løkke Rasmussen", parti = "Moderaterne")
+    )
+
     Scaffold(
         topBar = {
             Box(
@@ -74,8 +83,9 @@ fun FavoritesScreen(onBackClick: () -> Unit = {}) {
                     .padding(horizontal = 26.dp)
                     .padding(vertical = 26.dp)
             ) {
-                items(3) {
-                    FavoriteCard()
+                // Brug politikere-listen til at vise hvert FavoriteCard
+                items(politikere) { politiker ->
+                    FavoriteCard(navn = politiker.navn, parti = politiker.parti)
                 }
             }
         }
