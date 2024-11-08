@@ -86,17 +86,8 @@ import com.example.folkedex.R
                         )
                     }
 
-                    // folketing logo
-                    Image(
-                        painter = painterResource(id = R.drawable.flogo),
-                        contentDescription = "Right Aligned Transparent Image",
-                        modifier = Modifier
-                            .size(300.dp)
-                            .align(Alignment.CenterEnd)
-                            .padding(end = 16.dp)
-                            .offset(x = (100).dp, y = (-40).dp) // moving text
-                            .alpha(0.4f) //  transparency
-                    )
+                    // Brug FolketingLogo composable her
+                    FolketingLogo(modifier = Modifier.align(Alignment.CenterEnd))
                 }
             },
             content = { paddingValues ->

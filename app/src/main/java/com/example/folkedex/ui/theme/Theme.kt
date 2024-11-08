@@ -19,6 +19,7 @@ private val LightColorScheme = lightColorScheme(
     tertiary = Color(0xFFE91E63)
 )
 
+
 @Composable
 fun FolkeDexTheme(
     darkTheme: Boolean = false, // evt. brug dynamisk tema baseret på systemet
