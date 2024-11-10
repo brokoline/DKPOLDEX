@@ -40,137 +40,145 @@ import com.example.folkedex.R
 
 
 @OptIn(ExperimentalMaterial3Api::class)
-    @Composable
-    fun Party(onBackClick: () -> Unit = {}) {
-        Scaffold(
-            topBar = {
-                Box(
+@Composable
+fun Party(partyData: PartyData, onBackClick: () -> Unit = {}) {
+    Scaffold(
+        topBar = {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp)
+                    .background(partyData.backgroundColor),
+                contentAlignment = Alignment.CenterStart
+            ) {
+                IconButton(
+                    onClick = onBackClick,
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(200.dp)
-                        .background(Color(0xFF842990)),
-                    contentAlignment = Alignment.CenterStart
+                        .padding(start = 16.dp)
+                        .align(Alignment.CenterStart)
                 ) {
-
-                    IconButton(
-                        onClick = onBackClick,
-                        modifier = Modifier
-                            .padding(start = 16.dp)
-                            .align(Alignment.CenterStart)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Tilbage",
-                            tint = Color.White
-                        )
-                    }
-
-                    // Moderaterne logo
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.offset(x = (100).dp)
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.moderaterne),
-                            contentDescription = "Centered Image",
-                            modifier = Modifier
-                                .size(120.dp)
-                                .padding(bottom = 4.dp)
-                        )
-                        Text(
-                            "Moderaterne",
-                            fontSize = 40.sp,
-                            color = Color.White,
-                            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
-                        )
-                    }
-
-                    // Brug FolketingLogo composable her
-                    FolketingLogo(modifier = Modifier.align(Alignment.CenterEnd))
-                }
-            },
-            content = { paddingValues ->
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(paddingValues)
-                        .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    // text about the party
-                    Text(
-                        text = "Text about the Moderaterne party, \n" +
-                                "eventually what they stand for,\n" +
-                                "political orientation/spectrum\n" +
-                                "placement, when they were founded,\n" +
-                                "etc etc.",
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black,
-                        modifier = Modifier.fillMaxWidth(),
-                        textAlign = TextAlign.Center
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "Back",
+                        tint = Color.White
                     )
-
-                    // Button layout
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalArrangement = Arrangement.spacedBy(32.dp)
-                    ) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceEvenly
-                        ) {
-                            CustomButton(text = "Politicians", imageRes = R.drawable.flogo, modifier = Modifier.width(170.dp))
-                            CustomButton(text = "History", imageRes = R.drawable.flogo, modifier = Modifier.width(170.dp))
-                        }
-
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceEvenly
-                        ) {
-                            CustomButton(text = "Policies", imageRes = R.drawable.flogo, modifier = Modifier.width(170.dp))
-                            CustomButton(text = "Statistics", imageRes = R.drawable.flogo, modifier = Modifier.width(170.dp))
-                        }
-                    }
                 }
+
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.offset(x = partyData.offsetX.dp, y = partyData.offsetY.dp)
+                ) {
+                    Image(
+                        painter = painterResource(id = partyData.logoRes),
+                        contentDescription = "Centered Image",
+                        modifier = Modifier
+                            .size(partyData.imageSize)
+                            .padding(bottom = 4.dp)
+                    )
+                    Text(
+                        partyData.name,
+                        fontSize = partyData.textSize,
+                        color = Color.White,
+                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+                    )
+                }
+
+                FolketingLogo(modifier = Modifier.align(Alignment.CenterEnd))
             }
-        )
-    }
-
-    @Composable
-    fun CustomButton(text: String, imageRes: Int, modifier: Modifier = Modifier) {
-
-        Button(
-            onClick = { /* Handle click */ },
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF9F5BBA)),
-            shape = RoundedCornerShape(10.dp),
-            modifier = modifier
-                .shadow(elevation = 10.dp, shape = RoundedCornerShape(20.dp), clip = true)
-                .height(60.dp),
-
-            contentPadding = PaddingValues(horizontal = 16.dp),
-            
-        ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()
+        },
+        content = { paddingValues ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Text(
-                    text = text,
-                    color = Color.White,
+                    text = partyData.description,
+                    fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.weight(1f)
+                    color = Color.Black,
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center
                 )
-                Image(
-                    painter = painterResource(id = imageRes),
-                    contentDescription = "Button Icon",
-                    modifier = Modifier.size(42.dp)
-                )
+
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(32.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+                        CustomButton(
+                            text = "Politicians",
+                            imageRes = R.drawable.flogo,
+                            buttonColor = partyData.buttonColor,
+                            modifier = Modifier.width(170.dp)
+                        )
+                        CustomButton(
+                            text = "History",
+                            imageRes = R.drawable.flogo,
+                            buttonColor = partyData.buttonColor,
+                            modifier = Modifier.width(170.dp)
+                        )
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+                        CustomButton(
+                            text = "Policies",
+                            imageRes = R.drawable.flogo,
+                            buttonColor = partyData.buttonColor,
+                            modifier = Modifier.width(170.dp)
+                        )
+                        CustomButton(
+                            text = "Statistics",
+                            imageRes = R.drawable.flogo,
+                            buttonColor = partyData.buttonColor,
+                            modifier = Modifier.width(170.dp)
+                        )
+                    }
+                }
             }
         }
+    )
+}
+
+@Composable
+fun CustomButton(text: String, imageRes: Int, buttonColor: Color, modifier: Modifier = Modifier) {
+    Button(
+        onClick = { /* Handle click */ },
+        colors = ButtonDefaults.buttonColors(containerColor = buttonColor),
+        shape = RoundedCornerShape(10.dp),
+        modifier = modifier
+            .shadow(elevation = 10.dp, shape = RoundedCornerShape(20.dp), clip = true)
+            .height(60.dp),
+        contentPadding = PaddingValues(horizontal = 16.dp),
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(
+                text = text,
+                color = Color.White,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.weight(1f)
+            )
+            Image(
+                painter = painterResource(id = imageRes),
+                contentDescription = "Button Icon",
+                modifier = Modifier.size(42.dp)
+            )
+        }
     }
+}
 
     @Preview(
         showSystemUi = true,
@@ -179,7 +187,16 @@ import com.example.folkedex.R
     )
     @Composable
     fun PreviewParty() {
-        Party()
+        // Sample data for preview
+        val samplePartyData = PartyData(
+            name = "Moderaterne",
+            logoRes = R.drawable.moderaterne,
+            description = "Text about the Moderaterne party, eventually what they stand for, political orientation, placement, when they were founded, etc.",
+            backgroundColor = Color(0xFF842990),
+            buttonColor = Color(0xFF9F5BBA)
+        )
+
+        Party(partyData = samplePartyData)
     }
 
 
