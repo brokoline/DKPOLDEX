@@ -31,7 +31,7 @@ fun ReportCard(report: Report, onClick: () -> Unit) {
                 .fillMaxWidth()
                 .background(
                     brush = Brush.linearGradient(
-                        colors = listOf(Color(0xFFAED581), Color(0xFF689F38)) // Different gradient for reports
+                        colors = listOf(Color(0xFF689F38 ), Color(0xFFAED581)) // Different gradient for reports
                     )
                 )
                 .padding(16.dp)

@@ -33,7 +33,7 @@ fun VoteCard(vote: Vote, onClick: () -> Unit) {
                 .fillMaxWidth()
                 .background(
                     brush = Brush.linearGradient(
-                        colors = listOf(Color(0xFF80CBC4), Color(0xFF00695C)) // Nyt gradient for afstemninger
+                        colors = listOf(Color(0xFF00695C ), Color(0xFF80CBC4)) // Nyt gradient for afstemninger
                     )
                 )
                 .padding(16.dp)
