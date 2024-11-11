@@ -19,8 +19,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.folkedex.ui.theme.FolkeDexTheme
 import com.example.folkedex.ui.theme.FavoritesScreen
-//import com.example.folkedex.PartyScreen
+import com.example.folkedex.ui.theme.ReportsScreen
 import com.example.folkedex.ui.theme.Party
+import com.example.folkedex.ui.theme.VoteScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +50,20 @@ class MainActivity : ComponentActivity() {
                             }
                         })
                     }
+                    composable("Reports") {
+                        ReportsScreen(onBackClick = {
+                            navController.navigate("main") {
+                                popUpTo("main") { inclusive = true }
+                            }
+                        })
+                    }
+                    composable("Votes") { // Tilføjet Votes route
+                        VoteScreen(onBackClick = {
+                            navController.navigate("main") {
+                                popUpTo("main") { inclusive = true }
+                            }
+                        })
+                    }
                 }
             }
         }
@@ -64,7 +79,7 @@ fun MainScreen(navController: NavHostController) {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues)
-                    .padding(16.dp), // Tilføj noget padding for layoutets skyld
+                    .padding(16.dp),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -76,12 +91,23 @@ fun MainScreen(navController: NavHostController) {
                 Button(
                     onClick = { navController.navigate("Moderaterne") }
                 ) {
-                    Text(text = "Moderaterne     ")
+                    Text(text = "Moderaterne")
+                }
+                Button(
+                    onClick = { navController.navigate("Reports") }
+                ) {
+                    Text(text = "Reports")
+                }
+                Button( // Knappen til VoteScreen
+                    onClick = { navController.navigate("Votes") }
+                ) {
+                    Text(text = "Votes")
                 }
             }
         }
     )
 }
+
 
 @Preview(showBackground = true)
 @Composable
