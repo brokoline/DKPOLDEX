@@ -11,6 +11,7 @@ data class PartyData(
     val name: String,
     @DrawableRes val logoRes: Int,
     val description: String,
+    val history: String,
     val backgroundColor: Color,
     val buttonColor: Color,
     val offsetX: Float = 0f,

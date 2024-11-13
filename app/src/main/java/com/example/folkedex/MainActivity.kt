@@ -23,6 +23,7 @@ import com.example.folkedex.ui.theme.PartyRepository
 import com.example.folkedex.ui.theme.FavoritesScreen
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import com.example.folkedex.ui.theme.History
 
 
 class MainActivity : ComponentActivity() {
@@ -45,6 +46,14 @@ class MainActivity : ComponentActivity() {
                             }
                         })
                     }
+
+                    composable("history") {
+                        History(onBackClick = {
+                            navController.navigate("main") {
+                                popUpTo("main") { inclusive = true }
+                            }
+                        })
+                    }
                     // getting list of parties from our "database" and creating routes for each
                     PartyRepository.parties.forEach { party ->
                         composable(party.name) {
@@ -56,7 +65,7 @@ class MainActivity : ComponentActivity() {
                                         navController.navigate("main") {
                                             popUpTo("main") { inclusive = true }
                                         }
-                                    }
+                                    }, navController = navController
                                 )
                             } else {
                                 Text("Party data not found")
@@ -88,6 +97,14 @@ fun MainScreen(navController: NavHostController) {
                         modifier = Modifier.padding(vertical = 8.dp)
                     ) {
                         Text(text = "Gå til Favoritter")
+                    }
+                }
+                item {
+                    Button(
+                        onClick = { navController.navigate("history") },
+                        modifier = Modifier.padding(vertical = 8.dp)
+                    ) {
+                        Text(text = "Gå til historik")
                     }
                 }
 

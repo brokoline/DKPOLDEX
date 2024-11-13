@@ -36,12 +36,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.Navigation
 import com.example.folkedex.R
+
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Party(partyData: PartyData, onBackClick: () -> Unit = {}) {
+fun Party(partyData: PartyData, onBackClick: () -> Unit = {}, navController: NavHostController) {
     Scaffold(
         topBar = {
             Box(
@@ -115,13 +119,15 @@ fun Party(partyData: PartyData, onBackClick: () -> Unit = {}) {
                             text = "Politicians",
                             imageRes = R.drawable.flogo,
                             buttonColor = partyData.buttonColor,
-                            modifier = Modifier.width(170.dp)
+                            modifier = Modifier.width(170.dp),
+                            onClick = { }
                         )
                         CustomButton(
                             text = "History",
                             imageRes = R.drawable.flogo,
                             buttonColor = partyData.buttonColor,
-                            modifier = Modifier.width(170.dp)
+                            modifier = Modifier.width(170.dp),
+                            onClick = {navController.navigate("history")  }
                         )
                     }
 
@@ -133,13 +139,15 @@ fun Party(partyData: PartyData, onBackClick: () -> Unit = {}) {
                             text = "Policies",
                             imageRes = R.drawable.flogo,
                             buttonColor = partyData.buttonColor,
-                            modifier = Modifier.width(170.dp)
+                            modifier = Modifier.width(170.dp),
+                            onClick = { }
                         )
                         CustomButton(
                             text = "Statistics",
                             imageRes = R.drawable.flogo,
                             buttonColor = partyData.buttonColor,
-                            modifier = Modifier.width(170.dp)
+                            modifier = Modifier.width(170.dp),
+                            onClick = { }
                         )
                     }
                 }
@@ -149,9 +157,9 @@ fun Party(partyData: PartyData, onBackClick: () -> Unit = {}) {
 }
 
 @Composable
-fun CustomButton(text: String, imageRes: Int, buttonColor: Color, modifier: Modifier = Modifier) {
+fun CustomButton(text: String, imageRes: Int, buttonColor: Color, modifier: Modifier = Modifier, onClick: () -> Unit) {
     Button(
-        onClick = { /* Handle click */ },
+        onClick = onClick,
         colors = ButtonDefaults.buttonColors(containerColor = buttonColor),
         shape = RoundedCornerShape(10.dp),
         modifier = modifier
@@ -179,24 +187,4 @@ fun CustomButton(text: String, imageRes: Int, buttonColor: Color, modifier: Modi
         }
     }
 }
-
-    @Preview(
-        showSystemUi = true,
-        showBackground = true,
-        device = "spec:width=411dp,height=891dp,dpi=420"
-    )
-    @Composable
-    fun PreviewParty() {
-        // Sample data for preview
-        val samplePartyData = PartyData(
-            name = "Moderaterne",
-            logoRes = R.drawable.moderaterne,
-            description = "Text about the Moderaterne party, eventually what they stand for, political orientation, placement, when they were founded, etc.",
-            backgroundColor = Color(0xFF842990),
-            buttonColor = Color(0xFF9F5BBA)
-        )
-
-        Party(partyData = samplePartyData)
-    }
-
 

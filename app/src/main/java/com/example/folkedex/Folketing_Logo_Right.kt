@@ -23,6 +23,6 @@ fun FolketingLogo(
             .size(300.dp)
             .padding(end = 16.dp)
             .offset(x = 100.dp, y = (-40).dp) // Positionering i højre
-            .alpha(0.4f) // Transparens
+            .alpha(1.0f) // Transparens
     )
 }
