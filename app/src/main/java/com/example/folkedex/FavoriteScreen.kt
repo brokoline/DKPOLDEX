@@ -71,7 +71,7 @@ fun FavoritesScreen(onBackClick: () -> Unit = {}) {
                     )
                 }
 
-                // Brug FolketingLogo composable her
+                // FolketingLogo composable
                 FolketingLogo(modifier = Modifier.align(Alignment.CenterEnd))
             }
         },
@@ -83,7 +83,7 @@ fun FavoritesScreen(onBackClick: () -> Unit = {}) {
                     .padding(horizontal = 26.dp)
                     .padding(vertical = 26.dp)
             ) {
-                // Brug politikere-listen til at vise hvert FavoriteCard
+                // Bruger politikere-listen til at vise hvert FavoriteCard
                 items(politikere) { politiker ->
                     FavoriteCard(navn = politiker.navn, parti = politiker.parti)
                 }

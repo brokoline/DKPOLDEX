@@ -69,8 +69,6 @@ fun VoteScreen(onBackClick: () -> Unit = {}) {
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     )
                 }
-
-                // Hvis du har et logo, som skal vises i hjørnet, kan du bruge en lignende funktion til at tilføje det
             }
         },
         content = { paddingValues ->
