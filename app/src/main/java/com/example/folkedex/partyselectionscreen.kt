@@ -40,10 +40,12 @@ fun PartySelectionScreen(onPartyClick: (String) -> Unit) {
                 title = {
                     Text(
                         text = "FolkeDex",
-                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+                        fontSize = 32.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black // Make text color black for better contrast
                     )
                 },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = Color(0xFF842990))
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = Color.White) // Set to white
             )
         },
         content = { paddingValues ->
@@ -55,6 +57,7 @@ fun PartySelectionScreen(onPartyClick: (String) -> Unit) {
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                // This chunked(2) will help in forming rows of 2 cards each
                 items(getFullPartyList().chunked(2)) { rowParties ->
                     PartyRow(rowParties = rowParties, onPartyClick = onPartyClick)
                 }
@@ -77,23 +80,24 @@ fun PartyRow(rowParties: List<Pair<String, Int>>, onPartyClick: (String) -> Unit
 
 @Composable
 fun PartyCard(partyName: String, logoResId: Int, onPartyClick: (String) -> Unit) {
+    // Complementary card colors to enhance readability while keeping a party-like theme
     val cardColor = when (partyName) {
-        "Socialdemokratiet" -> Color(0xFFE2001A)
-        "Venstre" -> Color(0xFF0056A3)
-        "Liberal Alliance" -> Color(0xFFFBB040)
-        "Konservative" -> Color(0xFF006B3F)
-        "Enhedslisten" -> Color(0xFFEE1C25)
-        "Dansk Folkeparti" -> Color(0xFF002D72)
-        "Danmarksdemokraterne" -> Color(0xFFDD571C)
-        "Socialistisk Folkeparti" -> Color(0xFFBE1E2D)
-        "Radikale Venstre" -> Color(0xFF890C58)
-        "Alternativet" -> Color(0xFF63A744)
-        "Moderaterne" -> Color(0xFF702082)
-        "Det Konservative Folkeparti" -> Color(0xFF006B3F)
-        "Siumut" -> Color(0xFFBF0000)
-        "Inuit Ataqatigiit" -> Color(0xFF009F3D)
-        "Sambandsflokkurin" -> Color(0xFF003366)
-        "Javnaðarflokkurin" -> Color(0xFFCC0000)
+        "Socialdemokratiet" -> Color(0xFFF5B0B7)
+        "Venstre" -> Color(0xFFA5C8E1)
+        "Liberal Alliance" -> Color(0xFFFFD580)
+        "Konservative" -> Color(0xFFA9E5B3)
+        "Enhedslisten" -> Color(0xFFFFA3A7)
+        "Dansk Folkeparti" -> Color(0xFF8EA8E8)
+        "Danmarksdemokraterne" -> Color(0xFFFFB085)
+        "Socialistisk Folkeparti" -> Color(0xFFFF9AA3)
+        "Radikale Venstre" -> Color(0xFFDE8ABF)
+        "Alternativet" -> Color(0xFFB9E6A5)
+        "Moderaterne" -> Color(0xFFC28AD4)
+        "Det Konservative Folkeparti" -> Color(0xFFA9E5B3)
+        "Siumut" -> Color(0xFFFF9A9A)
+        "Inuit Ataqatigiit" -> Color(0xFFA8EFB3)
+        "Sambandsflokkurin" -> Color(0xFFA3C1E5)
+        "Javnaðarflokkurin" -> Color(0xFFFFA8A8)
         else -> Color(0xFFE0E0E0)
     }
 
@@ -121,7 +125,7 @@ fun PartyCard(partyName: String, logoResId: Int, onPartyClick: (String) -> Unit)
                 text = partyName,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.White,
+                color = Color.Black, // Black text to contrast against lighter card colors
                 modifier = Modifier.padding(top = 8.dp)
             )
         }
