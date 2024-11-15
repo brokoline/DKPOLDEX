@@ -35,7 +35,7 @@ fun FavoriteCard(navn: String, parti: String) {
                 .fillMaxWidth()
                 .background(
                     brush = Brush.linearGradient(
-                        colors = listOf(Color(0xFFFFA07A), Color(0xFFFF6347))
+                        colors = listOf(Color(0xFFFF6F61), Color(0xFFFFBEB2))
                     )
                 )
                 .padding(16.dp)
