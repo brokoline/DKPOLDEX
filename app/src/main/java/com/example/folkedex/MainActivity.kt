@@ -21,6 +21,7 @@ import com.example.folkedex.ui.theme.FolkeDexTheme
 import com.example.folkedex.ui.theme.FavoritesScreen
 //import com.example.folkedex.PartyScreen
 import com.example.folkedex.ui.theme.Party
+import com.example.folkedex.ui.theme.PoliticianProfileScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +49,9 @@ class MainActivity : ComponentActivity() {
                                 popUpTo("main") { inclusive = true }
                             }
                         })
+                    }
+                    composable("politicianProfile") {
+                        PoliticianProfileScreen()
                     }
                 }
             }
