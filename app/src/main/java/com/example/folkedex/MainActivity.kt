@@ -25,6 +25,7 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Scaffold
 import com.example.folkedex.ui.theme.BillScreen
 import com.example.folkedex.ui.theme.FavoritesScreen
+import com.example.folkedex.ui.theme.History
 import com.example.folkedex.ui.theme.NewsScreen
 import com.example.folkedex.ui.theme.Party
 import com.example.folkedex.ui.theme.PartyRepository
@@ -69,6 +70,7 @@ fun MainScreen(navController: NavHostController) {
             composable("policies") { PoliciesScreen(navController = navController) }
             composable("reports") { ReportsScreen(navController = navController) }
             composable("bills") { BillScreen(navController = navController) }
+            composable("history") { History(navController = navController) }
 
 
             // Dynamically Add Party Routes

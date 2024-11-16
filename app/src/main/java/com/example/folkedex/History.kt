@@ -36,12 +36,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.folkedex.R
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun History( onBackClick: () -> Unit = {}) {
+fun History( onBackClick: () -> Unit = {}, navController: NavController) {
     Scaffold(
         topBar = {
             Box(
@@ -52,7 +53,7 @@ fun History( onBackClick: () -> Unit = {}) {
                 contentAlignment = Alignment.CenterStart
             ) {
                 IconButton(
-                    onClick = onBackClick,
+                    onClick = {navController.popBackStack()},
                     modifier = Modifier
                         .padding(start = 16.dp)
                         .align(Alignment.CenterStart)
