@@ -11,6 +11,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.*
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,17 +23,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FavoritesScreen(onBackClick: () -> Unit = {}) {
+fun FavoritesScreen(navController: NavHostController) {
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text("Dine favoritter", style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)) },
                 colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = Color(0xFFFF6F61)),
                 navigationIcon = {
-                    IconButton(onClick = onBackClick) {
+                    IconButton(onClick = {navController.popBackStack()}) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
                             contentDescription = "Tilbage",
@@ -124,14 +126,4 @@ fun FavoriteCard() {
             }
         }
     }
-}
-
-@Preview(
-    showSystemUi = true,
-    showBackground = true,
-    device = "spec:width=411dp,height=891dp,dpi=420"
-)
-@Composable
-fun PreviewFavoriteScreen() {
-    FavoritesScreen()
 }
