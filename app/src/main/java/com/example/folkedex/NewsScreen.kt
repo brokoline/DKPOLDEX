@@ -1,80 +1,109 @@
-package com.example.folkedex
+package com.example.folkedex.ui.theme
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.folkedex.R
+
+data class NewsItem(val title: String, val description: String, val date: String)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NewsScreen(navController: NavHostController) {
+fun NewsScreen(onBackClick: () -> Unit = {}, onNewsClick: (String) -> Unit = {}) {
+    // Dummy-data til nyheder
+    val newsList = listOf(
+        NewsItem(
+            title = "New climate policies announced",
+            description = "The government announced new climate initiatives aiming to reduce emissions.",
+            date = "14-11-2024"
+        ),
+        NewsItem(
+            title = "Healthcare reform updates",
+            description = "A detailed breakdown of the upcoming healthcare reforms.",
+            date = "13-11-2024"
+        ),
+        NewsItem(
+            title = "Budget proposal highlights",
+            description = "Key takeaways from the 2024 budget proposal.",
+            date = "12-11-2024"
+        ),
+        NewsItem(
+            title = "Infrastructure developments",
+            description = "Major projects planned for the next fiscal year.",
+            date = "08-11-2024"
+        )
+    )
+
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("News", style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)) },
-                colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = Color(0xFFFF6F61)),
-                navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(
-                            imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Back",
-                            tint = Color.White
-                        )
-                    }
-                },
-            )
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp)
+                    .background(Color(0xFFF7C72E)), // Gult tema
+                contentAlignment = Alignment.CenterStart
+            ) {
+                IconButton(
+                    onClick = onBackClick,
+                    modifier = Modifier
+                        .padding(start = 16.dp)
+                        .align(Alignment.CenterStart)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "Back",
+                        tint = Color.White
+                    )
+                }
+
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.align(Alignment.Center)
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.newsicon), // Bruger dit nyhedsikon
+                        contentDescription = "News Icon",
+                        modifier = Modifier
+                            .size(100.dp)
+                            .padding(bottom = 4.dp)
+                    )
+                    Text(
+                        "News",
+                        fontSize = 30.sp,
+                        color = Color.White,
+                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+                    )
+                }
+
+                // Tilføjet FolketingLogo her
+                FolketingLogo(modifier = Modifier.align(Alignment.CenterEnd))
+            }
         },
         content = { paddingValues ->
-            Column(
+            LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues)
-                    .padding(horizontal = 16.dp)
+                    .padding(horizontal = 26.dp)
+                    .padding(vertical = 26.dp)
             ) {
-                Text(
-                    text = "Latest News",
-                    style = MaterialTheme.typography.headlineMedium.copy(
-                        fontWeight = FontWeight.Bold
-                    ),
-                    modifier = Modifier.padding(vertical = 16.dp)
-                )
-
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
-                ) {
-                    items(10) { // Placeholder how many news listed (currently 10)
-                        NewsItemPlaceholder()
-                    }
+                // Bruger newsList til at vise hvert NewsCard
+                items(newsList) { news ->
+                    NewsCard(newsItem = news, onClick = { onNewsClick(news.title) })
                 }
             }
         }
@@ -82,42 +111,50 @@ fun NewsScreen(navController: NavHostController) {
 }
 
 @Composable
-fun NewsItemPlaceholder() {
+fun NewsCard(newsItem: NewsItem, onClick: () -> Unit) {
     Card(
+        onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
-            .height(100.dp),
-        shape = RoundedCornerShape(8.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFFE0E0E0)),
-        elevation = CardDefaults.cardElevation(4.dp)
+            .padding(vertical = 8.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color(0xFFFFF59D) // Gule bokse
+        )
     ) {
-        Row(
+        Column(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
+                .fillMaxWidth()
+                .padding(16.dp)
         ) {
-            Box(
-                modifier = Modifier
-                    .size(64.dp)
-                    .background(Color.Gray, shape = RoundedCornerShape(4.dp))
-            ) {
-                // placeholder for news thumbnail
-            }
-            Spacer(modifier = Modifier.width(16.dp))
-            Column(
-                verticalArrangement = Arrangement.Center
-            ) {
-                Text(
-                    text = "Coming Soon",
-                    style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold)
-                )
-                Text(
-                    text = "Stay tuned for updates!",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = Color.Gray
-                )
-            }
+            Text(
+                text = newsItem.title,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Text(
+                text = newsItem.description,
+                fontSize = 14.sp,
+                color = Color.Gray,
+                modifier = Modifier.padding(top = 4.dp)
+            )
+            Text(
+                text = "Date: ${newsItem.date}",
+                fontSize = 14.sp,
+                color = Color.Gray,
+                modifier = Modifier.padding(top = 4.dp)
+            )
         }
     }
+}
+
+
+
+@Preview(
+    showSystemUi = true,
+    showBackground = true,
+    device = "spec:width=411dp,height=891dp,dpi=420"
+)
+@Composable
+fun PreviewNewsScreen() {
+    NewsScreen()
 }
