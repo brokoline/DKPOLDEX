@@ -6,6 +6,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,14 +20,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.folkedex.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PoliticianProfileScreen() {
-    val navController = rememberNavController()
-
+fun PoliticianProfileScreen(onBackClick: () -> Unit = {}, navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -41,9 +43,9 @@ fun PoliticianProfileScreen() {
                 )
             },
             navigationIcon = {
-                IconButton(onClick = {/* Handle action to go back */ }) {
+                IconButton(onClick = {navController.popBackStack()}) {
                     Icon(
-                        painter = painterResource(id = android.R.drawable.ic_media_previous),
+                        imageVector = Icons.Default.ArrowBack,
                         contentDescription = "Back",
                         tint = Color.White
                     )
@@ -52,7 +54,7 @@ fun PoliticianProfileScreen() {
             actions = {
                 IconButton(onClick = { /* Handle pressing favorite */ }) {
                     Icon(
-                        painter = painterResource(id = android.R.drawable.btn_star),
+                        imageVector = Icons.Default.Favorite,
                         contentDescription = "Favorite",
                         tint = Color.White
                     )
@@ -118,61 +120,6 @@ fun PoliticianProfileScreen() {
             color = Color.White,
             modifier = Modifier.padding(16.dp)
         )
-
-        // Bottom navigation bar
-        Spacer(modifier = Modifier.weight(1f))
-        NavigationBar(
-            containerColor = Color(0xFFAB47BC)
-        ) {
-            NavigationBarItem(
-                selected = false,
-                onClick = { /* handle navigation back to home-screen */ },
-                icon = {
-                    Icon(
-                        painter = painterResource(id = android.R.drawable.ic_menu_view),
-                        contentDescription = "Home",
-                        tint = Color.White
-                    )
-                },
-                label = {Text(text = "Home", color = Color.White)}
-            )
-            NavigationBarItem(
-                selected = false,
-                onClick = { /* Handle navigation to favorites-page */ },
-                icon = {
-                    Icon(
-                        painter = painterResource(id = android.R.drawable.btn_star),
-                        contentDescription = "Favorites",
-                        tint = Color.White
-                    )
-                },
-                label = { Text(text = "Favorites", color = Color.White)}
-            )
-            NavigationBarItem(
-                selected = false,
-                onClick = {  /* Handle navigation to news-page */ },
-                icon = {
-                    Icon(
-                        painter = painterResource(id = android.R.drawable.ic_menu_info_details),
-                        contentDescription = "News",
-                        tint = Color.White
-                    )
-                },
-                label = { Text(text = "News", color = Color.White)}
-            )
-            NavigationBarItem(
-                selected = false,
-                onClick = {  /* Handle navigation to settings-page */ },
-                icon = {
-                    Icon(
-                        painter = painterResource(id = android.R.drawable.ic_menu_preferences),
-                        contentDescription = "Settings",
-                        tint = Color.White
-                    )
-                },
-                label = { Text(text = "Settings", color = Color.White)}
-            )
-        }
     }
 }
 
