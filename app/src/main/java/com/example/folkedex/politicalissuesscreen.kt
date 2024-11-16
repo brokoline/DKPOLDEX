@@ -1,4 +1,4 @@
-package com.example.folkedex
+package com.example.folkedex.ui.theme
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -29,19 +29,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
 
-class PoliticalIssuesScreenActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            PoliticalIssuesScreenUnique(onIssueClick = { /* Handle issue selection */ })
-        }
-    }
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PoliticalIssuesScreenUnique(onIssueClick: (String) -> Unit) {
+fun PoliticalIssuesScreenUnique(onBackClick: () -> Unit = {}, navController: NavHostController) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -56,7 +49,7 @@ fun PoliticalIssuesScreenUnique(onIssueClick: (String) -> Unit) {
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = { /* Handle back button click */ }) {
+                    IconButton(onClick = {navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = "Back",
@@ -86,7 +79,7 @@ fun PoliticalIssuesScreenUnique(onIssueClick: (String) -> Unit) {
                     "Human Rights and Equality"
                 )
                 issues.forEach { issue ->
-                    IssueButtonUnique(issue, onIssueClick)
+                    IssueButtonUnique(issue, onClick = {})
                     Spacer(modifier = Modifier.height(16.dp))
                 }
             }
@@ -139,8 +132,4 @@ fun IssueButtonUnique(issue: String, onClick: (String) -> Unit) {
     }
 }
 
-@Preview(showSystemUi = true, showBackground = true)
-@Composable
-fun PreviewPoliticalIssuesScreenUnique() {
-    PoliticalIssuesScreenUnique(onIssueClick = { /* Handle click */ })
-}
+

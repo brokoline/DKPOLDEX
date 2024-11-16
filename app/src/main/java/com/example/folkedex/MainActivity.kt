@@ -25,6 +25,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import com.example.folkedex.ui.theme.History
 import com.example.folkedex.ui.theme.PartySelectionScreen
+import com.example.folkedex.ui.theme.PoliticalIssuesScreenUnique
+
 
 
 class MainActivity : ComponentActivity() {
@@ -57,6 +59,13 @@ class MainActivity : ComponentActivity() {
                     }
                     composable("partyselectionscreen") {
                         PartySelectionScreen(onBackClick = {
+                            navController.navigate("main") {
+                                popUpTo("main") { inclusive = true }
+                            }
+                        }, navController = navController)
+                    }
+                    composable("politicalissuesscreen") {
+                        PoliticalIssuesScreenUnique(onBackClick = {
                             navController.navigate("main") {
                                 popUpTo("main") { inclusive = true }
                             }
@@ -114,6 +123,14 @@ fun MainScreen(navController: NavHostController) {
                         modifier = Modifier.padding(vertical = 8.dp)
                     ) {
                         Text(text = "Party Selection")
+                    }
+                }
+                item {
+                    Button(
+                        onClick = { navController.navigate("politicalissuesscreen") },
+                        modifier = Modifier.padding(vertical = 8.dp)
+                    ) {
+                        Text(text = "Political issues")
                     }
                 }
 
