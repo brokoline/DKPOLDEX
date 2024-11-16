@@ -64,7 +64,8 @@ fun Party(partyData: PartyData, onBackClick: () -> Unit = {}, navController: Nav
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
                         contentDescription = "Back",
-                        tint = Color.White
+
+                        tint = partyData.backColor
                     )
                 }
 
@@ -82,7 +83,7 @@ fun Party(partyData: PartyData, onBackClick: () -> Unit = {}, navController: Nav
                     Text(
                         partyData.name,
                         fontSize = partyData.textSize,
-                        color = Color.White,
+                        color = partyData.backColor,
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     )
                 }
@@ -117,6 +118,7 @@ fun Party(partyData: PartyData, onBackClick: () -> Unit = {}, navController: Nav
                     ) {
                         CustomButton(
                             text = "Politicians",
+                            textColor = partyData.backColor,
                             imageRes = R.drawable.flogo,
                             buttonColor = partyData.buttonColor,
                             modifier = Modifier.width(170.dp),
@@ -124,6 +126,7 @@ fun Party(partyData: PartyData, onBackClick: () -> Unit = {}, navController: Nav
                         )
                         CustomButton(
                             text = "History",
+                            textColor = partyData.backColor,
                             imageRes = R.drawable.flogo,
                             buttonColor = partyData.buttonColor,
                             modifier = Modifier.width(170.dp),
@@ -137,6 +140,7 @@ fun Party(partyData: PartyData, onBackClick: () -> Unit = {}, navController: Nav
                     ) {
                         CustomButton(
                             text = "Policies",
+                            textColor = partyData.backColor,
                             imageRes = R.drawable.flogo,
                             buttonColor = partyData.buttonColor,
                             modifier = Modifier.width(170.dp),
@@ -144,6 +148,7 @@ fun Party(partyData: PartyData, onBackClick: () -> Unit = {}, navController: Nav
                         )
                         CustomButton(
                             text = "Statistics",
+                            textColor = partyData.backColor,
                             imageRes = R.drawable.flogo,
                             buttonColor = partyData.buttonColor,
                             modifier = Modifier.width(170.dp),
@@ -157,7 +162,7 @@ fun Party(partyData: PartyData, onBackClick: () -> Unit = {}, navController: Nav
 }
 
 @Composable
-fun CustomButton(text: String, imageRes: Int, buttonColor: Color, modifier: Modifier = Modifier, onClick: () -> Unit) {
+fun CustomButton(text: String, imageRes: Int, buttonColor: Color, textColor: Color, modifier: Modifier = Modifier, onClick: () -> Unit) {
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(containerColor = buttonColor),
@@ -174,7 +179,7 @@ fun CustomButton(text: String, imageRes: Int, buttonColor: Color, modifier: Modi
         ) {
             Text(
                 text = text,
-                color = Color.White,
+                color = textColor,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.weight(1f)

@@ -17,5 +17,6 @@ data class PartyData(
     val offsetX: Float = 0f,
     val offsetY: Float = 0f,
     val imageSize: Dp = 120.dp,
-    val textSize: TextUnit  = 40.sp
+    val textSize: TextUnit  = 40.sp,
+    val backColor: Color
 )

@@ -20,7 +20,8 @@ object PartyRepository {
             buttonColor = ModeraterneButton,
             offsetX = 80f,
             imageSize = 120.dp,
-            textSize = 40.sp
+            textSize = 40.sp,
+            backColor =Color.White
 
         ),
         PartyData(
@@ -36,7 +37,8 @@ object PartyRepository {
             buttonColor = VenstreButton,
             offsetX = 130f,
             imageSize = 130.dp,   // Default image size for Moderaterne
-            textSize = 40.sp
+            textSize = 40.sp,
+            backColor =Color.White
         ),
         PartyData(
             name = "Socialdemokratiet",
@@ -51,7 +53,8 @@ object PartyRepository {
             buttonColor = SocialdemokratietButton,
             offsetX = 30f,
             imageSize = 130.dp,   // Default image size for Moderaterne
-            textSize = 40.sp
+            textSize = 40.sp,
+            backColor =Color.White
         ),
         PartyData(
             name = "Radikale Venstre",
@@ -66,7 +69,8 @@ object PartyRepository {
             buttonColor = RadikalevenstreButton,
             offsetX = 40f,
             imageSize = 130.dp,   // Default image size for Moderaterne
-            textSize = 40.sp
+            textSize = 40.sp,
+            backColor =Color.White
         ),
         PartyData(
             name = "Det Konservative Folkeparti",
@@ -82,7 +86,8 @@ object PartyRepository {
             offsetX = 10f,
             offsetY = 20f,
             imageSize = 75.dp,
-            textSize = 30.sp
+            textSize = 30.sp,
+            backColor =Color.White
         ),
         PartyData(
             name = "Socialistisk Folkeparti",
@@ -98,7 +103,8 @@ object PartyRepository {
             offsetX = 35f,
             offsetY = 25f,
             imageSize = 75.dp,
-            textSize = 30.sp
+            textSize = 30.sp,
+            backColor =Color.White
         ),
         PartyData(
             name = "Liberal Alliance",
@@ -114,7 +120,8 @@ object PartyRepository {
             offsetX = 50f,
             offsetY = 25f,
             imageSize = 90.dp,
-            textSize = 40.sp
+            textSize = 40.sp,
+            backColor =Color.Black
         ),
         PartyData(
             name = "Dansk Folkeparti",
@@ -130,7 +137,8 @@ object PartyRepository {
             offsetX = 80f,
             offsetY = 15f,
             imageSize = 100.dp,
-            textSize = 30.sp
+            textSize = 30.sp,
+            backColor =Color.White
         ),
         PartyData(
             name = "Danmarksdemokraterne",
@@ -146,7 +154,8 @@ object PartyRepository {
             offsetX = 30f,
             offsetY = 10f,
             imageSize = 100.dp,
-            textSize = 30.sp
+            textSize = 30.sp,
+            backColor =Color.White
         ),
         PartyData(
             name = "Enhedslisten",
@@ -162,7 +171,8 @@ object PartyRepository {
             offsetX = 90f,
             offsetY = 15f,
             imageSize = 90.dp,
-            textSize = 35.sp
+            textSize = 35.sp,
+            backColor =Color.White
         ),
         PartyData(
             name = "Alternativet",
@@ -177,7 +187,8 @@ object PartyRepository {
             buttonColor = AlternativetButton,
             offsetX = 80f,
             imageSize = 100.dp,
-            textSize = 40.sp
+            textSize = 40.sp,
+            backColor =Color.White
         ),
         PartyData(
             name = "Sambandsflokkurin",
@@ -193,7 +204,8 @@ object PartyRepository {
             offsetX = 70f,
             offsetY = 15f,
             imageSize = 100.dp,
-            textSize = 30.sp
+            textSize = 30.sp,
+            backColor =Color.White
         ),
         PartyData(
             name = "Javnaðarflokkurin",
@@ -209,7 +221,8 @@ object PartyRepository {
             offsetX = 80f,
             offsetY = 15f,
             imageSize = 110.dp,   // Default image size for Moderaterne
-            textSize = 30.sp
+            textSize = 30.sp,
+            backColor =Color.White
         ),
         PartyData(
             name = "Siumut",
@@ -225,7 +238,8 @@ object PartyRepository {
             offsetX = 130f,
             offsetY = 20f,
             imageSize = 110.dp,
-            textSize = 30.sp
+            textSize = 30.sp,
+            backColor =Color.White
         ),
         PartyData(
             name = "Inuit Ataqatigiit",
@@ -241,7 +255,8 @@ object PartyRepository {
             offsetX = 90f,
             offsetY = 15f,
             imageSize = 100.dp,
-            textSize = 30.sp
+            textSize = 30.sp,
+            backColor =Color.White
         ),
         PartyData(
             name = "Løsgængere",
@@ -257,7 +272,8 @@ object PartyRepository {
             offsetX = 125f,
             offsetY = 15f,
             imageSize = 100.dp,
-            textSize = 30.sp
+            textSize = 30.sp,
+            backColor =Color.White
         ),
     )
     fun getPartyByName(name: String): PartyData? {
