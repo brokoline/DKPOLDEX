@@ -128,7 +128,7 @@ fun PoliticianCategoryGrid(navController: NavHostController) {
                             endColor = color.second,
                             onClick = {
                                 when (text) {
-                                    "FolkeDex" -> navController.navigate("home")
+                                    "FolkeDex" -> navController.navigate("folkedex")
                                     // other routes here
                                 }
                             }

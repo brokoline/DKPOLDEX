@@ -24,6 +24,9 @@ import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Scaffold
 import com.example.folkedex.ui.theme.FavoritesScreen
+import com.example.folkedex.ui.theme.Party
+import com.example.folkedex.ui.theme.PartyRepository
+import com.example.folkedex.ui.theme.PartySelectionScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,9 +57,31 @@ fun MainScreen(navController: NavHostController) {
             composable("favorites") { FavoritesScreen(navController = navController) }
             composable("news") { NewsScreen(navController) }
             composable("settings") { SettingsScreen(navController) }
+            composable("folkedex") { PartySelectionScreen(navController = navController) }
+
+            // Dynamically Add Party Routes
+            PartyRepository.parties.forEach { party ->
+                composable(party.name) {
+                    val partyData = PartyRepository.getPartyByName(party.name)
+                    if (partyData != null) {
+                        Party(
+                            partyData = partyData,
+                            onBackClick = {
+                                navController.navigate("home") {
+                                    popUpTo("home") { inclusive = true }
+                                }
+                            },
+                            navController = navController
+                        )
+                    } else {
+                        Text("Party data not found")
+                    }
+                }
+            }
         }
     }
 }
+
 
 @Composable
 fun BottomTabBar(navController: NavHostController) {
@@ -89,7 +114,6 @@ fun BottomTabBar(navController: NavHostController) {
         )
     }
 }
-
 
 
 @Composable
