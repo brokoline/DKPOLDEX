@@ -25,6 +25,7 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Scaffold
 import com.example.folkedex.ui.theme.BillScreen
 import com.example.folkedex.ui.theme.FavoritesScreen
+import com.example.folkedex.ui.theme.NewsScreen
 import com.example.folkedex.ui.theme.Party
 import com.example.folkedex.ui.theme.PartyRepository
 import com.example.folkedex.ui.theme.PartySelectionScreen
@@ -60,7 +61,7 @@ fun MainScreen(navController: NavHostController) {
         ) {
             composable("home") { HomeScreen(navController) }
             composable("favorites") { FavoritesScreen(navController = navController) }
-            composable("news") { NewsScreen(navController) }
+            composable("news") { NewsScreen(navController = navController) }
             composable("settings") { SettingsScreen(navController) }
             composable("folkedex") { PartySelectionScreen(navController = navController) }
             composable("issues") { PoliticalIssuesScreenUnique(navController = navController) }
@@ -110,12 +111,6 @@ fun BottomTabBar(navController: NavHostController) {
             label = { Text("Favorites", color = Color.White) },
             selected = navController.currentDestination?.route == "favorites",
             onClick = { navController.navigate("favorites") { popUpTo("home") } }
-        )
-        BottomNavigationItem(
-            icon = { Icon(Icons.Default.List, contentDescription = "News", tint = Color.White) },
-            label = { Text("News", color = Color.White) },
-            selected = navController.currentDestination?.route == "news",
-            onClick = { navController.navigate("news") { popUpTo("home") } }
         )
         BottomNavigationItem(
             icon = { Icon(Icons.Default.Settings, contentDescription = "Settings", tint = Color.White) },

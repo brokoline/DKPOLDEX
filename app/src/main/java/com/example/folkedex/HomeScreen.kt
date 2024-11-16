@@ -100,7 +100,7 @@ fun PoliticianCategoryGrid(navController: NavHostController) {
         "FolkeDex" to Pair(Color(0xFFFF6E60), Color(0xFFFFB1A5)),
         "Reports" to Pair(Color(0xFF6B9F39), Color(0xFFAED582)),
         "Issues" to Pair(Color(0xFF722424), Color(0xFFEAAFAF)),
-        "Policies" to Pair(Color(0xFFFFCE4B), Color(0xFFFFE49A)),
+        "News" to Pair(Color(0xFFFFCE4B), Color(0xFFFFE49A)),
         "Bills" to Pair(Color(0xFF0A9180), Color(0xFF73C4BB)),
         "Data" to Pair(Color(0xFF2C4F80), Color(0xFF4D8BDE))
     )
@@ -132,6 +132,7 @@ fun PoliticianCategoryGrid(navController: NavHostController) {
                                     "Issues" -> navController.navigate("issues")
                                     "Reports" -> navController.navigate("reports")
                                     "Bills" -> navController.navigate("bills")
+                                    "News" -> navController.navigate("news")
                                     // other routes here
                                 }
                             }

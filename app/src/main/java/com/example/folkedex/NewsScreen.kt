@@ -17,13 +17,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.example.folkedex.R
 
 data class NewsItem(val title: String, val description: String, val date: String)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NewsScreen(onBackClick: () -> Unit = {}, onNewsClick: (String) -> Unit = {}) {
+fun NewsScreen(onBackClick: () -> Unit = {}, onNewsClick: (String) -> Unit = {}, navController: NavController) {
     // Dummy-data til nyheder
     val newsList = listOf(
         NewsItem(
@@ -58,7 +59,7 @@ fun NewsScreen(onBackClick: () -> Unit = {}, onNewsClick: (String) -> Unit = {})
                 contentAlignment = Alignment.CenterStart
             ) {
                 IconButton(
-                    onClick = onBackClick,
+                    onClick = {navController.popBackStack()},
                     modifier = Modifier
                         .padding(start = 16.dp)
                         .align(Alignment.CenterStart)
@@ -145,16 +146,4 @@ fun NewsCard(newsItem: NewsItem, onClick: () -> Unit) {
             )
         }
     }
-}
-
-
-
-@Preview(
-    showSystemUi = true,
-    showBackground = true,
-    device = "spec:width=411dp,height=891dp,dpi=420"
-)
-@Composable
-fun PreviewNewsScreen() {
-    NewsScreen()
 }
