@@ -77,7 +77,7 @@ fun TopSectionWithSearchBar() {
 fun SearchBar() {
     TextField(
         value = "",
-        onValueChange = { /* Handle search input */ },
+        onValueChange = { /* for search bar input, backend thing */ },
         leadingIcon = {
             Icon(imageVector = Icons.Default.Search, contentDescription = "Search Icon")
         },
@@ -129,6 +129,7 @@ fun PoliticianCategoryGrid(navController: NavHostController) {
                             onClick = {
                                 when (text) {
                                     "FolkeDex" -> navController.navigate("folkedex")
+                                    "Issues" -> navController.navigate("issues")
                                     // other routes here
                                 }
                             }

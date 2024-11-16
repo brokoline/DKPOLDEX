@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -36,10 +38,19 @@ fun PartySelectionScreen(onBackClick: () -> Unit = {}, navController: NavHostCon
                         text = "FolkeDex",
                         fontSize = 32.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color.Black // Make text color black for better contrast
+                        color = Color.Black
                     )
                 },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = Color.White) // Set to white
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = Color.White),
+                navigationIcon = {
+                    IconButton(onClick = {navController.popBackStack()}) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Tilbage",
+                            tint = Color.Black
+                        )
+                    }
+                },
             )
         },
         content = { paddingValues ->
@@ -99,7 +110,7 @@ fun PartyCard(partyName: String, logoResId: Int, onPartyClick: (String) -> Unit)
 
     Card(
         modifier = Modifier
-            .size(150.dp)
+            .size(170.dp)
             .clickable { onPartyClick(partyName) },
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = cardColor)
@@ -121,8 +132,10 @@ fun PartyCard(partyName: String, logoResId: Int, onPartyClick: (String) -> Unit)
                 text = partyName,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.Black, // Black text to contrast against lighter card colors
-                modifier = Modifier.padding(top = 8.dp)
+                color = Color.Black,
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(8.dp)
             )
         }
     }
@@ -136,16 +149,16 @@ fun getFullPartyList(): List<Pair<String, Int>> {
         "Det Konservative Folkeparti" to R.drawable.konservative_logo,
         "Enhedslisten" to R.drawable.enhedslisten_logo,
         "Dansk Folkeparti" to R.drawable.dansk_folkeparti_logo,
-        "Danmarksdemokraterne" to R.drawable.danmarksdemokraterne_logo,
+        "Danmarks-\ndemokraterne" to R.drawable.danmarksdemokraterne_logo,
         "Socialistisk Folkeparti" to R.drawable.socialistisk_folkeparti_logo,
         "Radikale Venstre" to R.drawable.radikale_venstre_logo,
         "Alternativet" to R.drawable.alternativet_logo,
         "Moderaterne" to R.drawable.moderaterne_logo,
-        "Det Konservative Folkeparti" to R.drawable.konservative_logo,
         "Siumut" to R.drawable.siumut_logo,
         "Inuit Ataqatigiit" to R.drawable.inuit_ataqatigiit_logo,
-        "Sambandsflokkurin" to R.drawable.sambandsflokkurin_logo,
-        "Javnaðarflokkurin" to R.drawable.javnadarflokkurin_logo
+        "Sambands-\nflokkurin" to R.drawable.sambandsflokkurin_logo,
+        "Javnaðarflokkurin" to R.drawable.javnlogo2,
+        "Løsgængere" to R.drawable.loesgaengere
     )
 }
 

@@ -27,6 +27,7 @@ import com.example.folkedex.ui.theme.FavoritesScreen
 import com.example.folkedex.ui.theme.Party
 import com.example.folkedex.ui.theme.PartyRepository
 import com.example.folkedex.ui.theme.PartySelectionScreen
+import com.example.folkedex.ui.theme.PoliticalIssuesScreenUnique
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,6 +59,7 @@ fun MainScreen(navController: NavHostController) {
             composable("news") { NewsScreen(navController) }
             composable("settings") { SettingsScreen(navController) }
             composable("folkedex") { PartySelectionScreen(navController = navController) }
+            composable("issues") { PoliticalIssuesScreenUnique(navController = navController) }
 
             // Dynamically Add Party Routes
             PartyRepository.parties.forEach { party ->

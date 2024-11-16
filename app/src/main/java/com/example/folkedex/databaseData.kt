@@ -141,7 +141,7 @@ object PartyRepository {
             backColor =Color.White
         ),
         PartyData(
-            name = "Danmarksdemokraterne",
+            name = "Danmarks-\ndemokraterne",
             logoRes = R.drawable.ddemkraterne,
             description = "Text about the Danmarksdemokraterne party, \n" +
                     "eventually what they stand for,\n" +
@@ -191,7 +191,7 @@ object PartyRepository {
             backColor =Color.White
         ),
         PartyData(
-            name = "Sambandsflokkurin",
+            name = "Sambands-\nflokkurin",
             logoRes = R.drawable.sambands,
             description = "Text about the Sambandsflokkurin party, \n" +
                     "eventually what they stand for,\n" +
@@ -201,7 +201,7 @@ object PartyRepository {
             history = "This party was founded...",
             backgroundColor = SambandspartietBackground,
             buttonColor = SambandspartietButton,
-            offsetX = 70f,
+            offsetX = 110f,
             offsetY = 15f,
             imageSize = 100.dp,
             textSize = 30.sp,
