@@ -13,25 +13,40 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.folkedex.R
 
-data class Meeting(val number: Int, val title: String, val date: String)
+data class NewsItem(val title: String, val description: String, val date: String)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MeetingsScreen(onBackClick: () -> Unit = {}, onMeetingClick: (String) -> Unit = {}) {
-    // Dummy-data til news
-    val meetings = listOf(
-        Meeting(number = 19, title = "Report of meeting 19 on November 14, 2024 at 10:00 AM", date = "14-11-2024 (2024-25)"),
-        Meeting(number = 18, title = "Report of meeting 18 on November 13, 2024 at 1:00 PM", date = "13-11-2024 (2024-25)"),
-        Meeting(number = 17, title = "Report of meeting 17 on November 12, 2024 at 1:00 PM", date = "12-11-2024 (2024-25)"),
-        Meeting(number = 16, title = "Report of meeting 16 on November 8, 2024 at 9:00 AM", date = "08-11-2024 (2024-25)"),
+fun NewsScreen(onBackClick: () -> Unit = {}, onNewsClick: (String) -> Unit = {}) {
+    // Dummy-data til nyheder
+    val newsList = listOf(
+        NewsItem(
+            title = "New climate policies announced",
+            description = "The government announced new climate initiatives aiming to reduce emissions.",
+            date = "14-11-2024"
+        ),
+        NewsItem(
+            title = "Healthcare reform updates",
+            description = "A detailed breakdown of the upcoming healthcare reforms.",
+            date = "13-11-2024"
+        ),
+        NewsItem(
+            title = "Budget proposal highlights",
+            description = "Key takeaways from the 2024 budget proposal.",
+            date = "12-11-2024"
+        ),
+        NewsItem(
+            title = "Infrastructure developments",
+            description = "Major projects planned for the next fiscal year.",
+            date = "08-11-2024"
+        )
     )
-
 
     Scaffold(
         topBar = {
@@ -50,7 +65,7 @@ fun MeetingsScreen(onBackClick: () -> Unit = {}, onMeetingClick: (String) -> Uni
                 ) {
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "Tilbage",
+                        contentDescription = "Back",
                         tint = Color.White
                     )
                 }
@@ -60,7 +75,7 @@ fun MeetingsScreen(onBackClick: () -> Unit = {}, onMeetingClick: (String) -> Uni
                     modifier = Modifier.align(Alignment.Center)
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.newsicon), // Bruger dit nye ikon
+                        painter = painterResource(id = R.drawable.newsicon), // Bruger dit nyhedsikon
                         contentDescription = "News Icon",
                         modifier = Modifier
                             .size(100.dp)
@@ -74,7 +89,7 @@ fun MeetingsScreen(onBackClick: () -> Unit = {}, onMeetingClick: (String) -> Uni
                     )
                 }
 
-                // bruger det eksisterende FolketingLogo-objekt
+                // Tilføjet FolketingLogo her
                 FolketingLogo(modifier = Modifier.align(Alignment.CenterEnd))
             }
         },
@@ -86,8 +101,9 @@ fun MeetingsScreen(onBackClick: () -> Unit = {}, onMeetingClick: (String) -> Uni
                     .padding(horizontal = 26.dp)
                     .padding(vertical = 26.dp)
             ) {
-                items(meetings) { meeting ->
-                    MeetingCard(meeting = meeting, onClick = { onMeetingClick(meeting.title) })
+                // Bruger newsList til at vise hvert NewsCard
+                items(newsList) { news ->
+                    NewsCard(newsItem = news, onClick = { onNewsClick(news.title) })
                 }
             }
         }
@@ -95,14 +111,14 @@ fun MeetingsScreen(onBackClick: () -> Unit = {}, onMeetingClick: (String) -> Uni
 }
 
 @Composable
-fun MeetingCard(meeting: Meeting, onClick: () -> Unit) {
+fun NewsCard(newsItem: NewsItem, onClick: () -> Unit) {
     Card(
         onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xFFF5E660) // Gule bokse
+            containerColor = Color(0xFFFFF59D) // Gule bokse
         )
     ) {
         Column(
@@ -111,18 +127,18 @@ fun MeetingCard(meeting: Meeting, onClick: () -> Unit) {
                 .padding(16.dp)
         ) {
             Text(
-                text = "Møde nr. ${meeting.number}",
+                text = newsItem.title,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold
             )
             Text(
-                text = meeting.title,
+                text = newsItem.description,
                 fontSize = 14.sp,
                 color = Color.Gray,
                 modifier = Modifier.padding(top = 4.dp)
             )
             Text(
-                text = "Dato: ${meeting.date}",
+                text = "Date: ${newsItem.date}",
                 fontSize = 14.sp,
                 color = Color.Gray,
                 modifier = Modifier.padding(top = 4.dp)
@@ -131,12 +147,14 @@ fun MeetingCard(meeting: Meeting, onClick: () -> Unit) {
     }
 }
 
+
+
 @Preview(
     showSystemUi = true,
     showBackground = true,
     device = "spec:width=411dp,height=891dp,dpi=420"
 )
 @Composable
-fun PreviewMeetingsScreen() {
-    MeetingsScreen()
+fun PreviewNewsScreen() {
+    NewsScreen()
 }
