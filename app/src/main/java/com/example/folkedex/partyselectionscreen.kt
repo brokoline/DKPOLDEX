@@ -20,20 +20,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
 import com.example.folkedex.R
 
-class PartySelectionScreenActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            PartySelectionScreen(onPartyClick = { /* Handle party selection */ })
-        }
-    }
-}
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PartySelectionScreen(onPartyClick: (String) -> Unit) {
+fun PartySelectionScreen(onBackClick: () -> Unit = {}, navController: NavHostController) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -59,7 +53,9 @@ fun PartySelectionScreen(onPartyClick: (String) -> Unit) {
             ) {
                 // This chunked(2) will help in forming rows of 2 cards each
                 items(getFullPartyList().chunked(2)) { rowParties ->
-                    PartyRow(rowParties = rowParties, onPartyClick = onPartyClick)
+                    PartyRow(rowParties = rowParties, onPartyClick = { partyName ->
+
+                        navController.navigate(partyName) })
                 }
             }
         }
@@ -137,7 +133,7 @@ fun getFullPartyList(): List<Pair<String, Int>> {
         "Socialdemokratiet" to R.drawable.socialdemokratiet_logo,
         "Venstre" to R.drawable.venstre_logo,
         "Liberal Alliance" to R.drawable.liberal_alliance_logo,
-        "Konservative" to R.drawable.konservative_logo,
+        "Det Konservative Folkeparti" to R.drawable.konservative_logo,
         "Enhedslisten" to R.drawable.enhedslisten_logo,
         "Dansk Folkeparti" to R.drawable.dansk_folkeparti_logo,
         "Danmarksdemokraterne" to R.drawable.danmarksdemokraterne_logo,
@@ -153,8 +149,4 @@ fun getFullPartyList(): List<Pair<String, Int>> {
     )
 }
 
-@Preview(showSystemUi = true, showBackground = true)
-@Composable
-fun PreviewPartySelectionScreen() {
-    PartySelectionScreen(onPartyClick = { /* Handle click */ })
-}
+

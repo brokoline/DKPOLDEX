@@ -56,7 +56,7 @@ fun Party(partyData: PartyData, onBackClick: () -> Unit = {}, navController: Nav
                 contentAlignment = Alignment.CenterStart
             ) {
                 IconButton(
-                    onClick = onBackClick,
+                    onClick = {navController.popBackStack()},
                     modifier = Modifier
                         .padding(start = 16.dp)
                         .align(Alignment.CenterStart)

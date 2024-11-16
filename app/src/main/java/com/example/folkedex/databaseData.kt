@@ -54,7 +54,7 @@ object PartyRepository {
             textSize = 40.sp
         ),
         PartyData(
-            name = " Radikale Venstre",
+            name = "Radikale Venstre",
             logoRes = R.drawable.radikalevenstre,
             description = "Text about the Radikale Venstre party, \n" +
                     "eventually what they stand for,\n" +
@@ -101,7 +101,7 @@ object PartyRepository {
             textSize = 30.sp
         ),
         PartyData(
-            name = " Liberal Alliance",
+            name = "Liberal Alliance",
             logoRes = R.drawable.liberalalliance,
             description = "Text about the  Liberal Alliance party, \n" +
                     "eventually what they stand for,\n" +
@@ -149,7 +149,7 @@ object PartyRepository {
             textSize = 30.sp
         ),
         PartyData(
-            name = " Enhedslisten",
+            name = "Enhedslisten",
             logoRes = R.drawable.enhedslisten,
             description = "Text about the Enhedslisten party, \n" +
                     "eventually what they stand for,\n" +

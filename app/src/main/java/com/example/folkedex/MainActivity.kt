@@ -5,8 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,10 +18,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.folkedex.ui.theme.FolkeDexTheme
-import com.example.folkedex.ui.theme.FavoritesScreen
-import com.example.folkedex.ui.theme.ReportsScreen
 import com.example.folkedex.ui.theme.Party
-import com.example.folkedex.ui.theme.VoteScreen
+import com.example.folkedex.ui.theme.PartyRepository
+import com.example.folkedex.ui.theme.FavoritesScreen
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import com.example.folkedex.ui.theme.History
+import com.example.folkedex.ui.theme.PartySelectionScreen
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,66 +47,79 @@ class MainActivity : ComponentActivity() {
                             }
                         })
                     }
-                    composable("Moderaterne") {
-                        Party(onBackClick = {
+
+                    composable("history") {
+                        History(onBackClick = {
                             navController.navigate("main") {
                                 popUpTo("main") { inclusive = true }
                             }
                         })
                     }
-                    composable("Reports") {
-                        ReportsScreen(onBackClick = {
+                    composable("partyselectionscreen") {
+                        PartySelectionScreen(onBackClick = {
                             navController.navigate("main") {
                                 popUpTo("main") { inclusive = true }
                             }
-                        })
+                        }, navController = navController)
                     }
-                    composable("Votes") { // Tilføjet Votes route
-                        VoteScreen(onBackClick = {
-                            navController.navigate("main") {
-                                popUpTo("main") { inclusive = true }
+
+                    // getting list of parties from our "database" and creating routes for each
+                    PartyRepository.parties.forEach { party ->
+                        composable(party.name) {
+                            val partyData = PartyRepository.getPartyByName(party.name)
+                            if (partyData != null) {
+                                Party(
+                                    partyData = partyData,
+                                    onBackClick = {
+                                        navController.navigate("main") {
+                                            popUpTo("main") { inclusive = true }
+                                        }
+                                    }, navController = navController
+                                )
+                            } else {
+                                Text("Party data not found")
                             }
-                        })
+                        }
                     }
                 }
             }
         }
     }
 }
-
 @Composable
 fun MainScreen(navController: NavHostController) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         content = { paddingValues ->
-            Column(
+            LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues)
                     .padding(16.dp),
-                verticalArrangement = Arrangement.Center,
+                verticalArrangement = Arrangement.spacedBy(8.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Button(
-                    onClick = { navController.navigate("favorites") }
-                ) {
-                    Text(text = "Gå til Favoritter")
+                // Button to navigate to Favorites
+                item {
+                    Button(
+                        onClick = { navController.navigate("favorites") },
+                        modifier = Modifier.padding(vertical = 8.dp)
+                    ) {
+                        Text(text = "Gå til Favoritter")
+                    }
                 }
-                Button(
-                    onClick = { navController.navigate("Moderaterne") }
-                ) {
-                    Text(text = "Moderaterne")
+                item {
+                    Button(
+                        onClick = { navController.navigate("partyselectionscreen") },
+                        modifier = Modifier.padding(vertical = 8.dp)
+                    ) {
+                        Text(text = "Party Selection")
+                    }
                 }
-                Button(
-                    onClick = { navController.navigate("Reports") }
-                ) {
-                    Text(text = "Reports")
-                }
-                Button( // Knappen til VoteScreen
-                    onClick = { navController.navigate("Votes") }
-                ) {
-                    Text(text = "Votes")
-                }
+
+
+
+
             }
         }
     )
