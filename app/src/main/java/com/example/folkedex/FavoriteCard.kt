@@ -74,7 +74,7 @@ fun FavoriteCard(navn: String, parti: String) {
                 }
 
                 IconButton(
-                    onClick = { /* Handle favorite removal */ },
+                    onClick = { /* removes favorite */ },
                     modifier = Modifier.size(32.dp)
                 ) {
                     Icon(

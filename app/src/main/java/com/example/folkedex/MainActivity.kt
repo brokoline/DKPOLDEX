@@ -23,6 +23,7 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Scaffold
+import com.example.folkedex.ui.theme.BillScreen
 import com.example.folkedex.ui.theme.FavoritesScreen
 import com.example.folkedex.ui.theme.Party
 import com.example.folkedex.ui.theme.PartyRepository
@@ -30,6 +31,7 @@ import com.example.folkedex.ui.theme.PartySelectionScreen
 import com.example.folkedex.ui.theme.PoliciesScreen
 import com.example.folkedex.ui.theme.PoliticalIssuesScreenUnique
 import com.example.folkedex.ui.theme.PoliticianProfileScreen
+import com.example.folkedex.ui.theme.ReportsScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +66,8 @@ fun MainScreen(navController: NavHostController) {
             composable("issues") { PoliticalIssuesScreenUnique(navController = navController) }
             composable("politicians") { PoliticianProfileScreen(navController = navController) }
             composable("policies") { PoliciesScreen(navController = navController) }
+            composable("reports") { ReportsScreen(navController = navController) }
+            composable("bills") { BillScreen(navController = navController) }
 
 
             // Dynamically Add Party Routes

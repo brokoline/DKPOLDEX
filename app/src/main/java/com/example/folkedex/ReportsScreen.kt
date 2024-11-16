@@ -16,12 +16,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 
 data class Report(val title: String, val link: String)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ReportsScreen(onBackClick: () -> Unit = {}, onReportClick: (String) -> Unit = {}) {
+fun ReportsScreen(onBackClick: () -> Unit = {}, onReportClick: (String) -> Unit = {}, navController: NavController) {
     // Dummy data untill we connect to the API
     val reports = listOf(
         Report(title = "Budget Proposal 2023", link = "https://www.ft.dk/budget2023"),
@@ -39,7 +40,7 @@ fun ReportsScreen(onBackClick: () -> Unit = {}, onReportClick: (String) -> Unit 
                 contentAlignment = Alignment.CenterStart
             ) {
                 IconButton(
-                    onClick = onBackClick,
+                    onClick = {navController.popBackStack()},
                     modifier = Modifier
                         .padding(start = 16.dp)
                         .align(Alignment.CenterStart)
@@ -91,11 +92,4 @@ fun ReportsScreen(onBackClick: () -> Unit = {}, onReportClick: (String) -> Unit 
             }
         }
     )
-}
-
-// Preview for ReportsScreen
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun PreviewReportsScreen() {
-    ReportsScreen()
 }

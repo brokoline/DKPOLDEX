@@ -16,9 +16,10 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 
 @Composable
-fun VoteScreen(onBackClick: () -> Unit = {}) {
+fun BillScreen(onBackClick: () -> Unit = {}, navController: NavController) {
     // Dummy data for votes
     val votes = listOf(
         Vote(title = "Proposal A", description = "Passed with majority votes"),
@@ -36,7 +37,7 @@ fun VoteScreen(onBackClick: () -> Unit = {}) {
                 contentAlignment = Alignment.CenterStart
             ) {
                 IconButton(
-                    onClick = onBackClick,
+                    onClick = {navController.popBackStack()},
                     modifier = Modifier
                         .padding(start = 16.dp)
                         .align(Alignment.CenterStart)
@@ -85,11 +86,4 @@ fun VoteScreen(onBackClick: () -> Unit = {}) {
             }
         }
     )
-}
-
-// Preview for VoteScreen
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun PreviewVoteScreen() {
-    VoteScreen()
 }
