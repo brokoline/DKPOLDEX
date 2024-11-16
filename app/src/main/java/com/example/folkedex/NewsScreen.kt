@@ -86,7 +86,6 @@ fun MeetingsScreen(onBackClick: () -> Unit = {}, onMeetingClick: (String) -> Uni
                     .padding(horizontal = 26.dp)
                     .padding(vertical = 26.dp)
             ) {
-                // Bruger meetings-listen til at vise hvert MeetingCard
                 items(meetings) { meeting ->
                     MeetingCard(meeting = meeting, onClick = { onMeetingClick(meeting.title) })
                 }
