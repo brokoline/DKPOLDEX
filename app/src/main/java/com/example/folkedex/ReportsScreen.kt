@@ -6,7 +6,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Info // Importer et andet ikon, hvis det er passende
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,16 +18,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 
-data class Politiker(val navn: String, val parti: String)
+data class Report(val title: String, val link: String)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FavoritesScreen(onBackClick: () -> Unit = {}, navController: NavController) {
-    // Dummy-data til politikere
-    val politikere = listOf(
-        Politiker(navn = "Mette Frederiksen", parti = "Socialdemokratiet"),
-        Politiker(navn = "Jakob Ellemann-Jensen", parti = "Venstre"),
-        Politiker(navn = "Lars Løkke Rasmussen", parti = "Moderaterne")
+fun ReportsScreen(onBackClick: () -> Unit = {}, onReportClick: (String) -> Unit = {}, navController: NavController) {
+    // Dummy data untill we connect to the API
+    val reports = listOf(
+        Report(title = "Budget Proposal 2023", link = "https://www.ft.dk/budget2023"),
+        Report(title = "Health Care Reform", link = "https://www.ft.dk/healthcarereform"),
+        Report(title = "Climate Action Plan", link = "https://www.ft.dk/climateaction"),
     )
 
     Scaffold(
@@ -36,7 +36,7 @@ fun FavoritesScreen(onBackClick: () -> Unit = {}, navController: NavController) 
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(200.dp)
-                    .background(Color(0xFFFF6F61)),
+                    .background(Color(0xFFAED581)), // Different color for Reports screen
                 contentAlignment = Alignment.CenterStart
             ) {
                 IconButton(
@@ -57,22 +57,21 @@ fun FavoritesScreen(onBackClick: () -> Unit = {}, navController: NavController) 
                     modifier = Modifier.align(Alignment.Center)
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Favorite,
-                        contentDescription = "Favorites Heart Icon",
+                        imageVector = Icons.Default.Info, // Skift til et andet ikon, hvis ønsket
+                        contentDescription = "Reports Icon",
                         tint = Color.White,
                         modifier = Modifier
                             .size(100.dp)
                             .padding(bottom = 4.dp)
                     )
                     Text(
-                        "Dine favoritter",
+                        "Reports",
                         fontSize = 30.sp,
                         color = Color.White,
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     )
                 }
 
-                // FolketingLogo composable
                 FolketingLogo(modifier = Modifier.align(Alignment.CenterEnd))
             }
         },
@@ -84,9 +83,11 @@ fun FavoritesScreen(onBackClick: () -> Unit = {}, navController: NavController) 
                     .padding(horizontal = 26.dp)
                     .padding(vertical = 26.dp)
             ) {
-                // Bruger politikere-listen til at vise hvert FavoriteCard
-                items(politikere) { politiker ->
-                    FavoriteCard(navn = politiker.navn, parti = politiker.parti)
+                items(reports) { report ->
+                    ReportCard(
+                        report = report,
+                        onClick = { onReportClick(report.link) }
+                    )
                 }
             }
         }

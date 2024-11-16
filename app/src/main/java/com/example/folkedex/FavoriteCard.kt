@@ -35,7 +35,7 @@ fun FavoriteCard(navn: String, parti: String) {
                 .fillMaxWidth()
                 .background(
                     brush = Brush.linearGradient(
-                        colors = listOf(Color(0xFFFFA07A), Color(0xFFFF6347))
+                        colors = listOf(Color(0xFFFF6F61), Color(0xFFFFBEB2))
                     )
                 )
                 .padding(16.dp)
@@ -74,7 +74,7 @@ fun FavoriteCard(navn: String, parti: String) {
                 }
 
                 IconButton(
-                    onClick = { /* Handle favorite removal */ },
+                    onClick = { /* removes favorite */ },
                     modifier = Modifier.size(32.dp)
                 ) {
                     Icon(
