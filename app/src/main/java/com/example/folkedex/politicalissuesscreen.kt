@@ -1,4 +1,4 @@
-package com.example.folkedex
+package com.example.folkedex.ui.theme
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -9,18 +9,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,64 +18,72 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.folkedex.R
 
 class PoliticalIssuesScreenActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            PoliticalIssuesScreenUnique(onIssueClick = { /* Handle issue selection */ })
+            PoliticalIssuesScreen(onIssueClick = { /* Handle issue selection */ })
         }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PoliticalIssuesScreenUnique(onIssueClick: (String) -> Unit) {
+fun PoliticalIssuesScreen(onIssueClick: (String) -> Unit) {
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = "Political issues",
-                        style = MaterialTheme.typography.titleLarge.copy(
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 24.sp
-                        ),
-                        color = Color.White
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = { /* Handle back button click */ }) {
-                        Icon(
-                            imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = "Back",
-                            tint = Color.White
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color(0xFF8E5355))
+                    .padding(bottom = 8.dp) // Padding to move the title lower
+            ) {
+                TopAppBar(
+                    title = {
+                        Text(
+                            text = "Political issues",
+                            style = MaterialTheme.typography.titleLarge.copy(
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 24.sp
+                            ),
+                            color = Color.White,
+                            modifier = Modifier.padding(start = 16.dp) // Add some padding to align nicely
                         )
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFF8E5355))
-            )
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = { /* Handle back button click */ }) {
+                            Icon(
+                                imageVector = Icons.Filled.ArrowBack,
+                                contentDescription = "Back",
+                                tint = Color.White
+                            )
+                        }
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFF8E5355))
+                )
+                SearchBar() // Search bar integrated below the top app bar with adjustments
+            }
         },
         content = { paddingValues ->
             Column(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues)
-                    .padding(16.dp)
-                    .background(Color(0xFF8E5355)),
+                    .padding(16.dp),
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                SearchBarUnique()
                 Spacer(modifier = Modifier.height(16.dp))
                 val issues = listOf(
-                    "Environment and Climate",
-                    "Economy and Labor Market",
-                    "Health and Welfare",
-                    "Human Rights and Equality"
+                    "Environment and climate",
+                    "Economy and labor market",
+                    "Health and welfare",
+                    "Human rights and equality"
                 )
                 issues.forEach { issue ->
-                    IssueButtonUnique(issue, onIssueClick)
+                    IssueButton(issue, onIssueClick)
                     Spacer(modifier = Modifier.height(16.dp))
                 }
             }
@@ -96,7 +93,7 @@ fun PoliticalIssuesScreenUnique(onIssueClick: (String) -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchBarUnique() {
+fun SearchBar() {
     TextField(
         value = "",
         onValueChange = { /* Handle search query changes */ },
@@ -111,17 +108,20 @@ fun SearchBarUnique() {
         },
         modifier = Modifier
             .fillMaxWidth()
-            .height(56.dp),
+            .height(56.dp)
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .background(color = Color(0xFFE0B7B8), shape = RoundedCornerShape(16.dp)), // Added rounded corners and background color
         colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color(0xFFE0B7B8),
+            containerColor = Color.Transparent,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent
-        )
+        ),
+        shape = RoundedCornerShape(16.dp) // Rounded corners for the search bar
     )
 }
 
 @Composable
-fun IssueButtonUnique(issue: String, onClick: (String) -> Unit) {
+fun IssueButton(issue: String, onClick: (String) -> Unit) {
     Button(
         onClick = { onClick(issue) },
         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFAE7071)),
@@ -141,6 +141,6 @@ fun IssueButtonUnique(issue: String, onClick: (String) -> Unit) {
 
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
-fun PreviewPoliticalIssuesScreenUnique() {
-    PoliticalIssuesScreenUnique(onIssueClick = { /* Handle click */ })
+fun PreviewPoliticalIssuesScreen() {
+    PoliticalIssuesScreen(onIssueClick = { /* Handle click */ })
 }
