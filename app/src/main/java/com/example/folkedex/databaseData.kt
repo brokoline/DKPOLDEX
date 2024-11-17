@@ -49,7 +49,7 @@ object PartyRepository {
             backColor =Color.White
         ),
         PartyData(
-            name = "Socialdemokratiet",
+            name = "Socialdemo-\nkratiet",
             path = "Socialdemokratiet",
             logoRes = R.drawable.socialdemokratiet,
             altLogo = R.drawable.socialdemokratiet_logo,
@@ -256,7 +256,7 @@ object PartyRepository {
             backColor =Color.White
         ),
         PartyData(
-            name = "Javnaðarflokkurin",
+            name = "Javnaðar-\nflokkurin",
             path = "Javnaðarflokkurin",
             logoRes = R.drawable.javn,
             altLogo = R.drawable.javnlogo2,

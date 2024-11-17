@@ -185,7 +185,7 @@ fun PartyCard(
 
 
         Text(
-            text = partyData.path,
+            text = partyData.name,
             style = MaterialTheme.typography.body1.copy( // Increase text size
                 fontSize = MaterialTheme.typography.body1.fontSize * 1.2f
             ),
