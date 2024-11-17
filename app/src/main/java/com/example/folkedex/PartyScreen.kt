@@ -81,7 +81,7 @@ fun Party(partyData: PartyData, onBackClick: () -> Unit = {}, navController: Nav
                             .padding(bottom = 4.dp)
                     )
                     Text(
-                        partyData.name,
+                        partyData.path,
                         fontSize = partyData.textSize,
                         color = partyData.backColor,
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
