@@ -33,12 +33,7 @@ import com.example.folkedex.R
 
 
 @Composable
-fun PartySelectionScreen(
-    navController: NavHostController,
-    onBackClick: () -> Unit = {},
-    cardWidth: Dp = 160.dp,
-    cardHeight: Dp = 160.dp
-) {
+fun PartySelectionScreen( navController: NavHostController, onBackClick: () -> Unit = {}, cardWidth: Dp = 160.dp, cardHeight: Dp = 160.dp) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -186,8 +181,8 @@ fun PartyCard(
 
         Text(
             text = partyData.name,
-            style = MaterialTheme.typography.body1.copy( // Increase text size
-                fontSize = MaterialTheme.typography.body1.fontSize * 1.2f
+            style = MaterialTheme.typography.body1.copy(
+                fontSize = MaterialTheme.typography.body1.fontSize * 1.4f
             ),
             textAlign = TextAlign.Center,
             modifier = Modifier
