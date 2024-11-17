@@ -54,7 +54,11 @@ fun DataScreen(onBackClick: () -> Unit = {}) {
                         tint = Color.White
                     )
                 }
-
+                FolketingLogo(
+                    modifier = Modifier
+                        .align(Alignment.CenterEnd)
+                        .size(250.dp)
+                )
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.align(Alignment.Center)
@@ -63,7 +67,7 @@ fun DataScreen(onBackClick: () -> Unit = {}) {
                         painter = painterResource(id = R.drawable.database),
                         contentDescription = "News Icon",
                         modifier = Modifier
-                            .size(100.dp)
+                            .size(80.dp)
                             .padding(bottom = 4.dp)
                     )
 
@@ -73,11 +77,14 @@ fun DataScreen(onBackClick: () -> Unit = {}) {
                         color = Color.White,
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     )
+                    com.example.folkedex.SearchBar()
 
 
                 }
 
-                FolketingLogo(modifier = Modifier.align(Alignment.CenterEnd))
+
+
+
             }
         },
         content = { paddingValues ->
