@@ -74,7 +74,9 @@ fun TopSectionWithSearchBar() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchBar() {
+fun SearchBar(
+    modifier: Modifier = Modifier
+) {
     TextField(
         value = "",
         onValueChange = { /* for search bar input, backend thing */ },
@@ -88,7 +90,7 @@ fun SearchBar() {
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent
         ),
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp)
     )

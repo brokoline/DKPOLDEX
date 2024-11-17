@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 
 @Composable
@@ -32,7 +33,7 @@ fun BillScreen(onBackClick: () -> Unit = {}, navController: NavController) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(200.dp)
+                    .height(250.dp)
                     .background(Color(0xFF0D9180)), // Farvetema for VoteScreen
                 contentAlignment = Alignment.CenterStart
             ) {
@@ -49,7 +50,14 @@ fun BillScreen(onBackClick: () -> Unit = {}, navController: NavController) {
                     )
 
                 }
-                FolketingLogo(modifier = Modifier.align(Alignment.CenterEnd))
+                FolketingLogo(
+                    modifier = Modifier
+                        .align(Alignment.CenterEnd)
+                        .offset(x = -50.dp)
+                        .offset(y = -25.dp)
+                        .size(200.dp)
+                        .zIndex(0f)
+                )
 
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -64,10 +72,14 @@ fun BillScreen(onBackClick: () -> Unit = {}, navController: NavController) {
                             .padding(bottom = 4.dp)
                     )
                     Text(
-                        "Votings",
+                        "Bills",
                         fontSize = 30.sp,
                         color = Color.White,
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+                    )
+                    com.example.folkedex.SearchBar(
+                        modifier = Modifier
+                            .padding(horizontal = 15.dp)
                     )
                 }
             }
