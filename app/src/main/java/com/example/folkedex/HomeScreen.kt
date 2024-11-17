@@ -74,7 +74,9 @@ fun TopSectionWithSearchBar() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchBar() {
+fun SearchBar(
+    modifier: Modifier = Modifier
+) {
     TextField(
         value = "",
         onValueChange = { /* for search bar input, backend thing */ },
@@ -88,7 +90,7 @@ fun SearchBar() {
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent
         ),
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp)
     )
@@ -133,6 +135,7 @@ fun PoliticianCategoryGrid(navController: NavHostController) {
                                     "Reports" -> navController.navigate("reports")
                                     "Bills" -> navController.navigate("bills")
                                     "News" -> navController.navigate("news")
+                                    "Data" -> navController.navigate("data")
                                     // other routes here
                                 }
                             }
