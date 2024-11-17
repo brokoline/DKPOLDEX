@@ -58,3 +58,30 @@ val  SiumutButton = Color(0xFF336FE0)
 val EnhedslistenBackground = Color(0xFFF23A3A)
 val  EnhedslistenButton = Color(0xFFF55C5C)
 
+val altSocialdemokratiet = Color(0xFFF23A3A)
+val altVenstre = Color(0xFF0047D2)
+val altLiberalAlliance = Color(0xFFE9C64C)
+val altKonservative = Color(0xFF227945)
+val altEnhedslisten = Color(0xFFD0004C)
+val altDanskFolkeparti = Color(0xFF0E3459)
+val altDanmarksdemokraterne = Color(0xFF133f7c)
+val altSocialistiskFolkeparti = Color(0xFFF23A3A)
+val altRadikaleVenstre = Color(0xFFe6007e)
+val altAlternativet = Color(0xFF00FF00)
+val altModeraterne = Color(0xFF842990)
+val altSiumut = Color(0xFF0000FF)
+val altInuitAtaqatigiit = Color(0xFFb01116)
+val altSambandsflokkurin = Color(0xFF006cb4)
+val altJavnaðarflokkurin = Color(0xFFa30000)
+
+
+
+
+
+
+
+
+
+
+
+

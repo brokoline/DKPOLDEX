@@ -64,7 +64,7 @@ fun MainScreen(navController: NavHostController) {
             composable("favorites") { FavoritesScreen(navController = navController) }
             composable("news") { NewsScreen(navController = navController) }
             composable("settings") { SettingsScreen(navController) }
-            composable("folkedex") { PartySelectionScreen(navController = navController) }
+            composable("folkedex") {PartySelectionScreen( navController = navController)}
             composable("issues") { PoliticalIssuesScreenUnique(navController = navController) }
             composable("politicians") { PoliticianProfileScreen(navController = navController) }
             composable("policies") { PoliciesScreen(navController = navController) }
@@ -75,7 +75,7 @@ fun MainScreen(navController: NavHostController) {
 
             // Dynamically Add Party Routes
             PartyRepository.parties.forEach { party ->
-                composable(party.name) {
+                composable(party.path) {
                     val partyData = PartyRepository.getPartyByName(party.name)
                     if (partyData != null) {
                         Party(
