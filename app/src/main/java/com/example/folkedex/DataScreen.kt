@@ -19,6 +19,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.zIndex
+import androidx.navigation.NavController
 import com.example.folkedex.R
 
 
@@ -26,7 +28,7 @@ data class Data(val title: String)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DataScreen(onBackClick: () -> Unit = {}) {
+fun DataScreen(onBackClick: () -> Unit = {}, navController: NavController) {
     // Dummy data untill we connect to the API
     val examples = listOf(
         Data(title = "Data Example"),
@@ -40,12 +42,12 @@ fun DataScreen(onBackClick: () -> Unit = {}) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(200.dp)
+                    .height(250.dp)
                     .background(Color(0xFF3A6AA9)),
                 contentAlignment = Alignment.CenterStart
             ) {
                 IconButton(
-                    onClick = onBackClick,
+                    onClick = {navController.popBackStack()},
                     modifier = Modifier
                         .padding(start = 16.dp)
                         .align(Alignment.CenterStart)
@@ -59,7 +61,10 @@ fun DataScreen(onBackClick: () -> Unit = {}) {
                 FolketingLogo(
                     modifier = Modifier
                         .align(Alignment.CenterEnd)
-                        .size(250.dp)
+                        .offset(x = -50.dp)
+                        .offset(y = -25.dp)
+                        .size(200.dp)
+                        .zIndex(0f)
                 )
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -79,14 +84,12 @@ fun DataScreen(onBackClick: () -> Unit = {}) {
                         color = Color.White,
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     )
-                    DataSearchBar()
-
-
+                    com.example.folkedex.SearchBar(
+                        modifier = Modifier
+                            .padding(horizontal = 15.dp)
+                            .offset(y = 10.dp)
+                    )
                 }
-
-
-
-
             }
         },
 
@@ -106,33 +109,4 @@ fun DataScreen(onBackClick: () -> Unit = {}) {
             }
         }
     )
-}
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun DataSearchBar() {
-    TextField(
-        value = "",
-        onValueChange = { /* for search bar input, backend thing */ },
-        leadingIcon = {
-            Icon(imageVector = Icons.Default.Search, contentDescription = "Search Icon")
-        },
-        placeholder = { Text("Search for Politician, Party, etc...") },
-        shape = RoundedCornerShape(16.dp),
-        colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color(0xFFF5F5F5),
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent
-        ),
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp)
-            .padding(horizontal = 6.dp)
-    )
-}
-
-// Preview for ReportsScreen
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun PreviewDataScreen() {
-    DataScreen()
 }

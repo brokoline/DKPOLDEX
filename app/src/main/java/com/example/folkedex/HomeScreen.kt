@@ -135,6 +135,7 @@ fun PoliticianCategoryGrid(navController: NavHostController) {
                                     "Reports" -> navController.navigate("reports")
                                     "Bills" -> navController.navigate("bills")
                                     "News" -> navController.navigate("news")
+                                    "Data" -> navController.navigate("data")
                                     // other routes here
                                 }
                             }
