@@ -5,8 +5,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -77,7 +79,7 @@ fun DataScreen(onBackClick: () -> Unit = {}) {
                         color = Color.White,
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     )
-                    com.example.folkedex.SearchBar()
+                    DataSearchBar()
 
 
                 }
@@ -87,6 +89,7 @@ fun DataScreen(onBackClick: () -> Unit = {}) {
 
             }
         },
+
         content = { paddingValues ->
             LazyColumn(
                 modifier = Modifier
@@ -102,6 +105,28 @@ fun DataScreen(onBackClick: () -> Unit = {}) {
                 }
             }
         }
+    )
+}
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DataSearchBar() {
+    TextField(
+        value = "",
+        onValueChange = { /* for search bar input, backend thing */ },
+        leadingIcon = {
+            Icon(imageVector = Icons.Default.Search, contentDescription = "Search Icon")
+        },
+        placeholder = { Text("Search for Politician, Party, etc...") },
+        shape = RoundedCornerShape(16.dp),
+        colors = TextFieldDefaults.textFieldColors(
+            containerColor = Color(0xFFF5F5F5),
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp)
+            .padding(horizontal = 6.dp)
     )
 }
 
