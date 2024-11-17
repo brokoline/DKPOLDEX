@@ -1,10 +1,13 @@
 package com.example.folkedex.ui.theme
 
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -14,12 +17,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
-
+import androidx.navigation.compose.rememberNavController
+import com.example.folkedex.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PoliciesScreen(onBackClick: () -> Unit = {}, navController: NavHostController) {
+fun PoliciesScreen() {
+    val navController = rememberNavController()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -36,9 +41,9 @@ fun PoliciesScreen(onBackClick: () -> Unit = {}, navController: NavHostControlle
                 )
             },
             navigationIcon = {
-                IconButton(onClick = {navController.popBackStack()}) {
+                IconButton(onClick = { /* Handle back action */ }) {
                     Icon(
-                        imageVector = Icons.Default.ArrowBack,
+                        painter = painterResource(id = android.R.drawable.ic_media_previous),
                         contentDescription = "Back",
                         tint = Color.White
                     )
@@ -50,12 +55,24 @@ fun PoliciesScreen(onBackClick: () -> Unit = {}, navController: NavHostControlle
         // Party logo
         Spacer(modifier = Modifier.height(16.dp))
         Image(
-            painter = painterResource(id = android.R.drawable.ic_menu_gallery),
+            painter = painterResource(id = R.drawable.moderaterne2),
             contentDescription = "Moderaterne Logo",
             modifier = Modifier
                 .size(100.dp)
-                .padding(8.dp)
+                .padding(16.dp)
         )
+
+        // Image of politician
+        Spacer(modifier = Modifier.height(16.dp))
+        Image(
+            painter = painterResource(id = R.drawable.politician_image),
+            contentDescription = "Politician image",
+            modifier = Modifier
+                .size(180.dp)
+                .padding(16.dp)
+        )
+
+
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -64,7 +81,7 @@ fun PoliciesScreen(onBackClick: () -> Unit = {}, navController: NavHostControlle
             text = "FORANDRING FRA MIDTEN",
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.White,
+            color = Color.Black,
             modifier = Modifier.padding(8.dp)
         )
         Spacer(modifier = Modifier.height(8.dp))
@@ -88,31 +105,53 @@ fun PoliciesScreen(onBackClick: () -> Unit = {}, navController: NavHostControlle
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp),
+                .padding(horizontal = 16.dp)
+                .background(Color(0xFFE1BEE7))
+                .padding(16.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Box(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(8.dp)
-                    .background(Color(0xFFD1C4E9))
-                    .padding(16.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(text = "Political Proposals", color = Color.Black, fontWeight = FontWeight.Bold)
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Image(
+                    painter = painterResource(id = R.drawable.forslag),
+                    contentDescription = "Political Proposals Image",
+                    modifier = Modifier.size(100.dp)
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Political Proposals",
+                    fontSize = 16.sp,
+                    color = Color.Black,
+                    fontWeight = FontWeight.Bold
+                )
             }
-            Box(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(8.dp)
-                    .background(Color(0xFFD1C4E9))
-                    .padding(16.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(text = "Values & Thoughts", color = Color.Black, fontWeight = FontWeight.Bold)
+        }
+        Box(
+            modifier = Modifier
+                .weight(1f)
+                .padding(8.dp)
+                .background(Color.Transparent)
+                .border(width = 2.dp, color = Color(0xFFAB47BC))
+                .padding(16.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Image(
+                    painter = painterResource(id = R.drawable.vaerdier),
+                    contentDescription = "Values & Thoughts Image",
+                    modifier = Modifier.size(100.dp)
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Values & Thoughts",
+                    fontSize = 16.sp,
+                    color = Color.Black,
+                    fontWeight = FontWeight.Bold
+                )
             }
         }
     }
 }
+
+
 
 
