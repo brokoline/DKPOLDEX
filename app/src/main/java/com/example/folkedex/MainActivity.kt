@@ -91,6 +91,8 @@ fun MainScreen(navController: NavHostController) {
                         Text("Party data not found")
                     }
                 }
+
+
             }
         }
     }

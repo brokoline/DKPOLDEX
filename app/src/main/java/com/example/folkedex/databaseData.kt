@@ -9,6 +9,7 @@ object PartyRepository {
     val parties = listOf(
         PartyData(
             name = "Moderaterne",
+            path = "Moderaterne",
             logoRes = R.drawable.moderaterne,
             description = "Text about the Moderaterne party, \n" +
                     "eventually what they stand for,\n" +
@@ -26,6 +27,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Venstre",
+            path = "Venstre",
             logoRes = R.drawable.venstre,
             description = "Text about the Venstre party, \n" +
                     "eventually what they stand for,\n" +
@@ -42,6 +44,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Socialdemokratiet",
+            path = "Socialdemokratiet",
             logoRes = R.drawable.socialdemokratiet,
             description = "Text about the Socialdemokratiet party, \n" +
                     "eventually what they stand for,\n" +
@@ -58,6 +61,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Radikale Venstre",
+            path = "Radikale Venstre",
             logoRes = R.drawable.radikalevenstre,
             description = "Text about the Radikale Venstre party, \n" +
                     "eventually what they stand for,\n" +
@@ -74,6 +78,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Det Konservative Folkeparti",
+            path = "Det Konservative Folkeparti",
             logoRes = R.drawable.koservative,
             description = "Text about the Konservative Folkeparti party, \n" +
                     "eventually what they stand for,\n" +
@@ -91,6 +96,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Socialistisk Folkeparti",
+            path = "Socialistisk Folkeparti",
             logoRes = R.drawable.socialistiskfolkeparti,
             description = "Text about the Socialistisk Folkeparti party, \n" +
                     "eventually what they stand for,\n" +
@@ -108,6 +114,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Liberal Alliance",
+            path = "Liberal Alliance",
             logoRes = R.drawable.liberalalliance,
             description = "Text about the  Liberal Alliance party, \n" +
                     "eventually what they stand for,\n" +
@@ -125,6 +132,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Dansk Folkeparti",
+            path = "Dansk Folkeparti",
             logoRes = R.drawable.df,
             description = "Text about the Dansk Folkeparti party, \n" +
                     "eventually what they stand for,\n" +
@@ -142,6 +150,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Danmarks-\ndemokraterne",
+            path = "Danmarksdemokraterne",
             logoRes = R.drawable.ddemkraterne,
             description = "Text about the Danmarksdemokraterne party, \n" +
                     "eventually what they stand for,\n" +
@@ -159,6 +168,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Enhedslisten",
+            path = "Enhedslisten",
             logoRes = R.drawable.enhedslisten,
             description = "Text about the Enhedslisten party, \n" +
                     "eventually what they stand for,\n" +
@@ -176,6 +186,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Alternativet",
+            path = "Alternativet",
             logoRes = R.drawable.alternativet,
             description = "Text about the Alternativet party, \n" +
                     "eventually what they stand for,\n" +
@@ -192,6 +203,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Sambands-\nflokkurin",
+            path = "Sambandsflokkurin",
             logoRes = R.drawable.sambands,
             description = "Text about the Sambandsflokkurin party, \n" +
                     "eventually what they stand for,\n" +
@@ -201,7 +213,7 @@ object PartyRepository {
             history = "This party was founded...",
             backgroundColor = SambandspartietBackground,
             buttonColor = SambandspartietButton,
-            offsetX = 110f,
+            offsetX = 70f,
             offsetY = 15f,
             imageSize = 100.dp,
             textSize = 30.sp,
@@ -209,6 +221,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Javnaðarflokkurin",
+            path = "Javnaðarflokkurin",
             logoRes = R.drawable.javn,
             description = "Text about the Javnaðarflokkurin party, \n" +
                     "eventually what they stand for,\n" +
@@ -226,6 +239,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Siumut",
+            path = "Siumut",
             logoRes = R.drawable.siumut,
             description = "Text about the Siumut party, \n" +
                     "eventually what they stand for,\n" +
@@ -243,6 +257,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Inuit Ataqatigiit",
+            path = "Inuit Ataqatigiit",
             logoRes = R.drawable.inuit,
             description = "Text about the Inuit Ataqatigiit party, \n" +
                     "eventually what they stand for,\n" +
@@ -260,6 +275,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Løsgængere",
+            path = "Løsgængere",
             logoRes = R.drawable.loes,
             description = "Text about the politicians who currently aren't in any party, \n" +
                     "eventually what they stand for,\n" +

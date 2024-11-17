@@ -9,6 +9,7 @@ import androidx.compose.ui.unit.sp
 
 data class PartyData(
     val name: String,
+    val path: String,
     @DrawableRes val logoRes: Int,
     val description: String,
     val history: String,
