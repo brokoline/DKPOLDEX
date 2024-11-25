@@ -32,7 +32,7 @@ import com.example.folkedex.ui.theme.Party
 import com.example.folkedex.ui.theme.PartyRepository
 import com.example.folkedex.ui.theme.PartySelectionScreen
 import com.example.folkedex.ui.theme.PoliciesScreen
-import com.example.folkedex.ui.theme.PoliticalIssuesScreenUnique
+import com.example.folkedex.ui.theme.IssuesScreen
 import com.example.folkedex.ui.theme.PoliticianProfileScreen
 import com.example.folkedex.ui.theme.ReportsScreen
 
@@ -66,7 +66,7 @@ fun MainScreen(navController: NavHostController) {
             composable("news") { NewsScreen(navController = navController) }
             composable("settings") { SettingsScreen(navController) }
             composable("folkedex") {PartySelectionScreen( navController = navController)}
-            composable("issues") { PoliticalIssuesScreenUnique(navController = navController) }
+            composable("issues") { IssuesScreen(navController = navController) }
             composable("politicians") { PoliticianProfileScreen(navController = navController) }
             composable("policies") { PoliciesScreen(navController = navController) }
             composable("reports") { ReportsScreen(navController = navController) }
