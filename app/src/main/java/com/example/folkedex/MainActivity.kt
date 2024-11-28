@@ -20,7 +20,6 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Scaffold
 import com.example.folkedex.ui.theme.BillScreen
@@ -65,7 +64,7 @@ fun MainScreen(navController: NavHostController) {
             composable("favorites") { FavoritesScreen(navController = navController) }
             composable("news") { NewsScreen(navController = navController) }
             composable("settings") { SettingsScreen(navController) }
-            composable("folkedex") {PartySelectionScreen( navController = navController)}
+            composable("folkedex") { PartySelectionScreen( navController = navController) }
             composable("issues") { PoliticalIssuesScreenUnique(navController = navController) }
             composable("politicians") { PoliticianProfileScreen(navController = navController) }
             composable("policies") { PoliciesScreen(navController = navController) }
