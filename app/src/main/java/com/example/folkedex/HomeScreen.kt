@@ -18,18 +18,35 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.example.folkedex.ui.theme.FolketingLogo
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
-    Column {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .consumeWindowInsets(WindowInsets.systemBars)
+
+    ) {
         TopSectionWithSearchBar()
-        Spacer(modifier = Modifier.height(16.dp))
-        PoliticianCategoryGrid(navController)
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 275.dp)
+        ) {
+            Spacer(modifier = Modifier.height(16.dp))
+            PoliticianCategoryGrid(navController)
+        }
     }
 }
+
 
 @Composable
 fun TopSectionWithSearchBar() {
@@ -37,17 +54,18 @@ fun TopSectionWithSearchBar() {
         modifier = Modifier
             .fillMaxWidth()
             .height(200.dp) // Fixed height for red background area
-            .background(Color(0xFFFF6F61)) // Red color
+            .background(Color(0xFFFF6F61))
             .padding(16.dp)
+            .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Bottom)) // Only respect the bottom insets
     ) {
         // Logo as faint background
-        Image(
-            painter = painterResource(id = R.drawable.flogo),
-            contentDescription = null,
+        FolketingLogo(
             modifier = Modifier
-                .fillMaxWidth(0.49f) //Logo size background above
-                .align(Alignment.Center),
-            contentScale = ContentScale.FillWidth
+                .align(Alignment.CenterEnd)
+                .offset(x = -70.dp)
+                .offset(y = -1.dp)
+                .size(140.dp)
+                .zIndex(0f)
         )
 
         Column(
@@ -167,29 +185,28 @@ fun CategoryCard(text: String, startColor: Color, endColor: Color, onClick: () -
                             endColor
                         )
                     )
-                )
-                .padding(8.dp)
+                ),
+            contentAlignment = Alignment.Center
         ) {
-            Row(
-                modifier = Modifier.fillMaxSize(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = text,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White,
-                    fontSize = 22.sp
-                )
-                Image(
-                    painter = painterResource(id = R.drawable.flogo),
-                    contentDescription = "Logo",
-                    modifier = Modifier
-                        .size(75.dp)
-                        .alpha(0.5f)
-
-                )
-            }
+            Text(
+                text = text,
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
+                fontSize = 22.sp,
+                textAlign = TextAlign.Center
+            )
         }
     }
+}
+
+
+@Preview(
+    showSystemUi = true,
+    showBackground = true,
+    device = "spec:width=411dp,height=891dp,dpi=420"
+)
+@Composable
+fun PreviewHomeScreen() {
+    val navController = rememberNavController()
+    HomeScreen(navController = navController)
 }

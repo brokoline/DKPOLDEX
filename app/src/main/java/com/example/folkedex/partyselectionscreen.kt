@@ -24,9 +24,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.example.folkedex.HomeScreen
 import com.example.folkedex.R
 
 
@@ -67,7 +70,9 @@ fun PartySelectionScreen( navController: NavHostController, onBackClick: () -> U
 
                 IconButton(
                     onClick = { navController.popBackStack() },
-                    modifier = Modifier.padding(end = 0.dp)
+                    modifier = Modifier
+                        .padding(end = 0.dp)
+                        .padding(top = 30.dp)
                 ) {
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
@@ -85,6 +90,7 @@ fun PartySelectionScreen( navController: NavHostController, onBackClick: () -> U
                     modifier = Modifier
                         .offset(x = -10.dp)
                         .weight(1f)
+                        .padding(top = 30.dp)
                 )
             }
 
@@ -190,4 +196,14 @@ fun PartyCard(
                 .fillMaxWidth()
         )
     }
+}
+@Preview(
+    showSystemUi = true,
+    showBackground = true,
+    device = "spec:width=411dp,height=891dp,dpi=420"
+)
+@Composable
+fun PreviewPartySelectionScreen() {
+    val navController = rememberNavController()
+    PartySelectionScreen(navController = navController)
 }
