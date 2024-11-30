@@ -43,7 +43,7 @@ import com.example.folkedex.R
 @Composable
 fun PartySelectionScreen(navController: NavController, onBackClick: () -> Unit = {}, cardWidth: Dp = 160.dp, cardHeight: Dp = 160.dp) {
 
-    val scrollState = rememberLazyListState(initialFirstVisibleItemIndex = 1)
+    val scrollState = rememberLazyListState(initialFirstVisibleItemIndex = 0)
     val isTopBarVisible by remember {
         derivedStateOf { scrollState.firstVisibleItemIndex == 0 && scrollState.firstVisibleItemScrollOffset == 0 }
     }
@@ -82,7 +82,9 @@ fun PartySelectionScreen(navController: NavController, onBackClick: () -> Unit =
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Row(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 30.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         IconButton(
