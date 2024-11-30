@@ -1,5 +1,11 @@
 package com.example.folkedex.ui.theme
 
+import android.util.Log
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -7,36 +13,44 @@ import androidx.compose.foundation.layout.*
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import com.example.folkedex.HomeScreen
+import androidx.navigation.NavController
 import com.example.folkedex.R
 
 
-
-
 @Composable
-fun PartySelectionScreen( navController: NavHostController, onBackClick: () -> Unit = {}, cardWidth: Dp = 160.dp, cardHeight: Dp = 160.dp) {
+fun PartySelectionScreen(navController: NavController, onBackClick: () -> Unit = {}, cardWidth: Dp = 160.dp, cardHeight: Dp = 160.dp) {
+
+    val scrollState = rememberLazyListState(initialFirstVisibleItemIndex = 1)
+    val isTopBarVisible by remember {
+        derivedStateOf { scrollState.firstVisibleItemIndex == 0 && scrollState.firstVisibleItemScrollOffset == 0 }
+    }
+
+    Log.d("ScrollOffset", "Offset: ${remember { derivedStateOf { scrollState.firstVisibleItemScrollOffset } }}")
+
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -54,63 +68,60 @@ fun PartySelectionScreen( navController: NavHostController, onBackClick: () -> U
             contentScale = ContentScale.Fit
         )
 
-        // foreground
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 30.dp, vertical = 8.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Start
+        // foreground (now with collapsable top-bar)
+        Column{
+            AnimatedVisibility(
+                visible = isTopBarVisible,
+                enter = fadeIn(),
+                exit = fadeOut()
             ) {
-
-                IconButton(
-                    onClick = { navController.popBackStack() },
+                Column(
                     modifier = Modifier
-                        .padding(end = 0.dp)
-                        .padding(top = 30.dp)
+                        .fillMaxWidth()
+                        .padding(horizontal = 30.dp, vertical = 8.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "Back",
-                        tint = Color.Black
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        IconButton(
+                            onClick = { navController.popBackStack() },
+                            modifier = Modifier.padding(end = 0.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.ArrowBack,
+                                contentDescription = "Back",
+                                tint = Color.Black
+                            )
+                        }
+                        Text(
+                            text = "FolkeDex",
+                            color = Color.Black,
+                            fontSize = MaterialTheme.typography.headlineLarge.fontSize,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier
+                                .weight(1f)
+                        )
+                    }
+                    Text(
+                        text = "Select the relevant party",
+                        style = MaterialTheme.typography.titleMedium.copy(
+                            fontSize = MaterialTheme.typography.titleLarge.fontSize
+                        ),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 8.dp),
+                        textAlign = TextAlign.Center
                     )
                 }
-
-
-                Text(
-                    text = "FolkeDex",
-                    color = Color.Black,
-                    fontSize = MaterialTheme.typography.h4.fontSize,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier
-                        .offset(x = -10.dp)
-                        .weight(1f)
-                        .padding(top = 30.dp)
-                )
             }
 
-
-            Text(
-                text = "Select the relevant party",
-                style = MaterialTheme.typography.subtitle1.copy(
-                    fontSize = MaterialTheme.typography.h6.fontSize
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(0.dp),
-                textAlign = TextAlign.Center
-            )
-
-
             LazyColumn(
+                state = scrollState,
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(horizontal = 8.dp),
+                    .padding(top = 8.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 items(PartyRepository.parties.chunked(2)) { rowParties ->
@@ -145,6 +156,7 @@ fun PartySelectionScreen( navController: NavHostController, onBackClick: () -> U
         }
     }
 }
+
 
 
 
@@ -187,8 +199,8 @@ fun PartyCard(
 
         Text(
             text = partyData.name,
-            style = MaterialTheme.typography.body1.copy(
-                fontSize = MaterialTheme.typography.body1.fontSize * 1.4f
+            style = MaterialTheme.typography.bodyLarge.copy(
+                fontSize = MaterialTheme.typography.bodyLarge.fontSize * 1.4f
             ),
             textAlign = TextAlign.Center,
             modifier = Modifier
@@ -197,13 +209,9 @@ fun PartyCard(
         )
     }
 }
-@Preview(
-    showSystemUi = true,
-    showBackground = true,
-    device = "spec:width=411dp,height=891dp,dpi=420"
-)
+
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewPartySelectionScreen() {
-    val navController = rememberNavController()
-    PartySelectionScreen(navController = navController)
+    PartySelectionScreen(navController = NavController(LocalContext.current))
 }
