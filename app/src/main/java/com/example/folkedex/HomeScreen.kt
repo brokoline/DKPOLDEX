@@ -20,7 +20,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
+import com.example.folkedex.ui.theme.FolketingLogo
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
@@ -40,14 +42,14 @@ fun TopSectionWithSearchBar() {
             .background(Color(0xFFFF6F61)) // Red color
             .padding(16.dp)
     ) {
-        // Logo as faint background
-        Image(
-            painter = painterResource(id = R.drawable.flogo),
-            contentDescription = null,
+        // Logo
+        FolketingLogo(
             modifier = Modifier
-                .fillMaxWidth(0.49f) //Logo size background above
-                .align(Alignment.Center),
-            contentScale = ContentScale.FillWidth
+                .align(Alignment.CenterEnd)
+                .offset(x = -70.dp)
+                .offset(y = -1.dp)
+                .size(140.dp)
+                .zIndex(0f)
         )
 
         Column(
