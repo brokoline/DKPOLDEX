@@ -81,7 +81,7 @@ fun MainScreen(navController: NavHostController) {
             composable("folkedex") {PartySelectionScreen( navController = navController)}
             composable("issues") { PoliticalIssuesScreenUnique(navController = navController) }
             composable("politicians") { PoliticianScreen(navController = navController) }
-            //composable("policies") { PoliciesScreen(navController = navController) }
+            composable("policies") { PoliciesScreen(navController = navController) }
             composable("reports") { ReportsScreen(navController = navController) }
             composable("bills") { BillScreen(navController = navController) }
             composable("history") { History(navController = navController) }

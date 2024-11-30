@@ -37,12 +37,6 @@ fun PoliticianScreen(navController: NavController, onBackClick: () -> Unit = {})
                     .fillMaxWidth()
                     .background(Color.Transparent)
             ) {
-                Spacer(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(24.dp)
-                        .background(Color.Gray.copy(alpha = 0.8f))
-                )
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -57,11 +51,12 @@ fun PoliticianScreen(navController: NavController, onBackClick: () -> Unit = {})
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(50.dp),
+                            .height(50.dp)
+                            .padding(top = 25.dp),
                         contentAlignment = Alignment.CenterStart
                     ) {
                         IconButton(
-                            onClick = onBackClick,
+                            onClick = {navController.popBackStack()},
                             modifier = Modifier
                                 .padding(start = 16.dp)
                                 .align(Alignment.CenterStart)
@@ -100,43 +95,6 @@ fun PoliticianScreen(navController: NavController, onBackClick: () -> Unit = {})
                 }
             }
         },
-        bottomBar = {
-            BottomAppBar(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(45.dp),
-                containerColor = Color.Gray.copy(alpha = 0.8f)
-            ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    IconButton(onClick = { /* Navigate to Home */ }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.home),
-                            contentDescription = "Home",
-                            tint = Color.White
-                        )
-                    }
-                    IconButton(onClick = {/* Navigate to Favorites */}) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.favorites),
-                            contentDescription = "Home",
-                            tint = Color.White
-                        )
-                    }
-                    IconButton(onClick = {/* Navigate to settings */}) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.settings),
-                            contentDescription = "Settings",
-                            tint = Color.White
-                        )
-                    }
-                }
-            }
-        },
-
         content = { paddingValues ->
             Column(
                 modifier = Modifier
