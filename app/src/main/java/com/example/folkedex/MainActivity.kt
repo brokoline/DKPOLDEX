@@ -40,8 +40,8 @@ import com.example.folkedex.ui.theme.Party
 import com.example.folkedex.ui.theme.PartyRepository
 import com.example.folkedex.ui.theme.PartySelectionScreen
 import com.example.folkedex.PoliciesScreen
-import com.example.folkedex.ui.theme.PoliticalIssuesScreenUnique
 import com.example.folkedex.PoliticianScreen
+import com.example.folkedex.ui.theme.IssuesScreen
 import com.example.folkedex.ui.theme.ReportsScreen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -78,8 +78,8 @@ fun MainScreen(navController: NavHostController) {
             composable("favorites") { FavoritesScreen(navController = navController) }
             composable("news") { NewsScreen(navController = navController) }
             composable("settings") { SettingsScreen(navController) }
-            composable("folkedex") {PartySelectionScreen( navController = navController)}
-            composable("issues") { PoliticalIssuesScreenUnique(navController = navController) }
+            composable("folkedex") { PartySelectionScreen( navController = navController)}
+            composable("issues") { IssuesScreen(navController = navController) }
             composable("politicians") { PoliticianScreen(navController = navController) }
             composable("policies") { PoliciesScreen(navController = navController) }
             composable("reports") { ReportsScreen(navController = navController) }

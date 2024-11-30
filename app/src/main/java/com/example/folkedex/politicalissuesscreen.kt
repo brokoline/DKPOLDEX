@@ -13,32 +13,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.folkedex.HomeScreen
 import com.example.folkedex.R // Importerer drawable ressourcer
 
 @Composable
 fun IssuesScreen(onBackClick: () -> Unit = {}, navController: NavController) {
-    val votes = listOf(
-        "Mental Health",
-        "Immigration Policies",
-        "Freedom of Movement",
-        "Cultural Funding",
-        "Climate Change",
-        "Education Reform",
-        "Healthcare System",
-        "Taxation Policies",
-        "Housing Crisis",
-        "Transportation Infrastructure",
-        "Digital Privacy",
-        "Economic Growth",
-        "Labor Rights",
-        "EU Relations",
-        "Defense and Security"
+    val issues = listOf(
+        Issue(title = "Mental Health"),
+        Issue(title = "Immigration Policies"),
+        Issue(title = "Freedom of Movement"),
     )
 
     Scaffold(
@@ -80,6 +72,8 @@ fun IssuesScreen(onBackClick: () -> Unit = {}, navController: NavController) {
                         modifier = Modifier
                             .size(100.dp)
                             .padding(bottom = 4.dp)
+                            .padding(top = 10.dp),
+                        colorFilter = ColorFilter.tint(Color.White)
                     )
                     Text(
                         "Political Issues",
@@ -103,21 +97,13 @@ fun IssuesScreen(onBackClick: () -> Unit = {}, navController: NavController) {
                     .padding(paddingValues)
                     .padding(horizontal = 16.dp, vertical = 16.dp)
             ) {
-                items(votes) { vote ->
-                    GradientButton(
-                        text = vote,
-                        onClick = { /* Handle click if needed */ },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 8.dp)
-                            .height(60.dp) // Button height
-                    )
+                items(issues) { issue ->
+                    IssuesCard(issue = issue, onClick = {/*random*/})
                 }
             }
         }
     )
 }
-
 
 @Composable
 fun GradientButton(
@@ -156,20 +142,13 @@ fun GradientButton(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@Preview(
+    showSystemUi = true,
+    showBackground = true,
+    device = "spec:width=411dp,height=891dp,dpi=420"
+)
 @Composable
-fun SearchBar(modifier: Modifier = Modifier) {
-    OutlinedTextField(
-        value = "",
-        onValueChange = { /* Handle search input */ },
-        placeholder = { Text("Search for specific issues...") },
-        modifier = modifier
-            .fillMaxWidth()
-            .background(Color.White, shape = MaterialTheme.shapes.small),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = Color.Gray,
-            unfocusedBorderColor = Color.LightGray
-        )
-    )
-
+fun PreviewIssuesScreen() {
+    val navController = rememberNavController()
+    IssuesScreen(navController = navController)
 }
