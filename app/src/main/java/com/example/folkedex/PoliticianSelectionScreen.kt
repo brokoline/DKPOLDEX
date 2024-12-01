@@ -1,12 +1,5 @@
 package com.example.folkedex.ui.theme
 
-import android.util.Log
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -15,46 +8,53 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.folkedex.R
 
 @Composable
-fun PoliticianSelectionScreen(
-    navController: NavController,
-    partyName: String,
-    politicians: List<PoliticianData>,
-    onBackClick: () -> Unit = {},
+fun PoliticianSelectionScreen(navController: NavController,
+    partyName: String = "Moderaterne",
     cardWidth: Dp = 160.dp,
     cardHeight: Dp = 160.dp
 ) {
     val scrollState = rememberLazyListState()
-    val isTopBarVisible by remember {
-        derivedStateOf { scrollState.firstVisibleItemIndex == 0 && scrollState.firstVisibleItemScrollOffset == 0 }
-    }
     var searchQuery by remember { mutableStateOf("") }
+
+    // Dummy data for demonstration purposes
+    val politicians = listOf(
+        PoliticianData("Lars Løkke Rasmussen", R.drawable.politician_image, 0xFF6A1B9A),
+        PoliticianData("Jakob Engel-Schmidt", R.drawable.flogo, 0xFF6A1B9A),
+        PoliticianData("Mette Kierkgaard", R.drawable.flogo, 0xFF6A1B9A),
+        PoliticianData("Henrik Frandsen", R.drawable.flogo, 0xFF6A1B9A),
+        PoliticianData("Monika Rubin", R.drawable.flogo, 0xFF6A1B9A),
+        PoliticianData("Charlotte Bagge Hansen", R.drawable.flogo, 0xFF6A1B9A),
+        PoliticianData("Mohammad Rona", R.drawable.flogo, 0xFF6A1B9A)
+    )
 
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
     ) {
-        // Baggrundslogo
+        // Background logo
         Image(
             painter = painterResource(id = R.drawable.flogo),
             contentDescription = "Folketing Logo",
@@ -66,9 +66,9 @@ fun PoliticianSelectionScreen(
             contentScale = ContentScale.Fit
         )
 
-        // Forgrund med topbar og liste
+        // Foreground with top bar and list
         Column {
-            TopBarWithSearch(partyName, onBackClick, searchQuery) { query ->
+            TopBarWithSearch(navController, partyName, searchQuery) { query ->
                 searchQuery = query
             }
 
@@ -92,11 +92,9 @@ fun PoliticianSelectionScreen(
                         rowPoliticians.forEach { politician ->
                             PoliticianCard(
                                 politicianData = politician,
-                                onClick = {
-                                    // Navigér til politikerens detaljer
-                                },
                                 cardWidth = cardWidth,
-                                cardHeight = cardHeight
+                                cardHeight = cardHeight,
+                                navController = navController
                             )
                         }
 
@@ -114,11 +112,10 @@ fun PoliticianSelectionScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBarWithSearch(
+    navController: NavController,
     partyName: String,
-    onBackClick: () -> Unit,
     searchQuery: String,
     onSearchQueryChange: (String) -> Unit
 ) {
@@ -129,10 +126,12 @@ fun TopBarWithSearch(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Row(
+            modifier = Modifier
+                .padding(top = 30.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(
-                onClick = onBackClick,
+                onClick = {navController.popBackStack()},
                 modifier = Modifier.size(24.dp)
             ) {
                 Icon(
@@ -150,14 +149,14 @@ fun TopBarWithSearch(
             )
         }
 
-        com.example.folkedex.SearchBar() // søgefelt skal rettes
+        com.example.folkedex.SearchBar()
     }
 }
 
 @Composable
 fun PoliticianCard(
     politicianData: PoliticianData,
-    onClick: () -> Unit,
+    navController: NavController,
     cardWidth: Dp = 160.dp,
     cardHeight: Dp = 160.dp
 ) {
@@ -175,21 +174,22 @@ fun PoliticianCard(
                     color = Color(politicianData.cardColor),
                     shape = RoundedCornerShape(16.dp)
                 )
-                .clickable(onClick = onClick),
+                .clickable {
+                    navController.navigate("politician/${politicianData.name}")
+
+                },
             contentAlignment = Alignment.Center
         ) {
-            // Tilføjer billedet her
             Image(
                 painter = painterResource(id = politicianData.photo),
-                contentDescription = "Billede af ${politicianData.name}",
+                contentDescription = "Photo of ${politicianData.name}",
                 modifier = Modifier
                     .size(100.dp)
                     .padding(8.dp),
-                contentScale = ContentScale.Crop // Sikrer, at billedet passer
+                contentScale = ContentScale.Crop
             )
         }
 
-        // Tekst med navn
         Text(
             text = politicianData.name,
             style = MaterialTheme.typography.bodyLarge.copy(
@@ -204,36 +204,16 @@ fun PoliticianCard(
     }
 }
 
-
-// Data-klasse til politikere
+// Data class for politicians
 data class PoliticianData(
     val name: String,
-    val photo: Int, // Ressource-ID til politikerens billede
+    val photo: Int,
     val cardColor: Long
 )
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewPoliticianSelectionScreen() {
-    PoliticianSelectionScreen(
-        navController = NavController(LocalContext.current),
-        partyName = "Moderaterne",
-        politicians = listOf(
-            PoliticianData("Lars Løkke Rasmussen", R.drawable.politician_image, 0xFF6A1B9A),
-            PoliticianData("Jakob Engel-Schmidt", R.drawable.flogo, 0xFF6A1B9A),
-            PoliticianData("Mette Kierkgaard", R.drawable.flogo, 0xFF6A1B9A),
-            PoliticianData("Henrik Frandsen", R.drawable.flogo, 0xFF6A1B9A),
-            PoliticianData("Monika Rubin", R.drawable.flogo, 0xFF6A1B9A),
-            PoliticianData("Charlotte Bagge Hansen", R.drawable.flogo, 0xFF6A1B9A),
-            PoliticianData("Mohammad Rona", R.drawable.flogo, 0xFF6A1B9A),
-            PoliticianData("Peter Have", R.drawable.flogo, 0xFF6A1B9A),
-            PoliticianData("Nanna W. Gotfredsen", R.drawable.flogo, 0xFF6A1B9A),
-            PoliticianData("Rasmus Lund-Nielsen", R.drawable.flogo, 0xFF6A1B9A),
-            PoliticianData("Rosa Eriksen", R.drawable.flogo, 0xFF6A1B9A),
-            PoliticianData("Karin Liltorp", R.drawable.flogo, 0xFF6A1B9A),
-            PoliticianData("Henrik Rejnholt Andersen", R.drawable.flogo, 0xFF6A1B9A)
-
-
-        )
-    )
+    val navController = rememberNavController()
+    PoliticianSelectionScreen(navController)
 }

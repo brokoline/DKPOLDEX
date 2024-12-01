@@ -42,6 +42,7 @@ import com.example.folkedex.ui.theme.PartySelectionScreen
 import com.example.folkedex.PoliciesScreen
 import com.example.folkedex.PoliticianScreen
 import com.example.folkedex.ui.theme.IssuesScreen
+import com.example.folkedex.ui.theme.PoliticianSelectionScreen
 import com.example.folkedex.ui.theme.ReportsScreen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -80,12 +81,17 @@ fun MainScreen(navController: NavHostController) {
             composable("settings") { SettingsScreen(navController) }
             composable("folkedex") { PartySelectionScreen( navController = navController)}
             composable("issues") { IssuesScreen(navController = navController) }
-            composable("politicians") { PoliticianScreen(navController = navController) }
+            composable("politician/{name}") { backStackEntry ->
+                val name = backStackEntry.arguments?.getString("name") ?: "Unknown"
+                PoliticianScreen(navController = navController, name = name)
+            }
+
             composable("policies") { PoliciesScreen(navController = navController) }
             composable("reports") { ReportsScreen(navController = navController) }
             composable("bills") { BillScreen(navController = navController) }
             composable("history") { History(navController = navController) }
             composable("data") { DataScreen(navController = navController) }
+            composable("politicians") { PoliticianSelectionScreen(navController = navController) }
 
 
             // Dynamically Add Party Routes

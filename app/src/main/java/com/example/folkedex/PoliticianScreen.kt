@@ -29,7 +29,7 @@ import com.example.folkedex.PoliticianCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PoliticianScreen(navController: NavController, onBackClick: () -> Unit = {}) {
+fun PoliticianScreen(navController: NavController, name: String, onBackClick: () -> Unit = {}) {
     Scaffold(
         topBar = {
             Column(
@@ -182,5 +182,5 @@ fun PoliticianScreen(navController: NavController, onBackClick: () -> Unit = {})
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewPoliticianScreen() {
-    PoliticianScreen(navController = NavController(LocalContext.current))
+    PoliticianScreen(navController = NavController(LocalContext.current), name = "Lars Løkke Rasmussen")
 }

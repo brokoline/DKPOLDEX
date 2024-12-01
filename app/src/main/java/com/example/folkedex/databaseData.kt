@@ -279,8 +279,8 @@ object PartyRepository {
         PartyData(
             name = "Siumut",
             path = "Siumut",
-            logoRes = R.drawable.siumut,
-            altLogo = R.drawable.siumut,
+            logoRes = R.drawable.siumut_logo,
+            altLogo = R.drawable.siumut_logo,
             description = "Text about the Siumut party, \n" +
                     "eventually what they stand for,\n" +
                     "political orientation/spectrum\n" +
