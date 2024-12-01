@@ -45,11 +45,6 @@ fun FavoritesScreen(onBackClick: () -> Unit = {}, navController: NavController) 
                         .padding(start = 16.dp)
                         .align(Alignment.CenterStart)
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "Tilbage",
-                        tint = Color.White
-                    )
                 }
 
                 Column(

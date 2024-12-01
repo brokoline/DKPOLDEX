@@ -3,6 +3,11 @@ package com.example.folkedex
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
@@ -11,8 +16,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-
-// Import from Material 2 for BottomNavigation
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
@@ -23,6 +26,11 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.unit.dp
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.example.folkedex.ui.theme.BillScreen
 import com.example.folkedex.ui.theme.DataScreen
 import com.example.folkedex.ui.theme.FavoritesScreen
@@ -31,13 +39,16 @@ import com.example.folkedex.ui.theme.NewsScreen
 import com.example.folkedex.ui.theme.Party
 import com.example.folkedex.ui.theme.PartyRepository
 import com.example.folkedex.ui.theme.PartySelectionScreen
-import com.example.folkedex.ui.theme.PoliciesScreen
-import com.example.folkedex.ui.theme.PoliticalIssuesScreenUnique
-import com.example.folkedex.ui.theme.PoliticianProfileScreen
+import com.example.folkedex.PoliciesScreen
+import com.example.folkedex.PoliticianScreen
+import com.example.folkedex.ui.theme.IssuesScreen
+import com.example.folkedex.ui.theme.PoliticianSelectionScreen
 import com.example.folkedex.ui.theme.ReportsScreen
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContent {
             AppNavHost()
@@ -48,12 +59,15 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun AppNavHost() {
     val navController = rememberNavController()
+    //TransparentStatusBar()
     MainScreen(navController)
+
 }
 
 @Composable
 fun MainScreen(navController: NavHostController) {
     Scaffold(
+        contentWindowInsets = WindowInsets(0.dp),
         bottomBar = { BottomTabBar(navController) }
     ) { paddingValues ->
         NavHost(
@@ -65,14 +79,19 @@ fun MainScreen(navController: NavHostController) {
             composable("favorites") { FavoritesScreen(navController = navController) }
             composable("news") { NewsScreen(navController = navController) }
             composable("settings") { SettingsScreen(navController) }
-            composable("folkedex") {PartySelectionScreen( navController = navController)}
-            composable("issues") { PoliticalIssuesScreenUnique(navController = navController) }
-            composable("politicians") { PoliticianProfileScreen(navController = navController) }
+            composable("folkedex") { PartySelectionScreen( navController = navController)}
+            composable("issues") { IssuesScreen(navController = navController) }
+            composable("politician/{name}") { backStackEntry ->
+                val name = backStackEntry.arguments?.getString("name") ?: "Unknown"
+                PoliticianScreen(navController = navController, name = name)
+            }
+
             composable("policies") { PoliciesScreen(navController = navController) }
             composable("reports") { ReportsScreen(navController = navController) }
             composable("bills") { BillScreen(navController = navController) }
             composable("history") { History(navController = navController) }
             composable("data") { DataScreen(navController = navController) }
+            composable("politicians") { PoliticianSelectionScreen(navController = navController) }
 
 
             // Dynamically Add Party Routes
@@ -93,8 +112,6 @@ fun MainScreen(navController: NavHostController) {
                         Text("Party data not found")
                     }
                 }
-
-
             }
         }
     }
@@ -104,6 +121,8 @@ fun MainScreen(navController: NavHostController) {
 @Composable
 fun BottomTabBar(navController: NavHostController) {
     BottomNavigation(
+        modifier = Modifier
+            .height(60.dp),
         backgroundColor = Color.Gray
     ) {
         BottomNavigationItem(
@@ -126,7 +145,6 @@ fun BottomTabBar(navController: NavHostController) {
         )
     }
 }
-
 
 @Composable
 fun SettingsScreen(navController: NavHostController) {

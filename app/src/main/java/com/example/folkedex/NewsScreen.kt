@@ -18,6 +18,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.folkedex.HomeScreen
 import com.example.folkedex.R
 
 data class NewsItem(val title: String, val description: String, val date: String)
@@ -146,4 +148,14 @@ fun NewsCard(newsItem: NewsItem, onClick: () -> Unit) {
             )
         }
     }
+}
+@Preview(
+    showSystemUi = true,
+    showBackground = true,
+    device = "spec:width=411dp,height=891dp,dpi=420"
+)
+@Composable
+fun PreviewNewsScreen() {
+    val navController = rememberNavController()
+    NewsScreen(navController = navController)
 }

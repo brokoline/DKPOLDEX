@@ -18,6 +18,8 @@ import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.folkedex.HomeScreen
 
 @Composable
 fun BillScreen(onBackClick: () -> Unit = {}, navController: NavController) {
@@ -34,7 +36,7 @@ fun BillScreen(onBackClick: () -> Unit = {}, navController: NavController) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(250.dp)
-                    .background(Color(0xFF0D9180)), // Farvetema for VoteScreen
+                    .background(Color(0xFF0D9180)),
                 contentAlignment = Alignment.CenterStart
             ) {
                 IconButton(
@@ -93,9 +95,19 @@ fun BillScreen(onBackClick: () -> Unit = {}, navController: NavController) {
                     .padding(vertical = 26.dp)
             ) {
                 items(votes) { vote ->
-                    VoteCard(vote = vote, onClick = { /* Handle click, if necessary */ })
+                    VoteCard(vote = vote, onClick = { /* whatever click logic */ })
                 }
             }
         }
     )
+}
+@Preview(
+    showSystemUi = true,
+    showBackground = true,
+    device = "spec:width=411dp,height=891dp,dpi=420"
+)
+@Composable
+fun PreviewBillsScreen() {
+    val navController = rememberNavController()
+    BillScreen(navController = navController)
 }

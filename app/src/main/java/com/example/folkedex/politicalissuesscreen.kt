@@ -1,135 +1,154 @@
 package com.example.folkedex.ui.theme
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavHostController
+import androidx.compose.ui.zIndex
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.folkedex.HomeScreen
+import com.example.folkedex.R // Importerer drawable ressourcer
 
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PoliticalIssuesScreenUnique(onBackClick: () -> Unit = {}, navController: NavHostController) {
+fun IssuesScreen(onBackClick: () -> Unit = {}, navController: NavController) {
+    val issues = listOf(
+        Issue(title = "Mental Health"),
+        Issue(title = "Immigration Policies"),
+        Issue(title = "Freedom of Movement"),
+    )
+
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = "Political issues",
-                        style = MaterialTheme.typography.titleLarge.copy(
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 24.sp
-                        ),
-                        color = Color.White
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(250.dp)
+                    .background(Color(0xFF722424)), // Topbar color
+                contentAlignment = Alignment.CenterStart
+            ) {
+                IconButton(
+                    onClick = { navController.popBackStack() },
+                    modifier = Modifier
+                        .padding(start = 16.dp)
+                        .align(Alignment.CenterStart)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "Back",
+                        tint = Color.White
                     )
-                },
-                navigationIcon = {
-                    IconButton(onClick = {navController.popBackStack() }) {
-                        Icon(
-                            imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = "Back",
-                            tint = Color.White
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFF8E5355))
-            )
+                }
+                FolketingLogo(
+                    modifier = Modifier
+                        .align(Alignment.CenterEnd)
+                        .offset(x = -50.dp)
+                        .offset(y = -25.dp)
+                        .size(200.dp)
+                        .zIndex(0f) // Ensuring it is layered correctly
+                )
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.align(Alignment.Center)
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.exclamation_mark), // Billedressource
+                        contentDescription = "Exclamation Icon",
+                        modifier = Modifier
+                            .size(100.dp)
+                            .padding(bottom = 4.dp)
+                            .padding(top = 10.dp),
+                        colorFilter = ColorFilter.tint(Color.White)
+                    )
+                    Text(
+                        "Political Issues",
+                        fontSize = 30.sp,
+                        color = Color.White,
+                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+                    )
+                    com.example.folkedex.SearchBar( // Original SearchBar included
+                        modifier = Modifier
+                            .padding(horizontal = 16.dp)
+                            .fillMaxWidth()
+                            .padding(top = 8.dp)
+                    )
+                }
+            }
         },
         content = { paddingValues ->
-            Column(
+            LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues)
-                    .padding(16.dp)
-                    .background(Color(0xFF8E5355)),
-                verticalArrangement = Arrangement.Top,
-                horizontalAlignment = Alignment.CenterHorizontally
+                    .padding(horizontal = 16.dp, vertical = 16.dp)
             ) {
-                SearchBarUnique()
-                Spacer(modifier = Modifier.height(16.dp))
-                val issues = listOf(
-                    "Environment and Climate",
-                    "Economy and Labor Market",
-                    "Health and Welfare",
-                    "Human Rights and Equality"
-                )
-                issues.forEach { issue ->
-                    IssueButtonUnique(issue, onClick = {})
-                    Spacer(modifier = Modifier.height(16.dp))
+                items(issues) { issue ->
+                    IssuesCard(issue = issue, onClick = {/*random*/})
                 }
             }
         }
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchBarUnique() {
-    TextField(
-        value = "",
-        onValueChange = { /* Handle search query changes */ },
-        leadingIcon = {
-            Icon(
-                imageVector = Icons.Default.Search,
-                contentDescription = "Search icon"
-            )
-        },
-        placeholder = {
-            Text("Search for specific issues...")
-        },
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(56.dp),
-        colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color(0xFFE0B7B8),
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent
-        )
-    )
-}
-
-@Composable
-fun IssueButtonUnique(issue: String, onClick: (String) -> Unit) {
+fun GradientButton(
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Button(
-        onClick = { onClick(issue) },
-        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFAE7071)),
-        shape = RoundedCornerShape(16.dp),
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(60.dp)
+        onClick = onClick,
+        modifier = modifier,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color.Transparent, // Transparent for gradient background
+            contentColor = Color.White // Text color
+        ),
+        contentPadding = PaddingValues() // Remove default padding
     ) {
-        Text(
-            text = issue,
-            color = Color.White,
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Medium
-        )
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    brush = Brush.horizontalGradient(
+                        colors = listOf(
+                            Color(0xFF722424), // Gradient start
+                            Color(0xFFEAAFAF)  // Gradient end
+                        )
+                    )
+                ),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = text,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
     }
 }
 
-
+@Preview(
+    showSystemUi = true,
+    showBackground = true,
+    device = "spec:width=411dp,height=891dp,dpi=420"
+)
+@Composable
+fun PreviewIssuesScreen() {
+    val navController = rememberNavController()
+    IssuesScreen(navController = navController)
+}
