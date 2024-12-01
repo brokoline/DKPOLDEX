@@ -91,8 +91,8 @@ object PartyRepository {
         PartyData(
             name = "Det Konservative Folkeparti",
             path = "Det Konservative Folkeparti",
-            logoRes = R.drawable.koservative,
-            altLogo = R.drawable.konservative_logo,
+            logoRes = R.drawable.konserative,
+            altLogo = R.drawable.konserative,
             description = "Text about the Konservative Folkeparti party, \n" +
                     "eventually what they stand for,\n" +
                     "political orientation/spectrum\n" +
@@ -133,7 +133,7 @@ object PartyRepository {
         PartyData(
             name = "Liberal Alliance",
             path = "Liberal Alliance",
-            logoRes = R.drawable.liberalalliance,
+            logoRes = R.drawable.liberal_alliance_logo,
             altLogo = R.drawable.liberal_alliance_logo,
             description = "Text about the  Liberal Alliance party, \n" +
                     "eventually what they stand for,\n" +
@@ -149,7 +149,7 @@ object PartyRepository {
             imageSize = 90.dp,
             logoSize = 120.dp,
             textSize = 40.sp,
-            backColor =Color.Black
+            backColor =Color.White
         ),
         PartyData(
             name = "Dansk Folkeparti",
@@ -258,8 +258,8 @@ object PartyRepository {
         PartyData(
             name = "Javnaðar-\nflokkurin",
             path = "Javnaðarflokkurin",
-            logoRes = R.drawable.javn,
-            altLogo = R.drawable.javnlogo2,
+            logoRes = R.drawable.javna,
+            altLogo = R.drawable.javna,
             description = "Text about the Javnaðarflokkurin party, \n" +
                     "eventually what they stand for,\n" +
                     "political orientation/spectrum\n" +
@@ -280,7 +280,7 @@ object PartyRepository {
             name = "Siumut",
             path = "Siumut",
             logoRes = R.drawable.siumut,
-            altLogo = R.drawable.siumut_logo,
+            altLogo = R.drawable.siumut,
             description = "Text about the Siumut party, \n" +
                     "eventually what they stand for,\n" +
                     "political orientation/spectrum\n" +
