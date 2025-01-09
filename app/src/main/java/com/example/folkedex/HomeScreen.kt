@@ -62,9 +62,9 @@ fun TopSectionWithSearchBar() {
         FolketingLogo(
             modifier = Modifier
                 .align(Alignment.CenterEnd)
-                .offset(x = -70.dp)
-                .offset(y = -1.dp)
-                .size(140.dp)
+                .offset(x = -50.dp)
+                .offset(y = -5.dp)
+                .size(200.dp)
                 .zIndex(0f)
         )
 

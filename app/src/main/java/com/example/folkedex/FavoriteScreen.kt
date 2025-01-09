@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 
 data class Politiker(val navn: String, val parti: String)
@@ -69,7 +70,14 @@ fun FavoritesScreen(onBackClick: () -> Unit = {}, navController: NavController) 
                 }
 
                 // FolketingLogo composable
-                FolketingLogo(modifier = Modifier.align(Alignment.CenterEnd))
+                FolketingLogo(
+                    modifier = Modifier
+                        .align(Alignment.CenterEnd)
+                        .offset(x = -50.dp)
+                        .offset(y = -5.dp)
+                        .size(200.dp)
+                        .zIndex(0f)
+                )
             }
         },
         content = { paddingValues ->

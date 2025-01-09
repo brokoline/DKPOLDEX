@@ -81,9 +81,9 @@ fun ReportsScreen(onBackClick: () -> Unit = {}, onReportClick: (String) -> Unit 
                 FolketingLogo(
                     modifier = Modifier
                         .align(Alignment.CenterEnd)
-                        .offset(x = -70.dp)
-                        .offset(y = -1.dp)
-                        .size(140.dp)
+                        .offset(x = -50.dp)
+                        .offset(y = -25.dp)
+                        .size(205.dp)
                         .zIndex(0f)
                 )
             }
