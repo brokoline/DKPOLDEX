@@ -1,4 +1,4 @@
-package com.example.folkedex.ui.theme
+package com.example.folkedex.model
 
 import androidx.annotation.DrawableRes
 import androidx.compose.ui.graphics.Color

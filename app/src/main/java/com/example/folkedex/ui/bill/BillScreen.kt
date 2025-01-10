@@ -19,7 +19,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.folkedex.HomeScreen
 
 @Composable
 fun BillScreen(onBackClick: () -> Unit = {}, navController: NavController) {
@@ -79,7 +78,7 @@ fun BillScreen(onBackClick: () -> Unit = {}, navController: NavController) {
                         color = Color.White,
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     )
-                    com.example.folkedex.SearchBar(
+                    com.example.folkedex.ui.common.SearchBar(
                         modifier = Modifier
                             .padding(horizontal = 15.dp)
                     )

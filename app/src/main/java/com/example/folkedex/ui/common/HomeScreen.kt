@@ -1,6 +1,5 @@
-package com.example.folkedex
+package com.example.folkedex.ui.common
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -11,12 +10,9 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -149,11 +145,11 @@ fun PoliticianCategoryGrid(navController: NavHostController) {
                             onClick = {
                                 when (text) {
                                     "FolkeDex" -> navController.navigate("folkedex")
-                                    "Issues" -> navController.navigate("issues")
+                                    "Issues" -> navController.navigate("com/example/folkedex/ui/issues")
                                     "Reports" -> navController.navigate("reports")
                                     "Bills" -> navController.navigate("bills")
-                                    "News" -> navController.navigate("news")
-                                    "Data" -> navController.navigate("data")
+                                    "News" -> navController.navigate("com/example/folkedex/ui/news")
+                                    "Data" -> navController.navigate("com/example/folkedex/data")
                                     // other routes here
                                 }
                             }
