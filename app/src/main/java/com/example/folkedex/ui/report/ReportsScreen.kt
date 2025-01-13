@@ -23,7 +23,6 @@ data class Report(val title: String, val link: String)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReportsScreen(onBackClick: () -> Unit = {}, onReportClick: (String) -> Unit = {}, navController: NavController) {
-    // Dummy data untill we connect to the API
     val reports = listOf(
         Report(title = "Budget Proposal 2023", link = "https://www.ft.dk/budget2023"),
         Report(title = "Health Care Reform", link = "https://www.ft.dk/healthcarereform"),
@@ -36,7 +35,7 @@ fun ReportsScreen(onBackClick: () -> Unit = {}, onReportClick: (String) -> Unit 
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(240.dp)
-                    .background(Color(0xFFAED581)), // Different color for Reports screen
+                    .background(Color(0xFFAED581)),
                 contentAlignment = Alignment.CenterStart
             ) {
                 IconButton(
@@ -57,7 +56,7 @@ fun ReportsScreen(onBackClick: () -> Unit = {}, onReportClick: (String) -> Unit 
                     modifier = Modifier.align(Alignment.Center)
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Info, // Skift til et andet ikon, hvis ønsket
+                        imageVector = Icons.Default.Info,
                         contentDescription = "Reports Icon",
                         tint = Color.White,
                         modifier = Modifier

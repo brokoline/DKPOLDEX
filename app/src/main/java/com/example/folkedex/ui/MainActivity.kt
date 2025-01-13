@@ -87,7 +87,7 @@ fun MainScreen(navController: NavHostController) {
             composable("politicians") { PoliticianSelectionScreen(navController = navController) }
 
 
-            // Dynamically Add Party Routes
+
             PartyRepository.parties.forEach { party ->
                 composable(party.path) {
                     val partyData = PartyRepository.getPartyByName(party.name)

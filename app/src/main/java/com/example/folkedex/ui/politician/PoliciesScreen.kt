@@ -107,7 +107,6 @@ fun PoliciesScreen(navController: NavController, onBackClick: () -> Unit = {}) {
                         modifier = Modifier.fillMaxSize(),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        // Top Section
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {

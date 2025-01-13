@@ -22,5 +22,5 @@ data class PartyData(
     val imageSize: Dp = 120.dp,
     val logoSize: Dp = 120.dp,
     val textSize: TextUnit  = 40.sp,
-    val backColor: Color // text color for specific party sites
+    val backColor: Color
 )

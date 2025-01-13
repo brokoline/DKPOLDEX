@@ -12,9 +12,9 @@ import com.example.folkedex.R
 
 @Composable
 fun PoliticianCard() {
-    // Politician Image
+
     Image(
-        painter = painterResource(id = R.drawable.politician_image), // Replace with your drawable
+        painter = painterResource(id = R.drawable.politician_image),
         contentDescription = "Politician Image",
         modifier = Modifier
             .fillMaxWidth()

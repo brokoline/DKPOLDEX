@@ -21,13 +21,13 @@ fun DataCard(data: Data) {
             .padding(vertical = 8.dp)
             .shadow(elevation = 8.dp, shape = RoundedCornerShape(16.dp))
     ) {
-        // Gradient background
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
                     brush = Brush.linearGradient(
-                        colors = listOf(Color(0xFF2A4D7B ), Color(0xFF4D8DE1)) // Different gradient for reports
+                        colors = listOf(Color(0xFF2A4D7B ), Color(0xFF4D8DE1))
                     )
                 )
                 .padding(16.dp)

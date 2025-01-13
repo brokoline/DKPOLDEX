@@ -36,7 +36,7 @@ fun PoliticianSelectionScreen(navController: NavController,
     val scrollState = rememberLazyListState()
     var searchQuery by remember { mutableStateOf("") }
 
-    // Dummy data for demonstration purposes
+
     val politicians = listOf(
         PoliticianData("Lars Løkke Rasmussen", R.drawable.politician_image, 0xFF6A1B9A),
         PoliticianData("Jakob Engel-Schmidt", R.drawable.flogo, 0xFF6A1B9A),
@@ -52,7 +52,6 @@ fun PoliticianSelectionScreen(navController: NavController,
             .fillMaxSize()
             .background(Color.White)
     ) {
-        // Background logo
         Image(
             painter = painterResource(id = R.drawable.flogo),
             contentDescription = "Folketing Logo",
@@ -64,7 +63,6 @@ fun PoliticianSelectionScreen(navController: NavController,
             contentScale = ContentScale.Fit
         )
 
-        // Foreground with top bar and list
         Column {
             TopBarWithSearch(navController, partyName, searchQuery) { query ->
                 searchQuery = query
@@ -202,7 +200,6 @@ fun PoliticianCard(
     }
 }
 
-// Data class for politicians
 data class PoliticianData(
     val name: String,
     val photo: Int,

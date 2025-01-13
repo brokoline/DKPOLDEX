@@ -27,7 +27,7 @@ fun VoteCard(vote: Vote, onClick: () -> Unit) {
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = Color.Transparent)
     ) {
-        // Gradient background
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()

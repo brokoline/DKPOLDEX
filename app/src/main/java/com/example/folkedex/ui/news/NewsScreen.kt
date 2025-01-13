@@ -26,7 +26,6 @@ data class NewsItem(val title: String, val description: String, val date: String
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewsScreen(onBackClick: () -> Unit = {}, onNewsClick: (String) -> Unit = {}, navController: NavController) {
-    // Dummy-data til nyheder
     val newsList = listOf(
         NewsItem(
             title = "New climate policies announced",
@@ -91,7 +90,6 @@ fun NewsScreen(onBackClick: () -> Unit = {}, onNewsClick: (String) -> Unit = {},
                     )
                 }
 
-                // Tilføjet FolketingLogo her
                 FolketingLogo(modifier = Modifier.align(Alignment.CenterEnd))
             }
         },
@@ -103,7 +101,6 @@ fun NewsScreen(onBackClick: () -> Unit = {}, onNewsClick: (String) -> Unit = {},
                     .padding(horizontal = 26.dp)
                     .padding(vertical = 26.dp)
             ) {
-                // Bruger newsList til at vise hvert NewsCard
                 items(newsList) { news ->
                     NewsCard(newsItem = news, onClick = { onNewsClick(news.title) })
                 }
@@ -120,7 +117,7 @@ fun NewsCard(newsItem: NewsItem, onClick: () -> Unit) {
             .fillMaxWidth()
             .padding(vertical = 8.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xFFFFF59D) // Gule bokse
+            containerColor = Color(0xFFFFF59D)
         )
     ) {
         Column(

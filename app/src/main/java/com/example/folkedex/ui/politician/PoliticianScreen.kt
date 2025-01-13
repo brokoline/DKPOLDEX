@@ -112,7 +112,7 @@ fun PoliticianScreen(navController: NavController, name: String, onBackClick: ()
                         modifier = Modifier.fillMaxSize(),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        // Top Section
+
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
@@ -134,9 +134,8 @@ fun PoliticianScreen(navController: NavController, name: String, onBackClick: ()
                             )
                         }
 
-                        Spacer(modifier = Modifier.height(14.dp)) // Space between sections
+                        Spacer(modifier = Modifier.height(14.dp))
 
-                        // Bottom Section
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {

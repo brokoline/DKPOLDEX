@@ -49,12 +49,12 @@ fun TopSectionWithSearchBar() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(200.dp) // Fixed height for red background area
+            .height(200.dp)
             .background(Color(0xFFFF6F61))
             .padding(16.dp)
-            .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Bottom)) // Only respect the bottom insets
+            .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Bottom))
     ) {
-        // Logo as faint background
+
         FolketingLogo(
             modifier = Modifier
                 .align(Alignment.CenterEnd)
@@ -122,14 +122,14 @@ fun PoliticianCategoryGrid(navController: NavHostController) {
     )
 
     Column(
-        verticalArrangement = Arrangement.spacedBy(40.dp), //vertical distance between categories
+        verticalArrangement = Arrangement.spacedBy(40.dp),
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
     ) {
         categories.chunked(2).forEach { rowCategories ->
             Row(
-                horizontalArrangement = Arrangement.spacedBy(8.dp), //horizontal distance between categories
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 rowCategories.forEach { (text, color) ->
@@ -150,7 +150,7 @@ fun PoliticianCategoryGrid(navController: NavHostController) {
                                     "Bills" -> navController.navigate("bills")
                                     "News" -> navController.navigate("com/example/folkedex/ui/news")
                                     "Data" -> navController.navigate("com/example/folkedex/data")
-                                    // other routes here
+
                                 }
                             }
                         )

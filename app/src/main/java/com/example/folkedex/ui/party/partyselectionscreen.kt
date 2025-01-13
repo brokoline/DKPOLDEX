@@ -55,7 +55,7 @@ fun PartySelectionScreen(navController: NavController, onBackClick: () -> Unit =
             .fillMaxSize()
             .background(Color.White)
     ) {
-        // background logo
+
         Image(
             painter = painterResource(id = R.drawable.flogo),
             contentDescription = "folketinglogo",
@@ -67,7 +67,7 @@ fun PartySelectionScreen(navController: NavController, onBackClick: () -> Unit =
             contentScale = ContentScale.Fit
         )
 
-        // foreground (now with collapsable top-bar)
+
         Column{
             AnimatedVisibility(
                 visible = isTopBarVisible,

@@ -26,7 +26,6 @@ data class Data(val title: String)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DataScreen(onBackClick: () -> Unit = {}, navController: NavController) {
-    // Dummy data untill we connect to the API
     val examples = listOf(
         Data(title = "Data Example"),
         Data(title = "Data Example"),

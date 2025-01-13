@@ -21,11 +21,10 @@ fun ReportCard(report: Report, onClick: () -> Unit) {
             .fillMaxWidth()
             .padding(vertical = 8.dp)
             .shadow(elevation = 8.dp, shape = RoundedCornerShape(16.dp))
-            .clickable { onClick() }, // Handle report click
+            .clickable { onClick() },
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = Color.Transparent)
     ) {
-        // Gradient background
         Box(
             modifier = Modifier
                 .fillMaxWidth()

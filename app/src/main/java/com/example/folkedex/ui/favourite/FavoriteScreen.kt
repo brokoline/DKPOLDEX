@@ -21,7 +21,6 @@ data class Politiker(val navn: String, val parti: String)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FavoritesScreen(onBackClick: () -> Unit = {}, navController: NavController) {
-    // Dummy-data til politikere
     val politikere = listOf(
         Politiker(navn = "Mette Frederiksen", parti = "Socialdemokratiet"),
         Politiker(navn = "Jakob Ellemann-Jensen", parti = "Venstre"),
@@ -65,7 +64,6 @@ fun FavoritesScreen(onBackClick: () -> Unit = {}, navController: NavController) 
                     )
                 }
 
-                // FolketingLogo composable
                 FolketingLogo(modifier = Modifier.align(Alignment.CenterEnd))
             }
         },
@@ -77,7 +75,6 @@ fun FavoritesScreen(onBackClick: () -> Unit = {}, navController: NavController) 
                     .padding(horizontal = 26.dp)
                     .padding(vertical = 26.dp)
             ) {
-                // Bruger politikere-listen til at vise hvert FavoriteCard
                 items(politikere) { politiker ->
                     FavoriteCard(navn = politiker.navn, parti = politiker.parti)
                 }

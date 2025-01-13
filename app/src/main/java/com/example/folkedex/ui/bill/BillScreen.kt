@@ -22,7 +22,7 @@ import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun BillScreen(onBackClick: () -> Unit = {}, navController: NavController) {
-    // Dummy data for votes
+
     val votes = listOf(
         Vote(title = "Proposal A", description = "Passed with majority votes"),
         Vote(title = "Proposal B", description = "Rejected due to lack of support"),
