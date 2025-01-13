@@ -21,7 +21,7 @@ fun FolketingLogo(
         modifier = modifier
             .size(300.dp)
             .padding(end = 16.dp)
-            .offset(x = 100.dp, y = (-40).dp) // Positionering i højre
-            .alpha(1.0f) // Transparens
+            .offset(x = 100.dp, y = (-40).dp)
+            .alpha(1.0f)
     )
 }
