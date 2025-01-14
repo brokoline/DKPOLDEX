@@ -1,6 +1,7 @@
 package com.example.folkedex.ui.theme
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -13,28 +14,33 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
 
+data class Vote(val title: String, val description: String)
+
 @Composable
-fun DataCard(data: Data) {
+fun VoteCard(vote: Vote, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp)
             .shadow(elevation = 8.dp, shape = RoundedCornerShape(16.dp))
+            .clickable { onClick() },
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.Transparent)
     ) {
-        // Gradient background
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
                     brush = Brush.linearGradient(
-                        colors = listOf(Color(0xFF2A4D7B ), Color(0xFF4D8DE1)) // Different gradient for reports
+                        colors = listOf(Color(0xFF00695C ), Color(0xFF80CBC4))
                     )
                 )
                 .padding(16.dp)
         ) {
             Column {
                 Text(
-                    text = data.title,
+                    text = vote.title,
                     style = MaterialTheme.typography.bodyLarge.copy(
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
@@ -42,7 +48,7 @@ fun DataCard(data: Data) {
                     )
                 )
                 Text(
-                    text = "Details",
+                    text = vote.description,
                     style = MaterialTheme.typography.bodyMedium.copy(
                         fontSize = 14.sp,
                         color = Color.White.copy(alpha = 0.8f)

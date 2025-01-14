@@ -1,13 +1,11 @@
-package com.example.folkedex
+package com.example.folkedex.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
@@ -23,14 +21,12 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.unit.dp
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
+import com.example.folkedex.ui.common.HomeScreen
+import com.example.folkedex.ui.politician.PoliciesScreen
+import com.example.folkedex.ui.politician.PoliticianScreen
 import com.example.folkedex.ui.theme.BillScreen
 import com.example.folkedex.ui.theme.DataScreen
 import com.example.folkedex.ui.theme.FavoritesScreen
@@ -39,12 +35,9 @@ import com.example.folkedex.ui.theme.NewsScreen
 import com.example.folkedex.ui.theme.Party
 import com.example.folkedex.ui.theme.PartyRepository
 import com.example.folkedex.ui.theme.PartySelectionScreen
-import com.example.folkedex.PoliciesScreen
-import com.example.folkedex.PoliticianScreen
 import com.example.folkedex.ui.theme.IssuesScreen
 import com.example.folkedex.ui.theme.PoliticianSelectionScreen
 import com.example.folkedex.ui.theme.ReportsScreen
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,11 +70,11 @@ fun MainScreen(navController: NavHostController) {
         ) {
             composable("home") { HomeScreen(navController) }
             composable("favorites") { FavoritesScreen(navController = navController) }
-            composable("news") { NewsScreen(navController = navController) }
+            composable("com/example/folkedex/ui/news") { NewsScreen(navController = navController) }
             composable("settings") { SettingsScreen(navController) }
             composable("folkedex") { PartySelectionScreen( navController = navController)}
-            composable("issues") { IssuesScreen(navController = navController) }
-            composable("politician/{name}") { backStackEntry ->
+            composable("com/example/folkedex/ui/issues") { IssuesScreen(navController = navController) }
+            composable("com/example/folkedex/ui/politician/{name}") { backStackEntry ->
                 val name = backStackEntry.arguments?.getString("name") ?: "Unknown"
                 PoliticianScreen(navController = navController, name = name)
             }
@@ -89,12 +82,12 @@ fun MainScreen(navController: NavHostController) {
             composable("policies") { PoliciesScreen(navController = navController) }
             composable("reports") { ReportsScreen(navController = navController) }
             composable("bills") { BillScreen(navController = navController) }
-            composable("history") { History(navController = navController) }
-            composable("data") { DataScreen(navController = navController) }
+            composable("com/example/folkedex/ui/history") { History(navController = navController) }
+            composable("com/example/folkedex/data") { DataScreen(navController = navController) }
             composable("politicians") { PoliticianSelectionScreen(navController = navController) }
 
 
-            // Dynamically Add Party Routes
+
             PartyRepository.parties.forEach { party ->
                 composable(party.path) {
                     val partyData = PartyRepository.getPartyByName(party.name)

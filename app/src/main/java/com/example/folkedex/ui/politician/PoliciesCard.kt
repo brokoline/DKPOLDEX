@@ -1,15 +1,9 @@
 package com.example.folkedex.ui.theme
 
-import android.graphics.Paint.Align
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -35,7 +29,7 @@ fun PoliciesCard() {
             .background(Color.White),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Party logo
+
         Spacer(modifier = Modifier.height(0.dp))
         Image(
             painter = painterResource(id = R.drawable.moderaterne3),
@@ -46,7 +40,7 @@ fun PoliciesCard() {
                 .padding(16.dp)
         )
 
-        // Title and content section
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -96,7 +90,7 @@ fun PoliciesCard() {
 
         //Spacer(modifier = Modifier.height(16.dp))
 
-        // Bottom clickable sections
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()

@@ -34,14 +34,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
-import androidx.navigation.Navigation
-import com.example.folkedex.R
-
+import com.example.folkedex.model.PartyData
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -131,7 +127,7 @@ fun Party(partyData: PartyData, onBackClick: () -> Unit = {}, navController: Nav
                             //imageRes = R.drawable.flogo,
                             buttonColor = partyData.buttonColor,
                             modifier = Modifier.width(170.dp),
-                            onClick = {navController.navigate("history")  }
+                            onClick = {navController.navigate("com/example/folkedex/ui/history")  }
                         )
                     }
 

@@ -5,10 +5,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,7 +17,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import com.example.folkedex.PoliciesScreen
@@ -31,7 +28,6 @@ data class Data(val title: String)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DataScreen(onBackClick: () -> Unit = {}, navController: NavController) {
-    // Dummy data untill we connect to the API
     val examples = listOf(
         Data(title = "Data Example"),
         Data(title = "Data Example"),
@@ -86,7 +82,7 @@ fun DataScreen(onBackClick: () -> Unit = {}, navController: NavController) {
                         color = Color.White,
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     )
-                    com.example.folkedex.SearchBar(
+                    com.example.folkedex.ui.common.SearchBar(
                         modifier = Modifier
                             .padding(horizontal = 15.dp)
                             .offset(y = 10.dp)

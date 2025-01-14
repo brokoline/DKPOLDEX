@@ -17,13 +17,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
@@ -38,7 +36,7 @@ fun PoliticianSelectionScreen(navController: NavController,
     val scrollState = rememberLazyListState()
     var searchQuery by remember { mutableStateOf("") }
 
-    // Dummy data for demonstration purposes
+
     val politicians = listOf(
         PoliticianData("Lars Løkke Rasmussen", R.drawable.politician_image, 0xFF6A1B9A),
         PoliticianData("Jakob Engel-Schmidt", R.drawable.flogo, 0xFF6A1B9A),
@@ -54,7 +52,6 @@ fun PoliticianSelectionScreen(navController: NavController,
             .fillMaxSize()
             .background(Color.White)
     ) {
-        // Background logo
         Image(
             painter = painterResource(id = R.drawable.flogo),
             contentDescription = "Folketing Logo",
@@ -66,7 +63,6 @@ fun PoliticianSelectionScreen(navController: NavController,
             contentScale = ContentScale.Fit
         )
 
-        // Foreground with top bar and list
         Column {
             TopBarWithSearch(navController, partyName, searchQuery) { query ->
                 searchQuery = query
@@ -149,7 +145,7 @@ fun TopBarWithSearch(
             )
         }
 
-        com.example.folkedex.SearchBar()
+        com.example.folkedex.ui.common.SearchBar()
     }
 }
 
@@ -204,7 +200,6 @@ fun PoliticianCard(
     }
 }
 
-// Data class for politicians
 data class PoliticianData(
     val name: String,
     val photo: Int,

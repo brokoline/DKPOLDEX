@@ -22,7 +22,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.folkedex.HomeScreen
 import com.example.folkedex.R // Importerer drawable ressourcer
 
 @Composable
@@ -39,7 +38,7 @@ fun IssuesScreen(onBackClick: () -> Unit = {}, navController: NavController) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(250.dp)
-                    .background(Color(0xFF722424)), // Topbar color
+                    .background(Color(0xFF722424)),
                 contentAlignment = Alignment.CenterStart
             ) {
                 IconButton(
@@ -60,14 +59,14 @@ fun IssuesScreen(onBackClick: () -> Unit = {}, navController: NavController) {
                         .offset(x = -50.dp)
                         .offset(y = -25.dp)
                         .size(200.dp)
-                        .zIndex(0f) // Ensuring it is layered correctly
+                        .zIndex(0f)
                 )
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.align(Alignment.Center)
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.exclamation_mark), // Billedressource
+                        painter = painterResource(id = R.drawable.exclamation_mark),
                         contentDescription = "Exclamation Icon",
                         modifier = Modifier
                             .size(100.dp)
@@ -81,7 +80,7 @@ fun IssuesScreen(onBackClick: () -> Unit = {}, navController: NavController) {
                         color = Color.White,
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     )
-                    com.example.folkedex.SearchBar( // Original SearchBar included
+                    com.example.folkedex.ui.common.SearchBar(
                         modifier = Modifier
                             .padding(horizontal = 16.dp)
                             .fillMaxWidth()
@@ -115,10 +114,10 @@ fun GradientButton(
         onClick = onClick,
         modifier = modifier,
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color.Transparent, // Transparent for gradient background
-            contentColor = Color.White // Text color
+            containerColor = Color.Transparent,
+            contentColor = Color.White
         ),
-        contentPadding = PaddingValues() // Remove default padding
+        contentPadding = PaddingValues()
     ) {
         Box(
             modifier = Modifier
@@ -126,8 +125,8 @@ fun GradientButton(
                 .background(
                     brush = Brush.horizontalGradient(
                         colors = listOf(
-                            Color(0xFF722424), // Gradient start
-                            Color(0xFFEAAFAF)  // Gradient end
+                            Color(0xFF722424),
+                            Color(0xFFEAAFAF)
                         )
                     )
                 ),

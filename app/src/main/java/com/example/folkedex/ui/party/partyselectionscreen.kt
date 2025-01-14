@@ -2,8 +2,6 @@ package com.example.folkedex.ui.theme
 
 import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
@@ -38,6 +36,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.folkedex.R
+import com.example.folkedex.model.PartyData
 
 
 @Composable
@@ -56,7 +55,7 @@ fun PartySelectionScreen(navController: NavController, onBackClick: () -> Unit =
             .fillMaxSize()
             .background(Color.White)
     ) {
-        // background logo
+
         Image(
             painter = painterResource(id = R.drawable.flogo),
             contentDescription = "folketinglogo",
@@ -68,7 +67,7 @@ fun PartySelectionScreen(navController: NavController, onBackClick: () -> Unit =
             contentScale = ContentScale.Fit
         )
 
-        // foreground (now with collapsable top-bar)
+
         Column{
             AnimatedVisibility(
                 visible = isTopBarVisible,

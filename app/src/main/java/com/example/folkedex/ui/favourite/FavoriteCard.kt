@@ -29,7 +29,7 @@ fun FavoriteCard(navn: String, parti: String) {
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = Color.Transparent)
     ) {
-        // Gradientbaggrund
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()

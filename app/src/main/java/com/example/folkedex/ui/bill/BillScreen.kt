@@ -6,30 +6,27 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Info // Importer et andet ikon, hvis det er passende
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 
-data class Report(val title: String, val link: String)
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ReportsScreen(onBackClick: () -> Unit = {}, onReportClick: (String) -> Unit = {}, navController: NavController) {
-    // Dummy data untill we connect to the API
-    val reports = listOf(
-        Report(title = "Budget Proposal 2023", link = "https://www.ft.dk/budget2023"),
-        Report(title = "Health Care Reform", link = "https://www.ft.dk/healthcarereform"),
-        Report(title = "Climate Action Plan", link = "https://www.ft.dk/climateaction"),
+fun BillScreen(onBackClick: () -> Unit = {}, navController: NavController) {
+
+    val votes = listOf(
+        Vote(title = "Proposal A", description = "Passed with majority votes"),
+        Vote(title = "Proposal B", description = "Rejected due to lack of support"),
+        Vote(title = "Proposal C", description = "Passed unanimously")
     )
 
     Scaffold(
@@ -37,8 +34,8 @@ fun ReportsScreen(onBackClick: () -> Unit = {}, onReportClick: (String) -> Unit 
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(240.dp)
-                    .background(Color(0xFFAED581)), // Different color for Reports screen
+                    .height(250.dp)
+                    .background(Color(0xFF0D9180)),
                 contentAlignment = Alignment.CenterStart
             ) {
                 IconButton(
@@ -52,40 +49,40 @@ fun ReportsScreen(onBackClick: () -> Unit = {}, onReportClick: (String) -> Unit 
                         contentDescription = "Tilbage",
                         tint = Color.White
                     )
+
                 }
+                FolketingLogo(
+                    modifier = Modifier
+                        .align(Alignment.CenterEnd)
+                        .offset(x = -50.dp)
+                        .offset(y = -25.dp)
+                        .size(200.dp)
+                        .zIndex(0f)
+                )
 
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.align(Alignment.Center)
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Info, // Skift til et andet ikon, hvis ønsket
-                        contentDescription = "Reports Icon",
+                        imageVector = Icons.Default.CheckCircle,
+                        contentDescription = "Votes Icon",
                         tint = Color.White,
                         modifier = Modifier
                             .size(100.dp)
                             .padding(bottom = 4.dp)
                     )
                     Text(
-                        "Reports",
+                        "Bills",
                         fontSize = 30.sp,
                         color = Color.White,
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     )
-                    com.example.folkedex.SearchBar(
+                    com.example.folkedex.ui.common.SearchBar(
                         modifier = Modifier
                             .padding(horizontal = 15.dp)
                     )
                 }
-
-                FolketingLogo(
-                    modifier = Modifier
-                        .align(Alignment.CenterEnd)
-                        .offset(x = -50.dp)
-                        .offset(y = -25.dp)
-                        .size(205.dp)
-                        .zIndex(0f)
-                )
             }
         },
         content = { paddingValues ->
@@ -96,20 +93,20 @@ fun ReportsScreen(onBackClick: () -> Unit = {}, onReportClick: (String) -> Unit 
                     .padding(horizontal = 26.dp)
                     .padding(vertical = 26.dp)
             ) {
-                items(reports) { report ->
-                    ReportCard(
-                        report = report,
-                        onClick = { onReportClick(report.link) }
-                    )
+                items(votes) { vote ->
+                    VoteCard(vote = vote, onClick = { /* whatever click logic */ })
                 }
             }
         }
     )
 }
-
-@Preview(showBackground = true, showSystemUi = true)
+@Preview(
+    showSystemUi = true,
+    showBackground = true,
+    device = "spec:width=411dp,height=891dp,dpi=420"
+)
 @Composable
-fun PreviewReportsScreen() {
-    ReportsScreen(navController = NavController(LocalContext.current))
+fun PreviewBillsScreen() {
+    val navController = rememberNavController()
+    BillScreen(navController = navController)
 }
-

@@ -1,6 +1,5 @@
-package com.example.folkedex
+package com.example.folkedex.ui.common
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -11,12 +10,9 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -53,12 +49,12 @@ fun TopSectionWithSearchBar() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(200.dp) // Fixed height for red background area
+            .height(200.dp)
             .background(Color(0xFFFF6F61))
             .padding(16.dp)
-            .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Bottom)) // Only respect the bottom insets
+            .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Bottom))
     ) {
-        // Logo as faint background
+
         FolketingLogo(
             modifier = Modifier
                 .align(Alignment.CenterEnd)
@@ -126,14 +122,14 @@ fun PoliticianCategoryGrid(navController: NavHostController) {
     )
 
     Column(
-        verticalArrangement = Arrangement.spacedBy(40.dp), //vertical distance between categories
+        verticalArrangement = Arrangement.spacedBy(40.dp),
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
     ) {
         categories.chunked(2).forEach { rowCategories ->
             Row(
-                horizontalArrangement = Arrangement.spacedBy(8.dp), //horizontal distance between categories
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 rowCategories.forEach { (text, color) ->
@@ -149,12 +145,12 @@ fun PoliticianCategoryGrid(navController: NavHostController) {
                             onClick = {
                                 when (text) {
                                     "FolkeDex" -> navController.navigate("folkedex")
-                                    "Issues" -> navController.navigate("issues")
+                                    "Issues" -> navController.navigate("com/example/folkedex/ui/issues")
                                     "Reports" -> navController.navigate("reports")
                                     "Bills" -> navController.navigate("bills")
-                                    "News" -> navController.navigate("news")
-                                    "Data" -> navController.navigate("data")
-                                    // other routes here
+                                    "News" -> navController.navigate("com/example/folkedex/ui/news")
+                                    "Data" -> navController.navigate("com/example/folkedex/data")
+
                                 }
                             }
                         )

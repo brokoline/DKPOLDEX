@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.Alignment
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -22,7 +21,7 @@ fun FolketingLogo(
         modifier = modifier
             .size(300.dp)
             .padding(end = 16.dp)
-            .offset(x = 100.dp, y = (-40).dp) // Positionering i højre
-            .alpha(1.0f) // Transparens
+            .offset(x = 100.dp, y = (-40).dp)
+            .alpha(1.0f)
     )
 }

@@ -1,10 +1,5 @@
-package com.example.folkedex
+package com.example.folkedex.ui.politician
 
-import android.graphics.Paint.Align
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -17,15 +12,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.example.folkedex.PoliticianCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -120,7 +112,7 @@ fun PoliticianScreen(navController: NavController, name: String, onBackClick: ()
                         modifier = Modifier.fillMaxSize(),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        // Top Section
+
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
@@ -142,9 +134,8 @@ fun PoliticianScreen(navController: NavController, name: String, onBackClick: ()
                             )
                         }
 
-                        Spacer(modifier = Modifier.height(14.dp)) // Space between sections
+                        Spacer(modifier = Modifier.height(14.dp))
 
-                        // Bottom Section
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {

@@ -1,4 +1,4 @@
-package com.example.folkedex.ui.theme
+package com.example.folkedex.model
 
 import androidx.annotation.DrawableRes
 import androidx.compose.ui.graphics.Color
@@ -22,5 +22,5 @@ data class PartyData(
     val imageSize: Dp = 120.dp,
     val logoSize: Dp = 120.dp,
     val textSize: TextUnit  = 40.sp,
-    val backColor: Color // text color for specific party sites
+    val backColor: Color
 )

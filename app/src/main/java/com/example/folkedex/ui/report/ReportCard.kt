@@ -1,12 +1,12 @@
 package com.example.folkedex.ui.theme
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.foundation.clickable
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -14,10 +14,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
 
-data class Vote(val title: String, val description: String)
-
 @Composable
-fun VoteCard(vote: Vote, onClick: () -> Unit) {
+fun ReportCard(report: Report, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -27,20 +25,19 @@ fun VoteCard(vote: Vote, onClick: () -> Unit) {
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = Color.Transparent)
     ) {
-        // Gradient background
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
                     brush = Brush.linearGradient(
-                        colors = listOf(Color(0xFF00695C ), Color(0xFF80CBC4)) // Nyt gradient for afstemninger
+                        colors = listOf(Color(0xFF689F38 ), Color(0xFFAED581)) // Different gradient for reports
                     )
                 )
                 .padding(16.dp)
         ) {
             Column {
                 Text(
-                    text = vote.title,
+                    text = report.title,
                     style = MaterialTheme.typography.bodyLarge.copy(
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
@@ -48,7 +45,7 @@ fun VoteCard(vote: Vote, onClick: () -> Unit) {
                     )
                 )
                 Text(
-                    text = vote.description,
+                    text = "Open report",
                     style = MaterialTheme.typography.bodyMedium.copy(
                         fontSize = 14.sp,
                         color = Color.White.copy(alpha = 0.8f)
@@ -58,3 +55,4 @@ fun VoteCard(vote: Vote, onClick: () -> Unit) {
         }
     }
 }
+
