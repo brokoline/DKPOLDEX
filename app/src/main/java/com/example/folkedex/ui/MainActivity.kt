@@ -4,9 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.Modifier
@@ -14,16 +16,18 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.folkedex.ui.common.HomeScreen
 import com.example.folkedex.ui.politician.PoliciesScreen
 import com.example.folkedex.ui.politician.PoliticianScreen
@@ -52,7 +56,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun AppNavHost() {
     val navController = rememberNavController()
-    //TransparentStatusBar()
     MainScreen(navController)
 
 }
@@ -113,26 +116,24 @@ fun MainScreen(navController: NavHostController) {
 
 @Composable
 fun BottomTabBar(navController: NavHostController) {
-    BottomNavigation(
-        modifier = Modifier
-            .height(60.dp),
-        backgroundColor = Color.Gray
+    NavigationBar(
+        containerColor = Color.Gray
     ) {
-        BottomNavigationItem(
-            icon = { Icon(Icons.Default.Home, contentDescription = "Home", tint = Color.White) },
-            label = { Text("Home", color = Color.White) },
+        NavigationBarItem(
+            icon = { Icon(Icons.Default.Home, contentDescription = "Home", modifier = Modifier.size(35.dp), tint = Color.White) },
+            label = { Text("Home", fontSize = 20.sp, color = Color.White) },
             selected = navController.currentDestination?.route == "home",
             onClick = { navController.navigate("home") { popUpTo("home") { inclusive = true } } }
         )
-        BottomNavigationItem(
-            icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites", tint = Color.White) },
-            label = { Text("Favorites", color = Color.White) },
+        NavigationBarItem(
+            icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites", modifier = Modifier.size(35.dp), tint = Color.White) },
+            label = { Text("Favorites", fontSize = 20.sp, color = Color.White) },
             selected = navController.currentDestination?.route == "favorites",
             onClick = { navController.navigate("favorites") { popUpTo("home") } }
         )
-        BottomNavigationItem(
-            icon = { Icon(Icons.Default.Settings, contentDescription = "Settings", tint = Color.White) },
-            label = { Text("Settings", color = Color.White) },
+        NavigationBarItem(
+            icon = { Icon(Icons.Default.Settings, contentDescription = "Settings", modifier = Modifier.size(35.dp), tint = Color.White) },
+            label = { Text("Settings", fontSize = 20.sp, color = Color.White) },
             selected = navController.currentDestination?.route == "settings",
             onClick = { navController.navigate("settings") { popUpTo("home") } }
         )
@@ -141,5 +142,11 @@ fun BottomTabBar(navController: NavHostController) {
 
 @Composable
 fun SettingsScreen(navController: NavHostController) {
-    Text("Settings Screen Content Here")
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Text("--TO-BE-IMPLEMENTED--\n ----FUTURE FEATURE---")
+    }
 }
+
