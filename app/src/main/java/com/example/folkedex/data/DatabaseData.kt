@@ -18,7 +18,7 @@ object PartyRepository {
                     "political orientation/spectrum\n" +
                     "placement, when they were founded,\n" +
                     "etc etc.",
-            history = "This party was founded...",
+            history = "Moderaterne was founded in 2022 by Lars Løkke Rasmussen with a focus on centrist policies and pragmatic solutions.",
             backgroundColor = ModeraterneBackground,
             cardColor = altModeraterne,
             buttonColor = ModeraterneButton,
@@ -39,7 +39,7 @@ object PartyRepository {
                     "political orientation/spectrum\n" +
                     "placement, when they were founded,\n" +
                     "etc etc.",
-            history = "This party was founded...",
+            history = "Venstre, Denmark's Liberal Party, was founded in 1870 and has historically represented agriculture and business interests.",
             backgroundColor = VenstreBackground,
             cardColor = altVenstre,
             buttonColor = VenstreButton,
@@ -59,7 +59,7 @@ object PartyRepository {
                     "political orientation/spectrum\n" +
                     "placement, when they were founded,\n" +
                     "etc etc.",
-            history = "This party was founded...",
+            history = "Socialdemokratiet was founded in 1871 as Denmark's first workers' party, focusing on social justice and welfare policies.",
             backgroundColor = SocialdemokratietBackground,
             cardColor = altSocialdemokratiet,
             buttonColor = SocialdemokratietButton,
@@ -79,7 +79,7 @@ object PartyRepository {
                     "political orientation/spectrum\n" +
                     "placement, when they were founded,\n" +
                     "etc etc.",
-            history = "This party was founded...",
+            history = "Radikale Venstre was founded in 1905 as a party focusing on social liberalism and education policies.",
             backgroundColor = RadikalevenstreBackground,
             cardColor = altRadikaleVenstre,
             buttonColor = RadikalevenstreButton,
@@ -99,7 +99,7 @@ object PartyRepository {
                     "political orientation/spectrum\n" +
                     "placement, when they were founded,\n" +
                     "etc etc.",
-            history = "This party was founded...",
+            history = "Det Konservative Folkeparti was founded in 1915 and has roots in the former Højre party, focusing on private property rights and tradition.",
             backgroundColor = KonservativBackground,
             cardColor = altKonservative,
             buttonColor = KonservativButton,
@@ -120,7 +120,7 @@ object PartyRepository {
                     "political orientation/spectrum\n" +
                     "placement, when they were founded,\n" +
                     "etc etc.",
-            history = "This party was founded...",
+            history = "Socialistisk Folkeparti was founded in 1959 by Aksel Larsen after a split from DKP, focusing on socialism and environmental policies.",
             backgroundColor = SfBackground,
             cardColor = altSocialistiskFolkeparti,
             buttonColor = SfButton,
@@ -141,7 +141,7 @@ object PartyRepository {
                     "political orientation/spectrum\n" +
                     "placement, when they were founded,\n" +
                     "etc etc.",
-            history = "This party was founded...",
+            history = "Liberal Alliance was founded in 2007 and focuses on lower taxes, individual freedom, and less government regulation.",
             backgroundColor = LaBackground,
             cardColor = altLiberalAlliance,
             buttonColor = LaButton,
@@ -162,7 +162,7 @@ object PartyRepository {
                     "political orientation/spectrum\n" +
                     "placement, when they were founded,\n" +
                     "etc etc.",
-            history = "This party was founded...",
+            history = "Dansk Folkeparti was founded in 1995 by Pia Kjærsgaard and has primarily focused on nationalism and immigration policies.",
             backgroundColor = DanskfolkepartiBackground,
             cardColor = altDanskFolkeparti,
             buttonColor = DanskfolkepartiButton,
@@ -183,7 +183,7 @@ object PartyRepository {
                     "political orientation/spectrum\n" +
                     "placement, when they were founded,\n" +
                     "etc etc.",
-            history = "This party was founded...",
+            history = "Danmarksdemokraterne was founded in 2022 by Inger Støjberg, focusing on national conservative values.",
             backgroundColor = DanmarksdemokraterneBackground,
             cardColor = altDanmarksdemokraterne,
             buttonColor = DanmarksdemokraterneButton,
@@ -204,7 +204,7 @@ object PartyRepository {
                     "political orientation/spectrum\n" +
                     "placement, when they were founded,\n" +
                     "etc etc.",
-            history = "This party was founded...",
+            history = "Enhedslisten was founded in 1989 as a coalition of left-wing parties focusing on equality and environmental protection.",
             backgroundColor = EnhedslistenBackground,
             cardColor = altEnhedslisten,
             buttonColor = EnhedslistenButton,
@@ -225,7 +225,7 @@ object PartyRepository {
                     "political orientation/spectrum\n" +
                     "placement, when they were founded,\n" +
                     "etc etc.",
-            history = "This party was founded...",
+            history = "Alternativet was founded in 2013 focusing on sustainability, green policies, and rethinking democracy.",
             backgroundColor = AlternativetBackground,
             cardColor = altAlternativet,
             buttonColor = AlternativetButton,
@@ -245,7 +245,7 @@ object PartyRepository {
                     "political orientation/spectrum\n" +
                     "placement, when they were founded,\n" +
                     "etc etc.",
-            history = "This party was founded...",
+            history = "Sambandsflokkurin is a Faroese party founded in 1906 focusing on union with Denmark.",
             backgroundColor = SambandspartietBackground,
             cardColor = altSambandsflokkurin,
             buttonColor = SambandspartietButton,
@@ -266,7 +266,7 @@ object PartyRepository {
                     "political orientation/spectrum\n" +
                     "placement, when they were founded,\n" +
                     "etc etc.",
-            history = "This party was founded...",
+            history = "Javnaðarflokkurin is a Faroese social democratic party founded in 1925 focusing on equality and welfare.",
             backgroundColor = JavnBackground,
             cardColor = altJavnaðarflokkurin,
             buttonColor = JavnButton,
@@ -287,7 +287,7 @@ object PartyRepository {
                     "political orientation/spectrum\n" +
                     "placement, when they were founded,\n" +
                     "etc etc.",
-            history = "This party was founded...",
+            history = "Siumut is a Greenlandic social democratic party founded in 1977, focusing on self-governance and indigenous rights.",
             backgroundColor = SiumutBackground,
             cardColor = altSiumut,
             buttonColor = SiumutButton,
@@ -308,7 +308,7 @@ object PartyRepository {
                     "political orientation/spectrum\n" +
                     "placement, when they were founded,\n" +
                     "etc etc.",
-            history = "This party was founded...",
+            history = "Inuit Ataqatigiit is a Greenlandic left-wing party founded in 1976 focusing on independence and environmental protection.",
             backgroundColor = InuitBackground,
             cardColor = altInuitAtaqatigiit,
             buttonColor = InuitButton,
