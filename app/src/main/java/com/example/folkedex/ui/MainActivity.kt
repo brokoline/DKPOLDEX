@@ -25,12 +25,12 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.unit.dp
 import com.example.folkedex.ui.common.HomeScreen
+import com.example.folkedex.ui.history.HistoryScreen
 import com.example.folkedex.ui.politician.PoliciesScreen
 import com.example.folkedex.ui.politician.PoliticianScreen
 import com.example.folkedex.ui.theme.BillScreen
 import com.example.folkedex.ui.theme.DataScreen
 import com.example.folkedex.ui.theme.FavoritesScreen
-import com.example.folkedex.ui.theme.History
 import com.example.folkedex.ui.theme.NewsScreen
 import com.example.folkedex.ui.theme.Party
 import com.example.folkedex.ui.theme.PartyRepository
@@ -84,7 +84,12 @@ fun MainScreen(navController: NavHostController) {
             composable("bills") { BillScreen(navController = navController) }
             composable("com/example/folkedex/ui/history/{partyPath}") { backStackEntry ->
                 val partyPath = backStackEntry.arguments?.getString("partyPath")
-                History(navController = navController, partyPath = partyPath)
+                val partyData = PartyRepository.getPartyByName(partyPath ?: "")
+                if (partyData != null) {
+                    HistoryScreen(navController = navController, partyData = partyData)
+                } else {
+                    Text("No history available")
+                }
             }
             composable("com/example/folkedex/data") { DataScreen(navController = navController) }
             composable("politicians") { PoliticianSelectionScreen(navController = navController) }
