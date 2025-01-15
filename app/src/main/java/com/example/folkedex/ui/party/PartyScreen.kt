@@ -39,7 +39,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.folkedex.model.PartyData
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Party(partyData: PartyData, onBackClick: () -> Unit = {}, navController: NavHostController) {
@@ -53,15 +52,12 @@ fun Party(partyData: PartyData, onBackClick: () -> Unit = {}, navController: Nav
                 contentAlignment = Alignment.CenterStart
             ) {
                 IconButton(
-                    onClick = {navController.popBackStack()},
-                    modifier = Modifier
-                        .padding(start = 16.dp)
-                        .align(Alignment.CenterStart)
+                    onClick = { navController.popBackStack() },
+                    modifier = Modifier.padding(start = 16.dp)
                 ) {
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
                         contentDescription = "Back",
-
                         tint = partyData.backColor
                     )
                 }
@@ -73,19 +69,15 @@ fun Party(partyData: PartyData, onBackClick: () -> Unit = {}, navController: Nav
                     Image(
                         painter = painterResource(id = partyData.logoRes),
                         contentDescription = "Centered Image",
-                        modifier = Modifier
-                            .size(partyData.imageSize)
-                            .padding(bottom = 4.dp)
+                        modifier = Modifier.size(partyData.imageSize).padding(bottom = 4.dp)
                     )
                     Text(
                         partyData.path,
                         fontSize = partyData.textSize,
                         color = partyData.backColor,
-                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+                        style = androidx.compose.material3.MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     )
                 }
-
-                FolketingLogo(modifier = Modifier.align(Alignment.CenterEnd))
             }
         },
         content = { paddingValues ->
@@ -116,40 +108,20 @@ fun Party(partyData: PartyData, onBackClick: () -> Unit = {}, navController: Nav
                         CustomButton(
                             text = "Politicians",
                             textColor = partyData.backColor,
-                            //imageRes = R.drawable.flogo,
                             buttonColor = partyData.buttonColor,
                             modifier = Modifier.width(170.dp),
-                            onClick = { navController.navigate("politicians")}
+                            partyData = partyData,
+                            navController = navController,
+                            onClick = { navController.navigate("politicians") }
                         )
                         CustomButton(
                             text = "History",
                             textColor = partyData.backColor,
-                            //imageRes = R.drawable.flogo,
                             buttonColor = partyData.buttonColor,
                             modifier = Modifier.width(170.dp),
-                            onClick = {navController.navigate("com/example/folkedex/ui/history")  }
-                        )
-                    }
-
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceEvenly
-                    ) {
-                        CustomButton(
-                            text = "Policies",
-                            textColor = partyData.backColor,
-                            //imageRes = R.drawable.flogo,
-                            buttonColor = partyData.buttonColor,
-                            modifier = Modifier.width(170.dp),
-                            onClick = {navController.navigate("policies")  }
-                        )
-                        CustomButton(
-                            text = "Statistics",
-                            textColor = partyData.backColor,
-                            //imageRes = R.drawable.flogo,
-                            buttonColor = partyData.buttonColor,
-                            modifier = Modifier.width(170.dp),
-                            onClick = { }
+                            partyData = partyData,
+                            navController = navController,
+                            onClick = { navController.navigate("com/example/folkedex/ui/history/${partyData.path}") }
                         )
                     }
                 }
@@ -159,7 +131,15 @@ fun Party(partyData: PartyData, onBackClick: () -> Unit = {}, navController: Nav
 }
 
 @Composable
-fun CustomButton(text: String, buttonColor: Color, textColor: Color, modifier: Modifier = Modifier, onClick: () -> Unit) {
+fun CustomButton(
+    text: String,
+    buttonColor: Color,
+    textColor: Color,
+    modifier: Modifier = Modifier,
+    partyData: PartyData,
+    navController: NavHostController,
+    onClick: () -> Unit
+) {
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(containerColor = buttonColor),
@@ -167,7 +147,7 @@ fun CustomButton(text: String, buttonColor: Color, textColor: Color, modifier: M
         modifier = modifier
             .shadow(elevation = 10.dp, shape = RoundedCornerShape(20.dp), clip = true)
             .height(60.dp),
-        contentPadding = PaddingValues(horizontal = 16.dp),
+        contentPadding = PaddingValues(horizontal = 16.dp)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,

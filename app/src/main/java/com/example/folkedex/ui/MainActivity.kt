@@ -82,7 +82,10 @@ fun MainScreen(navController: NavHostController) {
             composable("policies") { PoliciesScreen(navController = navController) }
             composable("reports") { ReportsScreen(navController = navController) }
             composable("bills") { BillScreen(navController = navController) }
-            composable("com/example/folkedex/ui/history") { History(navController = navController) }
+            composable("com/example/folkedex/ui/history/{partyPath}") { backStackEntry ->
+                val partyPath = backStackEntry.arguments?.getString("partyPath")
+                History(navController = navController, partyPath = partyPath)
+            }
             composable("com/example/folkedex/data") { DataScreen(navController = navController) }
             composable("politicians") { PoliticianSelectionScreen(navController = navController) }
 

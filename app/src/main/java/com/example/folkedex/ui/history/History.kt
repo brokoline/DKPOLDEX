@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -32,82 +33,24 @@ import androidx.navigation.NavController
 import com.example.folkedex.R
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun History(navController: NavController) {
+fun History(navController: NavController, partyPath: String?) {
+    val party = PartyRepository.getPartyByName(partyPath ?: "")
     Scaffold(
         topBar = {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(200.dp)
-                    .background(SocialdemokratietBackground),
-                contentAlignment = Alignment.CenterStart
+                    .background(party?.backgroundColor ?: Color.Gray)
             ) {
-                IconButton(
-                    onClick = {navController.popBackStack()},
-                    modifier = Modifier
-                        .padding(start = 16.dp)
-                        .align(Alignment.CenterStart)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "Back",
-                        tint = Color.White
-                    )
-                }
-
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.offset(x = 140.dp)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.history),
-                        contentDescription = "Centered Image",
-                        modifier = Modifier
-                            .size(130.dp)
-                            .padding(bottom = 4.dp)
-                    )
-                    Text(
-                        "History",
-                        fontSize = 40.sp,
-                        color = Color.White,
-                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
-                    )
-                }
-
-                FolketingLogo(modifier = Modifier.align(Alignment.CenterEnd))
+                Text("History", color = Color.White)
             }
         },
         content = { paddingValues ->
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues)
-                    .padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Text(
-                    text = "The party was founded by...",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Black,
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center
-                )
-
-
-
-
+            Column(modifier = Modifier.padding(paddingValues)) {
+                Text(party?.history ?: "No history available.")
             }
         }
     )
 }
-
-
-
-
-
-
-
-
