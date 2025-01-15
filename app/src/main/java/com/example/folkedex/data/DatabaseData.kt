@@ -50,7 +50,7 @@ object PartyRepository {
             backColor =Color.White
         ),
         PartyData(
-            name = "Socialdemo-\nkratiet",
+            name = "Socialdemokratiet",
             path = "Socialdemokratiet",
             logoRes = R.drawable.socialdemokratiet,
             altLogo = R.drawable.socialdemokratiet_logo,
