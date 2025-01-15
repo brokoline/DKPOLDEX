@@ -13,11 +13,7 @@ object PartyRepository {
             path = "Moderaterne",
             logoRes = R.drawable.moderaterne,
             altLogo = R.drawable.moderaterne_logo,
-            description = "Text about the Moderaterne party, \n" +
-                    "eventually what they stand for,\n" +
-                    "political orientation/spectrum\n" +
-                    "placement, when they were founded,\n" +
-                    "etc etc.",
+            description = "Moderaterne was founded in 2022 by Lars Løkke Rasmussen with a focus on centrist policies and pragmatic solutions.",
             history = "Moderaterne was founded in 2022 by Lars Løkke Rasmussen with a focus on centrist policies and pragmatic solutions.",
             website = "https://moderaterne.dk",
             backgroundColor = ModeraterneBackground,
