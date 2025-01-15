@@ -74,7 +74,7 @@ fun MainScreen(navController: NavHostController) {
             composable("settings") { SettingsScreen(navController) }
             composable("folkedex") { PartySelectionScreen( navController = navController)}
             composable("com/example/folkedex/ui/issues") { IssuesScreen(navController = navController) }
-            composable("com/example/folkedex/ui/politician/{name}") { backStackEntry ->
+            composable("politician/{name}") { backStackEntry ->
                 val name = backStackEntry.arguments?.getString("name") ?: "Unknown"
                 PoliticianScreen(navController = navController, name = name)
             }
