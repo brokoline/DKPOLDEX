@@ -23,6 +23,7 @@ import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.folkedex.R // Importerer drawable ressourcer
+import com.example.folkedex.ui.common.FolketingLogo
 
 @Composable
 fun IssuesScreen(onBackClick: () -> Unit = {}, navController: NavController) {

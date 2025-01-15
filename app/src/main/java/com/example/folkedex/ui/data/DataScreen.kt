@@ -22,13 +22,14 @@ import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import com.example.folkedex.ui.politician.PoliciesScreen
 import com.example.folkedex.R
+import com.example.folkedex.ui.common.FolketingLogo
 
 
 data class Data(val title: String)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DataScreen(onBackClick: () -> Unit = {}, navController: NavController) {
+fun DataScreen(navController: NavController) {
     val examples = listOf(
         Data(title = "Data Example"),
         Data(title = "Data Example"),

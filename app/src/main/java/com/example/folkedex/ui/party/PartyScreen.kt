@@ -1,4 +1,4 @@
-package com.example.folkedex.ui.theme
+package com.example.folkedex.ui.party
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -38,11 +38,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.folkedex.model.PartyData
+import com.example.folkedex.ui.common.FolketingLogo
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Party(partyData: PartyData, onBackClick: () -> Unit = {}, navController: NavHostController) {
+fun Party(partyData: PartyData, navController: NavHostController) {
     Scaffold(
         topBar = {
             Box(

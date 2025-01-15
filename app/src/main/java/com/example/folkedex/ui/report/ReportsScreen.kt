@@ -19,6 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
+import com.example.folkedex.ui.common.FolketingLogo
 
 data class Report(val title: String, val link: String)
 

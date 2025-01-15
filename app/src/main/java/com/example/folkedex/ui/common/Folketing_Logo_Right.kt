@@ -1,4 +1,4 @@
-package com.example.folkedex.ui.theme
+package com.example.folkedex.ui.common
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size

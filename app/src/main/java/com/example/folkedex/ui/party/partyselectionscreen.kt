@@ -1,4 +1,4 @@
-package com.example.folkedex.ui.theme
+package com.example.folkedex.ui.party
 
 import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.folkedex.R
 import com.example.folkedex.model.PartyData
+import com.example.folkedex.ui.theme.PartyRepository
 
 
 @Composable

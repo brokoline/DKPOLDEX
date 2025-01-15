@@ -27,16 +27,16 @@ import androidx.compose.ui.unit.dp
 import com.example.folkedex.ui.common.HomeScreen
 import com.example.folkedex.ui.politician.PoliciesScreen
 import com.example.folkedex.ui.politician.PoliticianScreen
-import com.example.folkedex.ui.theme.BillScreen
+import com.example.folkedex.ui.bill.BillScreen
 import com.example.folkedex.ui.theme.DataScreen
 import com.example.folkedex.ui.theme.FavoritesScreen
 import com.example.folkedex.ui.theme.History
 import com.example.folkedex.ui.theme.NewsScreen
-import com.example.folkedex.ui.theme.Party
+import com.example.folkedex.ui.party.Party
 import com.example.folkedex.ui.theme.PartyRepository
-import com.example.folkedex.ui.theme.PartySelectionScreen
+import com.example.folkedex.ui.party.PartySelectionScreen
 import com.example.folkedex.ui.theme.IssuesScreen
-import com.example.folkedex.ui.theme.PoliticianSelectionScreen
+import com.example.folkedex.ui.politician.PoliticianSelectionScreen
 import com.example.folkedex.ui.theme.ReportsScreen
 
 class MainActivity : ComponentActivity() {
@@ -94,11 +94,8 @@ fun MainScreen(navController: NavHostController) {
                     if (partyData != null) {
                         Party(
                             partyData = partyData,
-                            onBackClick = {
-                                navController.navigate("home") {
-                                    popUpTo("home") { inclusive = true }
-                                }
-                            },
+
+
                             navController = navController
                         )
                     } else {

@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.folkedex.ui.theme.FolketingLogo
+
 
 @Composable
 fun HomeScreen(navController: NavHostController) {

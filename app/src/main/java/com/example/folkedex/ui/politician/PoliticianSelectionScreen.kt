@@ -1,4 +1,4 @@
-package com.example.folkedex.ui.theme
+package com.example.folkedex.ui.politician
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

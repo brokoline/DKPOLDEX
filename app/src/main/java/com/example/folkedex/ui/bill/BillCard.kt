@@ -1,4 +1,4 @@
-package com.example.folkedex.ui.theme
+package com.example.folkedex.ui.bill
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
