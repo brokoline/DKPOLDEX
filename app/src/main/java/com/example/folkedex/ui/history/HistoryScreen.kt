@@ -43,14 +43,22 @@ fun HistoryScreen(navController: NavHostController, partyData: PartyData) {
                     )
                 }
 
-                Image(
-                    painter = painterResource(id = partyData.logoRes),
-                    contentDescription = "Party Logo",
-                    modifier = Modifier
-                        .size(100.dp)
-                        .align(Alignment.CenterEnd)
-                        .padding(end = 16.dp)
-                )
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.offset(x = partyData.offsetX.dp, y = partyData.offsetY.dp)
+                ) {
+                    Image(
+                        painter = painterResource(id = partyData.logoRes),
+                        contentDescription = "Centered Image",
+                        modifier = Modifier.size(partyData.imageSize).padding(bottom = 4.dp)
+                    )
+                    Text(
+                        partyData.path,
+                        fontSize = partyData.textSize,
+                        color = partyData.backColor,
+                        style = androidx.compose.material3.MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+                    )
+                }
             }
         },
         content = { paddingValues ->
@@ -59,15 +67,15 @@ fun HistoryScreen(navController: NavHostController, partyData: PartyData) {
                     .fillMaxSize()
                     .padding(paddingValues)
                     .padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
                     text = partyData.history,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Normal,
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.SemiBold,
                     color = Color.Black,
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Start
+                    textAlign = TextAlign.Center
                 )
             }
         }

@@ -19,6 +19,7 @@ object PartyRepository {
                     "placement, when they were founded,\n" +
                     "etc etc.",
             history = "Moderaterne was founded in 2022 by Lars Løkke Rasmussen with a focus on centrist policies and pragmatic solutions.",
+            website = "https://moderaterne.dk",
             backgroundColor = ModeraterneBackground,
             cardColor = altModeraterne,
             buttonColor = ModeraterneButton,
@@ -40,6 +41,7 @@ object PartyRepository {
                     "placement, when they were founded,\n" +
                     "etc etc.",
             history = "Venstre, Denmark's Liberal Party, was founded in 1870 and has historically represented agriculture and business interests.",
+            website = "https://venstre.dk",
             backgroundColor = VenstreBackground,
             cardColor = altVenstre,
             buttonColor = VenstreButton,
@@ -60,6 +62,7 @@ object PartyRepository {
                     "placement, when they were founded,\n" +
                     "etc etc.",
             history = "Socialdemokratiet was founded in 1871 as Denmark's first workers' party, focusing on social justice and welfare policies.",
+            website = "https://socialdemokratiet.dk",
             backgroundColor = SocialdemokratietBackground,
             cardColor = altSocialdemokratiet,
             buttonColor = SocialdemokratietButton,
@@ -80,6 +83,7 @@ object PartyRepository {
                     "placement, when they were founded,\n" +
                     "etc etc.",
             history = "Radikale Venstre was founded in 1905 as a party focusing on social liberalism and education policies.",
+            website = "https://radikale.dk",
             backgroundColor = RadikalevenstreBackground,
             cardColor = altRadikaleVenstre,
             buttonColor = RadikalevenstreButton,
@@ -100,6 +104,7 @@ object PartyRepository {
                     "placement, when they were founded,\n" +
                     "etc etc.",
             history = "Det Konservative Folkeparti was founded in 1915 and has roots in the former Højre party, focusing on private property rights and tradition.",
+            website = "https://konservative.dk",
             backgroundColor = KonservativBackground,
             cardColor = altKonservative,
             buttonColor = KonservativButton,
@@ -121,6 +126,7 @@ object PartyRepository {
                     "placement, when they were founded,\n" +
                     "etc etc.",
             history = "Socialistisk Folkeparti was founded in 1959 by Aksel Larsen after a split from DKP, focusing on socialism and environmental policies.",
+            website = "https://sf.dk",
             backgroundColor = SfBackground,
             cardColor = altSocialistiskFolkeparti,
             buttonColor = SfButton,
@@ -142,6 +148,7 @@ object PartyRepository {
                     "placement, when they were founded,\n" +
                     "etc etc.",
             history = "Liberal Alliance was founded in 2007 and focuses on lower taxes, individual freedom, and less government regulation.",
+            website = "https://liberalalliance.dk",
             backgroundColor = LaBackground,
             cardColor = altLiberalAlliance,
             buttonColor = LaButton,
@@ -163,6 +170,7 @@ object PartyRepository {
                     "placement, when they were founded,\n" +
                     "etc etc.",
             history = "Dansk Folkeparti was founded in 1995 by Pia Kjærsgaard and has primarily focused on nationalism and immigration policies.",
+            website = "https://danskfolkeparti.dk",
             backgroundColor = DanskfolkepartiBackground,
             cardColor = altDanskFolkeparti,
             buttonColor = DanskfolkepartiButton,
@@ -174,7 +182,7 @@ object PartyRepository {
             backColor =Color.White
         ),
         PartyData(
-            name = "Danmarks-\ndemokraterne",
+            name = "Danmarksdemokraterne",
             path = "Danmarksdemokraterne",
             logoRes = R.drawable.ddemkraterne,
             altLogo = R.drawable.danmarksdemokraterne_logo,
@@ -184,6 +192,7 @@ object PartyRepository {
                     "placement, when they were founded,\n" +
                     "etc etc.",
             history = "Danmarksdemokraterne was founded in 2022 by Inger Støjberg, focusing on national conservative values.",
+            website = "https://danmarksdemokraterne.dk",
             backgroundColor = DanmarksdemokraterneBackground,
             cardColor = altDanmarksdemokraterne,
             buttonColor = DanmarksdemokraterneButton,
@@ -205,6 +214,7 @@ object PartyRepository {
                     "placement, when they were founded,\n" +
                     "etc etc.",
             history = "Enhedslisten was founded in 1989 as a coalition of left-wing parties focusing on equality and environmental protection.",
+            website = "https://enhedslisten.dk",
             backgroundColor = EnhedslistenBackground,
             cardColor = altEnhedslisten,
             buttonColor = EnhedslistenButton,
@@ -226,6 +236,7 @@ object PartyRepository {
                     "placement, when they were founded,\n" +
                     "etc etc.",
             history = "Alternativet was founded in 2013 focusing on sustainability, green policies, and rethinking democracy.",
+            website = "https://alternativet.dk",
             backgroundColor = AlternativetBackground,
             cardColor = altAlternativet,
             buttonColor = AlternativetButton,
@@ -246,6 +257,7 @@ object PartyRepository {
                     "placement, when they were founded,\n" +
                     "etc etc.",
             history = "Sambandsflokkurin is a Faroese party founded in 1906 focusing on union with Denmark.",
+            website = "https://samband.fo",
             backgroundColor = SambandspartietBackground,
             cardColor = altSambandsflokkurin,
             buttonColor = SambandspartietButton,
@@ -267,6 +279,7 @@ object PartyRepository {
                     "placement, when they were founded,\n" +
                     "etc etc.",
             history = "Javnaðarflokkurin is a Faroese social democratic party founded in 1925 focusing on equality and welfare.",
+            website = "https://j.fo",
             backgroundColor = JavnBackground,
             cardColor = altJavnaðarflokkurin,
             buttonColor = JavnButton,
@@ -288,6 +301,7 @@ object PartyRepository {
                     "placement, when they were founded,\n" +
                     "etc etc.",
             history = "Siumut is a Greenlandic social democratic party founded in 1977, focusing on self-governance and indigenous rights.",
+            website = "https://siumut.gl",
             backgroundColor = SiumutBackground,
             cardColor = altSiumut,
             buttonColor = SiumutButton,
@@ -309,6 +323,7 @@ object PartyRepository {
                     "placement, when they were founded,\n" +
                     "etc etc.",
             history = "Inuit Ataqatigiit is a Greenlandic left-wing party founded in 1976 focusing on independence and environmental protection.",
+            website = "https://ia.gl",
             backgroundColor = InuitBackground,
             cardColor = altInuitAtaqatigiit,
             buttonColor = InuitButton,
@@ -330,6 +345,7 @@ object PartyRepository {
                     "placement, when they were founded,\n" +
                     "etc etc.",
             history = "This party was founded...",
+            website = "https://www.ft.dk/da/ofte-stillede-spoergsmaal/medl_hvad-er-en-loesgaenger",
             backgroundColor = SocialdemokratietBackground,
             cardColor = altSocialdemokratiet,
             buttonColor = SocialdemokratietButton,
