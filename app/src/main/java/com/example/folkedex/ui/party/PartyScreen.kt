@@ -86,7 +86,7 @@ fun Party(partyData: PartyData, onBackClick: () -> Unit = {}, navController: Nav
 
                 Text(
                     text = "Visit Party Website",
-                    fontSize = 24.sp,
+                    fontSize = 28.sp,
                     fontWeight = FontWeight.Bold,
                     color = partyData.buttonColor,
                     modifier = Modifier
@@ -103,7 +103,7 @@ fun Party(partyData: PartyData, onBackClick: () -> Unit = {}, navController: Nav
 
                 Column(
                     modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(24.dp)
+                    verticalArrangement = Arrangement.spacedBy(2.dp)
                 ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),

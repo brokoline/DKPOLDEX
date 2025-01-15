@@ -221,7 +221,7 @@ object PartyRepository {
             backColor =Color.White
         ),
         PartyData(
-            name = "Javnaðar-\nflokkurin",
+            name = "Javnaðarflokkurin",
             path = "Javnaðarflokkurin",
             logoRes = R.drawable.javna,
             altLogo = R.drawable.javna,
@@ -279,7 +279,7 @@ object PartyRepository {
             path = "Løsgængere",
             logoRes = R.drawable.loes,
             altLogo = R.drawable.loesgaengere,
-            description = "An independent is a member of the Danish Parliament who does not belong to any of the party groups in the Danish Parliament. An independent is called outside the parliamentary groups (UFG).",
+            description = "An løsgænger (independent) is a member of the Danish Parliament who does not belong to any of the party groups in the Danish Parliament. An independent is called outside the parliamentary groups (UFG).",
             history = "An independent is a member of the Danish Parliament who does not belong to any of the party groups in the Danish Parliament. An independent is called outside the parliamentary groups (UFG).",
             website = "https://www.ft.dk/da/ofte-stillede-spoergsmaal/medl_hvad-er-en-loesgaenger",
             backgroundColor = SocialdemokratietBackground,
