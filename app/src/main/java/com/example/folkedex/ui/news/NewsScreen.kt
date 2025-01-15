@@ -20,12 +20,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.folkedex.HomeScreen
 import com.example.folkedex.R
 
 data class NewsItem(val title: String, val description: String, val date: String)
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewsScreen(onBackClick: () -> Unit = {}, onNewsClick: (String) -> Unit = {}, navController: NavController) {
     val newsList = listOf(
