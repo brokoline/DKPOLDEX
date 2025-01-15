@@ -34,7 +34,7 @@ import com.example.folkedex.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun History( onBackClick: () -> Unit = {}, navController: NavController) {
+fun History(navController: NavController) {
     Scaffold(
         topBar = {
             Box(
