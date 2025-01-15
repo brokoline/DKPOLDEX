@@ -172,7 +172,7 @@ object PartyRepository {
             path = "Enhedslisten",
             logoRes = R.drawable.enhedslisten,
             altLogo = R.drawable.enhedslisten_logo,
-            description = "Enhedslisten was founded in 1989 as a coalition of left-wing parties focusing on equality and environmental protection.",
+            description = "Enhedslisten was founded in 1989 as a coalition of left-wing parties, focusing on equality and environmental protection.",
             history = "Enhedslisten was founded in 1989 as a coalition of left-wing parties focusing on equality and environmental protection.",
             website = "https://enhedslisten.dk",
             backgroundColor = EnhedslistenBackground,
