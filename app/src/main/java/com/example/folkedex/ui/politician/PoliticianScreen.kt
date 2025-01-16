@@ -7,7 +7,10 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -26,7 +29,8 @@ import com.example.folkedex.data.FavoritesHelper
 fun PoliticianScreen(navController: NavController, name: String, onBackClick: () -> Unit = {}) {
     val context = LocalContext.current
     val favoritesHelper = remember { FavoritesHelper(context) }
-    val isFavorite = favoritesHelper.getFavorites().contains(name)
+    var isFavorite by remember { mutableStateOf(favoritesHelper.getFavorites().contains(name)) }
+
 
     Scaffold(
         topBar = {
@@ -73,6 +77,7 @@ fun PoliticianScreen(navController: NavController, name: String, onBackClick: ()
                                 } else {
                                     favoritesHelper.addFavorite(name)
                                 }
+                                isFavorite = !isFavorite
                             },
                             modifier = Modifier
                                 .padding(end = 16.dp)
