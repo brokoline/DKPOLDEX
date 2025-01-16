@@ -137,7 +137,17 @@ object PartyRepository {
             logoRes = R.drawable.socialistiskfolkeparti,
             altLogo = R.drawable.socialistisk_folkeparti_logo,
             description = "Socialistisk Folkeparti was founded in 1959 by Aksel Larsen after a split from DKP, focusing on socialism and environmental policies.",
-            history = "",
+            history = "SF - Socialist People's Party (often simply SF in everyday speech; English: Green Left) is a Danish left-wing political party whose ideological foundation is built around socialism, specifically people's socialism, inspired by democratic socialism and green politics.\n" +
+                    "\n" +
+                    "The party was formed in 1959 by Aksel Larsen, a member excluded from the DKP, who believed that socialism should be introduced through democratic means and without dictates from the Soviet Union. Initially, the focus was largely on the economy and disarmament, but over the years, the party adopted several key issues such as the environment, education, gender equality, and human rights.\n" +
+                    "\n" +
+                    "SF has been a supporting party for various Social Democrat-led governments over time, starting with \"The Red Cabinet\" in 1966-67. In terms of voter support, the party has had three high points where it achieved more than 10% of the votes, followed by periods of decline: the first at the parliamentary election in 1966 under Aksel Larsen, the second during the 1980s with Gert Petersen as leader, and the third at the parliamentary election in 2007 under the relatively newly elected leader Villy Søvndal.\n" +
+                    "\n" +
+                    "Villy Søvndal worked diligently to make SF a governing party and succeeded when SF, together with the Social Democrats and the Danish Social Liberal Party, entered the Helle Thorning-Schmidt Government from 2011 to 2014. However, the government period was not a success for SF, as many members and voters felt that the party had abandoned its traditional policies. Villy Søvndal stepped down as leader in 2012, after which the relatively unknown parliamentary member Annette Vilhelmsen won a contested leadership election against the party leadership's candidate, Health Minister Astrid Krag. SF withdrew from the government in January 2014 following internal disagreements over the state's sale of part of DONG Energy, and Annette Vilhelmsen simultaneously resigned as leader and was succeeded by Pia Olsen Dyhr.\n" +
+                    "\n" +
+                    "In 2019, SF secured 14 seats in the Folketing and 2 members in the European Parliament.\n" +
+                    "\n" +
+                    "SF's youth organization is Socialistisk Folkepartis Ungdom, usually abbreviated as SFU.",
             website = "https://sf.dk",
             backgroundColor = SfBackground,
             cardColor = altSocialistiskFolkeparti,
@@ -155,7 +165,15 @@ object PartyRepository {
             logoRes = R.drawable.liberal_alliance_logo,
             altLogo = R.drawable.liberal_alliance_logo,
             description = "Liberal Alliance was founded in 2007 and focuses on lower taxes, individual freedom, and less government regulation.",
-            history = "Liberal Alliance was founded in 2007 and focuses on lower taxes, individual freedom, and less government regulation.",
+            history = "Liberal Alliance (LA) is a Danish liberal-conservative party with 15 seats in the Folketing. The current leader is Alex Vanopslagh.\n" +
+                    "\n" +
+                    "Alex Vanopslagh, party leader from 2019 to present.\n" +
+                    "\n" +
+                    "The party originated from the center-right party Ny Alliance, which was formed in 2007, but soon after the parliamentary election, it split due to political disagreements and personal conflicts. Anders Samuelsen, who increasingly emerged as the party's strongman, led the transformation of the party into one with clear economic-liberalist viewpoints. The shift was completed with the name change to Liberal Alliance (LA) in August 2008 and the departure of the original leader Naser Khader from the party in January 2009, after which Anders Samuelsen took over as party leader.\n" +
+                    "\n" +
+                    "The party initially had only two members in the Folketing and seemed doomed with poor polling numbers, but with a program featuring clear key issues, the party gained ground and achieved nine and 13 seats in the parliamentary elections in 2011 and 2015, respectively. From 2016 to 2019, the party entered into the Lars Løkke Rasmussen III Government together with Venstre and the Conservatives. Liberal Alliance held six ministerial positions with Foreign Minister Anders Samuelsen at the helm. In the 2019 parliamentary election, Liberal Alliance lost nine seats, dropping to four seats with 2.3% of the vote. Anders Samuelsen lost his parliamentary seat and stepped down as party leader, with the newly elected Alex Vanopslagh taking over the position. In October 2019, the party was further reduced when the former group leader Simon Emil Ammitzbøll-Bille left the party. However, in the 2022 parliamentary election, the party achieved renewed success and its best result to date with 14 seats, partly due to a communication strategy that placed great emphasis on social media platforms like TikTok.\n" +
+                    "\n" +
+                    "The national chairman is Alex Vanopslagh. Liberal Alliance uses the party letter I, and its youth organization is called Liberal Alliance's Youth.",
             website = "https://liberalalliance.dk",
             backgroundColor = LaBackground,
             cardColor = altLiberalAlliance,
@@ -173,7 +191,19 @@ object PartyRepository {
             logoRes = R.drawable.df,
             altLogo = R.drawable.dansk_folkeparti_logo,
             description = "Dansk Folkeparti was founded in 1995 by Pia Kjærsgaard and has primarily focused on nationalism and immigration policies.",
-            history = "Dansk Folkeparti was founded in 1995 by Pia Kjærsgaard and has primarily focused on nationalism and immigration policies.",
+            history = "Danish People's Party (DF) is a Danish political party founded in 1995 by Pia Kjærsgaard and three members who split from the Progress Party (Fremskridtspartiet). The party is characterized by its national-conservative, social-conservative, and right-populist ideology.\n" +
+                    "\n" +
+                    "From the beginning, DF distinguished itself by rejecting the Progress Party's ultraliberal and provocative elements, focusing instead on nationalism, strict immigration policies, and opposition to European integration. The party entered the Folketing with four members at its inception.\n" +
+                    "\n" +
+                    "In its first general election in 1998, DF secured 7.4% of the vote and 13 seats. The party continued to grow, achieving 12% and 22 seats in the 2001 elections, making it the third-largest party in the Folketing. DF played a supportive role in various center-right governments, helping to implement stricter immigration laws and other policy initiatives.\n" +
+                    "\n" +
+                    "Pia Kjærsgaard led the party until September 2012, when Kristian Thulesen Dahl took over. Under Thulesen Dahl's leadership, DF reached its peak in the 2015 election, obtaining 21.1% of the vote and 37 seats, becoming the largest party in the blue bloc. Despite this success, the party faced significant challenges in the following years, including scandals related to misuse of EU funds (MELD- and FELD-sag) and controversial cooperation with the Social Democrats, which led to a decline in support.\n" +
+                    "\n" +
+                    "In the 2019 European Parliament elections, DF lost three of its four seats, and the same trend continued in the 2019 general election, where it was reduced to 16 seats with 8.7% of the vote. Poor performance in the 2021 municipal elections prompted Kristian Thulesen Dahl to resign in January 2022. Morten Messerschmidt was elected as the new leader but faced further turmoil as 11 of the 16 Folketing members left the party to join the newly formed Denmark Democrats.\n" +
+                    "\n" +
+                    "In the 2022 general election, DF experienced its worst result to date, securing only 2.6% of the vote and five seats. The party remains known for its skepticism towards immigration and its defense of certain welfare state elements, positioning itself on the right side of the political spectrum.\n" +
+                    "\n" +
+                    "As of early 2023, DF is the ninth-largest party in the Folketing. The party's youth organization is Dansk Folkepartis Ungdom, and it is part of the Identity and Democracy group in the European Parliament. Morten Messerschmidt continues to lead the party, navigating ongoing challenges related to leadership and membership stability.",
             website = "https://danskfolkeparti.dk",
             backgroundColor = DanskfolkepartiBackground,
             cardColor = altDanskFolkeparti,
@@ -191,7 +221,11 @@ object PartyRepository {
             logoRes = R.drawable.ddemkraterne,
             altLogo = R.drawable.danmarksdemokraterne_logo,
             description = "Danmarksdemokraterne was founded in 2022 by Inger Støjberg, focusing on national conservative values.",
-            history = "Danmarksdemokraterne was founded in 2022 by Inger Støjberg, focusing on national conservative values.",
+            history = "Denmark Democrats (Danmarksdemokraterne) is a right-leaning political party in Denmark, founded in 2022 by Inger Støjberg, who also serves as the party leader. The party advocates for strict immigration policies and positions itself as a civil-oriented party within the traditional blue bloc. In its first parliamentary election in 2022, Denmark Democrats secured 14 seats, making it the second-largest party in the blue bloc. By March 2024, the party increased its representation to 16 seats, becoming the third-largest party in the Folketing. Additionally, in the 2024 European Parliament elections, the party won one seat.\n" +
+                    "\n" +
+                    "Inger Støjberg, the party's founder, was sentenced to 60 days of unconditional imprisonment on December 13, 2021, for violating the ministerial responsibility law. Previously, she served as the deputy leader and a member of Venstre but resigned from her deputy position in December 2020 and left the party entirely in February 2021. Following her conviction, Støjberg was deemed unfit to remain in the Folketing by a majority vote in December 2021. She served her sentence under house arrest in Hadsund from March 28, 2022, and was released on May 26, 2022. Upon her release, she held a thank-you event at Visborggaard Castle near Hadsund with approximately 2,000 attendees, where she expressed her continued passion for politics and hinted at announcing her political future, leading to speculation about the formation of a new party.\n" +
+                    "\n" +
+                    "Inger Støjberg remains the national chairman of Denmark Democrats. The party emphasizes a strict stance on immigration and seeks to influence Denmark's political landscape from the right side of the spectrum. Denmark Democrats continue to build their presence both nationally and in the European Parliament, navigating the challenges of establishing a new political force in Denmark's dynamic political environment.",
             website = "https://danmarksdemokraterne.dk",
             backgroundColor = DanmarksdemokraterneBackground,
             cardColor = altDanmarksdemokraterne,
@@ -209,7 +243,17 @@ object PartyRepository {
             logoRes = R.drawable.enhedslisten,
             altLogo = R.drawable.enhedslisten_logo,
             description = "Enhedslisten was founded in 1989 as a coalition of left-wing parties, focusing on equality and environmental protection.",
-            history = "Enhedslisten was founded in 1989 as a coalition of left-wing parties focusing on equality and environmental protection.",
+            history = "The Red-Green Alliance (Enhedslisten) is a Danish left-wing political party established in 1989 through the merger of the Left Socialists (Venstresocialisterne), Communist Party of Denmark (DKP), and the Socialist Workers Party (SAP). The party identifies with democratic socialism, eco-socialism, and feminism, advocating for extensive social welfare programs, environmental sustainability, and gender equality.\n" +
+                    "\n" +
+                    "Enhedslisten was formed as a unification of various leftist factions aiming to create a stronger, more cohesive political force in Denmark's parliament, the Folketing. The merger sought to consolidate efforts to address issues such as workers' rights, social justice, and opposition to neoliberal economic policies.\n" +
+                    "\n" +
+                    "In its early years, Enhedslisten focused on grassroots activism and building a broad base of support among workers, students, and marginalized communities. The party has consistently pushed for progressive policies, including the expansion of public services, increased taxation on the wealthy, and robust environmental protections to combat climate change.\n" +
+                    "\n" +
+                    "Enhedslisten has gradually increased its representation in the Folketing, becoming a significant voice for the left. The party emphasizes direct democracy, participatory decision-making, and solidarity with international socialist movements. It has also been active in promoting anti-racist initiatives and advocating for the rights of immigrants and refugees.\n" +
+                    "\n" +
+                    "As of early 2025, Enhedslisten holds a notable number of seats in the Folketing, positioning itself as a key player in shaping Denmark's progressive agenda. The party continues to advocate for comprehensive climate policies, enhanced social welfare systems, and the dismantling of capitalist structures that it views as inherently exploitative. Enhedslisten remains committed to fostering an inclusive and equitable society through its unwavering dedication to socialist principles and environmental sustainability.\n" +
+                    "\n" +
+                    "Enhedslisten operates with a strong emphasis on internal democracy, allowing members to have significant input into the party's policies and leadership decisions. The party's youth wing, Rød Ungdom (Red Youth), actively engages younger generations in political activism and advocacy, ensuring the continuity of the party's values and objectives.",
             website = "https://enhedslisten.dk",
             backgroundColor = EnhedslistenBackground,
             cardColor = altEnhedslisten,
@@ -227,7 +271,11 @@ object PartyRepository {
             logoRes = R.drawable.alternativet,
             altLogo = R.drawable.alternativet_logo,
             description = "Alternativet was founded in 2013 focusing on sustainability, green policies, and rethinking democracy.",
-            history = "Alternativet was founded in 2013 focusing on sustainability, green policies, and rethinking democracy.",
+            history = "The Alternative (Alternativet) is a Danish green and progressive political party founded in 2013 by Josephine Fock and other activists. The party focuses on sustainability, social innovation, and fostering a green economy, positioning itself as a forward-thinking alternative to traditional political parties. Alternativet advocates for comprehensive climate policies, social justice, and participatory democracy, aiming to address contemporary societal challenges through innovative solutions.\n" +
+                    "\n" +
+                    "Since its establishment, The Alternative has experienced varying levels of electoral success, securing seats in the Folketing in the 2015 general election and maintaining representation in subsequent elections. The party has been involved in coalition discussions but has not been a major governing force. It appeals primarily to environmentally conscious voters, young people, and those seeking new approaches to politics and governance.\n" +
+                    "\n" +
+                    "As of early 2025, The Alternative continues to promote its agenda within the Folketing, emphasizing environmental sustainability, economic reform, and social equity. The party actively engages its youth wing, Alternative Youth, to involve younger generations in political activism and to sustain its progressive initiatives.",
             website = "https://alternativet.dk",
             backgroundColor = AlternativetBackground,
             cardColor = altAlternativet,
@@ -244,7 +292,7 @@ object PartyRepository {
             logoRes = R.drawable.sambands,
             altLogo = R.drawable.sambandsflokkurin_logo,
             description = "Sambandsflokkurin is a Faroese party founded in 1906 focusing on union with Denmark.",
-            history = "Sambandsflokkurin is a Faroese party founded in 1906 focusing on union with Denmark.",
+            history = "Sambandsflokkurin, also known as the Union Party, is a major political party in the Faroe Islands founded in 1930. The party advocates for maintaining and strengthening the union between the Faroe Islands and the Kingdom of Denmark. Sambandsflokkurin promotes policies that support economic stability, fisheries management, and the preservation of Faroese culture and language. Historically, the party has been influential in Faroese politics, often holding a significant number of seats in the Løgting, the Faroese Parliament. Sambandsflokkurin has participated in various coalition governments, emphasizing cooperation with other parties to achieve its objectives. The party appeals to voters who favor close ties with Denmark while seeking greater autonomy for the Faroe Islands. Leadership has been marked by experienced politicians who prioritize pragmatic solutions to economic and social issues facing the islands. Sambandsflokkurin continues to play a pivotal role in shaping the political landscape of the Faroe Islands, balancing the interests of maintaining the union with Denmark and addressing local concerns.",
             website = "https://samband.fo",
             backgroundColor = SambandspartietBackground,
             cardColor = altSambandsflokkurin,
@@ -262,7 +310,13 @@ object PartyRepository {
             logoRes = R.drawable.javna,
             altLogo = R.drawable.javna,
             description = "Javnaðarflokkurin is a Faroese social democratic party founded in 1925 focusing on equality and welfare.",
-            history = "Javnaðarflokkurin is a Faroese social democratic party founded in 1925 focusing on equality and welfare.",
+            history = "Javnaðarflokkurin (The Social Democratic Party) is a major political party in the Faroe Islands, founded in 1935. The party advocates for social democracy, emphasizing welfare state principles, workers' rights, and equitable economic policies. Javnaðarflokkurin supports maintaining strong ties with the Kingdom of Denmark while also promoting Faroese autonomy and the preservation of Faroese culture and language.\n" +
+                    "\n" +
+                    "Throughout its history, Javnaðarflokkurin has been influential in Faroese politics, frequently securing a significant number of seats in the Løgting, the Faroese Parliament. The party has participated in various coalition governments, often collaborating with other center-left and social democratic parties to implement progressive policies aimed at improving social services, education, and healthcare in the Faroe Islands.\n" +
+                    "\n" +
+                    "Javnaðarflokkurin appeals to voters who prioritize social equality, economic stability, and the protection of Faroese interests within the broader framework of the Danish Realm. The party is known for its pragmatic approach to governance, balancing the need for social reforms with economic sustainability. Under the leadership of experienced politicians, Javnaðarflokkurin continues to play a pivotal role in shaping the political landscape of the Faroe Islands, striving to enhance the quality of life for its citizens through comprehensive social policies and responsible economic management.\n" +
+                    "\n" +
+                    "As of early 2025, Javnaðarflokkurin remains one of the leading parties in the Løgting, actively contributing to legislative processes and government formation. The party continues to advocate for policies that support social welfare, sustainable economic development, and the safeguarding of Faroese cultural heritage. Javnaðarflokkurin maintains a strong grassroots presence, engaging with communities across the islands to address local concerns and ensure inclusive representation in the political arena.",
             website = "https://j.fo",
             backgroundColor = JavnBackground,
             cardColor = altJavnaðarflokkurin,
@@ -280,7 +334,9 @@ object PartyRepository {
             logoRes = R.drawable.siumut_logo,
             altLogo = R.drawable.siumut_logo,
             description = "Siumut is a Greenlandic social democratic party founded in 1977, focusing on self-governance and indigenous rights.",
-            history = "Siumut is a Greenlandic social democratic party founded in 1977, focusing on self-governance and indigenous rights.",
+            history = "Siumut (meaning \"Forward\") is a major social-democratic political party in Greenland, founded in 1977. The party advocates for Greenlandic self-government, social welfare policies, and economic development, while maintaining strong ties with Denmark. Siumut has been a dominant force in Greenlandic politics since the establishment of home rule, frequently leading the government and providing several Prime Ministers, including Jonathan Motzfeldt, Lars Emil Johansen, Hans Enoksen, Kuupik Kleist, and Aleqa Hammond.\n" +
+                    "\n" +
+                    "The party focuses on issues such as education, healthcare, sustainable fisheries, and infrastructure development, aiming to improve the quality of life for Greenland's residents. Siumut traditionally garners support from urban areas and has maintained a significant presence in the Inatsisartut, Greenland's parliament. As of early 2025, Siumut continues to play a key role in shaping Greenland's political landscape, advocating for policies that balance economic growth with social equity and environmental sustainability.",
             website = "https://siumut.gl",
             backgroundColor = SiumutBackground,
             cardColor = altSiumut,
@@ -298,7 +354,13 @@ object PartyRepository {
             logoRes = R.drawable.inuit,
             altLogo = R.drawable.inuit_ataqatigiit_logo,
             description = "Inuit Ataqatigiit is a Greenlandic left-wing party founded in 1976 focusing on independence and environmental protection.",
-            history = "Inuit Ataqatigiit is a Greenlandic left-wing party founded in 1976 focusing on independence and environmental protection.",
+            history = "Inuit Ataqatigiit is a left-wing political party in Greenland, founded in 1978. The party advocates for Greenlandic independence, social democracy, environmental sustainability, and the protection of Inuit culture and traditions. Inuit Ataqatigiit emphasizes the importance of sustainable development, focusing on issues such as renewable energy, fisheries management, and combating climate change to ensure the long-term well-being of Greenland's population and environment.\n" +
+                    "\n" +
+                    "Since its establishment, Inuit Ataqatigiit has been a significant force in Greenlandic politics, frequently securing a substantial number of seats in the Inatsisartut, Greenland's parliament. The party has led the government multiple times, with notable Prime Ministers including Josef Motzfeldt, Kuupik Kleist, and Múte Bourup Egede. Inuit Ataqatigiit has been instrumental in pushing for policies that promote social welfare, education, healthcare, and economic diversification to reduce Greenland's reliance on fishing and mineral resources.\n" +
+                    "\n" +
+                    "The party attracts voters who are passionate about social equality, environmental protection, and greater autonomy for Greenland within the Kingdom of Denmark. Inuit Ataqatigiit is known for its progressive stance on social issues, including gender equality and the rights of indigenous peoples. As of early 2025, Inuit Ataqatigiit continues to play a pivotal role in shaping Greenland's political landscape, advocating for policies that balance economic growth with social justice and environmental responsibility.\n" +
+                    "\n" +
+                    "Inuit Ataqatigiit remains one of the leading parties in the Inatsisartut, actively participating in government formation and legislative processes. The party continues to champion initiatives aimed at achieving greater self-governance for Greenland, enhancing social services, and promoting sustainable environmental practices. With a strong grassroots presence, Inuit Ataqatigiit engages with communities across Greenland to address local concerns and ensure that its policies reflect the needs and aspirations of the Inuit population.",
             website = "https://ia.gl",
             backgroundColor = InuitBackground,
             cardColor = altInuitAtaqatigiit,
@@ -315,8 +377,12 @@ object PartyRepository {
             path = "Løsgængere",
             logoRes = R.drawable.loes,
             altLogo = R.drawable.loesgaengere,
-            description = "An løsgænger (independent) is a member of the Danish Parliament who does not belong to any of the party groups in the Danish Parliament. An independent is called outside the parliamentary groups (UFG).",
-            history = "An independent is a member of the Danish Parliament who does not belong to any of the party groups in the Danish Parliament. An independent is called outside the parliamentary groups (UFG).",
+            description = "An independent (løsgænger) is a member of the Danish Parliament who does not belong to any of the party groups in the Danish Parliament. An independent is called outside the parliamentary groups (UFG).",
+            history = "An independent, known in Danish as a \"løsgænger,\" is an elected representative who does not belong to any political party or group. Typically, individuals become independents by resigning from or being expelled from their party during their term. Since the 1953 Constitution, only Jacob Haugaard was elected to the Folketing as an independent following the 1994 election, aside from Hans Schmidt in 1953, who was technically elected as an independent while representing the Schleswig Party.\n" +
+                    "\n" +
+                    "Independents are more common in local politics than in the Folketing because party structures play a significant role in providing support and expertise to members, making it challenging for individuals to cover all political areas on their own. Officially, elected representatives are not referred to as independents but as being outside of parties, abbreviated in the Folketing as UFG (udenfor folketingsgrupperne). The term \"løsgænger\" is somewhat humorous, originally referring to someone without a fixed residence or occupation. Historically, being an independent was punishable by law.\n" +
+                    "\n" +
+                    "In the European Parliament, there are several independents who may be members of national parties but do not join other parliamentarians in a group.",
             website = "https://www.ft.dk/da/ofte-stillede-spoergsmaal/medl_hvad-er-en-loesgaenger",
             backgroundColor = SocialdemokratietBackground,
             cardColor = altSocialdemokratiet,
