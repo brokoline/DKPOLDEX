@@ -7,6 +7,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -18,10 +19,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+import com.example.folkedex.data.FavoritesHelper
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PoliticianScreen(navController: NavController, name: String, onBackClick: () -> Unit = {}) {
+    val context = LocalContext.current
+    val favoritesHelper = remember { FavoritesHelper(context) }
+    val isFavorite = favoritesHelper.getFavorites().contains(name)
+
     Scaffold(
         topBar = {
             Column(
@@ -48,7 +54,7 @@ fun PoliticianScreen(navController: NavController, name: String, onBackClick: ()
                         contentAlignment = Alignment.CenterStart
                     ) {
                         IconButton(
-                            onClick = {navController.popBackStack()},
+                            onClick = { navController.popBackStack() },
                             modifier = Modifier
                                 .padding(start = 16.dp)
                                 .align(Alignment.CenterStart)
@@ -59,8 +65,15 @@ fun PoliticianScreen(navController: NavController, name: String, onBackClick: ()
                                 tint = Color.White
                             )
                         }
+
                         IconButton(
-                            onClick = {},
+                            onClick = {
+                                if (isFavorite) {
+                                    favoritesHelper.removeFavorite(name)
+                                } else {
+                                    favoritesHelper.addFavorite(name)
+                                }
+                            },
                             modifier = Modifier
                                 .padding(end = 16.dp)
                                 .align(Alignment.CenterEnd)
@@ -68,16 +81,16 @@ fun PoliticianScreen(navController: NavController, name: String, onBackClick: ()
                             Icon(
                                 imageVector = Icons.Default.Favorite,
                                 contentDescription = "Favorite",
-                                tint = Color.White
+                                tint = if (isFavorite) Color.Red else Color.White
                             )
                         }
+
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
                             modifier = Modifier.align(Alignment.Center)
                         ) {
-
                             Text(
-                                "Lars Løkke Rasmussen",
+                                text = name,
                                 fontSize = 20.sp,
                                 color = Color.White,
                                 style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
