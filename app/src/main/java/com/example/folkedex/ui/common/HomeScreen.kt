@@ -28,6 +28,7 @@ fun HomeScreen(navController: NavHostController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .background(Color.White)
             .consumeWindowInsets(WindowInsets.systemBars)
 
     ) {
@@ -35,7 +36,7 @@ fun HomeScreen(navController: NavHostController) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = 275.dp)
+                .padding(top = 225.dp)
         ) {
             Spacer(modifier = Modifier.height(16.dp))
             PoliticianCategoryGrid(navController)

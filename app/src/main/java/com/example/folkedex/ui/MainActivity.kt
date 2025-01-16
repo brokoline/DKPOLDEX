@@ -1,12 +1,14 @@
 package com.example.folkedex.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
@@ -45,6 +47,9 @@ import com.example.folkedex.ui.theme.ReportsScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        //window.decorView.apply {
+          //  systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+        //}
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContent {
@@ -117,23 +122,23 @@ fun MainScreen(navController: NavHostController) {
 @Composable
 fun BottomTabBar(navController: NavHostController) {
     NavigationBar(
-        containerColor = Color.Gray
+        containerColor = Color.White
     ) {
         NavigationBarItem(
-            icon = { Icon(Icons.Default.Home, contentDescription = "Home", modifier = Modifier.size(35.dp), tint = Color.White) },
-            label = { Text("Home", fontSize = 20.sp, color = Color.White) },
+            icon = { Icon(Icons.Default.Home, contentDescription = "Home", /*modifier = Modifier.padding(top = 10.dp),*/ tint = Color.Gray) },
+            label = { Text("Home", /*fontSize = 20.sp,*/ color = Color.Gray) },
             selected = navController.currentDestination?.route == "home",
             onClick = { navController.navigate("home") { popUpTo("home") { inclusive = true } } }
         )
         NavigationBarItem(
-            icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites", modifier = Modifier.size(35.dp), tint = Color.White) },
-            label = { Text("Favorites", fontSize = 20.sp, color = Color.White) },
+            icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites", /*modifier = Modifier.padding(top = 10.dp),*/ tint = Color.Gray) },
+            label = { Text("Favorites", /*fontSize = 20.sp,*/ color = Color.Gray) },
             selected = navController.currentDestination?.route == "favorites",
             onClick = { navController.navigate("favorites") { popUpTo("home") } }
         )
         NavigationBarItem(
-            icon = { Icon(Icons.Default.Settings, contentDescription = "Settings", modifier = Modifier.size(35.dp), tint = Color.White) },
-            label = { Text("Settings", fontSize = 20.sp, color = Color.White) },
+            icon = { Icon(Icons.Default.Settings, contentDescription = "Settings", /*modifier = Modifier.padding(top = 10.dp),*/ tint = Color.Gray) },
+            label = { Text("Settings", /*fontSize = 20.sp,*/ color = Color.Gray) },
             selected = navController.currentDestination?.route == "settings",
             onClick = { navController.navigate("settings") { popUpTo("home") } }
         )
