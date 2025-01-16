@@ -72,9 +72,11 @@ fun ReportsScreen( onReportClick: (String) -> Unit = {}, navController: NavContr
                         color = Color.White,
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     )
+                    var searchQuery = ""
                     com.example.folkedex.ui.common.SearchBar(
                         modifier = Modifier
-                            .padding(horizontal = 15.dp)
+                            .padding(horizontal = 15.dp),value = searchQuery,
+                        onValueChange = { searchQuery  = it }
                     )
                 }
 

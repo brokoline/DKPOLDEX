@@ -81,7 +81,9 @@ fun TopSectionWithSearchBar() {
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
-            SearchBar()
+            var searchQuery = ""
+            SearchBar(value = searchQuery,
+                onValueChange = { searchQuery  = it })
         }
     }
 }
@@ -89,20 +91,31 @@ fun TopSectionWithSearchBar() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchBar(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    value: String,
+    onValueChange: (String) -> Unit
 ) {
     TextField(
-        value = "",
-        onValueChange = { /* for search bar input, backend thing */ },
+        value = value,
+        onValueChange = onValueChange,
         leadingIcon = {
-            Icon(imageVector = Icons.Default.Search, contentDescription = "Search Icon")
+            Icon(
+                imageVector = Icons.Default.Search,
+                contentDescription = "Search Icon"
+            )
         },
-        placeholder = { Text("Search for Politician, Party, etc...") },
+        placeholder = {
+            Text(text = "Search for Politician, Party, etc...")
+        },
         shape = RoundedCornerShape(16.dp),
-        colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color(0xFFF5F5F5),
+        colors = TextFieldDefaults.colors(
+            focusedContainerColor = Color(0xFFF5F5F5),
+            unfocusedContainerColor = Color(0xFFF5F5F5),
             focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent
+            unfocusedIndicatorColor = Color.Transparent,
+            focusedTextColor = Color.Black,
+            unfocusedTextColor = Color.Black,
+            cursorColor = Color.Black
         ),
         modifier = modifier
             .fillMaxWidth()
@@ -147,7 +160,7 @@ fun PoliticianCategoryGrid(navController: NavHostController) {
                                     "FolkeDex" -> navController.navigate("folkedex")
                                     "Issues" -> navController.navigate("com/example/folkedex/ui/issues")
                                     "Reports" -> navController.navigate("reports")
-                                    "Bills" -> navController.navigate("bills")
+                                    "Bills" -> navController.navigate("testapi")
                                     "News" -> navController.navigate("com/example/folkedex/ui/news")
                                     "Data" -> navController.navigate("com/example/folkedex/data")
 

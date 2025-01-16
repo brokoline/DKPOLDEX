@@ -144,8 +144,9 @@ fun TopBarWithSearch(
                 modifier = Modifier.padding(start = 50.dp)
             )
         }
-
-        com.example.folkedex.ui.common.SearchBar()
+        var searchQuery = ""
+        com.example.folkedex.ui.common.SearchBar(value = searchQuery,
+            onValueChange = { searchQuery  = it })
     }
 }
 

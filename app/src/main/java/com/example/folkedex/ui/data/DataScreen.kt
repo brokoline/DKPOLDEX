@@ -84,10 +84,12 @@ fun DataScreen(navController: NavController) {
                         color = Color.White,
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     )
+                    var searchQuery = ""
                     com.example.folkedex.ui.common.SearchBar(
                         modifier = Modifier
                             .padding(horizontal = 15.dp)
-                            .offset(y = 10.dp)
+                            .offset(y = 10.dp),value="", onValueChange =
+                        { searchQuery  = it }
                     )
                 }
             }

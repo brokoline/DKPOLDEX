@@ -28,6 +28,7 @@ import com.example.folkedex.ui.common.HomeScreen
 import com.example.folkedex.ui.politician.PoliciesScreen
 import com.example.folkedex.ui.politician.PoliticianScreen
 import com.example.folkedex.ui.bill.BillScreen
+import com.example.folkedex.ui.feature.ActorListScreen
 import com.example.folkedex.ui.theme.DataScreen
 import com.example.folkedex.ui.theme.FavoritesScreen
 import com.example.folkedex.ui.theme.History
@@ -85,6 +86,7 @@ fun MainScreen(navController: NavHostController) {
             composable("com/example/folkedex/ui/history") { History(navController = navController) }
             composable("com/example/folkedex/data") { DataScreen(navController = navController) }
             composable("politicians") { PoliticianSelectionScreen(navController = navController) }
+            composable("testapi") { ActorListScreen(navController = navController) }
 
 
 
