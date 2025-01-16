@@ -1,5 +1,5 @@
 package com.example.folkedex.ui.theme
-
+//weee
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -24,7 +24,7 @@ data class Report(val title: String, val link: String)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ReportsScreen(onBackClick: () -> Unit = {}, onReportClick: (String) -> Unit = {}, navController: NavController) {
+fun ReportsScreen( onReportClick: (String) -> Unit = {}, navController: NavController) {
     val reports = listOf(
         Report(title = "Budget Proposal 2023", link = "https://www.ft.dk/budget2023"),
         Report(title = "Health Care Reform", link = "https://www.ft.dk/healthcarereform"),

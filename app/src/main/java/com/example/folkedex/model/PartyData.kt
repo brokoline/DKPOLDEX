@@ -14,6 +14,7 @@ data class PartyData(
     @DrawableRes val altLogo: Int,
     val description: String,
     val history: String,
+    val website: String,
     val backgroundColor: Color,
     val cardColor: Color,
     val buttonColor: Color,

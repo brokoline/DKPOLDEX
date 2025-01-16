@@ -13,12 +13,9 @@ object PartyRepository {
             path = "Moderaterne",
             logoRes = R.drawable.moderaterne,
             altLogo = R.drawable.moderaterne_logo,
-            description = "Text about the Moderaterne party, \n" +
-                    "eventually what they stand for,\n" +
-                    "political orientation/spectrum\n" +
-                    "placement, when they were founded,\n" +
-                    "etc etc.",
-            history = "This party was founded...",
+            description = "Moderaterne was founded in 2022 by Lars Løkke Rasmussen with a focus on centrist policies and pragmatic solutions.",
+            history = "Moderaterne was founded in 2022 by Lars Løkke Rasmussen with a focus on centrist policies and pragmatic solutions.",
+            website = "https://moderaterne.dk",
             backgroundColor = ModeraterneBackground,
             cardColor = altModeraterne,
             buttonColor = ModeraterneButton,
@@ -34,12 +31,9 @@ object PartyRepository {
             path = "Venstre",
             logoRes = R.drawable.venstre,
             altLogo = R.drawable.venstre_logo,
-            description = "Text about the Venstre party, \n" +
-                    "eventually what they stand for,\n" +
-                    "political orientation/spectrum\n" +
-                    "placement, when they were founded,\n" +
-                    "etc etc.",
-            history = "This party was founded...",
+            description = "Venstre, Denmark's Liberal Party, was founded in 1870 and has historically represented agriculture and business interests.",
+            history = "Venstre, Denmark's Liberal Party, was founded in 1870 and has historically represented agriculture and business interests.",
+            website = "https://venstre.dk",
             backgroundColor = VenstreBackground,
             cardColor = altVenstre,
             buttonColor = VenstreButton,
@@ -50,16 +44,13 @@ object PartyRepository {
             backColor =Color.White
         ),
         PartyData(
-            name = "Socialdemo-\nkratiet",
+            name = "Socialdemokratiet",
             path = "Socialdemokratiet",
             logoRes = R.drawable.socialdemokratiet,
             altLogo = R.drawable.socialdemokratiet_logo,
-            description = "Text about the Socialdemokratiet party, \n" +
-                    "eventually what they stand for,\n" +
-                    "political orientation/spectrum\n" +
-                    "placement, when they were founded,\n" +
-                    "etc etc.",
-            history = "This party was founded...",
+            description = "Socialdemokratiet was founded in 1871 as Denmark's first workers' party, focusing on social justice and welfare policies.",
+            history = "Socialdemokratiet was founded in 1871 as Denmark's first workers' party, focusing on social justice and welfare policies.",
+            website = "https://socialdemokratiet.dk",
             backgroundColor = SocialdemokratietBackground,
             cardColor = altSocialdemokratiet,
             buttonColor = SocialdemokratietButton,
@@ -74,12 +65,9 @@ object PartyRepository {
             path = "Radikale Venstre",
             logoRes = R.drawable.radikalevenstre,
             altLogo = R.drawable.radikale_venstre_logo,
-            description = "Text about the Radikale Venstre party, \n" +
-                    "eventually what they stand for,\n" +
-                    "political orientation/spectrum\n" +
-                    "placement, when they were founded,\n" +
-                    "etc etc.",
-            history = "This party was founded...",
+            description = "Radikale Venstre was founded in 1905 as a party focusing on social liberalism and education policies.",
+            history = "Radikale Venstre was founded in 1905 as a party focusing on social liberalism and education policies.",
+            website = "https://radikale.dk",
             backgroundColor = RadikalevenstreBackground,
             cardColor = altRadikaleVenstre,
             buttonColor = RadikalevenstreButton,
@@ -94,12 +82,9 @@ object PartyRepository {
             path = "Det Konservative Folkeparti",
             logoRes = R.drawable.konserative,
             altLogo = R.drawable.konserative,
-            description = "Text about the Konservative Folkeparti party, \n" +
-                    "eventually what they stand for,\n" +
-                    "political orientation/spectrum\n" +
-                    "placement, when they were founded,\n" +
-                    "etc etc.",
-            history = "This party was founded...",
+            description = "Det Konservative Folkeparti was founded in 1915 and has roots in the former Højre party, focusing on private property rights and tradition.",
+            history = "Det Konservative Folkeparti was founded in 1915 and has roots in the former Højre party, focusing on private property rights and tradition.",
+            website = "https://konservative.dk",
             backgroundColor = KonservativBackground,
             cardColor = altKonservative,
             buttonColor = KonservativButton,
@@ -115,12 +100,9 @@ object PartyRepository {
             path = "Socialistisk Folkeparti",
             logoRes = R.drawable.socialistiskfolkeparti,
             altLogo = R.drawable.socialistisk_folkeparti_logo,
-            description = "Text about the Socialistisk Folkeparti party, \n" +
-                    "eventually what they stand for,\n" +
-                    "political orientation/spectrum\n" +
-                    "placement, when they were founded,\n" +
-                    "etc etc.",
-            history = "This party was founded...",
+            description = "Socialistisk Folkeparti was founded in 1959 by Aksel Larsen after a split from DKP, focusing on socialism and environmental policies.",
+            history = "Socialistisk Folkeparti was founded in 1959 by Aksel Larsen after a split from DKP, focusing on socialism and environmental policies.",
+            website = "https://sf.dk",
             backgroundColor = SfBackground,
             cardColor = altSocialistiskFolkeparti,
             buttonColor = SfButton,
@@ -136,12 +118,9 @@ object PartyRepository {
             path = "Liberal Alliance",
             logoRes = R.drawable.liberal_alliance_logo,
             altLogo = R.drawable.liberal_alliance_logo,
-            description = "Text about the  Liberal Alliance party, \n" +
-                    "eventually what they stand for,\n" +
-                    "political orientation/spectrum\n" +
-                    "placement, when they were founded,\n" +
-                    "etc etc.",
-            history = "This party was founded...",
+            description = "Liberal Alliance was founded in 2007 and focuses on lower taxes, individual freedom, and less government regulation.",
+            history = "Liberal Alliance was founded in 2007 and focuses on lower taxes, individual freedom, and less government regulation.",
+            website = "https://liberalalliance.dk",
             backgroundColor = LaBackground,
             cardColor = altLiberalAlliance,
             buttonColor = LaButton,
@@ -157,12 +136,9 @@ object PartyRepository {
             path = "Dansk Folkeparti",
             logoRes = R.drawable.df,
             altLogo = R.drawable.dansk_folkeparti_logo,
-            description = "Text about the Dansk Folkeparti party, \n" +
-                    "eventually what they stand for,\n" +
-                    "political orientation/spectrum\n" +
-                    "placement, when they were founded,\n" +
-                    "etc etc.",
-            history = "This party was founded...",
+            description = "Dansk Folkeparti was founded in 1995 by Pia Kjærsgaard and has primarily focused on nationalism and immigration policies.",
+            history = "Dansk Folkeparti was founded in 1995 by Pia Kjærsgaard and has primarily focused on nationalism and immigration policies.",
+            website = "https://danskfolkeparti.dk",
             backgroundColor = DanskfolkepartiBackground,
             cardColor = altDanskFolkeparti,
             buttonColor = DanskfolkepartiButton,
@@ -174,16 +150,13 @@ object PartyRepository {
             backColor =Color.White
         ),
         PartyData(
-            name = "Danmarks-\ndemokraterne",
+            name = "Danmarksdemokraterne",
             path = "Danmarksdemokraterne",
             logoRes = R.drawable.ddemkraterne,
             altLogo = R.drawable.danmarksdemokraterne_logo,
-            description = "Text about the Danmarksdemokraterne party, \n" +
-                    "eventually what they stand for,\n" +
-                    "political orientation/spectrum\n" +
-                    "placement, when they were founded,\n" +
-                    "etc etc.",
-            history = "This party was founded...",
+            description = "Danmarksdemokraterne was founded in 2022 by Inger Støjberg, focusing on national conservative values.",
+            history = "Danmarksdemokraterne was founded in 2022 by Inger Støjberg, focusing on national conservative values.",
+            website = "https://danmarksdemokraterne.dk",
             backgroundColor = DanmarksdemokraterneBackground,
             cardColor = altDanmarksdemokraterne,
             buttonColor = DanmarksdemokraterneButton,
@@ -199,12 +172,9 @@ object PartyRepository {
             path = "Enhedslisten",
             logoRes = R.drawable.enhedslisten,
             altLogo = R.drawable.enhedslisten_logo,
-            description = "Text about the Enhedslisten party, \n" +
-                    "eventually what they stand for,\n" +
-                    "political orientation/spectrum\n" +
-                    "placement, when they were founded,\n" +
-                    "etc etc.",
-            history = "This party was founded...",
+            description = "Enhedslisten was founded in 1989 as a coalition of left-wing parties, focusing on equality and environmental protection.",
+            history = "Enhedslisten was founded in 1989 as a coalition of left-wing parties focusing on equality and environmental protection.",
+            website = "https://enhedslisten.dk",
             backgroundColor = EnhedslistenBackground,
             cardColor = altEnhedslisten,
             buttonColor = EnhedslistenButton,
@@ -220,12 +190,9 @@ object PartyRepository {
             path = "Alternativet",
             logoRes = R.drawable.alternativet,
             altLogo = R.drawable.alternativet_logo,
-            description = "Text about the Alternativet party, \n" +
-                    "eventually what they stand for,\n" +
-                    "political orientation/spectrum\n" +
-                    "placement, when they were founded,\n" +
-                    "etc etc.",
-            history = "This party was founded...",
+            description = "Alternativet was founded in 2013 focusing on sustainability, green policies, and rethinking democracy.",
+            history = "Alternativet was founded in 2013 focusing on sustainability, green policies, and rethinking democracy.",
+            website = "https://alternativet.dk",
             backgroundColor = AlternativetBackground,
             cardColor = altAlternativet,
             buttonColor = AlternativetButton,
@@ -240,12 +207,9 @@ object PartyRepository {
             path = "Sambandsflokkurin",
             logoRes = R.drawable.sambands,
             altLogo = R.drawable.sambandsflokkurin_logo,
-            description = "Text about the Sambandsflokkurin party, \n" +
-                    "eventually what they stand for,\n" +
-                    "political orientation/spectrum\n" +
-                    "placement, when they were founded,\n" +
-                    "etc etc.",
-            history = "This party was founded...",
+            description = "Sambandsflokkurin is a Faroese party founded in 1906 focusing on union with Denmark.",
+            history = "Sambandsflokkurin is a Faroese party founded in 1906 focusing on union with Denmark.",
+            website = "https://samband.fo",
             backgroundColor = SambandspartietBackground,
             cardColor = altSambandsflokkurin,
             buttonColor = SambandspartietButton,
@@ -257,16 +221,13 @@ object PartyRepository {
             backColor =Color.White
         ),
         PartyData(
-            name = "Javnaðar-\nflokkurin",
+            name = "Javnaðarflokkurin",
             path = "Javnaðarflokkurin",
             logoRes = R.drawable.javna,
             altLogo = R.drawable.javna,
-            description = "Text about the Javnaðarflokkurin party, \n" +
-                    "eventually what they stand for,\n" +
-                    "political orientation/spectrum\n" +
-                    "placement, when they were founded,\n" +
-                    "etc etc.",
-            history = "This party was founded...",
+            description = "Javnaðarflokkurin is a Faroese social democratic party founded in 1925 focusing on equality and welfare.",
+            history = "Javnaðarflokkurin is a Faroese social democratic party founded in 1925 focusing on equality and welfare.",
+            website = "https://j.fo",
             backgroundColor = JavnBackground,
             cardColor = altJavnaðarflokkurin,
             buttonColor = JavnButton,
@@ -282,12 +243,9 @@ object PartyRepository {
             path = "Siumut",
             logoRes = R.drawable.siumut_logo,
             altLogo = R.drawable.siumut_logo,
-            description = "Text about the Siumut party, \n" +
-                    "eventually what they stand for,\n" +
-                    "political orientation/spectrum\n" +
-                    "placement, when they were founded,\n" +
-                    "etc etc.",
-            history = "This party was founded...",
+            description = "Siumut is a Greenlandic social democratic party founded in 1977, focusing on self-governance and indigenous rights.",
+            history = "Siumut is a Greenlandic social democratic party founded in 1977, focusing on self-governance and indigenous rights.",
+            website = "https://siumut.gl",
             backgroundColor = SiumutBackground,
             cardColor = altSiumut,
             buttonColor = SiumutButton,
@@ -303,12 +261,9 @@ object PartyRepository {
             path = "Inuit Ataqatigiit",
             logoRes = R.drawable.inuit,
             altLogo = R.drawable.inuit_ataqatigiit_logo,
-            description = "Text about the Inuit Ataqatigiit party, \n" +
-                    "eventually what they stand for,\n" +
-                    "political orientation/spectrum\n" +
-                    "placement, when they were founded,\n" +
-                    "etc etc.",
-            history = "This party was founded...",
+            description = "Inuit Ataqatigiit is a Greenlandic left-wing party founded in 1976 focusing on independence and environmental protection.",
+            history = "Inuit Ataqatigiit is a Greenlandic left-wing party founded in 1976 focusing on independence and environmental protection.",
+            website = "https://ia.gl",
             backgroundColor = InuitBackground,
             cardColor = altInuitAtaqatigiit,
             buttonColor = InuitButton,
@@ -324,12 +279,9 @@ object PartyRepository {
             path = "Løsgængere",
             logoRes = R.drawable.loes,
             altLogo = R.drawable.loesgaengere,
-            description = "Text about the politicians who currently aren't in any party, \n" +
-                    "eventually what they stand for,\n" +
-                    "political orientation/spectrum\n" +
-                    "placement, when they were founded,\n" +
-                    "etc etc.",
-            history = "This party was founded...",
+            description = "An løsgænger (independent) is a member of the Danish Parliament who does not belong to any of the party groups in the Danish Parliament. An independent is called outside the parliamentary groups (UFG).",
+            history = "An independent is a member of the Danish Parliament who does not belong to any of the party groups in the Danish Parliament. An independent is called outside the parliamentary groups (UFG).",
+            website = "https://www.ft.dk/da/ofte-stillede-spoergsmaal/medl_hvad-er-en-loesgaenger",
             backgroundColor = SocialdemokratietBackground,
             cardColor = altSocialdemokratiet,
             buttonColor = SocialdemokratietButton,
