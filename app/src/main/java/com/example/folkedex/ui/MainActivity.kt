@@ -33,10 +33,10 @@ import com.example.folkedex.ui.theme.FavoritesScreen
 import com.example.folkedex.ui.theme.History
 import com.example.folkedex.ui.theme.NewsScreen
 import com.example.folkedex.ui.theme.Party
-import com.example.folkedex.ui.theme.PartyRepository
+import com.example.folkedex.data.PartyRepository
 import com.example.folkedex.ui.theme.PartySelectionScreen
 import com.example.folkedex.ui.theme.IssuesScreen
-import com.example.folkedex.ui.theme.PoliticianSelectionScreen
+import com.example.folkedex.ui.politician.PoliticianSelectionScreen
 import com.example.folkedex.ui.theme.ReportsScreen
 
 class MainActivity : ComponentActivity() {
@@ -84,7 +84,11 @@ fun MainScreen(navController: NavHostController) {
             composable("bills") { BillScreen(navController = navController) }
             composable("com/example/folkedex/ui/history") { History(navController = navController) }
             composable("com/example/folkedex/data") { DataScreen(navController = navController) }
-            composable("politicians") { PoliticianSelectionScreen(navController = navController) }
+            composable("politicians/{partyName}") { backStackEntry ->
+                val partyName = backStackEntry.arguments?.getString("partyName") ?: "Unknown"
+                PoliticianSelectionScreen(navController = navController, partyName = partyName)
+            }
+
 
 
 

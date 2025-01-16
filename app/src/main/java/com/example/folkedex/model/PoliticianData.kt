@@ -5,5 +5,9 @@ data class PoliticianData(
     val name: String,
     val photo: Int,
     val cardColor: Long,
-    val partyName: String
+    val partyName: String,
+    val age: Int,
+    val occupation: String,
+    val email: String,
+    val phone: Int
 )

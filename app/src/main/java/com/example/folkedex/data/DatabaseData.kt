@@ -1,12 +1,56 @@
-package com.example.folkedex.ui.theme
+package com.example.folkedex.data
 
-import androidx.compose.material3.CardColors
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.folkedex.R
 import com.example.folkedex.model.PartyData
 import com.example.folkedex.model.PoliticianData
+import com.example.folkedex.ui.theme.AlternativetBackground
+import com.example.folkedex.ui.theme.AlternativetButton
+import com.example.folkedex.ui.theme.DanmarksdemokraterneBackground
+import com.example.folkedex.ui.theme.DanmarksdemokraterneButton
+import com.example.folkedex.ui.theme.DanskfolkepartiBackground
+import com.example.folkedex.ui.theme.DanskfolkepartiButton
+import com.example.folkedex.ui.theme.EnhedslistenBackground
+import com.example.folkedex.ui.theme.EnhedslistenButton
+import com.example.folkedex.ui.theme.InuitBackground
+import com.example.folkedex.ui.theme.InuitButton
+import com.example.folkedex.ui.theme.JavnBackground
+import com.example.folkedex.ui.theme.JavnButton
+import com.example.folkedex.ui.theme.KonservativBackground
+import com.example.folkedex.ui.theme.KonservativButton
+import com.example.folkedex.ui.theme.LaBackground
+import com.example.folkedex.ui.theme.LaButton
+import com.example.folkedex.ui.theme.ModeraterneBackground
+import com.example.folkedex.ui.theme.ModeraterneButton
+import com.example.folkedex.ui.theme.RadikalevenstreBackground
+import com.example.folkedex.ui.theme.RadikalevenstreButton
+import com.example.folkedex.ui.theme.SambandspartietBackground
+import com.example.folkedex.ui.theme.SambandspartietButton
+import com.example.folkedex.ui.theme.SfBackground
+import com.example.folkedex.ui.theme.SfButton
+import com.example.folkedex.ui.theme.SiumutBackground
+import com.example.folkedex.ui.theme.SiumutButton
+import com.example.folkedex.ui.theme.SocialdemokratietBackground
+import com.example.folkedex.ui.theme.SocialdemokratietButton
+import com.example.folkedex.ui.theme.VenstreBackground
+import com.example.folkedex.ui.theme.VenstreButton
+import com.example.folkedex.ui.theme.altAlternativet
+import com.example.folkedex.ui.theme.altDanmarksdemokraterne
+import com.example.folkedex.ui.theme.altDanskFolkeparti
+import com.example.folkedex.ui.theme.altEnhedslisten
+import com.example.folkedex.ui.theme.altInuitAtaqatigiit
+import com.example.folkedex.ui.theme.altJavnaðarflokkurin
+import com.example.folkedex.ui.theme.altKonservative
+import com.example.folkedex.ui.theme.altLiberalAlliance
+import com.example.folkedex.ui.theme.altModeraterne
+import com.example.folkedex.ui.theme.altRadikaleVenstre
+import com.example.folkedex.ui.theme.altSambandsflokkurin
+import com.example.folkedex.ui.theme.altSiumut
+import com.example.folkedex.ui.theme.altSocialdemokratiet
+import com.example.folkedex.ui.theme.altSocialistiskFolkeparti
+import com.example.folkedex.ui.theme.altVenstre
 
 object PartyRepository {
     val parties = listOf(
@@ -35,7 +79,11 @@ object PartyRepository {
                     name = "Lars Løkke Rasmussen",
                     photo = R.drawable.politician_image,
                     cardColor = 0xFF6A1B9A,
-                    partyName = "Moderaterne"
+                    partyName = "Moderaterne",
+                    age = 60,
+                    occupation = "Formand for Moderaterne",
+                    email = "KaptajnUnderbuks@StatenBetaler.dk",
+                    phone = 42334123
                 )
             )
 
@@ -65,7 +113,11 @@ object PartyRepository {
                     name = "Jakob Ellemann-Jensen",
                     photo = R.drawable.flogo,
                     cardColor = 0xFF01288F,
-                    partyName = "Venstre"
+                    partyName = "Venstre",
+                    age = 51,
+                    occupation = "Formand for Venstre",
+                    email = "Dellemann@KingOfBurger.dk",
+                    phone = 42334123
                 )
             )
         ),

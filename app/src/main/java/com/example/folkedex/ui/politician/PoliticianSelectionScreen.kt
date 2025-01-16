@@ -1,4 +1,4 @@
-package com.example.folkedex.ui.theme
+package com.example.folkedex.ui.politician
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -26,8 +26,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.folkedex.R
+import com.example.folkedex.data.PartyRepository
 import com.example.folkedex.model.PoliticianData
-import com.example.folkedex.ui.theme.PartyRepository
 
 @Composable
 fun PoliticianSelectionScreen(
@@ -37,7 +37,6 @@ fun PoliticianSelectionScreen(
     cardHeight: Dp = 160.dp
 ) {
     val scrollState = rememberLazyListState()
-    var searchQuery by remember { mutableStateOf("") }
 
     val politicians = PartyRepository.getPoliticiansByParty(partyName)
 
@@ -46,6 +45,7 @@ fun PoliticianSelectionScreen(
             .fillMaxSize()
             .background(Color.White)
     ) {
+        // Background logo
         Image(
             painter = painterResource(id = R.drawable.flogo),
             contentDescription = "Folketing Logo",
@@ -58,9 +58,7 @@ fun PoliticianSelectionScreen(
         )
 
         Column {
-            TopBarWithSearch(navController, partyName, searchQuery) { query ->
-                searchQuery = query
-            }
+            TopBarWithSearch(navController, partyName)
 
             LazyColumn(
                 state = scrollState,
@@ -69,10 +67,7 @@ fun PoliticianSelectionScreen(
                     .padding(top = 8.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                val filteredPoliticians = politicians.filter {
-                    it.name.contains(searchQuery, ignoreCase = true)
-                }
-                items(filteredPoliticians.chunked(2)) { rowPoliticians ->
+                items(politicians.chunked(2)) { rowPoliticians ->
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -105,9 +100,7 @@ fun PoliticianSelectionScreen(
 @Composable
 fun TopBarWithSearch(
     navController: NavController,
-    partyName: String,
-    searchQuery: String,
-    onSearchQueryChange: (String) -> Unit
+    partyName: String
 ) {
     Column(
         modifier = Modifier
@@ -139,10 +132,7 @@ fun TopBarWithSearch(
             )
         }
 
-        com.example.folkedex.ui.common.SearchBar(
-            query = searchQuery,
-            onQueryChange = onSearchQueryChange
-        )
+        com.example.folkedex.ui.common.SearchBar()
     }
 }
 
@@ -169,7 +159,6 @@ fun PoliticianCard(
                 )
                 .clickable {
                     navController.navigate("politician/${politicianData.name}")
-
                 },
             contentAlignment = Alignment.Center
         ) {
@@ -201,5 +190,5 @@ fun PoliticianCard(
 @Composable
 fun PreviewPoliticianSelectionScreen() {
     val navController = rememberNavController()
-    PoliticianSelectionScreen(navController, partyName = "Moderaterne")
+    PoliticianSelectionScreen(navController)
 }
