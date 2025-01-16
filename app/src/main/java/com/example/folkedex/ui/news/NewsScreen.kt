@@ -20,6 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.folkedex.R
@@ -65,6 +66,14 @@ fun NewsScreen(onBackClick: () -> Unit = {}, navController: NavController) {
                     .background(Color(0xFFF7C72E)),
                 contentAlignment = Alignment.CenterStart
             ) {
+                FolketingLogo(
+                    modifier = Modifier
+                        .align(Alignment.CenterEnd)
+                        .offset(x = -50.dp)
+                        .offset(y = -5.dp)
+                        .size(205.dp)
+                        .zIndex(0f)
+                )
                 IconButton(
                     onClick = { navController.popBackStack() },
                     modifier = Modifier.padding(start = 16.dp)

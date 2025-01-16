@@ -18,8 +18,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
 import com.example.folkedex.model.PartyData
+import com.example.folkedex.ui.theme.FolketingLogo
 
 @Composable
 fun HistoryScreen(navController: NavHostController, partyData: PartyData) {
@@ -32,6 +34,14 @@ fun HistoryScreen(navController: NavHostController, partyData: PartyData) {
                     .background(partyData.backgroundColor),
                 contentAlignment = Alignment.CenterStart
             ) {
+                FolketingLogo(
+                    modifier = Modifier
+                        .align(Alignment.CenterEnd)
+                        .offset(x = -50.dp)
+                        .offset(y = -5.dp)
+                        .size(205.dp)
+                        .zIndex(0f)
+                )
                 IconButton(
                     onClick = { navController.popBackStack() },
                     modifier = Modifier.padding(start = 16.dp)

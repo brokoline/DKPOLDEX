@@ -58,6 +58,14 @@ fun FavoritesScreen(onBackClick: () -> Unit = {}, navController: NavController,
                     .background(Color(0xFFFF6F61)),
                 contentAlignment = Alignment.CenterStart
             ) {
+                FolketingLogo(
+                    modifier = Modifier
+                        .align(Alignment.CenterEnd)
+                        .offset(x = -50.dp)
+                        .offset(y = -5.dp)
+                        .size(205.dp)
+                        .zIndex(0f)
+                )
                 IconButton(
                     onClick = {navController.popBackStack()},
                     modifier = Modifier
@@ -85,16 +93,6 @@ fun FavoritesScreen(onBackClick: () -> Unit = {}, navController: NavController,
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     )
                 }
-
-                // FolketingLogo composable
-                FolketingLogo(
-                    modifier = Modifier
-                        .align(Alignment.CenterEnd)
-                        .offset(x = -50.dp)
-                        .offset(y = -5.dp)
-                        .size(200.dp)
-                        .zIndex(0f)
-                )
             }
         },
 
