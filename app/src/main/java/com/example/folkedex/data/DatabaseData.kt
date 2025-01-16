@@ -1,10 +1,12 @@
 package com.example.folkedex.ui.theme
 
+import androidx.compose.material3.CardColors
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.folkedex.R
 import com.example.folkedex.model.PartyData
+import com.example.folkedex.model.PoliticianData
 
 object PartyRepository {
     val parties = listOf(
@@ -26,7 +28,16 @@ object PartyRepository {
             imageSize = 120.dp,
             logoSize = 160.dp,
             textSize = 40.sp,
-            backColor =Color.White
+            backColor =Color.White,
+            politicians = listOf(
+                PoliticianData(
+                    id = 1,
+                    name = "Lars Løkke Rasmussen",
+                    photo = R.drawable.politician_image,
+                    cardColor = 0xFF6A1B9A,
+                    partyName = "Moderaterne"
+                )
+            )
 
         ),
         PartyData(
@@ -47,7 +58,16 @@ object PartyRepository {
             imageSize = 130.dp,
             logoSize = 80.dp,
             textSize = 40.sp,
-            backColor =Color.White
+            backColor =Color.White,
+            politicians = listOf(
+                PoliticianData(
+                    id = 8,
+                    name = "Jakob Ellemann-Jensen",
+                    photo = R.drawable.flogo,
+                    cardColor = 0xFF01288F,
+                    partyName = "Venstre"
+                )
+            )
         ),
         PartyData(
             name = "Socialdemo-\nkratiet",
@@ -343,5 +363,8 @@ object PartyRepository {
     )
     fun getPartyByName(name: String): PartyData? {
         return parties.find { it.name == name }
+    }
+    fun getPoliticiansByParty(partyName: String): List<PoliticianData> {
+        return parties.find { it.name == partyName }?.politicians ?: emptyList()
     }
 }

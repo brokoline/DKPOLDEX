@@ -26,9 +26,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.folkedex.R
+import com.example.folkedex.model.PoliticianData
+import com.example.folkedex.ui.theme.PartyRepository
 
 @Composable
-fun PoliticianSelectionScreen(navController: NavController,
+fun PoliticianSelectionScreen(
+    navController: NavController,
     partyName: String = "Moderaterne",
     cardWidth: Dp = 160.dp,
     cardHeight: Dp = 160.dp
@@ -36,16 +39,7 @@ fun PoliticianSelectionScreen(navController: NavController,
     val scrollState = rememberLazyListState()
     var searchQuery by remember { mutableStateOf("") }
 
-
-    val politicians = listOf(
-        PoliticianData("Lars Løkke Rasmussen", R.drawable.politician_image, 0xFF6A1B9A),
-        PoliticianData("Jakob Engel-Schmidt", R.drawable.flogo, 0xFF6A1B9A),
-        PoliticianData("Mette Kierkgaard", R.drawable.flogo, 0xFF6A1B9A),
-        PoliticianData("Henrik Frandsen", R.drawable.flogo, 0xFF6A1B9A),
-        PoliticianData("Monika Rubin", R.drawable.flogo, 0xFF6A1B9A),
-        PoliticianData("Charlotte Bagge Hansen", R.drawable.flogo, 0xFF6A1B9A),
-        PoliticianData("Mohammad Rona", R.drawable.flogo, 0xFF6A1B9A)
-    )
+    val politicians = PartyRepository.getPoliticiansByParty(partyName)
 
     Box(
         modifier = Modifier
@@ -127,7 +121,7 @@ fun TopBarWithSearch(
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(
-                onClick = {navController.popBackStack()},
+                onClick = { navController.popBackStack() },
                 modifier = Modifier.size(24.dp)
             ) {
                 Icon(
@@ -145,7 +139,10 @@ fun TopBarWithSearch(
             )
         }
 
-        com.example.folkedex.ui.common.SearchBar()
+        com.example.folkedex.ui.common.SearchBar(
+            query = searchQuery,
+            onQueryChange = onSearchQueryChange
+        )
     }
 }
 
@@ -200,15 +197,9 @@ fun PoliticianCard(
     }
 }
 
-data class PoliticianData(
-    val name: String,
-    val photo: Int,
-    val cardColor: Long
-)
-
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewPoliticianSelectionScreen() {
     val navController = rememberNavController()
-    PoliticianSelectionScreen(navController)
+    PoliticianSelectionScreen(navController, partyName = "Moderaterne")
 }
