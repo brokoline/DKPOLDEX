@@ -3,6 +3,7 @@ package com.example.folkedex.ui.history
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
@@ -72,21 +73,23 @@ fun HistoryScreen(navController: NavHostController, partyData: PartyData) {
             }
         },
         content = { paddingValues ->
-            Column(
+            LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues)
                     .padding(16.dp),
-                verticalArrangement = Arrangement.Center,
+                verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(
-                    text = partyData.history,
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = Color.Black,
-                    textAlign = TextAlign.Center
-                )
+                item {
+                    Text(
+                        text = partyData.history,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Normal,
+                        color = Color.Black,
+                        textAlign = TextAlign.Start
+                    )
+                }
             }
         }
     )
