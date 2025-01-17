@@ -25,3 +25,11 @@ fun extractAllTagsFromXml(biografi: String?, tag: String): List<String> {
         emptyList()
     }
 }
+
+fun extractPartyFromBiography(biografi: String?): String? {
+    if (biografi.isNullOrBlank()) return null
+
+    val regex = "<party>(.*?)</party>".toRegex()
+    val matchResult = regex.find(biografi)
+    return matchResult?.groups?.get(1)?.value
+}

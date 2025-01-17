@@ -23,7 +23,9 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Scaffold
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.lifecycleScope
 import com.example.folkedex.ui.common.HomeScreen
 import com.example.folkedex.ui.politician.PoliciesScreen
 import com.example.folkedex.ui.politician.PoliticianScreen
@@ -34,17 +36,27 @@ import com.example.folkedex.ui.theme.FavoritesScreen
 import com.example.folkedex.ui.theme.History
 import com.example.folkedex.ui.theme.NewsScreen
 import com.example.folkedex.ui.party.Party
-import com.example.folkedex.ui.theme.PartyRepository
+import com.example.folkedex.data.PartyRepository
+import com.example.folkedex.data.PartyRepository.mapActorsToParties
+import com.example.folkedex.data.local.DataStore
+
+import com.example.folkedex.ui.feature.FetchActors.fetchActors
+import com.example.folkedex.ui.feature.PartyListScreen
 import com.example.folkedex.ui.party.PartySelectionScreen
 import com.example.folkedex.ui.theme.IssuesScreen
 import com.example.folkedex.ui.politician.PoliticianSelectionScreen
 import com.example.folkedex.ui.theme.ReportsScreen
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
+
         setContent {
+
             AppNavHost()
         }
     }
@@ -52,11 +64,13 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun AppNavHost() {
+
     val navController = rememberNavController()
     //TransparentStatusBar()
     MainScreen(navController)
 
 }
+
 
 @Composable
 fun MainScreen(navController: NavHostController) {
@@ -86,7 +100,7 @@ fun MainScreen(navController: NavHostController) {
             composable("com/example/folkedex/ui/history") { History(navController = navController) }
             composable("com/example/folkedex/data") { DataScreen(navController = navController) }
             composable("politicians") { PoliticianSelectionScreen(navController = navController) }
-            composable("testapi") { ActorListScreen(navController = navController) }
+            composable("testapi") { PartyListScreen(navController = navController) }
 
 
 

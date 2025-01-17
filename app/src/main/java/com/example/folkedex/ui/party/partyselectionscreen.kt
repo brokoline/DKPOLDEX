@@ -20,6 +20,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -34,15 +35,29 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.folkedex.R
 import com.example.folkedex.model.PartyData
-import com.example.folkedex.ui.theme.PartyRepository
+import com.example.folkedex.data.PartyRepository
+import com.example.folkedex.ui.feature.PartyViewModel
+import com.example.folkedex.ui.feature.PartyViewModelFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 
 @Composable
 fun PartySelectionScreen(navController: NavController, onBackClick: () -> Unit = {}, cardWidth: Dp = 160.dp, cardHeight: Dp = 160.dp) {
+    val context = LocalContext.current
+    val viewModel: PartyViewModel = viewModel(
+        factory = PartyViewModelFactory(context)
+    )
 
+    LaunchedEffect(Unit) {
+        withContext(Dispatchers.IO) {
+            viewModel.fetchAndCachePartyData(context)
+        }
+    }
     val scrollState = rememberLazyListState(initialFirstVisibleItemIndex = 0)
     val isTopBarVisible by remember {
         derivedStateOf { scrollState.firstVisibleItemIndex == 0 && scrollState.firstVisibleItemScrollOffset == 0 }
