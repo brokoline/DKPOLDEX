@@ -287,7 +287,7 @@ object PartyRepository {
             backColor =Color.White
         ),
         PartyData(
-            name = "Sambands-\nflokkurin",
+            name = "Sambandsflokkurin",
             path = "Sambandsflokkurin",
             logoRes = R.drawable.sambands,
             altLogo = R.drawable.sambandsflokkurin_logo,
