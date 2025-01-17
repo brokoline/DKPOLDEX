@@ -123,7 +123,6 @@ fun Party(partyData: PartyData, onBackClick: () -> Unit = {}, navController: Nav
                         CustomButton(
                             text = "History",
                             textColor = partyData.backColor,
-                            //imageRes = R.drawable.flogo,
                             buttonColor = partyData.buttonColor,
                             modifier = Modifier.width(170.dp),
                             onClick = {navController.navigate("com/example/folkedex/ui/history")  }
@@ -140,7 +139,8 @@ fun Party(partyData: PartyData, onBackClick: () -> Unit = {}, navController: Nav
                             //imageRes = R.drawable.flogo,
                             buttonColor = partyData.buttonColor,
                             modifier = Modifier.width(170.dp),
-                            onClick = {navController.navigate("policies")  }
+                            onClick = { navController.navigate("policies/${partyData.name}") }
+
                         )
                         CustomButton(
                             text = "Statistics",

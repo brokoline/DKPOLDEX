@@ -12,15 +12,16 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+import com.example.folkedex.model.PartyData
 import com.example.folkedex.ui.theme.PoliciesCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PoliciesScreen(navController: NavController, onBackClick: () -> Unit = {}) {
+fun PoliciesScreen(navController: NavController, party: PartyData) {
     Scaffold(
         topBar = {
             Column(
@@ -33,7 +34,7 @@ fun PoliciesScreen(navController: NavController, onBackClick: () -> Unit = {}) {
                         .fillMaxWidth()
                         .background(
                             brush = Brush.linearGradient(
-                                colors = listOf(Color(0xFF9C27B0), Color(0xFFE1BEE7))
+                                colors = listOf(party.backgroundColor, party.cardColor)
                             )
                         )
                         .padding(horizontal = 16.dp, vertical = 8.dp),
@@ -42,12 +43,11 @@ fun PoliciesScreen(navController: NavController, onBackClick: () -> Unit = {}) {
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(50.dp)
                             .padding(top = 20.dp),
                         contentAlignment = Alignment.CenterStart
                     ) {
                         IconButton(
-                            onClick = {navController.popBackStack()},
+                            onClick = { navController.popBackStack() },
                             modifier = Modifier
                                 .padding(start = 16.dp)
                                 .align(Alignment.CenterStart)
@@ -58,26 +58,13 @@ fun PoliciesScreen(navController: NavController, onBackClick: () -> Unit = {}) {
                                 tint = Color.White
                             )
                         }
-                        IconButton(
-                            onClick = {},
-                            modifier = Modifier
-                                .padding(end = 16.dp)
-                                .align(Alignment.CenterEnd)
-                        ) {
-
-                        }
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
+                        Text(
+                            text = "Policies",
+                            fontSize = 32.sp,
+                            color = Color.White,
+                            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                             modifier = Modifier.align(Alignment.Center)
-                        ) {
-
-                            Text(
-                                "Policies",
-                                fontSize = 32.sp,
-                                color = Color.White,
-                                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
-                            )
-                        }
+                        )
                     }
                 }
             }
@@ -88,40 +75,16 @@ fun PoliciesScreen(navController: NavController, onBackClick: () -> Unit = {}) {
                     .fillMaxSize()
                     .padding(paddingValues)
             ) {
-                PoliciesCard()
-
-                Spacer(modifier = Modifier.height(0.dp))
-
-                Box (
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(0.9f)
-                        .background(
-                            brush = Brush.linearGradient(
-                                colors = listOf(Color(0xFF9C27B0), Color(0xFFE1BEE7))
-                            )
-                        )
-                        .padding(6.dp)
-                ) {
-                    Column(
-                        modifier = Modifier.fillMaxSize(),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Spacer(modifier = Modifier.height(12.dp))
-                        }
-                        Spacer(modifier = Modifier.height(14.dp)) // Space between sections
-                    }
-                }
+                PoliciesCard(party = party)
             }
         }
     )
 }
 
-@Preview(showBackground = true, showSystemUi = true)
+
+
+/*@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewPoliciesScreen() {
     PoliciesScreen(navController = NavController(LocalContext.current))
-}
+}*/

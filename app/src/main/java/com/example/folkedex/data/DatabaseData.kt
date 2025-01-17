@@ -73,6 +73,26 @@ object PartyRepository {
             logoSize = 160.dp,
             textSize = 40.sp,
             backColor =Color.White,
+            policies = "Danmark er et fantastisk land. Et godt sted at vokse op, stifte familie og blive gammel. På mange måder har vi fundet opskriften på et samfund med en god balance mellem lighed, frihed og tryghed. Det er solsiden af fortællingen om Danmark. Og det er en sand fortælling.\n" +
+                    "\n" +
+                    "Men – hånden på hjertet – der er også en skyggeside:\n" +
+                    "\n" +
+                    "Vores velfærd er grundlæggende udfordret på kerneopgaven både demografisk, økonomisk og strukturelt.\n" +
+                    "\n" +
+                    "For mange unge opbygger ikke faglige færdigheder og personlig robusthed til få fodfæste på arbejdsmarkedet.\n" +
+                    "For mange idéer og initiativer bliver ikke omsat til arbejdspladser og velstand, fordi vi mangler kvalificeret arbejdskraft og taber i konkurrence til andre lande med mere attraktive investeringsvilkår.\n" +
+                    "For mange ældre medborgere får ikke en værdig pleje og omsorg.\n" +
+                    "For mange mennesker lever på kanten af samfundet uden at være en aktiv del af fællesskabet.\n" +
+                    "For mange med anden etnisk baggrund end dansk er ikke fuldt deltagende i arbejds- og samfundslivet.\n" +
+                    "Og vores sygehusvæsen – som ellers har leveret f.eks. langt bedre kræftbehandling over de sidste snart mange år – er under voldsomt pres. Ikke bare fra Covid-19-pandemien, men fra demografi, livstilssygdomme og uattraktive arbejdsvilkår.\n" +
+                    "\n" +
+                    "Det er også en sand beskrivelse af Danmark!\n" +
+                    "\n" +
+                    "MODERATERNE har et brændende ønske om at finde løsningerne og samle de ansvarlige partier om at løse de udfordringer, der ellers sander til i fastlåste højre-venstre-positioner. Det er sådan, at vi forløser drømmen om at skabe et endnu bedre Danmark med frihed, frisind, virkelyst og fremgang.\n" +
+                    "\n" +
+                    "Vi har ikke patent på den drøm. Heldigvis. Men det er ikke nok at drømme; der skal handles for at realisere drømmen. Og vi er forbi det punkt, hvor det kan ske med en ekstra milliard til offentligt forbrug, en finjustering af skatteskruen eller smarte slogans om velfærdslove, der lover mere end de holder, eller symbolske værdipolitiske meldinger uden reel effekt.\n" +
+                    "\n" +
+                    "For få tør tænke nyt eller højt. De politiske blokke lurer på hinanden. For meget handler om dagens avisoverskrift og morgendagens meningsmåling – for lidt om, hvad vi for alvor skal forandre, hvis vi ikke bare vil fastholde, men udbygge vores velfærd, velstand og muligheder.",
             politicians = listOf(
                 PoliticianData(
                     id = 1,
@@ -107,6 +127,23 @@ object PartyRepository {
             logoSize = 80.dp,
             textSize = 40.sp,
             backColor =Color.White,
+            policies = "True social security and welfare is based on a high level of private production financing the welfare. We cannot in the long term carry on maintaining a high living standard and an extensive social security system by becoming indebted. Curbing the national and foreign debts of Denmark is therefore a central objective for our economic policies. Venstre's economic policy is aiming at a stable and sustainable growth of employment. Economic policies should build on four corner stones; low inflation rate; low interest rates; fixed currency rate and sound and stable public finance. The national budget should be balanced; public debts bring about problems of tax distribution and carry forward tax burdens into the next generation.\n" +
+                    "\n" +
+                    "Venstre works for a gradual lowering of the tax burden. Progress in a society is based on the principle that it is worth while having a job, saving, investing and taking risks. This is why society should stimulate private initiative and independence everywhere.\n" +
+                    "\n" +
+                    "Venstre stands for a free market economy, - both because it fulfills most efficiently people's individual wishes and needs, and because the individual person has a basic right to interact with other people. A free market economy ensures dynamic growth and innovation in both material and non material values.\n" +
+                    "\n" +
+                    "Venstre wants social security with the highest freedom of choice. We have a responsibility for people who cannot look after themselves. The stronger has to look after the weaker. This is why we have to co-finance hospitals, nursing homes and other institutions and that we are economically and socially secured when we get old, if we become ill and unemployed. The welfare system should ensure that its citizens can have the highest freedom of choice and the strictest control of public finance. Liberal politics is to combine social security with the highest possible level of freedom and independence for the individual citizens.\n" +
+                    "\n" +
+                    "It is important to stimulate qualitative growth. The advance in technology can bring about interesting possibilities of growth in the quality of life if we conscientiously use it for creating a better framework for family life and human contact, cultural life and education. New technology could also contribute to ensuring a cleaner environment and better working conditions. Also the individual citizen is responsible for taking care of the environment by reducing the use of products with a heavy environmental impacts and by reducing the amount of waste.\n" +
+                    "\n" +
+                    "The backbone of a liberal environmental policy is the \"polluter-pays principle\". Economic incentives should make it attractive to protect and improve the environment. Venstre is on guard against totalitarian powers being bestowed on governments in the name of environmental protection. An efficient protection of the environment should be linked with freedom and market economy.\n" +
+                    "\n" +
+                    "Pollution does not respect borders, which is why it should be combatted through international cooperation. The European cooperation should be strengthened. Environmental taxes should have a positive impact on the environment. The principle therefore has to be that the consumer or the producer should be able to avoid or reduce environmental taxes by changing ways of consumption or manufacturing.\n" +
+                    "\n" +
+                    "Environmental taxes should not increase the overall tax burden but constitute an economical incentive for environmentally friendly behaviour.\n" +
+                    "\n" +
+                    "A liberal industrial policy builds on the assumption that private companies know better than public authorities what will become future products or areas of growth. Businesses should be allowed to make a profit in order to develop new products and invest in new manufacturing. The source of innovation are the entrepreneurs. They discover new niches and start a new production in order to fill these niches. They develop new, better and cheaper methods of production. This is why it should become easier to establish and run a company.",
             politicians = listOf(
                 PoliticianData(
                     id = 8,
@@ -139,7 +176,8 @@ object PartyRepository {
             imageSize = 130.dp,
             logoSize =80.dp,
             textSize = 40.sp,
-            backColor =Color.White
+            backColor =Color.White,
+            policies = ""
         ),
         PartyData(
             name = "Radikale Venstre",
@@ -159,7 +197,8 @@ object PartyRepository {
             imageSize = 130.dp,
             logoSize = 120.dp,
             textSize = 40.sp,
-            backColor =Color.White
+            backColor =Color.White,
+            policies = ""
         ),
         PartyData(
             name = "Det Konservative Folkeparti",
@@ -180,7 +219,8 @@ object PartyRepository {
             imageSize = 75.dp,
             logoSize = 100.dp,
             textSize = 30.sp,
-            backColor =Color.White
+            backColor =Color.White,
+            policies = ""
         ),
         PartyData(
             name = "Socialistisk Folkeparti",
@@ -201,7 +241,8 @@ object PartyRepository {
             imageSize = 75.dp,
             logoSize = 120.dp,
             textSize = 30.sp,
-            backColor =Color.White
+            backColor =Color.White,
+            policies = ""
         ),
         PartyData(
             name = "Liberal Alliance",
@@ -222,7 +263,8 @@ object PartyRepository {
             imageSize = 90.dp,
             logoSize = 120.dp,
             textSize = 40.sp,
-            backColor =Color.White
+            backColor =Color.White,
+            policies = ""
         ),
         PartyData(
             name = "Dansk Folkeparti",
@@ -243,7 +285,8 @@ object PartyRepository {
             imageSize = 100.dp,
             logoSize = 120.dp,
             textSize = 30.sp,
-            backColor =Color.White
+            backColor =Color.White,
+            policies = ""
         ),
         PartyData(
             name = "Danmarks-\ndemokraterne",
@@ -264,7 +307,8 @@ object PartyRepository {
             imageSize = 100.dp,
             logoSize = 120.dp,
             textSize = 30.sp,
-            backColor =Color.White
+            backColor =Color.White,
+            policies = ""
         ),
         PartyData(
             name = "Enhedslisten",
@@ -285,7 +329,8 @@ object PartyRepository {
             imageSize = 90.dp,
             logoSize = 120.dp,
             textSize = 35.sp,
-            backColor =Color.White
+            backColor =Color.White,
+            policies = ""
         ),
         PartyData(
             name = "Alternativet",
@@ -305,7 +350,8 @@ object PartyRepository {
             imageSize = 100.dp,
             logoSize = 120.dp,
             textSize = 40.sp,
-            backColor =Color.White
+            backColor =Color.Black,
+            policies = ""
         ),
         PartyData(
             name = "Sambands-\nflokkurin",
@@ -326,7 +372,8 @@ object PartyRepository {
             imageSize = 100.dp,
             logoSize = 120.dp,
             textSize = 30.sp,
-            backColor =Color.White
+            backColor =Color.White,
+            policies = ""
         ),
         PartyData(
             name = "Javnaðar-\nflokkurin",
@@ -347,7 +394,8 @@ object PartyRepository {
             imageSize = 110.dp,
             logoSize = 120.dp,
             textSize = 30.sp,
-            backColor =Color.White
+            backColor =Color.White,
+            policies = ""
         ),
         PartyData(
             name = "Siumut",
@@ -368,7 +416,8 @@ object PartyRepository {
             imageSize = 110.dp,
             logoSize = 120.dp,
             textSize = 30.sp,
-            backColor =Color.White
+            backColor =Color.White,
+            policies = ""
         ),
         PartyData(
             name = "Inuit Ataqatigiit",
@@ -389,7 +438,8 @@ object PartyRepository {
             imageSize = 100.dp,
             logoSize = 120.dp,
             textSize = 30.sp,
-            backColor =Color.White
+            backColor =Color.White,
+            policies = ""
         ),
         PartyData(
             name = "Løsgængere",
@@ -410,7 +460,8 @@ object PartyRepository {
             imageSize = 100.dp,
             logoSize = 120.dp,
             textSize = 30.sp,
-            backColor =Color.White
+            backColor =Color.White,
+            policies = ""
         ),
     )
     fun getPartyByName(name: String): PartyData? {

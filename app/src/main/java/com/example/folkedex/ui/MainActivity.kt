@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -79,7 +80,17 @@ fun MainScreen(navController: NavHostController) {
                 PoliticianScreen(navController = navController, name = name)
             }
 
-            composable("policies") { PoliciesScreen(navController = navController) }
+            composable("policies/{partyName}") { backStackEntry ->
+                val partyName = backStackEntry.arguments?.getString("partyName") ?: "Unknown"
+                val partyData = PartyRepository.getPartyByName(partyName)
+
+                if (partyData != null) {
+                    PoliciesScreen(navController = navController, party = partyData)
+                } else {
+                    // Show an error or blank screen if the party data is null
+                    Text("Party data not found", color = Color.Red, modifier = Modifier.fillMaxSize())
+                }
+            }
             composable("reports") { ReportsScreen(navController = navController) }
             composable("bills") { BillScreen(navController = navController) }
             composable("com/example/folkedex/ui/history") { History(navController = navController) }
