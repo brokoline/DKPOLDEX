@@ -19,6 +19,7 @@ import androidx.navigation.NavController
 import com.example.folkedex.model.PartyData
 import com.example.folkedex.ui.theme.PoliciesCard
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PoliciesScreen(navController: NavController, party: PartyData) {

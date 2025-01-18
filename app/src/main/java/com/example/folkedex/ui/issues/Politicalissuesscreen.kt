@@ -23,6 +23,7 @@ import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.folkedex.R // Importerer drawable ressourcer
+import com.example.folkedex.ui.common.FolketingLogo
 
 @Composable
 fun IssuesScreen(onBackClick: () -> Unit = {}, navController: NavController) {
@@ -80,11 +81,13 @@ fun IssuesScreen(onBackClick: () -> Unit = {}, navController: NavController) {
                         color = Color.White,
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     )
+                    var searchQuery = ""
                     com.example.folkedex.ui.common.SearchBar(
                         modifier = Modifier
                             .padding(horizontal = 16.dp)
                             .fillMaxWidth()
-                            .padding(top = 8.dp)
+                            .padding(top = 8.dp),value="", onValueChange =
+                        { searchQuery  = it }
                     )
                 }
             }

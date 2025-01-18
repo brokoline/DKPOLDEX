@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.folkedex.R
+import com.example.folkedex.ui.common.FolketingLogo
 
 
 @OptIn(ExperimentalMaterial3Api::class)

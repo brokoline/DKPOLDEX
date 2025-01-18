@@ -7,6 +7,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.folkedex.model.PoliticianData
+import com.example.folkedex.data.model.Actor
 
 data class PartyData(
     val name: String,
@@ -23,6 +24,8 @@ data class PartyData(
     val imageSize: Dp = 120.dp,
     val logoSize: Dp = 120.dp,
     val textSize: TextUnit  = 40.sp,
+    val backColor: Color,
+    val politicians: List<Actor> = emptyList()
     val backColor: Color,
     val politicians: List<PoliticianData> = emptyList(),
     val policies: String = ""

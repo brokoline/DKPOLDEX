@@ -1,5 +1,5 @@
 package com.example.folkedex.ui.theme
-
+//weee
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -19,12 +19,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
+import com.example.folkedex.ui.common.FolketingLogo
 
 data class Report(val title: String, val link: String)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ReportsScreen(onBackClick: () -> Unit = {}, onReportClick: (String) -> Unit = {}, navController: NavController) {
+fun ReportsScreen( onReportClick: (String) -> Unit = {}, navController: NavController) {
     val reports = listOf(
         Report(title = "Budget Proposal 2023", link = "https://www.ft.dk/budget2023"),
         Report(title = "Health Care Reform", link = "https://www.ft.dk/healthcarereform"),
@@ -71,9 +72,11 @@ fun ReportsScreen(onBackClick: () -> Unit = {}, onReportClick: (String) -> Unit 
                         color = Color.White,
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     )
+                    var searchQuery = ""
                     com.example.folkedex.ui.common.SearchBar(
                         modifier = Modifier
-                            .padding(horizontal = 15.dp)
+                            .padding(horizontal = 15.dp),value = searchQuery,
+                        onValueChange = { searchQuery  = it }
                     )
                 }
 

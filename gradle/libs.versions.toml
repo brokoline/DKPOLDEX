@@ -1,16 +1,19 @@
 [versions]
 accompanistSystemuicontroller = "0.31.2-alpha"
 agp = "8.7.3"
-kotlin = "1.9.0"
-coreKtx = "1.13.1"
+kotlin = "2.0.21"
+coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
-lifecycleRuntimeKtx = "2.8.5"
-activityCompose = "1.9.2"
-composeBom = "2024.04.01"
+lifecycleRuntimeKtx = "2.8.7"
+activityCompose = "1.10.0"
+composeBom = "2025.01.00"
 appcompat = "1.7.0"
-
+coilCompose = "3.0.1"
+retrofit = "2.11.0"
+kotlinSerialization = "1.7.3"
+datastore = "1.1.2"
 [libraries]
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistSystemuicontroller" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -28,8 +31,15 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-
+coil = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coilCompose" }
+coil-httpok = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coilCompose" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+kotlin-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerialization" }
+kotlin-serialization-converter = { group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version.ref="retrofit" }
+androidx-datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref="datastore"}
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin"}
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

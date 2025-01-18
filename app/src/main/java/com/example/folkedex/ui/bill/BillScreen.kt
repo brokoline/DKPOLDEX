@@ -1,4 +1,4 @@
-package com.example.folkedex.ui.theme
+package com.example.folkedex.ui.bill
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -19,9 +19,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.folkedex.ui.common.FolketingLogo
+
 
 @Composable
-fun BillScreen(onBackClick: () -> Unit = {}, navController: NavController) {
+fun BillScreen( navController: NavController) {
 
     val votes = listOf(
         Vote(title = "Proposal A", description = "Passed with majority votes"),
@@ -78,10 +80,14 @@ fun BillScreen(onBackClick: () -> Unit = {}, navController: NavController) {
                         color = Color.White,
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     )
+                    var searchQuery = ""
                     com.example.folkedex.ui.common.SearchBar(
+
                         modifier = Modifier
-                            .padding(horizontal = 15.dp)
-                    )
+                            .padding(horizontal = 15.dp), value="", onValueChange =
+                        { searchQuery  = it }
+                )
+
                 }
             }
         },

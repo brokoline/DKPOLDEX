@@ -4,6 +4,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.folkedex.R
+import com.example.folkedex.data.model.Actor
+import com.example.folkedex.domain.extractPartyFromBiography
 import com.example.folkedex.model.PartyData
 import com.example.folkedex.model.PoliticianData
 import com.example.folkedex.ui.theme.AlternativetBackground
@@ -51,8 +53,27 @@ import com.example.folkedex.ui.theme.altSiumut
 import com.example.folkedex.ui.theme.altSocialdemokratiet
 import com.example.folkedex.ui.theme.altSocialistiskFolkeparti
 import com.example.folkedex.ui.theme.altVenstre
+import com.example.folkedex.ui.theme.*
+
+
+
+
 
 object PartyRepository {
+    fun mapActorsToParties(actors: List<Actor>, parties: List<PartyData>): List<PartyData> {
+        val actorsByParty = actors.groupBy { actor ->
+            val partyName = extractPartyFromBiography(actor.biografi)?.trim()
+            when (partyName) {
+                "Uden for folketingsgrupperne" -> "Løsgængere"
+                else -> partyName
+            }
+        }
+
+        return parties.map { party ->
+            val matchingActors = actorsByParty[party.path] ?: emptyList()
+            party.copy(politicians = matchingActors)
+        }
+    }
     val parties = listOf(
         PartyData(
             name = "Moderaterne",
@@ -463,7 +484,9 @@ object PartyRepository {
             backColor =Color.White,
             policies = ""
         ),
+
     )
+    var cachedParties: List<PartyData> = emptyList()
     fun getPartyByName(name: String): PartyData? {
         return parties.find { it.name == name }
     }
