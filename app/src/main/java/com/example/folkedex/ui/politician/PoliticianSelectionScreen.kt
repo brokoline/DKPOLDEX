@@ -1,5 +1,6 @@
 package com.example.folkedex.ui.politician
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -17,35 +18,48 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import coil3.compose.AsyncImage
 import com.example.folkedex.R
 import com.example.folkedex.data.PartyRepository
+import com.example.folkedex.data.model.Actor
+import com.example.folkedex.domain.extractPoliPictureFromBiography
 import com.example.folkedex.model.PoliticianData
+import com.example.folkedex.ui.feature.PartyViewModel
+import com.example.folkedex.ui.feature.PartyViewModelFactory
 
 @Composable
 fun PoliticianSelectionScreen(
     navController: NavController,
-    partyName: String = "Moderaterne",
+    partyName: String = "",
     cardWidth: Dp = 160.dp,
-    cardHeight: Dp = 160.dp
+    cardHeight: Dp = 160.dp,
 ) {
     val scrollState = rememberLazyListState()
 
-    val politicians = PartyRepository.getPoliticiansByParty(partyName)
+    val context = LocalContext.current
+    val viewModel: PartyViewModel = viewModel(
+        factory = PartyViewModelFactory(context)
+    )
+
+    val parties by viewModel.parties.collectAsState()
+
+    val politicians = parties.find { it.name == partyName }?.politicians.orEmpty()
 
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
     ) {
-        // Background logo
         Image(
             painter = painterResource(id = R.drawable.flogo),
             contentDescription = "Folketing Logo",
@@ -102,6 +116,7 @@ fun TopBarWithSearch(
     navController: NavController,
     partyName: String
 ) {
+    Log.d("checking for bugs", "motherfcuker1")
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -139,42 +154,60 @@ fun TopBarWithSearch(
 
 @Composable
 fun PoliticianCard(
-    politicianData: PoliticianData,
+    politicianData: Actor,
     navController: NavController,
     cardWidth: Dp = 160.dp,
     cardHeight: Dp = 160.dp
 ) {
+    val party = politicianData.let {
+        PartyRepository.parties.find { party -> party.name == politicianData.biografi }
+    }
+    Log.d("party test", party.toString())
     Column(
         modifier = Modifier
             .width(cardWidth)
             .padding(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(cardHeight - 40.dp)
-                .background(
-                    color = Color(politicianData.cardColor),
-                    shape = RoundedCornerShape(16.dp)
-                )
-                .clickable {
-                    navController.navigate("politician/${politicianData.name}")
-                },
-            contentAlignment = Alignment.Center
-        ) {
-            Image(
-                painter = painterResource(id = politicianData.photo),
-                contentDescription = "Photo of ${politicianData.name}",
+        Log.d("checking for bugs", "motherfucker2")
+        if (party != null) {
+            val photoUrl = extractPoliPictureFromBiography(politicianData.biografi)
+            Log.d("checking for bugs", "picture should work3")
+            Box(
                 modifier = Modifier
-                    .size(100.dp)
-                    .padding(8.dp),
-                contentScale = ContentScale.Crop
-            )
+                    .fillMaxWidth()
+                    .height(cardHeight - 40.dp)
+                    .background(
+                        color = party.cardColor,
+                        shape = RoundedCornerShape(16.dp)
+                    )
+                    .clickable {
+                        navController.navigate("politician/${politicianData.navn}")
+                    },
+                contentAlignment = Alignment.Center
+            ) {
+                Image(
+                    painter = painterResource(R.drawable.flogo),
+                    contentDescription = "Photo of ${politicianData.navn}",
+                    modifier = Modifier
+                        .size(100.dp)
+                        .padding(8.dp),
+                    contentScale = ContentScale.Crop,
+                )
+                /*AsyncImage(
+                    model = photoUrl,
+                    contentDescription = "Photo of ${politicianData.navn}",
+                    modifier = Modifier
+                        .size(100.dp)
+                        .padding(8.dp),
+                    contentScale = ContentScale.Crop,
+                    placeholder = painterResource(R.drawable.flogo),
+                )*/
+            }
         }
 
         Text(
-            text = politicianData.name,
+            text = politicianData.navn,
             style = MaterialTheme.typography.bodyLarge.copy(
                 fontSize = MaterialTheme.typography.bodyLarge.fontSize * 1.3f,
                 fontWeight = FontWeight.Bold

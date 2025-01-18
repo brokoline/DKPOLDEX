@@ -26,10 +26,10 @@ class PartyViewModel(private val context: Context) : ViewModel() {
         viewModelScope.launch {
 
             val actors = fetchActors(context)
-            Log.d("PartyViewModel", "Fetched ${actors.size} politicians from the API.")
+           // Log.d("PartyViewModel", "Fetched ${actors.size} politicians from the API.")
 
             val updatedParties = mapActorsToParties(actors, PartyRepository.parties)
-            Log.d("PartyViewModel", updatedParties.get(0).politicians.toString())
+            //Log.d("PartyViewModel", updatedParties.get(0).politicians.toString())
 
             _parties.value = updatedParties
         }

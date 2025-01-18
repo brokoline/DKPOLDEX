@@ -22,7 +22,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+import coil3.compose.AsyncImage
+import com.example.folkedex.R
 import com.example.folkedex.data.PartyRepository
+import com.example.folkedex.data.model.Actor
+import com.example.folkedex.domain.*
 import com.example.folkedex.model.PartyData
 import com.example.folkedex.model.PoliticianData
 import com.example.folkedex.ui.party.Party
@@ -33,25 +37,29 @@ fun PoliticianScreen(navController: NavController, name: String) {
     val politician = PartyRepository.parties
         .flatMap { it.politicians }
         .find { it.navn == name }
-    val party = PartyRepository.parties
-        .flatMap { it. }
+    val party = politician?.let {
+        PartyRepository.parties.find { party -> party.name == politician.biografi }
+    }
 
     if (politician != null) {
+        val photoUrl = extractPoliPictureFromBiography(politician.biografi)
         Scaffold(
             topBar = {
-                TopAppBar(
-                    title = { Text(politician.navn) },
-                    navigationIcon = {
-                        IconButton(onClick = { navController.popBackStack() }) {
-                            Icon(Icons.Default.ArrowBack, contentDescription = "Back")
-                        }
-                    },
-                    colors = TopAppBarDefaults.smallTopAppBarColors(
-                        containerColor = Color(party.),
-                        titleContentColor = Color.White,
-                        navigationIconContentColor = Color.White
+                if (party != null) {
+                    TopAppBar(
+                        title = { Text(politician.navn) },
+                        navigationIcon = {
+                            IconButton(onClick = { navController.popBackStack() }) {
+                                Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                            }
+                        },
+                        colors = TopAppBarDefaults.topAppBarColors(
+                            containerColor = party.cardColor,
+                            titleContentColor = Color.White,
+                            navigationIconContentColor = Color.White
+                        )
                     )
-                )
+                }
             },
             content = { paddingValues ->
                 Column(
@@ -61,16 +69,19 @@ fun PoliticianScreen(navController: NavController, name: String) {
                         .padding(16.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Image(
-                        painter = painterResource(id = politician.photo),
-                        contentDescription = "Photo of ${politician.name}",
-                        modifier = Modifier
-                            .size(300.dp)
-                            .padding(8.dp)
-                            .background(Color(politician.cardColor), shape = RoundedCornerShape(8.dp))
-                            .padding(4.dp),
-                        contentScale = ContentScale.Crop
-                    )
+                    if (party != null) {
+                        AsyncImage(
+                            model = photoUrl,
+                            contentDescription = "Photo of ${politician.navn}",
+                            modifier = Modifier
+                                .size(300.dp)
+                                .padding(8.dp)
+                                .background(party.cardColor, shape = RoundedCornerShape(8.dp))
+                                .padding(4.dp),
+                            contentScale = ContentScale.Crop,
+                            placeholder = painterResource(R.drawable.flogo),
+                        )
+                    }
 
                     Spacer(modifier = Modifier.height(16.dp))
 
@@ -93,14 +104,15 @@ fun PoliticianScreen(navController: NavController, name: String) {
 }
 
 @Composable
-fun PoliticianDetails(politician: PoliticianData) {
+fun PoliticianDetails(politician: Actor) {
     val details = mapOf(
-        "Name" to politician.name,
-        "Party" to politician.partyName,
-        "Age" to politician.age,
-        "Occupation" to politician.occupation,
-        "Email" to politician.email,
-        "Phone" to politician.phone
+        "Name" to politician.navn,
+        "Party" to (extractPartyFromBiography(politician.biografi) ?: "?"),
+        "Born" to (extractPoliAgeFromBiography(politician.biografi) ?: "?"),
+        "Profession" to (extractPoliProfFromBiography(politician.biografi) ?: "?"),
+        "Education" to (extractPoliEducationFromBiography(politician.biografi) ?: "?"),
+        "Email" to (extractPoliMailFromBiography(politician.biografi) ?: "?"),
+        "Phone" to (extractPoliPhoneFromBiography(politician.biografi) ?: "?")
     )
 
     Column(

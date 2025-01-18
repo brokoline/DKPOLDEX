@@ -75,6 +75,9 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.kotlin.serialization)
     implementation(libs.kotlin.serialization.converter)
+    implementation(libs.coil)
+    implementation(libs.coil.httpok)
+
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
     implementation("androidx.compose.material3:material3:1.3.1")
     implementation("androidx.compose.material3:material3-window-size-class:1.3.1")
