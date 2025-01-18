@@ -32,6 +32,7 @@ import coil3.compose.AsyncImage
 import com.example.folkedex.R
 import com.example.folkedex.data.PartyRepository
 import com.example.folkedex.data.model.Actor
+import com.example.folkedex.domain.extractPartyFromBiography
 import com.example.folkedex.domain.extractPoliPictureFromBiography
 import com.example.folkedex.model.PoliticianData
 import com.example.folkedex.ui.feature.PartyViewModel
@@ -116,7 +117,6 @@ fun TopBarWithSearch(
     navController: NavController,
     partyName: String
 ) {
-    Log.d("checking for bugs", "motherfcuker1")
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -160,7 +160,7 @@ fun PoliticianCard(
     cardHeight: Dp = 160.dp
 ) {
     val party = politicianData.let {
-        PartyRepository.parties.find { party -> party.name == politicianData.biografi }
+        PartyRepository.parties.find { party -> party.name == extractPartyFromBiography(politicianData.biografi) }
     }
     Log.d("party test", party.toString())
     Column(
@@ -169,10 +169,8 @@ fun PoliticianCard(
             .padding(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Log.d("checking for bugs", "motherfucker2")
         if (party != null) {
             val photoUrl = extractPoliPictureFromBiography(politicianData.biografi)
-            Log.d("checking for bugs", "picture should work3")
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -186,6 +184,7 @@ fun PoliticianCard(
                     },
                 contentAlignment = Alignment.Center
             ) {
+                /*
                 Image(
                     painter = painterResource(R.drawable.flogo),
                     contentDescription = "Photo of ${politicianData.navn}",
@@ -194,7 +193,8 @@ fun PoliticianCard(
                         .padding(8.dp),
                     contentScale = ContentScale.Crop,
                 )
-                /*AsyncImage(
+                */
+                AsyncImage(
                     model = photoUrl,
                     contentDescription = "Photo of ${politicianData.navn}",
                     modifier = Modifier
@@ -202,7 +202,7 @@ fun PoliticianCard(
                         .padding(8.dp),
                     contentScale = ContentScale.Crop,
                     placeholder = painterResource(R.drawable.flogo),
-                )*/
+                )
             }
         }
 
