@@ -37,16 +37,13 @@ import com.example.folkedex.ui.theme.FavoritesScreen
 import com.example.folkedex.ui.theme.History
 import com.example.folkedex.ui.theme.NewsScreen
 import com.example.folkedex.ui.party.Party
-import com.example.folkedex.data.PartyRepository
 import com.example.folkedex.data.PartyRepository.mapActorsToParties
 import com.example.folkedex.data.local.DataStore
 
 import com.example.folkedex.ui.feature.FetchActors.fetchActors
 import com.example.folkedex.ui.feature.PartyListScreen
 import com.example.folkedex.ui.party.PartySelectionScreen
-import com.example.folkedex.ui.theme.Party
 import com.example.folkedex.data.PartyRepository
-import com.example.folkedex.ui.theme.PartySelectionScreen
 import com.example.folkedex.ui.theme.IssuesScreen
 import com.example.folkedex.ui.politician.PoliticianSelectionScreen
 import com.example.folkedex.ui.theme.ReportsScreen
@@ -127,11 +124,6 @@ fun MainScreen(navController: NavHostController) {
                     if (partyData != null) {
                         Party(
                             partyData = partyData,
-                            onBackClick = {
-                                navController.navigate("home") {
-                                    popUpTo("home") { inclusive = true }
-                                }
-                            },
                             navController = navController
                         )
                     } else {

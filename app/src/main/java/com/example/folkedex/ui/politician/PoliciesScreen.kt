@@ -17,7 +17,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.folkedex.model.PartyData
-import com.example.folkedex.ui.theme.PoliciesCard
 
 
 @OptIn(ExperimentalMaterial3Api::class)

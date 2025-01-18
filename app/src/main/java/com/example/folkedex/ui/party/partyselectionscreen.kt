@@ -40,7 +40,6 @@ import androidx.navigation.NavController
 import com.example.folkedex.R
 import com.example.folkedex.data.PartyRepository
 import com.example.folkedex.model.PartyData
-import com.example.folkedex.data.PartyRepository
 import com.example.folkedex.ui.feature.PartyViewModel
 import com.example.folkedex.ui.feature.PartyViewModelFactory
 import kotlinx.coroutines.Dispatchers

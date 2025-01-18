@@ -23,27 +23,31 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.example.folkedex.data.PartyRepository
+import com.example.folkedex.model.PartyData
 import com.example.folkedex.model.PoliticianData
+import com.example.folkedex.ui.party.Party
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PoliticianScreen(navController: NavController, name: String) {
     val politician = PartyRepository.parties
         .flatMap { it.politicians }
-        .find { it.name == name }
+        .find { it.navn == name }
+    val party = PartyRepository.parties
+        .flatMap { it. }
 
     if (politician != null) {
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { Text(politician.name) },
+                    title = { Text(politician.navn) },
                     navigationIcon = {
                         IconButton(onClick = { navController.popBackStack() }) {
                             Icon(Icons.Default.ArrowBack, contentDescription = "Back")
                         }
                     },
                     colors = TopAppBarDefaults.smallTopAppBarColors(
-                        containerColor = Color(politician.cardColor),
+                        containerColor = Color(party.),
                         titleContentColor = Color.White,
                         navigationIconContentColor = Color.White
                     )

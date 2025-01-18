@@ -25,8 +25,6 @@ data class PartyData(
     val logoSize: Dp = 120.dp,
     val textSize: TextUnit  = 40.sp,
     val backColor: Color,
-    val politicians: List<Actor> = emptyList()
-    val backColor: Color,
-    val politicians: List<PoliticianData> = emptyList(),
+    val politicians: List<Actor> = emptyList(),
     val policies: String = ""
 )

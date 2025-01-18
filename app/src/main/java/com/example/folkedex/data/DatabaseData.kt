@@ -68,7 +68,6 @@ object PartyRepository {
                 else -> partyName
             }
         }
-
         return parties.map { party ->
             val matchingActors = actorsByParty[party.path] ?: emptyList()
             party.copy(politicians = matchingActors)
@@ -114,19 +113,6 @@ object PartyRepository {
                     "Vi har ikke patent på den drøm. Heldigvis. Men det er ikke nok at drømme; der skal handles for at realisere drømmen. Og vi er forbi det punkt, hvor det kan ske med en ekstra milliard til offentligt forbrug, en finjustering af skatteskruen eller smarte slogans om velfærdslove, der lover mere end de holder, eller symbolske værdipolitiske meldinger uden reel effekt.\n" +
                     "\n" +
                     "For få tør tænke nyt eller højt. De politiske blokke lurer på hinanden. For meget handler om dagens avisoverskrift og morgendagens meningsmåling – for lidt om, hvad vi for alvor skal forandre, hvis vi ikke bare vil fastholde, men udbygge vores velfærd, velstand og muligheder.",
-            politicians = listOf(
-                PoliticianData(
-                    id = 1,
-                    name = "Lars Løkke Rasmussen",
-                    photo = R.drawable.politician_image,
-                    cardColor = 0xFF6A1B9A,
-                    partyName = "Moderaterne",
-                    age = 60,
-                    occupation = "Formand for Moderaterne",
-                    email = "KaptajnUnderbuks@StatenBetaler.dk",
-                    phone = 42334123
-                )
-            )
 
         ),
         PartyData(
@@ -165,19 +151,6 @@ object PartyRepository {
                     "Environmental taxes should not increase the overall tax burden but constitute an economical incentive for environmentally friendly behaviour.\n" +
                     "\n" +
                     "A liberal industrial policy builds on the assumption that private companies know better than public authorities what will become future products or areas of growth. Businesses should be allowed to make a profit in order to develop new products and invest in new manufacturing. The source of innovation are the entrepreneurs. They discover new niches and start a new production in order to fill these niches. They develop new, better and cheaper methods of production. This is why it should become easier to establish and run a company.",
-            politicians = listOf(
-                PoliticianData(
-                    id = 8,
-                    name = "Jakob Ellemann-Jensen",
-                    photo = R.drawable.flogo,
-                    cardColor = 0xFF01288F,
-                    partyName = "Venstre",
-                    age = 51,
-                    occupation = "Formand for Venstre",
-                    email = "Dellemann@KingOfBurger.dk",
-                    phone = 42334123
-                )
-            )
         ),
         PartyData(
             name = "Socialdemo-\nkratiet",
@@ -489,8 +462,5 @@ object PartyRepository {
     var cachedParties: List<PartyData> = emptyList()
     fun getPartyByName(name: String): PartyData? {
         return parties.find { it.name == name }
-    }
-    fun getPoliticiansByParty(partyName: String): List<PoliticianData> {
-        return parties.find { it.name == partyName }?.politicians ?: emptyList()
     }
 }
