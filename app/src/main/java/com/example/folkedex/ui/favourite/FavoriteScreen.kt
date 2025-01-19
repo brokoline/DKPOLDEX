@@ -84,7 +84,7 @@ fun FavoritesScreen(
                             .padding(bottom = 4.dp)
                     )
                     Text(
-                        "Dine favoritter",
+                        "Your favorites",
                         fontSize = 30.sp,
                         color = Color.White,
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
