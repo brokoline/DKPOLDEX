@@ -28,13 +28,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.lifecycleScope
 import com.example.folkedex.ui.common.HomeScreen
+import com.example.folkedex.ui.history.HistoryScreen
 import com.example.folkedex.ui.politician.PoliciesScreen
 import com.example.folkedex.ui.politician.PoliticianScreen
 import com.example.folkedex.ui.bill.BillScreen
 import com.example.folkedex.ui.feature.ActorListScreen
 import com.example.folkedex.ui.theme.DataScreen
 import com.example.folkedex.ui.theme.FavoritesScreen
-import com.example.folkedex.ui.theme.History
 import com.example.folkedex.ui.theme.NewsScreen
 import com.example.folkedex.ui.party.Party
 import com.example.folkedex.data.PartyRepository.mapActorsToParties
@@ -55,9 +55,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
-
         setContent {
-
             AppNavHost()
         }
     }
@@ -65,12 +63,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun AppNavHost() {
-
     val navController = rememberNavController()
     MainScreen(navController)
 
 }
-
 
 @Composable
 fun MainScreen(navController: NavHostController) {
@@ -106,8 +102,16 @@ fun MainScreen(navController: NavHostController) {
                 }
             }
             composable("reports") { ReportsScreen(navController = navController) }
-            composable("Bills") { BillScreen(navController = navController) }
-            composable("com/example/folkedex/ui/history") { History(navController = navController) }
+            composable("bills") { BillScreen(navController = navController) }
+            composable("com/example/folkedex/ui/history/{partyPath}") { backStackEntry ->
+                val partyPath = backStackEntry.arguments?.getString("partyPath")
+                val partyData = PartyRepository.getPartyByName(partyPath ?: "")
+                if (partyData != null) {
+                    HistoryScreen(navController = navController, partyData = partyData)
+                } else {
+                    Text("No history available")
+                }
+            }
             composable("com/example/folkedex/data") { DataScreen(navController = navController) }
             composable("politicians/{partyName}") { backStackEntry ->
                 val partyName = backStackEntry.arguments?.getString("partyName") ?: "Unknown"

@@ -1,5 +1,7 @@
 package com.example.folkedex.ui.theme
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -12,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -20,34 +23,37 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.folkedex.ui.common.HomeScreen
 import com.example.folkedex.R
-import com.example.folkedex.ui.common.FolketingLogo
 
-data class NewsItem(val title: String, val description: String, val date: String)
+data class NewsItem(val title: String, val description: String, val url: String)
 
 @Composable
-fun NewsScreen(onBackClick: () -> Unit = {}, onNewsClick: (String) -> Unit = {}, navController: NavController) {
+fun NewsScreen(onBackClick: () -> Unit = {}, navController: NavController) {
     val newsList = listOf(
         NewsItem(
-            title = "New climate policies announced",
-            description = "The government announced new climate initiatives aiming to reduce emissions.",
-            date = "14-11-2024"
+            title = "TV2 Politik",
+            description = "Nyheder om politik fra TV2.",
+            url = "https://nyheder.tv2.dk/politik"
         ),
         NewsItem(
-            title = "Healthcare reform updates",
-            description = "A detailed breakdown of the upcoming healthcare reforms.",
-            date = "13-11-2024"
+            title = "DR Politik",
+            description = "Seneste politiske nyheder fra DR.",
+            url = "https://www.dr.dk/nyheder/politik"
         ),
         NewsItem(
-            title = "Budget proposal highlights",
-            description = "Key takeaways from the 2024 budget proposal.",
-            date = "12-11-2024"
+            title = "Altinget Politik",
+            description = "Indblik i dansk politik fra Altinget.",
+            url = "https://www.altinget.dk"
         ),
         NewsItem(
-            title = "Infrastructure developments",
-            description = "Major projects planned for the next fiscal year.",
-            date = "08-11-2024"
+            title = "Regeringen.dk",
+            description = "Officielle nyheder og initiativer fra regeringen.",
+            url = "https://www.regeringen.dk"
+        ),
+        NewsItem(
+            title = "Folketinget",
+            description = "Dokumenter og sager fra Folketinget.",
+            url = "https://www.ft.dk/da/dokumenter/dokumentlister/nyeste-sager"
         )
     )
 
@@ -57,14 +63,20 @@ fun NewsScreen(onBackClick: () -> Unit = {}, onNewsClick: (String) -> Unit = {},
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(200.dp)
-                    .background(Color(0xFFF7C72E)), // Gult tema
+                    .background(Color(0xFFF7C72E)),
                 contentAlignment = Alignment.CenterStart
             ) {
-                IconButton(
-                    onClick = {navController.popBackStack()},
+                FolketingLogo(
                     modifier = Modifier
-                        .padding(start = 16.dp)
-                        .align(Alignment.CenterStart)
+                        .align(Alignment.CenterEnd)
+                        .offset(x = -50.dp)
+                        .offset(y = -5.dp)
+                        .size(205.dp)
+                        .zIndex(0f)
+                )
+                IconButton(
+                    onClick = { navController.popBackStack() },
+                    modifier = Modifier.padding(start = 16.dp)
                 ) {
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
@@ -78,7 +90,7 @@ fun NewsScreen(onBackClick: () -> Unit = {}, onNewsClick: (String) -> Unit = {},
                     modifier = Modifier.align(Alignment.Center)
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.newsicon), // Bruger dit nyhedsikon
+                        painter = painterResource(id = R.drawable.newsicon),
                         contentDescription = "News Icon",
                         modifier = Modifier
                             .size(100.dp)
@@ -91,16 +103,6 @@ fun NewsScreen(onBackClick: () -> Unit = {}, onNewsClick: (String) -> Unit = {},
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     )
                 }
-
-                // Tilføjet FolketingLogo her
-                FolketingLogo(
-                    modifier = Modifier
-                        .align(Alignment.CenterEnd)
-                        .offset(x = -50.dp)
-                        .offset(y = -5.dp)
-                        .size(200.dp)
-                        .zIndex(0f)
-                )
             }
         },
         content = { paddingValues ->
@@ -112,7 +114,7 @@ fun NewsScreen(onBackClick: () -> Unit = {}, onNewsClick: (String) -> Unit = {},
                     .padding(vertical = 26.dp)
             ) {
                 items(newsList) { news ->
-                    NewsCard(newsItem = news, onClick = { onNewsClick(news.title) })
+                    NewsCard(newsItem = news)
                 }
             }
         }
@@ -120,14 +122,18 @@ fun NewsScreen(onBackClick: () -> Unit = {}, onNewsClick: (String) -> Unit = {},
 }
 
 @Composable
-fun NewsCard(newsItem: NewsItem, onClick: () -> Unit) {
+fun NewsCard(newsItem: NewsItem) {
+    val context = LocalContext.current
     Card(
-        onClick = onClick,
+        onClick = {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(newsItem.url))
+            context.startActivity(intent)
+        },
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xFFFFF59D)
+            containerColor = Color(0xFFF7C72E)
         )
     ) {
         Column(
@@ -138,23 +144,19 @@ fun NewsCard(newsItem: NewsItem, onClick: () -> Unit) {
             Text(
                 text = newsItem.title,
                 fontSize = 18.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                color = Color.White
             )
             Text(
                 text = newsItem.description,
                 fontSize = 14.sp,
-                color = Color.Gray,
-                modifier = Modifier.padding(top = 4.dp)
-            )
-            Text(
-                text = "Date: ${newsItem.date}",
-                fontSize = 14.sp,
-                color = Color.Gray,
+                color = Color.White,
                 modifier = Modifier.padding(top = 4.dp)
             )
         }
     }
 }
+
 @Preview(
     showSystemUi = true,
     showBackground = true,

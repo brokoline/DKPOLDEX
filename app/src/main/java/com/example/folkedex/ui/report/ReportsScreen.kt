@@ -41,6 +41,14 @@ fun ReportsScreen( onReportClick: (String) -> Unit = {}, navController: NavContr
                     .background(Color(0xFFAED581)),
                 contentAlignment = Alignment.CenterStart
             ) {
+                FolketingLogo(
+                    modifier = Modifier
+                        .align(Alignment.CenterEnd)
+                        .offset(x = -50.dp)
+                        .offset(y = -25.dp)
+                        .size(205.dp)
+                        .zIndex(0f)
+                )
                 IconButton(
                     onClick = {navController.popBackStack()},
                     modifier = Modifier
@@ -79,15 +87,6 @@ fun ReportsScreen( onReportClick: (String) -> Unit = {}, navController: NavContr
                         onValueChange = { searchQuery  = it }
                     )
                 }
-
-                FolketingLogo(
-                    modifier = Modifier
-                        .align(Alignment.CenterEnd)
-                        .offset(x = -50.dp)
-                        .offset(y = -25.dp)
-                        .size(205.dp)
-                        .zIndex(0f)
-                )
             }
         },
         content = { paddingValues ->

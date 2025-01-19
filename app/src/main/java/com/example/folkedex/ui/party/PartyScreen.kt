@@ -1,49 +1,39 @@
 package com.example.folkedex.ui.party
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
+import com.example.folkedex.R
 import com.example.folkedex.model.PartyData
 import com.example.folkedex.ui.common.FolketingLogo
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Party(partyData: PartyData, navController: NavHostController) {
+fun Party(partyData: PartyData, onBackClick: () -> Unit = {}, navController: NavHostController) {
+    val context = LocalContext.current
+
     Scaffold(
         topBar = {
             Box(
@@ -53,16 +43,21 @@ fun Party(partyData: PartyData, navController: NavHostController) {
                     .background(partyData.backgroundColor),
                 contentAlignment = Alignment.CenterStart
             ) {
-                IconButton(
-                    onClick = {navController.popBackStack()},
+                FolketingLogo(
                     modifier = Modifier
-                        .padding(start = 16.dp)
-                        .align(Alignment.CenterStart)
+                        .align(Alignment.CenterEnd)
+                        .offset(x = -50.dp)
+                        .offset(y = -5.dp)
+                        .size(200.dp)
+                        .zIndex(0f)
+                )
+                IconButton(
+                    onClick = { navController.popBackStack() },
+                    modifier = Modifier.padding(start = 16.dp)
                 ) {
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
                         contentDescription = "Back",
-
                         tint = partyData.backColor
                     )
                 }
@@ -74,19 +69,15 @@ fun Party(partyData: PartyData, navController: NavHostController) {
                     Image(
                         painter = painterResource(id = partyData.logoRes),
                         contentDescription = "Centered Image",
-                        modifier = Modifier
-                            .size(partyData.imageSize)
-                            .padding(bottom = 4.dp)
+                        modifier = Modifier.size(partyData.imageSize).padding(bottom = 4.dp)
                     )
                     Text(
                         partyData.path,
                         fontSize = partyData.textSize,
                         color = partyData.backColor,
-                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+                        style = androidx.compose.material3.MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     )
                 }
-
-                FolketingLogo(modifier = Modifier.align(Alignment.CenterEnd))
             }
         },
         content = { paddingValues ->
@@ -95,24 +86,41 @@ fun Party(partyData: PartyData, navController: NavHostController) {
                     .fillMaxSize()
                     .padding(paddingValues)
                     .padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
                     text = partyData.description,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black,
-                    modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.Center
                 )
 
+                Text(
+                    text = "Visit Party Website",
+                    fontSize = 28.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = partyData.buttonColor,
+                    modifier = Modifier
+                        .clickable {
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(partyData.website))
+                            context.startActivity(intent)
+                        }
+                        .padding(top = 24.dp)
+                        .align(Alignment.CenterHorizontally),
+                    textAlign = TextAlign.Center
+                )
+
+                Spacer(modifier = Modifier.height(24.dp))
+
                 Column(
                     modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(32.dp)
+                    verticalArrangement = Arrangement.spacedBy(2.dp)
                 ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceEvenly
+                        horizontalArrangement = Arrangement.SpaceAround
                     ) {
                         CustomButton(
                             text = "Politicians",
@@ -120,35 +128,45 @@ fun Party(partyData: PartyData, navController: NavHostController) {
                             buttonColor = partyData.buttonColor,
                             modifier = Modifier.width(170.dp),
                             onClick = { navController.navigate("politicians/${partyData.name}")}
+                            modifier = Modifier.weight(1f).padding(8.dp),
+                            partyData = partyData,
+                            navController = navController,
+                            onClick = { navController.navigate("politicians") }
                         )
                         CustomButton(
                             text = "History",
                             textColor = partyData.backColor,
                             buttonColor = partyData.buttonColor,
-                            modifier = Modifier.width(170.dp),
-                            onClick = {navController.navigate("com/example/folkedex/ui/history")  }
+                            modifier = Modifier.weight(1f).padding(8.dp),
+                            partyData = partyData,
+                            navController = navController,
+                            onClick = { navController.navigate("com/example/folkedex/ui/history/${partyData.path}") }
                         )
                     }
 
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceEvenly
+                        horizontalArrangement = Arrangement.SpaceAround
                     ) {
                         CustomButton(
                             text = "Policies",
                             textColor = partyData.backColor,
-                            //imageRes = R.drawable.flogo,
                             buttonColor = partyData.buttonColor,
                             modifier = Modifier.width(170.dp),
                             onClick = { navController.navigate("policies/${partyData.name}") }
 
+                            modifier = Modifier.weight(1f).padding(8.dp),
+                            partyData = partyData,
+                            navController = navController,
+                            onClick = { navController.navigate("policies") }
                         )
                         CustomButton(
                             text = "Statistics",
                             textColor = partyData.backColor,
-                            //imageRes = R.drawable.flogo,
                             buttonColor = partyData.buttonColor,
-                            modifier = Modifier.width(170.dp),
+                            modifier = Modifier.weight(1f).padding(8.dp),
+                            partyData = partyData,
+                            navController = navController,
                             onClick = { }
                         )
                     }
@@ -158,8 +176,17 @@ fun Party(partyData: PartyData, navController: NavHostController) {
     )
 }
 
+
 @Composable
-fun CustomButton(text: String, buttonColor: Color, textColor: Color, modifier: Modifier = Modifier, onClick: () -> Unit) {
+fun CustomButton(
+    text: String,
+    buttonColor: Color,
+    textColor: Color,
+    modifier: Modifier = Modifier,
+    partyData: PartyData,
+    navController: NavHostController,
+    onClick: () -> Unit
+) {
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(containerColor = buttonColor),
@@ -167,7 +194,7 @@ fun CustomButton(text: String, buttonColor: Color, textColor: Color, modifier: M
         modifier = modifier
             .shadow(elevation = 10.dp, shape = RoundedCornerShape(20.dp), clip = true)
             .height(60.dp),
-        contentPadding = PaddingValues(horizontal = 16.dp),
+        contentPadding = PaddingValues(horizontal = 16.dp)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
