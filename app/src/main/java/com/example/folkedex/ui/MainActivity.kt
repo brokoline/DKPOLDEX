@@ -73,7 +73,7 @@ fun MainScreen(navController: NavHostController) {
             composable("home") { HomeScreen(navController) }
             composable("favorites") { FavoritesScreen(navController = navController) }
             composable("com/example/folkedex/ui/news") { NewsScreen(navController = navController) }
-            composable("settings") { SettingsScreen(navController) }
+            composable("settings") { SettingsScreen() }
             composable("folkedex") { PartySelectionScreen(navController = navController)}
             composable("com/example/folkedex/ui/issues") { IssuesScreen(navController = navController) }
             composable("politician/{name}") { backStackEntry ->
@@ -157,7 +157,7 @@ fun BottomTabBar(navController: NavHostController) {
 }
 
 @Composable
-fun SettingsScreen(navController: NavHostController) {
+fun SettingsScreen() {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
