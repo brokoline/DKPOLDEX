@@ -1,13 +1,6 @@
 package com.example.folkedex.ui.party
 
 import android.annotation.SuppressLint
-import android.util.Log
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -25,15 +18,10 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LargeTopAppBar
-import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -43,7 +31,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -60,7 +47,11 @@ import kotlinx.coroutines.withContext
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PartySelectionScreen(navController: NavController, onBackClick: () -> Unit = {}, cardWidth: Dp = 160.dp, cardHeight: Dp = 160.dp) {
+fun PartySelectionScreen(
+    navController: NavController,
+    cardWidth: Dp = 160.dp,
+    cardHeight: Dp = 160.dp
+) {
     val context = LocalContext.current
     val viewModel: PartyViewModel = viewModel(
         factory = PartyViewModelFactory(context)
@@ -74,14 +65,15 @@ fun PartySelectionScreen(navController: NavController, onBackClick: () -> Unit =
         }
     }
     Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier = Modifier
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             CenterAlignedTopAppBar(
                 scrollBehavior = scrollBehavior,
                 navigationIcon = {
                     IconButton(
                         onClick = { navController.popBackStack() },
-                        modifier = Modifier.padding(end = 0.dp)
+                        modifier = Modifier.padding(end = 8.dp)
                     ) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
@@ -102,8 +94,7 @@ fun PartySelectionScreen(navController: NavController, onBackClick: () -> Unit =
                                 fontSize = MaterialTheme.typography.titleLarge.fontSize
                             ),
                             modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 8.dp),
+                                .fillMaxWidth(),
                             textAlign = TextAlign.Center
                         )
                     }
@@ -127,7 +118,6 @@ fun PartySelectionScreen(navController: NavController, onBackClick: () -> Unit =
                 .alpha(0.27f),
             contentScale = ContentScale.Fit
         )
-
         LazyColumn(
             state = scrollState,
             modifier = Modifier
@@ -222,8 +212,8 @@ fun PartyCard(
     }
 }
 
-@Preview(showBackground = true, showSystemUi = true)
+/*@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewPartySelectionScreen() {
     PartySelectionScreen(navController = NavController(LocalContext.current))
-}
+}*/

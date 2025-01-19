@@ -37,6 +37,7 @@ fun HomeScreen(navController: NavHostController) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(top = 230.dp)
+                .background(color = Color.White)
         ) {
             Spacer(modifier = Modifier.height(16.dp))
             PoliticianCategoryGrid(navController)
