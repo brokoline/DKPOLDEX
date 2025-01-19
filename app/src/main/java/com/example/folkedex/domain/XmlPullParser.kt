@@ -37,7 +37,7 @@ fun extractPartyFromBiography(biografi: String?): String? {
 fun extractPoliPictureFromBiography(biografi: String?): String? {
     if (biografi.isNullOrBlank()) return null
 
-    val regex = "<pictureHiRes>(.*?)</pictureHiRes>".toRegex()
+    val regex = "<pictureMiRes>(.*?)</pictureMiRes>".toRegex()
     val matchResult = regex.find(biografi)
     return matchResult?.groups?.get(1)?.value
 }

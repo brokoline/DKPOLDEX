@@ -16,6 +16,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -160,9 +161,10 @@ fun PoliticianCard(
     cardHeight: Dp = 160.dp
 ) {
     val party = politicianData.let {
-        PartyRepository.parties.find { party -> party.name == extractPartyFromBiography(politicianData.biografi) }
+        PartyRepository.parties.find { party ->
+            party.path == extractPartyFromBiography(politicianData.biografi)
+        }
     }
-    Log.d("party test", party.toString())
     Column(
         modifier = Modifier
             .width(cardWidth)
@@ -184,45 +186,41 @@ fun PoliticianCard(
                     },
                 contentAlignment = Alignment.Center
             ) {
-                /*
-                Image(
-                    painter = painterResource(R.drawable.flogo),
-                    contentDescription = "Photo of ${politicianData.navn}",
-                    modifier = Modifier
-                        .size(100.dp)
-                        .padding(8.dp),
-                    contentScale = ContentScale.Crop,
-                )
-                */
-                AsyncImage(
-                    model = photoUrl,
-                    contentDescription = "Photo of ${politicianData.navn}",
-                    modifier = Modifier
-                        .size(100.dp)
-                        .padding(8.dp),
-                    contentScale = ContentScale.Crop,
-                    placeholder = painterResource(R.drawable.flogo),
-                )
+                if (photoUrl != null) {
+                    AsyncImage(
+                        model = photoUrl,
+                        contentDescription = "Photo of ${politicianData.navn}",
+                        modifier = Modifier
+                            .size(150.dp)
+                            .clip(RoundedCornerShape(33.dp))
+                            .padding(8.dp),
+                        contentScale = ContentScale.Crop,
+                        placeholder = painterResource(R.drawable.missingphoto),
+                    )
+                } else {
+                    Image(
+                        painter = painterResource(R.drawable.missingphoto),
+                        contentDescription = "Photo of ${politicianData.navn}",
+                        modifier = Modifier
+                            .size(150.dp)
+                            .clip(RoundedCornerShape(33.dp))
+                            .padding(8.dp),
+                        contentScale = ContentScale.Crop,
+                    )
+                }
             }
+
+            Text(
+                text = politicianData.navn,
+                style = MaterialTheme.typography.bodyLarge.copy(
+                    fontSize = MaterialTheme.typography.bodyLarge.fontSize * 1.3f,
+                    fontWeight = FontWeight.Bold
+                ),
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .padding(top = 8.dp)
+                    .fillMaxWidth()
+            )
         }
-
-        Text(
-            text = politicianData.navn,
-            style = MaterialTheme.typography.bodyLarge.copy(
-                fontSize = MaterialTheme.typography.bodyLarge.fontSize * 1.3f,
-                fontWeight = FontWeight.Bold
-            ),
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .padding(top = 8.dp)
-                .fillMaxWidth()
-        )
     }
-}
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun PreviewPoliticianSelectionScreen() {
-    val navController = rememberNavController()
-    PoliticianSelectionScreen(navController)
 }

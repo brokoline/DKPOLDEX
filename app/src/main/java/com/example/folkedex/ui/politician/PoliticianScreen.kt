@@ -38,7 +38,7 @@ fun PoliticianScreen(navController: NavController, name: String) {
         .flatMap { it.politicians }
         .find { it.navn == name }
     val party = politician?.let {
-        PartyRepository.parties.find { party -> party.name == politician.biografi }
+        PartyRepository.parties.find { party -> party.path == extractPartyFromBiography(politician.biografi) }
     }
 
     if (politician != null) {
@@ -133,7 +133,7 @@ fun PoliticianDetails(politician: Actor) {
                     color = Color.Black
                 )
                 Text(
-                    text = value.toString(),
+                    text = value,
                     style = MaterialTheme.typography.bodyMedium,
                     color = Color.DarkGray
                 )

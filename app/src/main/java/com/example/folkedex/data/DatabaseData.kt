@@ -61,12 +61,12 @@ import com.example.folkedex.ui.theme.*
 
 object PartyRepository {
     fun mapActorsToParties(actors: List<Actor>, parties: List<PartyData>): List<PartyData> {
-        val actorsByParty = actors.groupBy { actor ->
-            val partyName = extractPartyFromBiography(actor.biografi)?.trim()
+        val actorsByParty = actors.groupBy { actor -> extractPartyFromBiography(actor.biografi)?.trim()
+            /*val partyName =
             when (partyName) {
                 "Uden for folketingsgrupperne" -> "Løsgængere"
                 else -> partyName
-            }
+            }*/
         }
         return parties.map { party ->
             val matchingActors = actorsByParty[party.path] ?: emptyList()
@@ -437,7 +437,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Løsgængere",
-            path = "Løsgængere",
+            path = "Uden for folketingsgrupperne",
             logoRes = R.drawable.loes,
             altLogo = R.drawable.loesgaengere,
             description = "Text about the politicians who currently aren't in any party, \n" +
@@ -449,7 +449,7 @@ object PartyRepository {
             backgroundColor = SocialdemokratietBackground,
             cardColor = altSocialdemokratiet,
             buttonColor = SocialdemokratietButton,
-            offsetX = 125f,
+            offsetX = 10f,
             offsetY = 15f,
             imageSize = 100.dp,
             logoSize = 120.dp,
