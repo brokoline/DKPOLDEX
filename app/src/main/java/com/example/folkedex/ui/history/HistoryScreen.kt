@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
 import com.example.folkedex.model.PartyData
-import com.example.folkedex.ui.theme.FolketingLogo
+import com.example.folkedex.ui.common.FolketingLogo
 
 @Composable
 fun HistoryScreen(navController: NavHostController, partyData: PartyData) {

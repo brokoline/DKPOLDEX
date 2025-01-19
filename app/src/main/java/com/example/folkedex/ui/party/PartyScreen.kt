@@ -126,12 +126,10 @@ fun Party(partyData: PartyData, onBackClick: () -> Unit = {}, navController: Nav
                             text = "Politicians",
                             textColor = partyData.backColor,
                             buttonColor = partyData.buttonColor,
-                            modifier = Modifier.width(170.dp),
-                            onClick = { navController.navigate("politicians/${partyData.name}")}
+                            onClick = { navController.navigate("politicians/${partyData.name}")},
                             modifier = Modifier.weight(1f).padding(8.dp),
                             partyData = partyData,
                             navController = navController,
-                            onClick = { navController.navigate("politicians") }
                         )
                         CustomButton(
                             text = "History",
@@ -152,13 +150,10 @@ fun Party(partyData: PartyData, onBackClick: () -> Unit = {}, navController: Nav
                             text = "Policies",
                             textColor = partyData.backColor,
                             buttonColor = partyData.buttonColor,
-                            modifier = Modifier.width(170.dp),
-                            onClick = { navController.navigate("policies/${partyData.name}") }
-
+                            onClick = { navController.navigate("policies/${partyData.name}") },
                             modifier = Modifier.weight(1f).padding(8.dp),
                             partyData = partyData,
                             navController = navController,
-                            onClick = { navController.navigate("policies") }
                         )
                         CustomButton(
                             text = "Statistics",

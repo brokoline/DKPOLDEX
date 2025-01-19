@@ -1,6 +1,6 @@
 package com.example.folkedex.ui.politician
 
-import android.util.Log
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -10,13 +10,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -24,20 +21,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil3.compose.AsyncImage
 import com.example.folkedex.R
+import com.example.folkedex.data.FavoritesHelper
 import com.example.folkedex.data.PartyRepository
 import com.example.folkedex.data.model.Actor
 import com.example.folkedex.domain.*
-import com.example.folkedex.model.PartyData
-import com.example.folkedex.model.PoliticianData
 import com.example.folkedex.ui.feature.PartyViewModel
 import com.example.folkedex.ui.feature.PartyViewModelFactory
-import com.example.folkedex.ui.party.Party
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,12 +42,18 @@ fun PoliticianScreen(navController: NavController, name: String) {
         factory = PartyViewModelFactory(context)
     )
     val parties by viewModel.parties.collectAsState()
+
+    // Retrieve politician and party information
     val politician = parties
         .flatMap { it.politicians }
         .find { it.navn == name }
     val party = politician?.let {
         PartyRepository.parties.find { party -> party.path == extractPartyFromBiography(politician.biografi) }
     }
+
+    // Favorite functionality
+    val favoritesHelper = remember { FavoritesHelper(context) }
+    var isFavorite by remember { mutableStateOf(favoritesHelper.getFavorites().contains(name)) }
 
     if (politician != null) {
         val photoUrl = extractPoliPictureFromBiography(politician.biografi)
@@ -66,6 +65,24 @@ fun PoliticianScreen(navController: NavController, name: String) {
                         navigationIcon = {
                             IconButton(onClick = { navController.popBackStack() }) {
                                 Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                            }
+                        },
+                        actions = {
+                            IconButton(
+                                onClick = {
+                                    if (isFavorite) {
+                                        favoritesHelper.removeFavorite(name)
+                                    } else {
+                                        favoritesHelper.addFavorite(name)
+                                    }
+                                    isFavorite = !isFavorite
+                                }
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Favorite,
+                                    contentDescription = "Favorite",
+                                    tint = if (isFavorite) Color.Red else Color.White
+                                )
                             }
                         },
                         colors = TopAppBarDefaults.topAppBarColors(
@@ -84,7 +101,7 @@ fun PoliticianScreen(navController: NavController, name: String) {
                         .padding(16.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    if (party != null && photoUrl !=null) {
+                    if (party != null && photoUrl != null) {
                         AsyncImage(
                             model = photoUrl,
                             contentDescription = "Photo of ${politician.navn}",

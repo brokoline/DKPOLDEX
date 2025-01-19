@@ -5,49 +5,46 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.zIndex
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.folkedex.R
 import com.example.folkedex.data.FavoritesHelper
-
+import com.example.folkedex.ui.common.FolketingLogo
+import com.example.folkedex.ui.feature.PartyViewModel
+import com.example.folkedex.ui.feature.PartyViewModelFactory
+import com.example.folkedex.ui.politician.PoliticianCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FavoritesScreen(onBackClick: () -> Unit = {}, navController: NavController,
+fun FavoritesScreen(
+    navController: NavController,
     cardWidth: Dp = 160.dp,
     cardHeight: Dp = 160.dp
-){
+) {
     val context = LocalContext.current
-    val favoriteManager = remember { FavoritesHelper(context) }
+    val viewModel: PartyViewModel = viewModel(factory = PartyViewModelFactory(context))
+    val parties by viewModel.parties.collectAsState()
+
+    val favoriteManager = FavoritesHelper(context)
     val favorites = favoriteManager.getFavorites()
 
-    val politicians = listOf(
-        PoliticianData("Lars Løkke Rasmussen", R.drawable.politician_image, 0xFF6A1B9A),
-        PoliticianData("Jakob Engel-Schmidt", R.drawable.flogo, 0xFF6A1B9A),
-        PoliticianData("Mette Kierkgaard", R.drawable.flogo, 0xFF6A1B9A),
-        PoliticianData("Henrik Frandsen", R.drawable.flogo, 0xFF6A1B9A),
-        PoliticianData("Monika Rubin", R.drawable.flogo, 0xFF6A1B9A),
-        PoliticianData("Charlotte Bagge Hansen", R.drawable.flogo, 0xFF6A1B9A),
-        PoliticianData("Mohammad Rona", R.drawable.flogo, 0xFF6A1B9A)
-    )
-
-    val favoritePoliticians = politicians.filter { politician ->
-        favorites.contains(politician.name)
-    }
+    val favoritePoliticians = parties
+        .flatMap { it.politicians }
+        .filter { favorites.contains(it.navn) }
 
     Scaffold(
         topBar = {
@@ -67,7 +64,7 @@ fun FavoritesScreen(onBackClick: () -> Unit = {}, navController: NavController,
                         .zIndex(0f)
                 )
                 IconButton(
-                    onClick = {navController.popBackStack()},
+                    onClick = { navController.popBackStack() },
                     modifier = Modifier
                         .padding(start = 16.dp)
                         .align(Alignment.CenterStart)
@@ -95,7 +92,6 @@ fun FavoritesScreen(onBackClick: () -> Unit = {}, navController: NavController,
                 }
             }
         },
-
         content = { paddingValues ->
             LazyColumn(
                 modifier = Modifier
@@ -104,7 +100,6 @@ fun FavoritesScreen(onBackClick: () -> Unit = {}, navController: NavController,
                     .padding(horizontal = 26.dp)
                     .padding(vertical = 26.dp)
             ) {
-
                 items(favoritePoliticians.chunked(2)) { rowPoliticians ->
                     Row(
                         modifier = Modifier

@@ -1,4 +1,4 @@
-package com.example.folkedex.ui.theme
+package com.example.folkedex.ui.news
 
 import android.content.Intent
 import android.net.Uri
@@ -24,6 +24,7 @@ import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.folkedex.R
+import com.example.folkedex.ui.common.FolketingLogo
 
 data class NewsItem(val title: String, val description: String, val url: String)
 
