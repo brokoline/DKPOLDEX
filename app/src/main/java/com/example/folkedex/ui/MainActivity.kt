@@ -106,7 +106,7 @@ fun MainScreen(navController: NavHostController) {
                 }
             }
             composable("reports") { ReportsScreen(navController = navController) }
-            composable("testapi") { PartyListScreen(navController = navController) }
+            composable("Bills") { BillScreen(navController = navController) }
             composable("com/example/folkedex/ui/history") { History(navController = navController) }
             composable("com/example/folkedex/data") { DataScreen(navController = navController) }
             composable("politicians/{partyName}") { backStackEntry ->

@@ -18,33 +18,59 @@ class PartyViewModel(private val context: Context) : ViewModel() {
     private val _parties = MutableStateFlow<List<PartyData>>(emptyList())
     val parties: StateFlow<List<PartyData>> = _parties
 
+    private val dataStore = DataStore(context)
+
     init {
-        fetchPartiesWithPoliticians()
+        loadCachedParties()
     }
 
-    private fun fetchPartiesWithPoliticians() {
+    // Load cached parties on initialization
+    private fun loadCachedParties() {
         viewModelScope.launch {
-
-            val actors = fetchActors(context)
-           // Log.d("PartyViewModel", "Fetched ${actors.size} politicians from the API.")
-
-            val updatedParties = mapActorsToParties(actors, PartyRepository.parties)
-            //Log.d("PartyViewModel", updatedParties.get(0).politicians.toString())
-
-            _parties.value = updatedParties
+            try {
+                val cachedActors = dataStore.loadActors()
+                if (cachedActors.isNotEmpty()) {
+                    val updatedParties = mapActorsToParties(cachedActors, PartyRepository.parties)
+                    _parties.value = updatedParties
+                } else {
+                    fetchPartiesWithPoliticians()
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                fetchPartiesWithPoliticians() // Fallback to fetching data if cache fails
+            }
         }
     }
-    fun fetchAndCachePartyData(context: Context) {
+
+    // Fetch parties and save data to cache
+    private fun fetchPartiesWithPoliticians() {
         viewModelScope.launch {
             try {
                 val actors = fetchActors(context)
                 val updatedParties = mapActorsToParties(actors, PartyRepository.parties)
-                PartyRepository.cachedParties = updatedParties
-                DataStore(context).saveActors(actors)
+                _parties.value = updatedParties
+
+                // Save actors to cache
+                dataStore.saveActors(actors)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    // Explicitly fetch and cache data (can be triggered manually)
+    fun fetchAndCachePartyData() {
+        viewModelScope.launch {
+            try {
+                val actors = fetchActors(context)
+                val updatedParties = mapActorsToParties(actors, PartyRepository.parties)
+                _parties.value = updatedParties
+
+                // Save actors to cache
+                dataStore.saveActors(actors)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
     }
 }
-

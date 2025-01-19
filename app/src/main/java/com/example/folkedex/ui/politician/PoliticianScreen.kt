@@ -1,16 +1,21 @@
 package com.example.folkedex.ui.politician
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -21,6 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil3.compose.AsyncImage
 import com.example.folkedex.R
@@ -29,12 +35,21 @@ import com.example.folkedex.data.model.Actor
 import com.example.folkedex.domain.*
 import com.example.folkedex.model.PartyData
 import com.example.folkedex.model.PoliticianData
+import com.example.folkedex.ui.feature.PartyViewModel
+import com.example.folkedex.ui.feature.PartyViewModelFactory
 import com.example.folkedex.ui.party.Party
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PoliticianScreen(navController: NavController, name: String) {
-    val politician = PartyRepository.parties
+    val scrollState = rememberLazyListState()
+
+    val context = LocalContext.current
+    val viewModel: PartyViewModel = viewModel(
+        factory = PartyViewModelFactory(context)
+    )
+    val parties by viewModel.parties.collectAsState()
+    val politician = parties
         .flatMap { it.politicians }
         .find { it.navn == name }
     val party = politician?.let {
@@ -69,7 +84,7 @@ fun PoliticianScreen(navController: NavController, name: String) {
                         .padding(16.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    if (party != null) {
+                    if (party != null && photoUrl !=null) {
                         AsyncImage(
                             model = photoUrl,
                             contentDescription = "Photo of ${politician.navn}",
@@ -80,6 +95,16 @@ fun PoliticianScreen(navController: NavController, name: String) {
                                 .padding(4.dp),
                             contentScale = ContentScale.Crop,
                             placeholder = painterResource(R.drawable.flogo),
+                        )
+                    } else {
+                        Image(
+                            painter = painterResource(R.drawable.missingphoto),
+                            contentDescription = "Photo of ${politician.navn}",
+                            modifier = Modifier
+                                .size(300.dp)
+                                .clip(RoundedCornerShape(33.dp))
+                                .padding(8.dp),
+                            contentScale = ContentScale.Crop,
                         )
                     }
 
@@ -135,7 +160,8 @@ fun PoliticianDetails(politician: Actor) {
                 Text(
                     text = value,
                     style = MaterialTheme.typography.bodyMedium,
-                    color = Color.DarkGray
+                    color = Color.DarkGray,
+                    textAlign = TextAlign.End
                 )
             }
         }

@@ -55,7 +55,7 @@ fun PartySelectionScreen(navController: NavController, onBackClick: () -> Unit =
 
     LaunchedEffect(Unit) {
         withContext(Dispatchers.IO) {
-            viewModel.fetchAndCachePartyData(context)
+            viewModel.fetchAndCachePartyData()
         }
     }
     val scrollState = rememberLazyListState(initialFirstVisibleItemIndex = 0)
