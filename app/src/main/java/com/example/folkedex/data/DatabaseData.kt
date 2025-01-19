@@ -77,7 +77,7 @@ object PartyRepository {
         PartyData(
             name = "Moderaterne",
             path = "Moderaterne",
-            logoRes = R.drawable.moderaterne,
+            logoRes = R.drawable.moderaterne_logo,
             altLogo = R.drawable.moderaterne_logo,
             description = "Moderaterne was founded in 2022 by Lars Løkke Rasmussen with a focus on centrist policies and pragmatic solutions.",
             history = "The Moderates (Danish: Moderaterne) is a liberal political party in Denmark founded by former Prime Minister and current Minister of Foreign Affairs Lars Løkke Rasmussen. He announced the name in a foundational speech on 5 June 2021. At the same time, he said that his main scenario was that the party would be formed after the 2021 Danish local elections. The name was, according to Rasmussen, inspired by the fictitious Prime Minister Birgitte Nyborg's party Moderaterne in the hit political TV drama Borgen as well as the Swedish Moderate Party, the then–second largest party in the Swedish Riksdag. The Moderates' political position is referred to as centre to centre-right.\n" +
