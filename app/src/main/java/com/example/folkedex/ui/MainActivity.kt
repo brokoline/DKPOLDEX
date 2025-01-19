@@ -1,13 +1,16 @@
 package com.example.folkedex.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.Modifier
@@ -23,10 +26,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.lifecycleScope
+import androidx.compose.ui.unit.sp
 import com.example.folkedex.ui.common.HomeScreen
 import com.example.folkedex.ui.history.HistoryScreen
 import com.example.folkedex.ui.politician.PoliciesScreen
@@ -141,26 +148,24 @@ fun MainScreen(navController: NavHostController) {
 
 @Composable
 fun BottomTabBar(navController: NavHostController) {
-    BottomNavigation(
-        modifier = Modifier
-            .height(60.dp),
-        backgroundColor = Color.Gray
+    NavigationBar(
+        containerColor = Color.White
     ) {
-        BottomNavigationItem(
-            icon = { Icon(Icons.Default.Home, contentDescription = "Home", tint = Color.White) },
-            label = { Text("Home", color = Color.White) },
+        NavigationBarItem(
+            icon = { Icon(Icons.Default.Home, contentDescription = "Home", /*modifier = Modifier.padding(top = 10.dp),*/ tint = Color.Gray) },
+            label = { Text("Home", /*fontSize = 20.sp,*/ color = Color.Gray) },
             selected = navController.currentDestination?.route == "home",
             onClick = { navController.navigate("home") { popUpTo("home") { inclusive = true } } }
         )
-        BottomNavigationItem(
-            icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites", tint = Color.White) },
-            label = { Text("Favorites", color = Color.White) },
+        NavigationBarItem(
+            icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites", /*modifier = Modifier.padding(top = 10.dp),*/ tint = Color.Gray) },
+            label = { Text("Favorites", /*fontSize = 20.sp,*/ color = Color.Gray) },
             selected = navController.currentDestination?.route == "favorites",
             onClick = { navController.navigate("favorites") { popUpTo("home") } }
         )
-        BottomNavigationItem(
-            icon = { Icon(Icons.Default.Settings, contentDescription = "Settings", tint = Color.White) },
-            label = { Text("Settings", color = Color.White) },
+        NavigationBarItem(
+            icon = { Icon(Icons.Default.Settings, contentDescription = "Settings", /*modifier = Modifier.padding(top = 10.dp),*/ tint = Color.Gray) },
+            label = { Text("Settings", /*fontSize = 20.sp,*/ color = Color.Gray) },
             selected = navController.currentDestination?.route == "settings",
             onClick = { navController.navigate("settings") { popUpTo("home") } }
         )
@@ -169,5 +174,10 @@ fun BottomTabBar(navController: NavHostController) {
 
 @Composable
 fun SettingsScreen(navController: NavHostController) {
-    Text("Settings Screen Content Here")
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Text("--TO-BE-IMPLEMENTED--\n ----FUTURE FEATURE---")
+    }
 }
