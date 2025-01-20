@@ -13,7 +13,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -57,7 +57,7 @@ fun PartySelectionScreen(
         factory = PartyViewModelFactory(context)
     )
 
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val scrollState = rememberLazyListState()
     LaunchedEffect(Unit) {
         withContext(Dispatchers.IO) {
@@ -76,11 +76,13 @@ fun PartySelectionScreen(
                         modifier = Modifier.padding(end = 8.dp)
                     ) {
                         Icon(
-                            imageVector = Icons.Default.ArrowBack,
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Back",
                             tint = Color.Black
                         )
                     }
+                },
+                title = {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(
                             text = "FolkeDex",
@@ -99,68 +101,63 @@ fun PartySelectionScreen(
                         )
                     }
                 },
-                title = {
-
-                },
                 colors = TopAppBarDefaults.largeTopAppBarColors(
                     containerColor = Color.White,
                 )
             )
         }
     ) { innerPadding ->
-        Image(
-            painter = painterResource(id = R.drawable.flogo),
-            contentDescription = "folketinglogo",
-            modifier = Modifier
-                .size(3000.dp)
-                .padding(end = 16.dp)
-                .offset(x = 150.dp, y = (-300).dp)
-                .alpha(0.27f),
-            contentScale = ContentScale.Fit
-        )
-        LazyColumn(
-            state = scrollState,
-            modifier = Modifier
-                .fillMaxSize()
-                .nestedScroll(scrollBehavior.nestedScrollConnection)
-                .padding(innerPadding),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            items(PartyRepository.parties.chunked(2)) { rowParties ->
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 8.dp),
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    rowParties.forEach { party ->
-                        PartyCard(
-                            partyData = party,
-                            onClick = {
-                                navController.navigate(party.path)
-                            },
-                            cardWidth = cardWidth,
-                            cardHeight = cardHeight
-                        )
-                    }
+        Box(modifier = Modifier.fillMaxSize()) {
+            Image(
+                painter = painterResource(id = R.drawable.flogo),
+                contentDescription = "folketinglogo",
+                modifier = Modifier
+                    .size(3000.dp)
+                    .padding(end = 16.dp)
+                    .offset(x = 150.dp, y = (-300).dp)
+                    .alpha(0.27f),
+                contentScale = ContentScale.Fit
+            )
+            LazyColumn(
+                state = scrollState,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(
+                        top = innerPadding.calculateTopPadding()
+                    ),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                items(PartyRepository.parties.chunked(2)) { rowParties ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 8.dp),
+                        horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+                        rowParties.forEach { party ->
+                            PartyCard(
+                                partyData = party,
+                                onClick = {
+                                    navController.navigate(party.path)
+                                },
+                                cardWidth = cardWidth,
+                                cardHeight = cardHeight
+                            )
+                        }
 
-
-                    if (rowParties.size == 1) {
-                        Spacer(
-                            modifier = Modifier
-                                .width(cardWidth)
-                                .height(cardHeight)
-                        )
+                        if (rowParties.size == 1) {
+                            Spacer(
+                                modifier = Modifier
+                                    .width(cardWidth)
+                                    .height(cardHeight)
+                            )
+                        }
                     }
                 }
             }
         }
     }
 }
-
-
-
-
 
 
 
@@ -211,9 +208,3 @@ fun PartyCard(
         )
     }
 }
-
-/*@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun PreviewPartySelectionScreen() {
-    PartySelectionScreen(navController = NavController(LocalContext.current))
-}*/

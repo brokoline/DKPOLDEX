@@ -36,6 +36,7 @@ import com.example.folkedex.data.model.Actor
 import com.example.folkedex.domain.extractPartyFromBiography
 import com.example.folkedex.domain.extractPoliPictureFromBiography
 import com.example.folkedex.model.PoliticianData
+import com.example.folkedex.ui.common.HomeScreen
 import com.example.folkedex.ui.feature.PartyViewModel
 import com.example.folkedex.ui.feature.PartyViewModelFactory
 

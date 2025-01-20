@@ -16,12 +16,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 
 
 @Composable
@@ -218,16 +216,5 @@ fun CategoryCard(text: String, startColor: Color, endColor: Color, onClick: () -
                 )
             }
         }
-    }
-
-    /*@Preview(
-        showSystemUi = true,
-        showBackground = true,
-        device = "spec:width=411dp,height=891dp,dpi=420"
-    )*/
-    @Composable
-    fun PreviewHomeScreen() {
-        val navController = rememberNavController()
-        HomeScreen(navController = navController)
     }
 }
