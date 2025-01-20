@@ -73,7 +73,7 @@ fun MainScreen(navController: NavHostController) {
             composable("home") { HomeScreen(navController) }
             composable("favorites") { FavoritesScreen(navController = navController) }
             composable("com/example/folkedex/ui/news") { NewsScreen(navController = navController) }
-            composable("settings") { SettingsScreen() }
+            composable("settings") { com.example.folkedex.ui.settings.SettingsScreen(navController) }
             composable("folkedex") { PartySelectionScreen(navController = navController)}
             composable("com/example/folkedex/ui/issues") { IssuesScreen(navController = navController) }
             composable("politician/{name}") { backStackEntry ->
