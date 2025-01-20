@@ -669,10 +669,10 @@ object PartyRepository {
         ),
         PartyData(
             name = "Løsgængere",
-            path = "Uden for folketingsgrupperne",
+            path = "Løsgængere",
             logoRes = R.drawable.loes,
             altLogo = R.drawable.loesgaengere,
-            description = "An independent (løsgænger) is a member of the Danish Parliament who does not belong to any of the party groups in the Danish Parliament. An independent is called outside the parliamentary groups (UFG).",
+            description = "An løsgænger (independent) is a member of the Danish Parliament who does not belong to any of the party groups in the Danish Parliament. An independent is called outside the parliamentary groups (UFG).",
             history = "An independent, known in Danish as a \"løsgænger,\" is an elected representative who does not belong to any political party or group. Typically, individuals become independents by resigning from or being expelled from their party during their term. Since the 1953 Constitution, only Jacob Haugaard was elected to the Folketing as an independent following the 1994 election, aside from Hans Schmidt in 1953, who was technically elected as an independent while representing the Schleswig Party.\n" +
                     "\n" +
                     "Independents are more common in local politics than in the Folketing because party structures play a significant role in providing support and expertise to members, making it challenging for individuals to cover all political areas on their own. Officially, elected representatives are not referred to as independents but as being outside of parties, abbreviated in the Folketing as UFG (udenfor folketingsgrupperne). The term \"løsgænger\" is somewhat humorous, originally referring to someone without a fixed residence or occupation. Historically, being an independent was punishable by law.\n" +
@@ -682,11 +682,11 @@ object PartyRepository {
             backgroundColor = SocialdemokratietBackground,
             cardColor = altSocialdemokratiet,
             buttonColor = SocialdemokratietButton,
-            offsetX = 10f,
+            offsetX = 90f,
             offsetY = 15f,
             imageSize = 100.dp,
             logoSize = 120.dp,
-            textSize = 30.sp,
+            textSize = 40.sp,
             backColor =Color.White,
             policies = """
                         Individual priorities:
