@@ -220,7 +220,6 @@ fun CategoryCard(text: String, startColor: Color, endColor: Color, onClick: () -
         }
     }
 
-
     /*@Preview(
         showSystemUi = true,
         showBackground = true,
