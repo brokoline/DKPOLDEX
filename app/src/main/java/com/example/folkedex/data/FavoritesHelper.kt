@@ -23,4 +23,18 @@ class FavoritesHelper(context: Context) {
     fun getFavorites(): Set<String> {
         return sharedPreferences.getStringSet("favorites", emptySet()) ?: emptySet()
     }
+
+    fun clearFavorites() {
+        sharedPreferences.edit().remove("favorites").apply()
+    }
+
+
+    fun getFavoritesAsString(): String {
+        val favorites = getFavorites()
+        return if (favorites.isEmpty()) {
+            "No favorites found."
+        } else {
+            favorites.joinToString(separator = "\n") { "- $it" }
+        }
+    }
 }
