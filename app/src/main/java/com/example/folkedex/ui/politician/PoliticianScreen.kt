@@ -27,6 +27,7 @@ import coil3.compose.AsyncImage
 import com.example.folkedex.R
 import com.example.folkedex.data.FavoritesHelper
 import com.example.folkedex.data.PartyRepository
+import com.example.folkedex.data.local.DataStore
 import com.example.folkedex.data.model.Actor
 import com.example.folkedex.domain.*
 import com.example.folkedex.ui.feature.PartyViewModel
@@ -38,9 +39,8 @@ fun PoliticianScreen(navController: NavController, name: String) {
     val scrollState = rememberLazyListState()
 
     val context = LocalContext.current
-    val viewModel: PartyViewModel = viewModel(
-        factory = PartyViewModelFactory(context)
-    )
+    val dataStore = DataStore(context)
+    val viewModel: PartyViewModel = viewModel(factory = PartyViewModelFactory(dataStore))
     val parties by viewModel.parties.collectAsState()
 
     // Retrieve politician and party information
@@ -111,7 +111,7 @@ fun PoliticianScreen(navController: NavController, name: String) {
                                 .background(party.cardColor, shape = RoundedCornerShape(8.dp))
                                 .padding(4.dp),
                             contentScale = ContentScale.Crop,
-                            placeholder = painterResource(R.drawable.flogo),
+                            placeholder = painterResource(R.drawable.flogo3),
                         )
                     } else {
                         Image(

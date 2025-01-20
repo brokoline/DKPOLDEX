@@ -12,7 +12,7 @@ data class Actor(
     val fornavn: String?,
     val efternavn: String?,
     val biografi: String?,
-    val photo: Int = R.drawable.flogo, // Default to placeholder
+    val photo: Int = R.drawable.flogo3, // Default to placeholder
     @SerialName("opdateringsdato") val updatedDate: String,
     @SerialName("startdato") val startDate: String?,
     @SerialName("slutdato") val endDate: String?

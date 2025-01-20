@@ -32,6 +32,7 @@ import androidx.navigation.compose.rememberNavController
 import coil3.compose.AsyncImage
 import com.example.folkedex.R
 import com.example.folkedex.data.PartyRepository
+import com.example.folkedex.data.local.DataStore
 import com.example.folkedex.data.model.Actor
 import com.example.folkedex.domain.extractPartyFromBiography
 import com.example.folkedex.domain.extractPoliPictureFromBiography
@@ -49,9 +50,8 @@ fun PoliticianSelectionScreen(
     val scrollState = rememberLazyListState()
 
     val context = LocalContext.current
-    val viewModel: PartyViewModel = viewModel(
-        factory = PartyViewModelFactory(context)
-    )
+    val dataStore = DataStore(context)
+    val viewModel: PartyViewModel = viewModel(factory = PartyViewModelFactory(dataStore))
 
     val parties by viewModel.parties.collectAsState()
 
@@ -63,7 +63,7 @@ fun PoliticianSelectionScreen(
             .background(Color.White)
     ) {
         Image(
-            painter = painterResource(id = R.drawable.flogo),
+            painter = painterResource(id = R.drawable.flogo3),
             contentDescription = "Folketing Logo",
             modifier = Modifier
                 .size(3000.dp)

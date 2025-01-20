@@ -67,7 +67,8 @@ fun TopSectionWithSearchBar() {
         )
 
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize(),
             verticalArrangement = Arrangement.Bottom,
             horizontalAlignment = Alignment.Start
         ) {
@@ -219,16 +220,14 @@ fun CategoryCard(text: String, startColor: Color, endColor: Color, onClick: () -
             }
         }
     }
-
-
-    /*@Preview(
-        showSystemUi = true,
-        showBackground = true,
-        device = "spec:width=411dp,height=891dp,dpi=420"
-    )*/
-    @Composable
-    fun PreviewHomeScreen() {
-        val navController = rememberNavController()
-        HomeScreen(navController = navController)
-    }
+}
+@Preview(
+    showSystemUi = true,
+    showBackground = true,
+    device = "spec:width=411dp,height=891dp,dpi=420"
+)
+@Composable
+fun PreviewHomeScreen() {
+    val navController = rememberNavController()
+    HomeScreen(navController = navController)
 }

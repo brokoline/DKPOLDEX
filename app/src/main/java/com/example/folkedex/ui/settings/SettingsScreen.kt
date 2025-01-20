@@ -52,7 +52,7 @@ fun SettingsScreen(navController: NavController) {
             ) {
 
                 Image(
-                    painter = painterResource(id = R.drawable.flogo),
+                    painter = painterResource(id = R.drawable.flogo3),
                     contentDescription = null,
                     modifier = Modifier
                         .size(300.dp)

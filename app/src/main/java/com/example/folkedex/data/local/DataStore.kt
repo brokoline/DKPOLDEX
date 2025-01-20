@@ -14,7 +14,9 @@ import kotlinx.serialization.json.Json
 
 private val Context.dataStore by preferencesDataStore(name = "folkedex_datastore")
 
-class DataStore(private val context: Context) {
+class DataStore(context: Context) {
+
+    private val datastore = context.dataStore
 
     // Keys for storing data
     private val ACTORS_KEY = stringPreferencesKey("actors_data")
@@ -25,7 +27,7 @@ class DataStore(private val context: Context) {
      */
     suspend fun saveActors(actors: List<Actor>) {
         val jsonString = Json.encodeToString(actors)
-        context.dataStore.edit { preferences ->
+        datastore.edit { preferences ->
             preferences[ACTORS_KEY] = jsonString
         }
     }
@@ -34,7 +36,7 @@ class DataStore(private val context: Context) {
      * Loads the list of actors from DataStore.
      */
     suspend fun loadActors(): List<Actor> {
-        val preferences = context.dataStore.data.first()
+        val preferences = datastore.data.first()
         val jsonString = preferences[ACTORS_KEY] ?: return emptyList()
         return try {
             Json.decodeFromString(jsonString)
@@ -48,7 +50,7 @@ class DataStore(private val context: Context) {
      */
     suspend fun saveParties(parties: List<PartyData>) {
         val jsonString = Json.encodeToString(parties)
-        context.dataStore.edit { preferences ->
+        datastore.edit { preferences ->
             preferences[PARTIES_KEY] = jsonString
         }
     }
@@ -57,7 +59,7 @@ class DataStore(private val context: Context) {
      * Loads the list of parties from DataStore.
      */
     suspend fun loadParties(): List<PartyData> {
-        val preferences = context.dataStore.data.first()
+        val preferences = datastore.data.first()
         val jsonString = preferences[PARTIES_KEY] ?: return emptyList()
         return try {
             Json.decodeFromString(jsonString)

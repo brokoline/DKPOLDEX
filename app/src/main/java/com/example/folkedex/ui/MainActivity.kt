@@ -1,6 +1,7 @@
 package com.example.folkedex.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -21,11 +22,20 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.folkedex.ui.common.HomeScreen
 import com.example.folkedex.ui.history.HistoryScreen
 import com.example.folkedex.ui.politician.PoliciesScreen
@@ -38,6 +48,9 @@ import com.example.folkedex.ui.party.Party
 
 import com.example.folkedex.ui.party.PartySelectionScreen
 import com.example.folkedex.data.PartyRepository
+import com.example.folkedex.data.local.DataStore
+import com.example.folkedex.ui.feature.PartyViewModel
+import com.example.folkedex.ui.feature.PartyViewModelFactory
 import com.example.folkedex.ui.theme.IssuesScreen
 import com.example.folkedex.ui.politician.PoliticianSelectionScreen
 import com.example.folkedex.ui.theme.ReportsScreen
@@ -47,7 +60,30 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContent {
-            AppNavHost()
+            val context = LocalContext.current
+            val dataStore = DataStore(context)
+            val viewModel: PartyViewModel = viewModel(factory = PartyViewModelFactory(dataStore))
+            var isLoading by remember { mutableStateOf(true) }
+            LaunchedEffect(Unit) {
+                viewModel.fetchAndCachePartyData()
+                isLoading = false
+            }
+            if (isLoading) {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator()
+                }
+            } else {
+                // Show the main content
+                AppNavHost()
+            }
+            val parties by viewModel.parties.collectAsState()
+            val politician = parties
+                .flatMap { it.politicians }
+            Log.d("api content test", politician.toString())
+            //AppNavHost()
         }
     }
 }
