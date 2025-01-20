@@ -26,71 +26,70 @@ import com.example.folkedex.ui.common.FolketingLogo
 
 @Composable
 fun HistoryScreen(navController: NavHostController, partyData: PartyData) {
-    Scaffold(
-        topBar = {
-            Box(
+    Box(modifier = Modifier.fillMaxSize()) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp)
+                .background(partyData.backgroundColor),
+            contentAlignment = Alignment.CenterStart
+        ) {
+            FolketingLogo(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
-                    .background(partyData.backgroundColor),
-                contentAlignment = Alignment.CenterStart
+                    .align(Alignment.CenterEnd)
+                    .offset(x = -50.dp, y = -5.dp)
+                    .size(205.dp)
+                    .zIndex(0f)
+            )
+            IconButton(
+                onClick = { navController.popBackStack() },
+                modifier = Modifier.padding(start = 16.dp)
             ) {
-                FolketingLogo(
-                    modifier = Modifier
-                        .align(Alignment.CenterEnd)
-                        .offset(x = -50.dp)
-                        .offset(y = -5.dp)
-                        .size(205.dp)
-                        .zIndex(0f)
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = "Back",
+                    tint = partyData.backColor
                 )
-                IconButton(
-                    onClick = { navController.popBackStack() },
-                    modifier = Modifier.padding(start = 16.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "Back",
-                        tint = partyData.backColor
-                    )
-                }
-
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.offset(x = partyData.offsetX.dp, y = partyData.offsetY.dp)
-                ) {
-                    Image(
-                        painter = painterResource(id = partyData.logoRes),
-                        contentDescription = "Centered Image",
-                        modifier = Modifier.size(partyData.imageSize).padding(bottom = 4.dp)
-                    )
-                    Text(
-                        partyData.path,
-                        fontSize = partyData.textSize,
-                        color = partyData.backColor,
-                        style = androidx.compose.material3.MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
-                    )
-                }
             }
-        },
-        content = { paddingValues ->
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues)
-                    .padding(16.dp),
-                verticalArrangement = Arrangement.Top,
-                horizontalAlignment = Alignment.CenterHorizontally
+
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.offset(x = partyData.offsetX.dp, y = partyData.offsetY.dp)
             ) {
-                item {
-                    Text(
-                        text = partyData.history,
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Normal,
-                        color = Color.Black,
-                        textAlign = TextAlign.Start
-                    )
-                }
+                Image(
+                    painter = painterResource(id = partyData.logoRes),
+                    contentDescription = "Centered Image",
+                    modifier = Modifier
+                        .size(partyData.imageSize)
+                        .padding(bottom = 4.dp)
+                )
+                Text(
+                    partyData.path,
+                    fontSize = partyData.textSize,
+                    color = partyData.backColor,
+                    style = androidx.compose.material3.MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+                )
             }
         }
-    )
+
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 200.dp),
+            verticalArrangement = Arrangement.Top
+        ) {
+            item {
+                Text(
+                    text = partyData.history,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Normal,
+                    color = Color.Black,
+                    textAlign = TextAlign.Start,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp)
+                )
+            }
+        }
+    }
 }
