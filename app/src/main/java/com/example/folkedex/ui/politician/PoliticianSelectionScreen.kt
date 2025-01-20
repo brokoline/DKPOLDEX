@@ -1,6 +1,5 @@
 package com.example.folkedex.ui.politician
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -10,7 +9,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -25,18 +24,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import coil3.compose.AsyncImage
 import com.example.folkedex.R
 import com.example.folkedex.data.PartyRepository
 import com.example.folkedex.data.model.Actor
 import com.example.folkedex.domain.extractPartyFromBiography
 import com.example.folkedex.domain.extractPoliPictureFromBiography
-import com.example.folkedex.model.PoliticianData
-import com.example.folkedex.ui.common.HomeScreen
 import com.example.folkedex.ui.feature.PartyViewModel
 import com.example.folkedex.ui.feature.PartyViewModelFactory
 
@@ -82,7 +77,7 @@ fun PoliticianSelectionScreen(
             contentScale = ContentScale.Fit
         )
 
-        Column {
+        Column(modifier = Modifier.fillMaxSize()) {
             TopBarWithSearch(
                 navController = navController,
                 partyName = partyName,
@@ -92,9 +87,7 @@ fun PoliticianSelectionScreen(
 
             LazyColumn(
                 state = scrollState,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(top = 8.dp),
+                modifier = Modifier.fillMaxSize(), // Listen går op under søgefeltet
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 items(filteredPoliticians.chunked(2)) { rowPoliticians ->
@@ -137,12 +130,12 @@ fun TopBarWithSearch(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+            .background(Color.Transparent)
+            .padding(horizontal = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(2.dp)
     ) {
         Row(
-            modifier = Modifier
-                .padding(top = 30.dp),
+            modifier = Modifier.padding(top = 8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(
@@ -150,7 +143,7 @@ fun TopBarWithSearch(
                 modifier = Modifier.size(24.dp)
             ) {
                 Icon(
-                    imageVector = Icons.Default.ArrowBack,
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = "Back",
                     tint = Color.Black
                 )
@@ -160,9 +153,10 @@ fun TopBarWithSearch(
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
                 color = Color.Black,
-                modifier = Modifier.padding(start = 50.dp)
+                modifier = Modifier.padding(start = 16.dp)
             )
         }
+
         com.example.folkedex.ui.common.SearchBar(
             value = searchQuery,
             onValueChange = onSearchQueryChange

@@ -102,7 +102,7 @@ fun PartySelectionScreen(
                     }
                 },
                 colors = TopAppBarDefaults.largeTopAppBarColors(
-                    containerColor = Color.White,
+                    containerColor = Color.Transparent,
                 )
             )
         }
