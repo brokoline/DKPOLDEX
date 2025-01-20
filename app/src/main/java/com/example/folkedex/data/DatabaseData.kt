@@ -94,26 +94,18 @@ object PartyRepository {
             logoSize = 160.dp,
             textSize = 40.sp,
             backColor =Color.White,
-            policies = "Danmark er et fantastisk land. Et godt sted at vokse op, stifte familie og blive gammel. På mange måder har vi fundet opskriften på et samfund med en god balance mellem lighed, frihed og tryghed. Det er solsiden af fortællingen om Danmark. Og det er en sand fortælling.\n" +
-                    "\n" +
-                    "Men – hånden på hjertet – der er også en skyggeside:\n" +
-                    "\n" +
-                    "Vores velfærd er grundlæggende udfordret på kerneopgaven både demografisk, økonomisk og strukturelt.\n" +
-                    "\n" +
-                    "For mange unge opbygger ikke faglige færdigheder og personlig robusthed til få fodfæste på arbejdsmarkedet.\n" +
-                    "For mange idéer og initiativer bliver ikke omsat til arbejdspladser og velstand, fordi vi mangler kvalificeret arbejdskraft og taber i konkurrence til andre lande med mere attraktive investeringsvilkår.\n" +
-                    "For mange ældre medborgere får ikke en værdig pleje og omsorg.\n" +
-                    "For mange mennesker lever på kanten af samfundet uden at være en aktiv del af fællesskabet.\n" +
-                    "For mange med anden etnisk baggrund end dansk er ikke fuldt deltagende i arbejds- og samfundslivet.\n" +
-                    "Og vores sygehusvæsen – som ellers har leveret f.eks. langt bedre kræftbehandling over de sidste snart mange år – er under voldsomt pres. Ikke bare fra Covid-19-pandemien, men fra demografi, livstilssygdomme og uattraktive arbejdsvilkår.\n" +
-                    "\n" +
-                    "Det er også en sand beskrivelse af Danmark!\n" +
-                    "\n" +
-                    "MODERATERNE har et brændende ønske om at finde løsningerne og samle de ansvarlige partier om at løse de udfordringer, der ellers sander til i fastlåste højre-venstre-positioner. Det er sådan, at vi forløser drømmen om at skabe et endnu bedre Danmark med frihed, frisind, virkelyst og fremgang.\n" +
-                    "\n" +
-                    "Vi har ikke patent på den drøm. Heldigvis. Men det er ikke nok at drømme; der skal handles for at realisere drømmen. Og vi er forbi det punkt, hvor det kan ske med en ekstra milliard til offentligt forbrug, en finjustering af skatteskruen eller smarte slogans om velfærdslove, der lover mere end de holder, eller symbolske værdipolitiske meldinger uden reel effekt.\n" +
-                    "\n" +
-                    "For få tør tænke nyt eller højt. De politiske blokke lurer på hinanden. For meget handler om dagens avisoverskrift og morgendagens meningsmåling – for lidt om, hvad vi for alvor skal forandre, hvis vi ikke bare vil fastholde, men udbygge vores velfærd, velstand og muligheder.",
+            policies = """
+                        Main Principles:
+                            - Change from the center: Moderaterne aims to unite responsible parties to solve challenges through pragmatic solutions, not tied to traditional right-left positions.
+                             - View on humanity: The party celebrates personal freedom combined with the duty of citizenship, based on trust in the individual and the abilities of civil society.
+
+                        Core Areas:
+                            - Health: Moderaterne advocates for a citizen-centered healthcare system with better access to doctors, home treatment teams, and restructuring of regions to ensure uniform treatment across the country.
+                            - Climate and Environment: The party aims for ambitious climate goals and concrete actions within green industries and agriculture, as well as strengthened nature and environmental policies.
+                            - Education: Moderaterne focuses on improving the quality of education, providing better opportunities for vocational pathways for young people, and ensuring companies have improved recruitment opportunities.
+                            - Employment: The party works to integrate more young people into the labor market and improve conditions for entrepreneurs by removing burdens like the 'Tax from Hell.'
+                            - EU Policy: Moderaterne supports strong European cooperation with a focus on higher climate goals, security policy, and an open internal market.
+                        """.trimIndent()
 
         ),
         PartyData(
@@ -138,23 +130,19 @@ object PartyRepository {
             logoSize = 80.dp,
             textSize = 40.sp,
             backColor =Color.White,
-            policies = "True social security and welfare is based on a high level of private production financing the welfare. We cannot in the long term carry on maintaining a high living standard and an extensive social security system by becoming indebted. Curbing the national and foreign debts of Denmark is therefore a central objective for our economic policies. Venstre's economic policy is aiming at a stable and sustainable growth of employment. Economic policies should build on four corner stones; low inflation rate; low interest rates; fixed currency rate and sound and stable public finance. The national budget should be balanced; public debts bring about problems of tax distribution and carry forward tax burdens into the next generation.\n" +
-                    "\n" +
-                    "Venstre works for a gradual lowering of the tax burden. Progress in a society is based on the principle that it is worth while having a job, saving, investing and taking risks. This is why society should stimulate private initiative and independence everywhere.\n" +
-                    "\n" +
-                    "Venstre stands for a free market economy, - both because it fulfills most efficiently people's individual wishes and needs, and because the individual person has a basic right to interact with other people. A free market economy ensures dynamic growth and innovation in both material and non material values.\n" +
-                    "\n" +
-                    "Venstre wants social security with the highest freedom of choice. We have a responsibility for people who cannot look after themselves. The stronger has to look after the weaker. This is why we have to co-finance hospitals, nursing homes and other institutions and that we are economically and socially secured when we get old, if we become ill and unemployed. The welfare system should ensure that its citizens can have the highest freedom of choice and the strictest control of public finance. Liberal politics is to combine social security with the highest possible level of freedom and independence for the individual citizens.\n" +
-                    "\n" +
-                    "It is important to stimulate qualitative growth. The advance in technology can bring about interesting possibilities of growth in the quality of life if we conscientiously use it for creating a better framework for family life and human contact, cultural life and education. New technology could also contribute to ensuring a cleaner environment and better working conditions. Also the individual citizen is responsible for taking care of the environment by reducing the use of products with a heavy environmental impacts and by reducing the amount of waste.\n" +
-                    "\n" +
-                    "The backbone of a liberal environmental policy is the \"polluter-pays principle\". Economic incentives should make it attractive to protect and improve the environment. Venstre is on guard against totalitarian powers being bestowed on governments in the name of environmental protection. An efficient protection of the environment should be linked with freedom and market economy.\n" +
-                    "\n" +
-                    "Pollution does not respect borders, which is why it should be combatted through international cooperation. The European cooperation should be strengthened. Environmental taxes should have a positive impact on the environment. The principle therefore has to be that the consumer or the producer should be able to avoid or reduce environmental taxes by changing ways of consumption or manufacturing.\n" +
-                    "\n" +
-                    "Environmental taxes should not increase the overall tax burden but constitute an economical incentive for environmentally friendly behaviour.\n" +
-                    "\n" +
-                    "A liberal industrial policy builds on the assumption that private companies know better than public authorities what will become future products or areas of growth. Businesses should be allowed to make a profit in order to develop new products and invest in new manufacturing. The source of innovation are the entrepreneurs. They discover new niches and start a new production in order to fill these niches. They develop new, better and cheaper methods of production. This is why it should become easier to establish and run a company.",
+            policies = """
+                        Main Principles:
+                            - Freedom with responsibility: Venstre believes that people thrive best in freedom combined with responsibility, where the individual has the right and obligation to take responsibility for their own life.
+                            - Commitment to international cooperation: The party wishes for Denmark to actively participate in international collaborations to ensure freedom, peace, and improved living conditions globally.
+
+                        Core Areas:
+                            - Health: Venstre advocates for a healthcare system closer to citizens, with more general practitioners and modern health centers across the country.
+                            - Climate and Environment: The party focuses on green transition through investments in the future's climate and nature, as well as a green tax reform.
+                            - Education: Venstre aims to improve education with more flexibility, higher quality, and stronger ties to the labor market.
+                            - Employment: The party believes it should always pay to work and strives for more freedom and opportunities for working Denmark.
+                            - Business: Venstre aims to make Denmark the best country in the world to be an entrepreneur through tax cuts and better conditions for businesses.
+                        """.trimIndent()
+
         ),
         PartyData(
             name = "Socialdemokratiet",
@@ -180,7 +168,20 @@ object PartyRepository {
             logoSize =80.dp,
             textSize = 40.sp,
             backColor =Color.White,
-            policies = ""
+            policies = """
+                        Main Principles:
+                            - Freedom, equality, and solidarity: The party strives for a welfare society based on these core values, where the community creates security and freedom for the individual.
+
+                        Core Areas:
+                            - Employment: Socialdemokratiet works to create more jobs and ensure that it always pays to work.
+                            - Housing: The party aims for cities with room for everyone and works to secure more public housing.
+                            - Children: All children should have the best opportunities, and Socialdemokratiet focuses on early intervention and better staff-to-child ratios in daycare institutions.
+                            - Vocational Education: The party seeks to strengthen vocational education to ensure a skilled workforce and provide young people with more educational opportunities.
+                            - EU: Socialdemokratiet supports EU cooperation where it makes sense and works for a social dimension in EU policies.
+                            - Climate: The party aims for Denmark to be a green pioneer country and works for ambitious climate goals and green transition.
+                            - Growth and Businesses: Socialdemokratiet advocates for better conditions for private businesses and a responsible economic policy.
+                        """.trimIndent()
+
         ),
         PartyData(
             name = "Radikale Venstre",
@@ -204,11 +205,22 @@ object PartyRepository {
             logoSize = 120.dp,
             textSize = 40.sp,
             backColor =Color.White,
-            policies = ""
+            policies = """
+                        Main Principles:
+                            - Social liberalism: The party seeks to combine personal freedom with social responsibility, where the state creates the framework for individuals to thrive and contribute to society.
+                            - International cooperation: Radikale Venstre strongly supports international cooperation and works to strengthen Denmark's role in global institutions such as the EU.
+
+                        Core Areas:
+                            - Democracy and Rule of Law: The party fights to preserve and strengthen democratic values and principles, including equality before the law and the protection of individual rights.
+                            - Climate and Environment: Radikale Venstre advocates for sustainable development and aims to leave the Earth in a better state for future generations through ambitious climate and environmental policies.
+                            - Education: The party places a high priority on education, viewing it as essential for both individual and societal development. They work to ensure equal access to quality education for all.
+                            - Integration and Diversity: Radikale Venstre sees strength in diversity and differences within the community. The party defends an open-mindedness that not only tolerates differences but also embraces change through encounters with diversity.
+                        """.trimIndent()
+
         ),
         PartyData(
-            name = "Konservative Folkeparti",
-            path = "Konservative Folkeparti",
+            name = "Det Konservative Folkeparti",
+            path = "Det Konservative Folkeparti",
             logoRes = R.drawable.konserative,
             altLogo = R.drawable.konserative,
             description = "The Konservative Folkeparti was founded in 1915 and has roots in the former Højre party, focusing on private property rights and traditions.",
@@ -235,7 +247,19 @@ object PartyRepository {
             logoSize = 100.dp,
             textSize = 30.sp,
             backColor =Color.White,
-            policies = ""
+            policies = """
+                        Main Principles:
+                            - Freedom and Responsibility: The party believes that individual freedom and personal responsibility go hand in hand, and a free society is achieved when individuals take responsibility for themselves and their loved ones.
+                            - Strong Communities: Protects natural communities such as families and civil society, which are considered the foundation of a healthy society.
+
+                        Core Areas:
+                            - Economy and Taxes: Advocates for responsible economic policies focused on tax cuts, including reducing income taxes and eliminating inheritance tax.
+                            - Climate and Environment: Supports a green transition through a responsible green tax reform, making Denmark a green pioneer without hindering economic growth.
+                            - Immigration and Integration: Pursues a strict and responsible immigration policy with a focus on integration and requirements for understanding Danish culture and language.
+                            - Defense: Supports a strong Danish defense to guarantee Denmark's sovereignty and continued strong NATO cooperation.
+                            - EU Policy: Recognizes the importance of a well-functioning European collaboration as a prerequisite for growth and prosperity in Denmark but emphasizes the need for the EU to respect the sovereignty of its member states.
+                        """.trimIndent()
+
         ),
         PartyData(
             name = "Socialistisk Folkeparti",
@@ -264,7 +288,19 @@ object PartyRepository {
             logoSize = 120.dp,
             textSize = 30.sp,
             backColor =Color.White,
-            policies = ""
+            policies = """
+                       Main Principles:
+                            - Socialism and Democracy: Advocates for a socialist society based on solidarity, equality, and sustainability. Aims to strengthen democracy at all levels of society.
+                            - Green Transition: Prioritizes environment and climate with a focus on making Denmark a green pioneer. Promotes sustainable development across all sectors.
+
+                       Core Areas:
+                            - Children and Youth: Works to improve conditions for children and families, including better staff-to-child ratios in daycare institutions. Increases investments in education and children's well-being.
+                            - Climate and Environment: Supports ambitious climate goals and the green energy transition. Invests in plant-based foods and better protection of nature and marine environments.
+                            - Immigration and Integration: Proposes a more humane immigration policy focusing on integration and family reunification. Aims to challenge strict and bureaucratic regulations.
+                            - EU Policy: Engages in a green and solidarity-based European collaboration. Works for joint solutions across borders.
+                            - Welfare and Health: Protects and develops the Danish welfare model with a focus on health and social justice. Aims to improve conditions for employees in the health and care sectors.
+                        """.trimIndent()
+
         ),
         PartyData(
             name = "Liberal Alliance",
@@ -291,7 +327,29 @@ object PartyRepository {
             logoSize = 120.dp,
             textSize = 40.sp,
             backColor =Color.White,
-            policies = ""
+            policies = """
+                        Main Principles:
+                            - Personal Freedom: Liberal Alliance believes individuals thrive best with maximum freedom to shape their own lives.
+                            - Open-mindedness: The party supports diversity and accepts different life choices as long as they do not harm others.
+                            - Less State, More Private: Liberal Alliance advocates for limited state power with lower taxes and less bureaucracy, creating room for private initiative.
+                            - Freedom with Responsibility: Personal freedom comes with the responsibility for one's own actions and their consequences.
+
+                        Core Areas:
+                            - Tax Policy:
+                            - Abolishment of the top tax bracket to increase incentives for work and investment.
+                            - No taxation on the first 7,000 DKK per month, providing citizens with greater economic freedom.
+                            - Reduction of corporate taxes to attract investments and create jobs.
+                            - Welfare:
+                            - Introduction of welfare accounts, allowing citizens to save for future welfare services under favorable tax conditions.
+                            - Promotion of free choice between public and private welfare options to improve quality and efficiency.
+                            - Rule of Law and Democracy:
+                            - Strengthening legal certainty and ensuring equality before the law for all citizens.
+                            - Limiting state surveillance and protecting privacy rights.
+                            - Climate Policy:
+                            - Achieving 100% CO₂ reduction by 2030 through international cooperation and market-based solutions.
+                            - Supporting technological innovation and green energy as drivers of sustainable growth.
+                        """.trimIndent()
+
         ),
         PartyData(
             name = "Dansk Folkeparti",
@@ -322,7 +380,24 @@ object PartyRepository {
             logoSize = 120.dp,
             textSize = 30.sp,
             backColor =Color.White,
-            policies = ""
+            policies = """
+                        Main Principles:
+                            - National Sovereignty: Dansk Folkeparti seeks to preserve Denmark's independence and opposes further transfer of sovereignty to the EU.
+                            - Cultural Preservation: The party works to protect Danish culture and traditions from influences they consider to be in conflict with Danish values.
+
+                        Core Areas:
+                            - Immigration Policy:
+                            - Dansk Folkeparti pursues a strict immigration policy and aims to limit immigration, particularly from non-Western countries.
+                            - The party works to deport criminal and unintegrated foreigners back to their countries of origin.
+                            - Social Policy:
+                            - The party advocates for a responsible and dignified social policy where care and support for vulnerable citizens are public responsibilities.
+                            - They believe a society should be judged by how it treats its weakest members.
+                            - Environmental Policy:
+                            - The overarching goal is to prevent human intervention that disrupts nature's balance to ensure a healthy environment for present and future generations.
+                            - EU Policy:
+                            - Dansk Folkeparti is skeptical of the EU and advocates for an open and democratic collaboration among independent nations without a European elite rule.
+                            """.trimIndent()
+
         ),
         PartyData(
             name = "Danmarksdemokraterne",
@@ -345,7 +420,21 @@ object PartyRepository {
             logoSize = 120.dp,
             textSize = 30.sp,
             backColor =Color.White,
-            policies = ""
+            policies = """
+                       Main Principles:
+                            - Denmark in Balance: The party works to create equal opportunities and development across the entire country, with a focus on strengthening areas outside the major cities.
+
+                        Core Areas:
+                            - Immigration Policy:
+                            - Danmarksdemokraterne pursues a strict immigration policy focusing on integration and requirements for understanding Danish culture and language.
+                            - Health:
+                            - The party aims for a healthcare system closer to citizens, ensuring better access to doctors and healthcare services throughout the country.
+                            - Production Denmark:
+                            - Danmarksdemokraterne works to strengthen Danish businesses and ensure favorable conditions for production and industry.
+                            - EU Policy:
+                            - The party seeks to limit EU influence on Danish matters and advocates for a more independent Denmark within the EU.
+                        """.trimIndent()
+
         ),
         PartyData(
             name = "Enhedslisten",
@@ -374,7 +463,27 @@ object PartyRepository {
             logoSize = 120.dp,
             textSize = 35.sp,
             backColor =Color.White,
-            policies = ""
+            policies = """
+                        Main Principles:
+                            - Socialism and Democracy: Enhedslisten works to create a socialist democracy in Denmark by expanding democracy and combating the negative effects of capitalism, such as inequality and environmental destruction.
+                            - Green Transition: The party prioritizes environmental protection and sustainable development, aiming to make Denmark a green pioneer country.
+
+                        Core Areas:
+                            - Social Policy:
+                            - Enhedslisten fights against social inequality and poverty and advocates for strengthening and expanding the welfare state.
+                            - The party believes in inclusion for all, regardless of gender, sexuality, disability, or ethnic background.
+                            - Economic Policy:
+                            - The party is strongly anti-capitalist and has notably opposed tax evasion through transfer pricing, where multinational companies minimize their tax payments by placing profits in low-tax countries.
+                            - Enhedslisten advocates for a larger public sector to improve the quality of life for public employees and citizens.
+                            - Education:
+                            - The party believes everyone should have free access to education and opposes tuition fees, as they hinder equal opportunities for obtaining an education.
+                            - Foreign Policy:
+                            - Enhedslisten supports a foreign policy based on respect for human rights and aims to double development aid.
+                            - The party advocates for Denmark to leave NATO.
+                            - EU Policy:
+                            - Enhedslisten is critical of the EU and believes Denmark should be allowed to implement better rules if a majority in Denmark supports them, even if it challenges the EU’s internal market.
+                        """.trimIndent()
+
         ),
         PartyData(
             name = "Alternativet",
@@ -396,7 +505,23 @@ object PartyRepository {
             logoSize = 120.dp,
             textSize = 40.sp,
             backColor =Color.Black,
-            policies = ""
+            policies = """
+                        Main Principles:
+                            - Alternativet is built on six core values:
+                            - Courage, Generosity, Transparency, Humility, Humor and Empathy
+                            - These values form the foundation of the party’s policies and approach to societal development.
+
+                        Core Areas:
+                            - Climate and Sustainability:
+                            - Advocates for a serious sustainable transition in Denmark with a focus on the environment and climate.
+                            - New Political Culture:
+                            - Aims to renew the political culture through transparency, inclusion, and dialogue.
+                            - Social Justice:
+                            - Strives for a society with less inequality and more social justice.
+                            - Economic Sustainability:
+                            - Promotes an economy that supports green transition and social balance.
+                        """.trimIndent()
+
         ),
         PartyData(
             name = "Sambandsflokkurin",
@@ -415,7 +540,20 @@ object PartyRepository {
             logoSize = 120.dp,
             textSize = 30.sp,
             backColor =Color.White,
-            policies = ""
+            policies = """
+                        Main Principles:
+                            - Preservation of the Realm Community: The party's primary goal is to preserve and strengthen the Faroe Islands' connection to Denmark.
+                            - Social Liberal Policy: Sambandsflokkurin pursues a social liberal policy focusing on individual freedom, business development, and social considerations.
+
+                        Core Areas:
+                            - Economic Policy:
+                            - The party promotes a conservative-liberal economic policy emphasizing business development and economic growth.
+                            - Cultural Issues:
+                            - Sambandsflokkurin is engaged in cultural matters and works to strengthen Faroese culture and identity within the framework of the Realm Community.
+                            - Reform of the Realm Community:
+                            - The party proposes reforms to the Realm Community, ensuring that areas such as the constitution, currency, monarchy, judicial system, police, prosecution service, corrections system, and foreign, security, and defense policies (partially) remain shared matters between the Faroe Islands and Denmark.
+                        """.trimIndent()
+
         ),
         PartyData(
             name = "Javnaðarflokkurin",
@@ -440,7 +578,21 @@ object PartyRepository {
             logoSize = 120.dp,
             textSize = 30.sp,
             backColor =Color.White,
-            policies = ""
+            policies = """
+                       Main Principles:
+                            - Social Democracy: The party is founded on the values of freedom, equality, and solidarity, working for a secure and fair society without poverty.
+
+                       Core Areas:
+                            - Welfare:
+                            - Javnaðarflokkurin aims to strengthen the welfare state and ensure social justice for all citizens.
+                            - Economy:
+                            - The party promotes sustainable economic development that generates growth and jobs in the Faroe Islands.
+                            - Education:
+                            - Javnaðarflokkurin works to ensure equal access to education and lifelong learning for everyone.
+                            - Environment:
+                            - The party prioritizes sustainable development and environmental protection for future generations.
+                        """.trimIndent()
+
         ),
         PartyData(
             name = "Siumut",
@@ -461,7 +613,22 @@ object PartyRepository {
             logoSize = 120.dp,
             textSize = 30.sp,
             backColor =Color.White,
-            policies = ""
+            policies = """
+                        Main Principles:
+                            - Social Democracy: Siumut pursues a social democratic policy focusing on social justice and welfare.
+                            - Independence: The party works to strengthen Greenland's self-governance within the Realm Community with Denmark, with a long-term vision of full independence achieved in cooperation with Denmark.
+
+                        Core Areas:
+                            - Economic Development:
+                            - Siumut promotes a sustainable economic policy that supports growth and development in Greenland.
+                            - Education:
+                            - The party prioritizes education as a key factor for societal development and works to improve the education system.
+                            - Environment and Natural Resources:
+                            - Siumut advocates for the responsible use of Greenland's natural resources, with respect for the environment and future generations.
+                            - Health and Welfare:
+                            - The party works to ensure all citizens have access to healthcare services and a strong social safety net.
+                        """.trimIndent()
+
         ),
         PartyData(
             name = "Inuit Ataqatigiit",
@@ -486,7 +653,19 @@ object PartyRepository {
             logoSize = 120.dp,
             textSize = 30.sp,
             backColor =Color.White,
-            policies = ""
+            policies = """
+                       Main Principles:
+                            - Socialism and Independence: The party strives for an economically and politically independent Greenland, guided by the principles of sustainability.
+
+                       Core Areas:
+                            - Sustainable Development:
+                            - Inuit Ataqatigiit emphasizes that Greenland's resources should benefit the entire society and that political efforts should be based on equality, mutual respect, and solidarity.
+                            - Social Justice:
+                            - The party works to develop a strong, just, and sustainable society with room for everyone, based on democracy, equality, and human rights.
+                            - Education and Culture:
+                            - Inuit Ataqatigiit prioritizes education and cultural strength as foundations for Greenland's future.
+                        """.trimIndent()
+
         ),
         PartyData(
             name = "Løsgængere",
@@ -509,7 +688,40 @@ object PartyRepository {
             logoSize = 120.dp,
             textSize = 30.sp,
             backColor =Color.White,
-            policies = ""
+            policies = """
+                        Individual priorities:
+                            - Independent politicians typically base their policies on personal beliefs, key issues, or causes that may range from environmental policy to economic reform.
+                            - They often have a freer role and can address specific issues without being bound by a party platform.
+
+                        Independence:
+                            - Independents operate outside of party politics, allowing them to take positions on a case-by-case basis without regard for party lines or internal majority decisions.
+
+                        Political positions:
+                            - There is no fixed political direction for independents, as they may range from the far-right or far-left to pragmatic and centrist positions.
+                            - They often focus on issues that led to their break from a former party or specific ideological divides.
+
+                        Pragmatism or protest:
+                            - Some independents aim to create concrete solutions in collaboration with other parties.
+                            - Others may be protest politicians primarily opposing systems, institutions, or policies they were previously part of.
+
+                        Limited influence:
+                            - Without a party backing them, independents may have limited parliamentary power but can gain significant attention if they represent controversial or popular viewpoints.
+
+                        Examples in Denmark:
+                            - Notable independents in the Danish Parliament have included politicians who left their parties due to ideological disagreements or personal conflicts. Examples include Uffe Elbæk and Simon Emil Ammitzbøll-Bille, who later founded their own parties.
+
+                        How do they function in practice?
+
+                        Voting in parliament:
+                            - Independents have the freedom to vote independently of party blocs, allowing them to support one side on one issue and the other side on another.
+
+                        Visibility:
+                            - Independents may find it harder to gain media coverage and influence unless their issues or personalities attract significant attention.
+
+                        Practical Collaboration:
+                            - They often need to collaborate with parties or other politicians to gain support for their proposals.
+                        """.trimIndent()
+
         ),
 
     )
