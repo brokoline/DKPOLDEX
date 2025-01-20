@@ -164,7 +164,8 @@ fun TopBarWithSearch(
         }
         com.example.folkedex.ui.common.SearchBar(
             value = searchQuery,
-            onValueChange = onSearchQueryChange
+            onValueChange = onSearchQueryChange,
+            onFocusChanged = {}
         )
     }
 }
