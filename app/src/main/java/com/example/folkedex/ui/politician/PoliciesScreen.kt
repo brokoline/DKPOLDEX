@@ -21,15 +21,17 @@ import androidx.navigation.NavHostController
 import com.example.folkedex.model.PartyData
 import com.example.folkedex.ui.common.FolketingLogo
 
+
+
 @Composable
-fun PoliciesScreen(navController: NavHostController, party: PartyData) {
+fun PoliciesScreen(navController: NavHostController, partyData: PartyData) {
     Scaffold(
         topBar = {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(200.dp)
-                    .background(party.backgroundColor),
+                    .background(partyData.backgroundColor),
                 contentAlignment = Alignment.CenterStart
             ) {
                 FolketingLogo(
@@ -47,25 +49,24 @@ fun PoliciesScreen(navController: NavHostController, party: PartyData) {
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
                         contentDescription = "Back",
-                        tint = party.cardColor
+                        tint = partyData.backColor
                     )
                 }
 
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.offset(x = party.offsetX.dp, y = party.offsetY.dp)
+                    modifier = Modifier.offset(x = partyData.offsetX.dp, y = partyData.offsetY.dp)
                 ) {
-                    Text(
-                        text = "M", // Assuming "M" is a placeholder for the party icon or initial
-                        fontSize = 40.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = party.cardColor
+                    Image(
+                        painter = painterResource(id = partyData.logoRes),
+                        contentDescription = "Centered Image",
+                        modifier = Modifier.size(partyData.imageSize).padding(bottom = 4.dp)
                     )
                     Text(
-                        text = party.name.uppercase(),
-                        fontSize = 24.sp,
-                        color = party.cardColor,
-                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+                        partyData.path,
+                        fontSize = partyData.textSize,
+                        color = partyData.backColor,
+                        style = androidx.compose.material3.MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     )
                 }
             }
@@ -75,14 +76,14 @@ fun PoliciesScreen(navController: NavHostController, party: PartyData) {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues)
-                    .padding(horizontal = 16.dp),
+                    .padding(16.dp),
                 verticalArrangement = Arrangement.Top,
-                horizontalAlignment = Alignment.Start
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 item {
                     Text(
-                        text = party.policies,
-                        fontSize = 18.sp,
+                        text = partyData.policies,
+                        fontSize = 20.sp,
                         fontWeight = FontWeight.Normal,
                         color = Color.Black,
                         textAlign = TextAlign.Start

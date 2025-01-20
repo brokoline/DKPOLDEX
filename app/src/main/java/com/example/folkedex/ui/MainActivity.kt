@@ -86,11 +86,11 @@ fun MainScreen(navController: NavHostController) {
                 val partyData = PartyRepository.getPartyByName(partyName)
 
                 if (partyData != null) {
-                    PoliciesScreen(navController = navController, party = partyData)
+                    PoliciesScreen(navController = navController, partyData = partyData)
                 } else {
-                    // Show an error or blank screen if the party data is null
-                    Text("Party data not found", color = Color.Red, modifier = Modifier.fillMaxSize())
+                    Text(text = "Party data not found", color = Color.Red, modifier = Modifier.fillMaxSize())
                 }
+
             }
             composable("reports") { ReportsScreen(navController = navController) }
             composable("bills") { BillScreen(navController = navController) }
