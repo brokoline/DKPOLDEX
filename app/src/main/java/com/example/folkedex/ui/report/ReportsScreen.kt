@@ -9,6 +9,10 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Info // Importer et andet ikon, hvis det er passende
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,11 +30,20 @@ data class Report(val title: String, val link: String)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReportsScreen( onReportClick: (String) -> Unit = {}, navController: NavController) {
+
+    var searchQuery by remember { mutableStateOf("") }
+
     val reports = listOf(
         Report(title = "Budget Proposal 2023", link = "https://www.ft.dk/budget2023"),
         Report(title = "Health Care Reform", link = "https://www.ft.dk/healthcarereform"),
         Report(title = "Climate Action Plan", link = "https://www.ft.dk/climateaction"),
     )
+
+    val filteredReports = if (searchQuery.isBlank()) {
+        reports
+    } else {
+        reports.filter { it.title.contains(searchQuery, ignoreCase = true) }
+    }
 
     Scaffold(
         topBar = {
@@ -80,11 +93,14 @@ fun ReportsScreen( onReportClick: (String) -> Unit = {}, navController: NavContr
                         color = Color.White,
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     )
-                    var searchQuery = ""
+
                     com.example.folkedex.ui.common.SearchBar(
+                        value = searchQuery,
+                        onValueChange = { newText ->
+                            searchQuery = newText
+                        },
                         modifier = Modifier
-                            .padding(horizontal = 15.dp),value = searchQuery,
-                        onValueChange = { searchQuery  = it }
+                            .padding(horizontal = 15.dp)
                     )
                 }
             }
@@ -97,7 +113,7 @@ fun ReportsScreen( onReportClick: (String) -> Unit = {}, navController: NavContr
                     .padding(horizontal = 26.dp)
                     .padding(vertical = 26.dp)
             ) {
-                items(reports) { report ->
+                items(filteredReports) { report ->
                     ReportCard(
                         report = report,
                         onClick = { onReportClick(report.link) }
