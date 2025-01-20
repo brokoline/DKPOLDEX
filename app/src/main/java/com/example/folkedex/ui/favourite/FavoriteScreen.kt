@@ -18,7 +18,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.zIndex
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -28,7 +27,6 @@ import com.example.folkedex.ui.feature.PartyViewModel
 import com.example.folkedex.ui.feature.PartyViewModelFactory
 import com.example.folkedex.ui.politician.PoliticianCard
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FavoritesScreen(
     navController: NavController,
@@ -93,45 +91,45 @@ fun FavoritesScreen(
             }
         },
         content = { paddingValues ->
-            LazyColumn(
+            Box(
                 modifier = Modifier
                     .fillMaxSize()
+                    .background(Color.White)
                     .padding(paddingValues)
-                    .padding(horizontal = 26.dp)
-                    .padding(vertical = 26.dp)
             ) {
-                items(favoritePoliticians.chunked(2)) { rowPoliticians ->
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 8.dp),
-                        horizontalArrangement = Arrangement.SpaceEvenly
-                    ) {
-                        rowPoliticians.forEach { politician ->
-                            PoliticianCard(
-                                politicianData = politician,
-                                cardWidth = cardWidth,
-                                cardHeight = cardHeight,
-                                navController = navController
-                            )
-                        }
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 26.dp)
+                        .padding(vertical = 26.dp)
+                ) {
+                    items(favoritePoliticians.chunked(2)) { rowPoliticians ->
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 8.dp),
+                            horizontalArrangement = Arrangement.SpaceEvenly
+                        ) {
+                            rowPoliticians.forEach { politician ->
+                                PoliticianCard(
+                                    politicianData = politician,
+                                    cardWidth = cardWidth,
+                                    cardHeight = cardHeight,
+                                    navController = navController
+                                )
+                            }
 
-                        if (rowPoliticians.size == 1) {
-                            Spacer(
-                                modifier = Modifier
-                                    .width(cardWidth)
-                                    .height(cardHeight)
-                            )
+                            if (rowPoliticians.size == 1) {
+                                Spacer(
+                                    modifier = Modifier
+                                        .width(cardWidth)
+                                        .height(cardHeight)
+                                )
+                            }
                         }
                     }
                 }
             }
         }
     )
-}
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun PreviewFavoritesScreen() {
-    FavoritesScreen(navController = NavController(LocalContext.current))
 }
