@@ -48,6 +48,8 @@ fun PoliticianSelectionScreen(
 ) {
     val scrollState = rememberLazyListState()
 
+    var searchQuery by remember { mutableStateOf("") }
+
     val context = LocalContext.current
     val viewModel: PartyViewModel = viewModel(
         factory = PartyViewModelFactory(context)
@@ -56,6 +58,12 @@ fun PoliticianSelectionScreen(
     val parties by viewModel.parties.collectAsState()
 
     val politicians = parties.find { it.name == partyName }?.politicians.orEmpty()
+
+    val filteredPoliticians = if (searchQuery.isBlank()) {
+        politicians
+    } else {
+        politicians.filter { it.navn.contains(searchQuery, ignoreCase = true) }
+    }
 
     Box(
         modifier = Modifier
@@ -74,7 +82,12 @@ fun PoliticianSelectionScreen(
         )
 
         Column {
-            TopBarWithSearch(navController, partyName)
+            TopBarWithSearch(
+                navController = navController,
+                partyName = partyName,
+                searchQuery = searchQuery,
+                onSearchQueryChange = { newValue -> searchQuery = newValue }
+            )
 
             LazyColumn(
                 state = scrollState,
@@ -83,7 +96,7 @@ fun PoliticianSelectionScreen(
                     .padding(top = 8.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                items(politicians.chunked(2)) { rowPoliticians ->
+                items(filteredPoliticians.chunked(2)) { rowPoliticians ->
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -116,7 +129,9 @@ fun PoliticianSelectionScreen(
 @Composable
 fun TopBarWithSearch(
     navController: NavController,
-    partyName: String
+    partyName: String,
+    searchQuery: String,
+    onSearchQueryChange: (String) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -147,9 +162,10 @@ fun TopBarWithSearch(
                 modifier = Modifier.padding(start = 50.dp)
             )
         }
-        var searchQuery = ""
-        com.example.folkedex.ui.common.SearchBar(value = searchQuery,
-            onValueChange = { searchQuery  = it })
+        com.example.folkedex.ui.common.SearchBar(
+            value = searchQuery,
+            onValueChange = onSearchQueryChange
+        )
     }
 }
 
