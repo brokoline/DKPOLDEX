@@ -667,7 +667,7 @@ object PartyRepository {
 
         ),
         PartyData(
-            name = "Løsgængere",
+            name = "Uden for folketingsgrupperne",
             path = "Uden for folketingsgrupperne",
             logoRes = R.drawable.loes,
             altLogo = R.drawable.loesgaengere,
