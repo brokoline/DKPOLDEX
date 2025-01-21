@@ -7,6 +7,8 @@ import com.example.folkedex.R
 import com.example.folkedex.data.model.Actor
 import com.example.folkedex.domain.extractPartyFromBiography
 import com.example.folkedex.model.PartyData
+import com.example.folkedex.model.PoliticianData
+import com.example.folkedex.ui.common.SearchableItem
 import com.example.folkedex.ui.theme.AlternativetBackground
 import com.example.folkedex.ui.theme.AlternativetButton
 import com.example.folkedex.ui.theme.DanmarksdemokraterneBackground
@@ -727,5 +729,25 @@ object PartyRepository {
     var cachedParties: List<PartyData> = emptyList()
     fun getPartyByName(name: String): PartyData? {
         return parties.find { it.name == name }
+    }
+
+    fun getAllSearchableItems(): List<SearchableItem> {
+        val partyItems = parties.map { party ->
+            SearchableItem(
+                label = party.name,
+                route = "folkedex/${party.name}"
+            )
+        }
+
+        val politicianItems = parties.flatMap { party ->
+            party.politicians.map { actor ->
+                SearchableItem(
+                    label = actor.navn,
+                    route = "politician/${actor.navn}"
+                )
+            }
+        }
+
+        return partyItems + politicianItems
     }
 }

@@ -154,6 +154,50 @@ fun PoliticianSelectionScreen(
 }
 
 @Composable
+fun TopBarWithSearch(
+    navController: NavController,
+    partyName: String,
+    searchQuery: String,
+    onSearchQueryChange: (String) -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(top = 30.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            IconButton(
+                onClick = { navController.popBackStack() },
+                modifier = Modifier.size(24.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = "Back",
+                    tint = Color.Black
+                )
+            }
+            Text(
+                text = "FolkeDex: $partyName",
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold,
+                color = Color.Black,
+                modifier = Modifier.padding(start = 50.dp)
+            )
+        }
+        com.example.folkedex.ui.common.SearchBar(
+            value = searchQuery,
+            onValueChange = onSearchQueryChange,
+            onFocusChanged = {}
+        )
+    }
+}
+
+@Composable
 fun PoliticianCard(
     politicianData: Actor,
     navController: NavController,

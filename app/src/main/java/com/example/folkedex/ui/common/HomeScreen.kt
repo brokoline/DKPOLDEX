@@ -1,19 +1,31 @@
 package com.example.folkedex.ui.common
 
+import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,10 +34,15 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.folkedex.data.PartyRepository
+import com.example.folkedex.ui.components.HomeSearchBar
 
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
+
+    val context = LocalContext.current
+
     Box(
         modifier = Modifier
             .background(color = Color.White)
@@ -33,7 +50,8 @@ fun HomeScreen(navController: NavHostController) {
             .consumeWindowInsets(WindowInsets.systemBars)
 
     ) {
-        TopSectionWithSearchBar()
+        TopSectionWithSearchBar(navController = navController, context = context)
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -48,7 +66,7 @@ fun HomeScreen(navController: NavHostController) {
 
 
 @Composable
-fun TopSectionWithSearchBar() {
+fun TopSectionWithSearchBar(navController: NavHostController, context: Context) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -85,9 +103,14 @@ fun TopSectionWithSearchBar() {
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
-            var searchQuery = ""
-            SearchBar(value = searchQuery,
-                onValueChange = { searchQuery  = it })
+            HomeSearchBar(navController = navController, context = context) { suggestion ->
+                suggestion?.let {
+                    Log.d("HomeScreen", "Navigating to politician: ${it.navn}")
+                    navController.navigate("politician/${it.navn}")
+                } ?: run {
+                    Log.e("HomeScreen", "Suggestion was null or invalid")
+                }
+            }
         }
     }
 }
@@ -97,8 +120,11 @@ fun TopSectionWithSearchBar() {
 fun SearchBar(
     modifier: Modifier = Modifier,
     value: String,
-    onValueChange: (String) -> Unit
+    onValueChange: (String) -> Unit,
+    onFocusChanged: (Boolean) -> Unit
 ) {
+    val focusManager = LocalFocusManager.current
+
     TextField(
         value = value,
         onValueChange = onValueChange,
@@ -124,6 +150,9 @@ fun SearchBar(
         modifier = modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp)
+            .onFocusChanged { focusState ->
+                onFocusChanged((focusState.isFocused))
+            }
     )
 }
 
