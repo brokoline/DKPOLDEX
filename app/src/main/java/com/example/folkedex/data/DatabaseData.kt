@@ -7,7 +7,6 @@ import com.example.folkedex.R
 import com.example.folkedex.data.model.Actor
 import com.example.folkedex.domain.extractPartyFromBiography
 import com.example.folkedex.model.PartyData
-import com.example.folkedex.model.PoliticianData
 import com.example.folkedex.ui.theme.AlternativetBackground
 import com.example.folkedex.ui.theme.AlternativetButton
 import com.example.folkedex.ui.theme.DanmarksdemokraterneBackground
@@ -679,9 +678,9 @@ object PartyRepository {
                     "\n" +
                     "In the European Parliament, there are several independents who may be members of national parties but do not join other parliamentarians in a group.",
             website = "https://www.ft.dk/da/ofte-stillede-spoergsmaal/medl_hvad-er-en-loesgaenger",
-            backgroundColor = SocialdemokratietBackground,
-            cardColor = altSocialdemokratiet,
-            buttonColor = SocialdemokratietButton,
+            backgroundColor = LøsgængerBackground,
+            cardColor = altLøsgænger,
+            buttonColor = LøsgængerButton,
             offsetX = 90f,
             offsetY = 15f,
             imageSize = 100.dp,
