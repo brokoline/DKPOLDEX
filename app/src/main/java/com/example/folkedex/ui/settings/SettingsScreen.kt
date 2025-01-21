@@ -5,8 +5,8 @@ import android.os.Environment
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -21,6 +21,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.folkedex.R
 import com.example.folkedex.data.FavoritesHelper
@@ -50,7 +51,6 @@ fun SettingsScreen(navController: NavController) {
                     .background(Color.White)
                     .padding(padding)
             ) {
-
                 Image(
                     painter = painterResource(id = R.drawable.flogo),
                     contentDescription = null,
@@ -61,7 +61,6 @@ fun SettingsScreen(navController: NavController) {
                     contentScale = ContentScale.Fit
                 )
 
-
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
@@ -69,50 +68,29 @@ fun SettingsScreen(navController: NavController) {
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-
-                    Button(
-                        onClick = {
-                            scope.launch {
-                                val message = exportFavoritesToFile(context, favoriteManager.getFavorites().toList())
-                                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                    Text(
+                        text = "Export your FolkeDex favorites",
+                        style = MaterialTheme.typography.titleLarge.copy(color = Color.Black), // Larger text
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .padding(vertical = 12.dp) // Adjusted vertical padding
+                            .clickable {
+                                scope.launch {
+                                    val message = exportFavoritesToFile(context, favoriteManager.getFavorites().toList())
+                                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                                }
                             }
-                        },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFF4CAF50),
-                            contentColor = Color.White
-                        ),
-                        shape = RoundedCornerShape(32.dp),
+                    )
+                    Text(
+                        text = "Reset your FolkeDex favorites",
+                        style = MaterialTheme.typography.titleLarge.copy(color = Color.Red), // Larger text
+                        textAlign = TextAlign.Center,
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .height(60.dp)
-                            .padding(vertical = 8.dp)
-                    ) {
-                        Text(
-                            text = "Export Favorites",
-                            style = MaterialTheme.typography.titleMedium,
-                            textAlign = TextAlign.Center
-                        )
-                    }
-
-
-                    Button(
-                        onClick = { showConfirmationDialog.value = true },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFFF44336),
-                            contentColor = Color.White
-                        ),
-                        shape = RoundedCornerShape(32.dp),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(60.dp)
-                            .padding(vertical = 8.dp)
-                    ) {
-                        Text(
-                            text = "Reset Favorites",
-                            style = MaterialTheme.typography.titleMedium,
-                            textAlign = TextAlign.Center
-                        )
-                    }
+                            .padding(vertical = 12.dp) // Adjusted vertical padding
+                            .clickable {
+                                showConfirmationDialog.value = true
+                            }
+                    )
                 }
 
                 if (showConfirmationDialog.value) {
@@ -143,7 +121,6 @@ fun SettingsScreen(navController: NavController) {
     )
 }
 
-// Helper function to export favorites to a file
 fun exportFavoritesToFile(context: Context, favorites: List<String>): String {
     if (favorites.isEmpty()) {
         return "You have no favorites to export."
