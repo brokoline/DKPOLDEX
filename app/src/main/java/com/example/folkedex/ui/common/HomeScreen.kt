@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -124,6 +125,121 @@ fun SearchBar(
         modifier = modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp)
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun CollapsibleSearchTopAppBar(
+    title: String,
+    searchQuery: String,
+    onSearchQueryChange: (String) -> Unit,
+    onBackClicked: () -> Unit,
+    scrollBehavior: TopAppBarScrollBehavior
+) {
+    LargeTopAppBar(
+        scrollBehavior = scrollBehavior,
+        navigationIcon = {
+            IconButton(onClick = onBackClicked) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = "Back",
+                    tint = Color.Black
+                )
+            }
+            if (scrollBehavior.state.collapsedFraction < 1f) {
+                Text(
+                    text = title,
+                    color = Color.Black,
+                    style = MaterialTheme.typography.headlineSmall,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                )
+            }
+        },
+        title = {
+            if (scrollBehavior.state.collapsedFraction < 1f) {
+                Column(
+                    modifier = Modifier.fillMaxWidth().fillMaxHeight().background(Color.Transparent)
+                ) {
+                    TextField(
+                        value = searchQuery,
+                        onValueChange = onSearchQueryChange,
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Default.Search,
+                                contentDescription = "Search Icon"
+                            )
+                        },
+                        placeholder = {
+                            Text(
+                                text = "Search for a specific Politician"
+                            )
+                        },
+                        textStyle = MaterialTheme.typography.bodySmall.copy(
+                            color = Color.Black
+                        ),
+                        colors = TextFieldDefaults.colors(
+                            focusedContainerColor = Color.White,
+                            unfocusedContainerColor = Color.White,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            focusedTextColor = Color.Black,
+                            unfocusedTextColor = Color.Black,
+                            cursorColor = Color.Black
+                        ),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(60.dp)
+                            .padding(horizontal = 16.dp)
+                    )
+                }
+            } else {
+                Column(
+                    modifier = Modifier.fillMaxWidth().fillMaxHeight().background(Color.Transparent)
+                ) {
+                    TextField(
+                        value = searchQuery,
+                        onValueChange = onSearchQueryChange,
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Default.Search,
+                                contentDescription = "Search Icon"
+                            )
+                        },
+                        placeholder = {
+                            Text(
+                                text = "Search for a specific Politician"
+                            )
+                        },
+                        textStyle = MaterialTheme.typography.bodySmall.copy(
+                            color = Color.Black
+                        ),
+                        colors = TextFieldDefaults.colors(
+                            focusedContainerColor = Color.White,
+                            unfocusedContainerColor = Color.White,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            focusedTextColor = Color.Black,
+                            unfocusedTextColor = Color.Black,
+                            cursorColor = Color.Black
+                        ),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(60.dp)
+                            .padding(horizontal = 16.dp)
+                    )
+                }
+            }
+        },
+        colors = TopAppBarDefaults.largeTopAppBarColors(
+            //containerColor = MaterialTheme.colorScheme.background
+            containerColor = Color.Transparent
+        ),
+        modifier = Modifier
+            .background(Color.Transparent) // Prevent default elevation overlays
+            .zIndex(1f), // Ensure it appears above other content
     )
 }
 
