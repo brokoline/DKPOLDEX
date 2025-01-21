@@ -44,6 +44,7 @@ fun ReportsScreen() {
     val viewModel: ReportsViewModel = viewModel(factory = ReportsViewModelFactory(dataStore))
     val reports = viewModel.files.collectAsState().value
     val isLoading = viewModel.isLoading.collectAsState().value
+    var searchQuery by remember { mutableStateOf("") }
 
 
     val listState = rememberLazyListState()
@@ -51,7 +52,7 @@ fun ReportsScreen() {
     val filteredReports = if (searchQuery.isBlank()) {
         reports
     } else {
-        reports.filter { it.title.contains(searchQuery, ignoreCase = true) }
+        reports.filter { it.titel.contains(searchQuery, ignoreCase = true) }
     }
 
     Scaffold(
@@ -105,7 +106,7 @@ fun ReportsScreen() {
         content = { paddingValues ->
             LazyColumn(
 
-                state = listState, // Attach the LazyListState
+                state = listState,
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues)
@@ -113,9 +114,9 @@ fun ReportsScreen() {
                     .padding(vertical = 26.dp)
             ) {
                 item {
-                    Spacer(modifier = Modifier.height(20.dp)) // Adjust the height as needed
+                    Spacer(modifier = Modifier.height(20.dp))
                 }
-                items(reports) { report ->
+                //items(reports) { report ->
                 items(filteredReports) { report ->
                     ReportCard(
                         report = report,
@@ -141,7 +142,6 @@ fun ReportsScreen() {
         }
     )
 
-    // Detect when the user scrolls to the bottom
     LaunchedEffect(listState) {
         snapshotFlow {
             val layoutInfo = listState.layoutInfo
@@ -177,7 +177,6 @@ fun ReportCard(report: FileData, onClick: () -> Unit) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(110.dp)
                 .background(
                     brush = Brush.linearGradient(
                         colors = listOf(Color(0xFF689F38), Color(0xFFAED581))
