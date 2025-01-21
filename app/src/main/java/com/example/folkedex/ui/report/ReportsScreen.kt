@@ -36,6 +36,7 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import com.example.folkedex.ui.common.FolketingLogo
+import com.example.folkedex.ui.feature.AltSearchBar
 
 @Composable
 fun ReportsScreen() {
@@ -92,7 +93,7 @@ fun ReportsScreen() {
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     )
 
-                    com.example.folkedex.ui.common.SearchBar(
+                    AltSearchBar(
                         value = searchQuery,
                         onValueChange = { newText ->
                             searchQuery = newText

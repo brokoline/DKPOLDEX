@@ -1,6 +1,5 @@
 package com.example.folkedex.ui.politician
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -11,7 +10,6 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -38,6 +36,7 @@ import com.example.folkedex.domain.extractPartyFromBiography
 import com.example.folkedex.domain.extractPoliPictureFromBiography
 import com.example.folkedex.ui.feature.PartyViewModel
 import com.example.folkedex.ui.feature.PartyViewModelFactory
+import com.example.folkedex.ui.feature.AltSearchBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -89,7 +88,7 @@ fun PoliticianSelectionScreen(
                             textAlign = TextAlign.Center,
                         )
                         Spacer(modifier = Modifier.height(8.dp))
-                        com.example.folkedex.ui.common.SearchBar(
+                        AltSearchBar(
                             value = searchQuery,
                             onValueChange = { newValue -> searchQuery = newValue },
                             onFocusChanged = {},
@@ -191,7 +190,7 @@ fun TopBarWithSearch(
                 modifier = Modifier.padding(start = 50.dp)
             )
         }
-        com.example.folkedex.ui.common.SearchBar(
+        AltSearchBar(
             value = searchQuery,
             onValueChange = onSearchQueryChange,
             onFocusChanged = {}

@@ -1,26 +1,26 @@
-package com.example.folkedex.ui.components
+package com.example.folkedex.ui.feature
 
 import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import com.example.folkedex.data.PartyRepository.parties
 import com.example.folkedex.data.local.DataStore
 import com.example.folkedex.data.model.Actor
@@ -34,7 +34,7 @@ fun HomeSearchBar(
     navController: NavController,
     modifier: Modifier = Modifier,
     onSuggestionClick: (Actor?) -> Unit = {},
-    OnSuggestionClick: (PartyData?) -> Unit = {}
+    onAltSuggestionClick: (PartyData?) -> Unit = {}
 ) {
     var query by remember { mutableStateOf(TextFieldValue("")) }
     var suggestions by remember { mutableStateOf(listOf<String>()) }
@@ -42,14 +42,14 @@ fun HomeSearchBar(
 
     LaunchedEffect(Unit) {
         val actors = dataStore.loadActors()
-
         suggestions = listOf("Home", "Favorites", "Reports", "News") +
                 actors.map { it.navn } + parties.map { it.name }
     }
 
     val filteredSuggestions = suggestions.filter { it.contains(query.text, ignoreCase = true) }
 
-    Column(modifier = modifier) {
+    Box(modifier = modifier.fillMaxWidth()) {
+        // Search TextField
         TextField(
             value = query,
             onValueChange = { newQuery -> query = newQuery },
@@ -74,18 +74,19 @@ fun HomeSearchBar(
             ),
             modifier = Modifier
                 .fillMaxWidth()
-                .height(60.dp)
                 .padding(vertical = 4.dp)
         )
 
+        // Suggestions Dropdown (LazyColumn)
         if (query.text.isNotEmpty() && filteredSuggestions.isNotEmpty()) {
-            Column(
+            LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .offset(y = 60.dp) // Offset to appear below the TextField
                     .background(Color.White)
-                    .padding(vertical = 4.dp)
+                    .heightIn(max = 200.dp) // Limit height of the dropdown
             ) {
-                filteredSuggestions.forEach { suggestion ->
+                items(filteredSuggestions) { suggestion ->
                     Text(
                         text = suggestion,
                         modifier = Modifier
@@ -93,7 +94,7 @@ fun HomeSearchBar(
                             .clickable {
                                 query = TextFieldValue(suggestion)
                                 onSuggestionClick(getActorFromName(suggestion, dataStore))
-                                OnSuggestionClick(getPartyFromName(suggestion, dataStore))
+                                onAltSuggestionClick(getPartyFromName(suggestion, dataStore))
                                 navigateToRoute(suggestion, navController)
                             }
                             .padding(8.dp),
@@ -104,6 +105,8 @@ fun HomeSearchBar(
         }
     }
 }
+
+
 
 fun getActorFromName(name: String, dataStore: DataStore): Actor? {
     val actors = runBlocking { dataStore.loadActors() }
@@ -129,4 +132,44 @@ fun navigateToRoute(suggestion: String, navController: NavController) {
             navController.navigate("politician/$suggestion")
         }
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AltSearchBar(
+    modifier: Modifier = Modifier,
+    value: String,
+    onValueChange: (String) -> Unit,
+    onFocusChanged: (Boolean) -> Unit
+) {
+
+    TextField(
+        value = value,
+        onValueChange = onValueChange,
+        leadingIcon = {
+            Icon(
+                imageVector = Icons.Default.Search,
+                contentDescription = "Search Icon"
+            )
+        },
+        placeholder = {
+            Text(text = "Search for Politician, Party, etc...")
+        },
+        shape = RoundedCornerShape(16.dp),
+        colors = TextFieldDefaults.colors(
+            focusedContainerColor = Color(0xFFF5F5F5),
+            unfocusedContainerColor = Color(0xFFF5F5F5),
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+            focusedTextColor = Color.Black,
+            unfocusedTextColor = Color.Black,
+            cursorColor = Color.Black
+        ),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp)
+            .onFocusChanged { focusState ->
+                onFocusChanged((focusState.isFocused))
+            }
+    )
 }
