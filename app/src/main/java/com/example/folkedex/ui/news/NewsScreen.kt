@@ -56,6 +56,11 @@ fun NewsScreen(onBackClick: () -> Unit = {}, navController: NavController) {
             title = "Folketinget,dk",
             description = "Documents and cases from the Folketing.",
             url = "https://www.ft.dk/da/dokumenter/dokumentlister/nyeste-sager"
+        ),
+        NewsItem(
+            title = "DanskErhverv,dk",
+            description = "News about business development, current political analyses and studies.",
+            url = "https://www.danskerhverv.dk/politik-og-analyser/"
         )
     )
 
@@ -167,13 +172,3 @@ fun NewsCard(newsItem: NewsItem) {
     }
 }
 
-@Preview(
-    showSystemUi = true,
-    showBackground = true,
-    device = "spec:width=411dp,height=891dp,dpi=420"
-)
-@Composable
-fun PreviewNewsScreen() {
-    val navController = rememberNavController()
-    NewsScreen(navController = navController)
-}
