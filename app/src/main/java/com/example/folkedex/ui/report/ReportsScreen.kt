@@ -1,16 +1,12 @@
 package com.example.folkedex.ui.report
 
 import android.content.Intent
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Info // Importer et andet ikon, hvis det er passende
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -25,27 +21,19 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.zIndex
-import androidx.datastore.dataStore
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
-import com.example.folkedex.data.remote.ApiService
 import com.example.folkedex.data.remote.FileData
-import com.example.folkedex.ui.common.FolketingLogo
-import com.example.folkedex.ui.feature.PartyViewModel
-import com.example.folkedex.ui.feature.PartyViewModelFactory
 import com.example.folkedex.data.local.DataStore
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.runtime.remember
 import android.net.Uri
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.ui.zIndex
+import com.example.folkedex.ui.common.FolketingLogo
 
 @Composable
-fun ReportsScreen(
-    onReportClick: (String) -> Unit = {},
-    navController: NavController,
-) {
+fun ReportsScreen() {
     val context = LocalContext.current
     val dataStore = DataStore(context)
     val viewModel: ReportsViewModel = viewModel(factory = ReportsViewModelFactory(dataStore))
@@ -72,18 +60,6 @@ fun ReportsScreen(
                         .size(205.dp)
                         .zIndex(0f)
                 )
-                IconButton(
-                    onClick = {navController.popBackStack()},
-                    modifier = Modifier
-                        .padding(start = 16.dp)
-                        .align(Alignment.CenterStart)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "Tilbage",
-                        tint = Color.White
-                    )
-                }
 
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
