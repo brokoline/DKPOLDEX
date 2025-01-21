@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -35,6 +36,7 @@ import com.example.folkedex.domain.extractPoliPictureFromBiography
 import com.example.folkedex.ui.feature.PartyViewModel
 import com.example.folkedex.ui.feature.PartyViewModelFactory
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PoliticianSelectionScreen(
     navController: NavController,
@@ -42,8 +44,8 @@ fun PoliticianSelectionScreen(
     cardWidth: Dp = 160.dp,
     cardHeight: Dp = 160.dp,
 ) {
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val scrollState = rememberLazyListState()
-
     var searchQuery by remember { mutableStateOf("") }
 
     val context = LocalContext.current
@@ -52,42 +54,71 @@ fun PoliticianSelectionScreen(
     )
 
     val parties by viewModel.parties.collectAsState()
-
     val politicians = parties.find { it.name == partyName }?.politicians.orEmpty()
-
     val filteredPoliticians = if (searchQuery.isBlank()) {
         politicians
     } else {
         politicians.filter { it.navn.contains(searchQuery, ignoreCase = true) }
     }
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White)
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.flogo),
-            contentDescription = "Folketing Logo",
-            modifier = Modifier
-                .size(3000.dp)
-                .padding(end = 16.dp)
-                .offset(x = 150.dp, y = (-300).dp)
-                .alpha(0.27f),
-            contentScale = ContentScale.Fit
-        )
-
-        Column(modifier = Modifier.fillMaxSize()) {
-            TopBarWithSearch(
-                navController = navController,
-                partyName = partyName,
-                searchQuery = searchQuery,
-                onSearchQueryChange = { newValue -> searchQuery = newValue }
+    Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            CenterAlignedTopAppBar(
+                scrollBehavior = scrollBehavior,
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Back",
+                            tint = Color.Black
+                        )
+                    }
+                },
+                title = {
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = "FolkeDex: $partyName",
+                            color = Color.Black,
+                            style = MaterialTheme.typography.headlineSmall,
+                            textAlign = TextAlign.Center,
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        com.example.folkedex.ui.common.SearchBar(
+                            value = searchQuery,
+                            onValueChange = { newValue -> searchQuery = newValue },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp)
+                                .height(48.dp)
+                        )
+                    }
+                },
+                colors = TopAppBarDefaults.largeTopAppBarColors(
+                    containerColor = Color.Transparent,
+                )
             )
-
+        }
+    ) { innerPadding ->
+        Box(modifier = Modifier.fillMaxSize()) {
+            Image(
+                painter = painterResource(id = R.drawable.flogo),
+                contentDescription = "Folketing Logo",
+                modifier = Modifier
+                    .size(3000.dp)
+                    .padding(end = 16.dp)
+                    .offset(x = 150.dp, y = (-300).dp)
+                    .alpha(0.27f),
+                contentScale = ContentScale.Fit
+            )
             LazyColumn(
                 state = scrollState,
-                modifier = Modifier.fillMaxSize(), // Listen går op under søgefeltet
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = innerPadding.calculateTopPadding()),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 items(filteredPoliticians.chunked(2)) { rowPoliticians ->
@@ -119,51 +150,6 @@ fun PoliticianSelectionScreen(
         }
     }
 }
-
-@Composable
-fun TopBarWithSearch(
-    navController: NavController,
-    partyName: String,
-    searchQuery: String,
-    onSearchQueryChange: (String) -> Unit
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color.Transparent)
-            .padding(horizontal = 16.dp, vertical = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        Row(
-            modifier = Modifier.padding(top = 16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            IconButton(
-                onClick = { navController.popBackStack() },
-                modifier = Modifier.size(24.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = "Back",
-                    tint = Color.Black
-                )
-            }
-            Text(
-                text = "FolkeDex: $partyName",
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black,
-                modifier = Modifier.padding(start = 16.dp)
-            )
-        }
-
-        com.example.folkedex.ui.common.SearchBar(
-            value = searchQuery,
-            onValueChange = onSearchQueryChange
-        )
-    }
-}
-
 
 @Composable
 fun PoliticianCard(
