@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -43,7 +43,6 @@ fun PoliticianScreen(navController: NavController, name: String) {
     )
     val parties by viewModel.parties.collectAsState()
 
-    // Retrieve politician and party information
     val politician = parties
         .flatMap { it.politicians }
         .find { it.navn == name }
@@ -51,7 +50,6 @@ fun PoliticianScreen(navController: NavController, name: String) {
         PartyRepository.parties.find { party -> party.path == extractPartyFromBiography(politician.biografi) }
     }
 
-    // Favorite functionality
     val favoritesHelper = remember { FavoritesHelper(context) }
     var isFavorite by remember { mutableStateOf(favoritesHelper.getFavorites().contains(name)) }
 
@@ -64,7 +62,7 @@ fun PoliticianScreen(navController: NavController, name: String) {
                         title = { Text(politician.navn) },
                         navigationIcon = {
                             IconButton(onClick = { navController.popBackStack() }) {
-                                Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                                Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                             }
                         },
                         actions = {
@@ -97,6 +95,7 @@ fun PoliticianScreen(navController: NavController, name: String) {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
+                        .background(color = Color.White)
                         .padding(paddingValues)
                         .padding(16.dp),
                     horizontalAlignment = Alignment.CenterHorizontally

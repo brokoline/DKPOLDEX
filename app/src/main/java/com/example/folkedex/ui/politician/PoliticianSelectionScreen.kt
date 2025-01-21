@@ -109,6 +109,7 @@ fun PoliticianSelectionScreen(
                 contentDescription = "Folketing Logo",
                 modifier = Modifier
                     .size(3000.dp)
+                    .background(color = Color.White)
                     .padding(end = 16.dp)
                     .offset(x = 150.dp, y = (-300).dp)
                     .alpha(0.27f),
