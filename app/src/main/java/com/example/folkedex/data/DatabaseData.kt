@@ -668,7 +668,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Løsgængere",
-            path = "Løsgængere",
+            path = "Uden for folketingsgrupperne",
             logoRes = R.drawable.loes,
             altLogo = R.drawable.loesgaengere,
             description = "An løsgænger (independent) is a member of the Danish Parliament who does not belong to any of the party groups in the Danish Parliament. An independent is called outside the parliamentary groups (UFG).",
@@ -681,7 +681,7 @@ object PartyRepository {
             backgroundColor = LøsgængerBackground,
             cardColor = altLøsgænger,
             buttonColor = LøsgængerButton,
-            offsetX = 90f,
+            offsetX = 9f,
             offsetY = 15f,
             imageSize = 100.dp,
             logoSize = 120.dp,
