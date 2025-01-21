@@ -35,6 +35,8 @@ import com.example.folkedex.ui.theme.DataScreen
 import com.example.folkedex.ui.theme.FavoritesScreen
 import com.example.folkedex.ui.news.NewsScreen
 import com.example.folkedex.ui.party.Party
+import androidx.compose.ui.platform.LocalContext
+
 
 import com.example.folkedex.ui.party.PartySelectionScreen
 import com.example.folkedex.data.PartyRepository
@@ -70,17 +72,18 @@ fun MainScreen(navController: NavHostController) {
             startDestination = "home",
             modifier = Modifier.padding(paddingValues)
         ) {
-            composable("home") { HomeScreen(navController) }
+            composable("home") {
+                HomeScreen(navController = navController) // No context needed
+            }
             composable("favorites") { FavoritesScreen(navController = navController) }
             composable("com/example/folkedex/ui/news") { NewsScreen(navController = navController) }
             composable("settings") { com.example.folkedex.ui.settings.SettingsScreen(navController) }
-            composable("folkedex") { PartySelectionScreen(navController = navController)}
+            composable("folkedex") { PartySelectionScreen(navController = navController) }
             composable("com/example/folkedex/ui/issues") { IssuesScreen(navController = navController) }
             composable("politician/{name}") { backStackEntry ->
                 val name = backStackEntry.arguments?.getString("name") ?: "Unknown"
                 PoliticianScreen(navController = navController, name = name)
             }
-
             composable("policies/{partyName}") { backStackEntry ->
                 val partyName = backStackEntry.arguments?.getString("partyName") ?: "Unknown"
                 val partyData = PartyRepository.getPartyByName(partyName)
@@ -90,7 +93,6 @@ fun MainScreen(navController: NavHostController) {
                 } else {
                     Text(text = "Party data not found", color = Color.Red, modifier = Modifier.fillMaxSize())
                 }
-
             }
             composable("reports") { ReportsScreen(navController = navController) }
             composable("bills") { BillScreen(navController = navController) }
@@ -108,9 +110,6 @@ fun MainScreen(navController: NavHostController) {
                 val partyName = backStackEntry.arguments?.getString("partyName") ?: "Unknown"
                 PoliticianSelectionScreen(navController = navController, partyName = partyName)
             }
-
-
-
 
             PartyRepository.parties.forEach { party ->
                 composable(party.path) {

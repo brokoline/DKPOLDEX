@@ -1,5 +1,7 @@
 package com.example.folkedex.ui.common
 
+import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -21,6 +23,7 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
@@ -32,31 +35,13 @@ import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.folkedex.data.PartyRepository
+import com.example.folkedex.ui.components.HomeSearchBar
 
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
 
-    var searchQuery by remember { mutableStateOf("") }
-    var isSearchFocused by remember { mutableStateOf(false) }
-
-    val allItems = PartyRepository.getAllSearchableItems()
-
-    val placeholderSuggestions = listOf(
-        SearchableItem("placeholder", "placeholder-route"),
-        SearchableItem("placeholder", "placeholder-route"),
-        SearchableItem("placeholder", "placeholder-route"),
-        SearchableItem("placeholder", "placeholder-route")
-    )
-
-    val filteredSuggestions = if (searchQuery.isBlank()) {
-        emptyList()
-    } else {
-        allItems.filter { it.label.contains(searchQuery, ignoreCase = true) }
-    }
-
-    var textFieldheightPx by remember { mutableStateOf(0) }
-    val density = LocalDensity.current
+    val context = LocalContext.current
 
     Box(
         modifier = Modifier
@@ -64,23 +49,7 @@ fun HomeScreen(navController: NavHostController) {
             .consumeWindowInsets(WindowInsets.systemBars)
 
     ) {
-        TopSectionWithSearchBar(
-            searchQuery = searchQuery,
-            onSearchQueryChange = { newValue -> searchQuery = newValue},
-            isSearchFocused = isSearchFocused,
-            onSearchFocusChange = { isFocused ->
-                isSearchFocused = isFocused
-            },
-            placeholderSuggestions = placeholderSuggestions,
-            filteredSuggestions = filteredSuggestions,
-            onSuggestionClick = { item ->
-                if (item.route != "placeholder-route") {
-                    navController.navigate(item.route)
-                }
-                searchQuery = ""
-                isSearchFocused = false
-            }
-        )
+        TopSectionWithSearchBar(navController = navController, context = context)
 
         Column(
             modifier = Modifier
@@ -96,15 +65,7 @@ fun HomeScreen(navController: NavHostController) {
 
 
 @Composable
-fun TopSectionWithSearchBar(
-    searchQuery: String,
-    onSearchQueryChange: (String) -> Unit,
-    isSearchFocused: Boolean,
-    onSearchFocusChange: (Boolean) -> Unit,
-    placeholderSuggestions: List<SearchableItem>,
-    filteredSuggestions: List<SearchableItem>,
-    onSuggestionClick: (SearchableItem) -> Unit
-) {
+fun TopSectionWithSearchBar(navController: NavHostController, context: Context) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -140,48 +101,16 @@ fun TopSectionWithSearchBar(
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
-            SearchBar(
-                value = searchQuery,
-                onValueChange = onSearchQueryChange,
-                onFocusChanged = onSearchFocusChange
-            )
-        }
-
-        if (isSearchFocused) {
-            val suggestionsToShow = if (searchQuery.isBlank()) {
-                placeholderSuggestions
-            } else {
-                filteredSuggestions
-            }
-
-            // Dropdown
-            if (filteredSuggestions.isNotEmpty()) {
-                Box(
-                    modifier = Modifier
-                        .align(Alignment.BottomStart)
-                        .zIndex(10f)
-                ) {
-                    Surface(
-                        shape = RoundedCornerShape(8.dp),
-                        shadowElevation = 8.dp,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                    ) {
-                        LazyColumn {
-                            items(filteredSuggestions) { suggestion ->
-                                Text(
-                                    text = suggestion.label,
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .clickable { onSuggestionClick(suggestion) }
-                                        .padding(vertical = 8.dp, horizontal = 16.dp)
-                                )
-                            }
-                        }
-                    }
+            HomeSearchBar(navController = navController, context = context) { suggestion ->
+                suggestion?.let {
+                    Log.d("HomeScreen", "Navigating to politician: ${it.navn}")
+                    navController.navigate("politician/${it.navn}")
+                } ?: run {
+                    Log.e("HomeScreen", "Suggestion was null or invalid")
                 }
             }
         }
+
     }
 }
 
@@ -327,9 +256,5 @@ fun CategoryCard(text: String, startColor: Color, endColor: Color, onClick: () -
         showBackground = true,
         device = "spec:width=411dp,height=891dp,dpi=420"
     )*/
-    @Composable
-    fun PreviewHomeScreen() {
-        val navController = rememberNavController()
-        HomeScreen(navController = navController)
-    }
+
 }
