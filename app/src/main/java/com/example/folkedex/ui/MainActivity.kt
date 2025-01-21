@@ -5,10 +5,17 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.Modifier
@@ -17,6 +24,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -34,6 +42,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.folkedex.ui.common.HomeScreen
@@ -53,7 +62,12 @@ import com.example.folkedex.ui.feature.PartyViewModel
 import com.example.folkedex.ui.feature.PartyViewModelFactory
 import com.example.folkedex.ui.theme.IssuesScreen
 import com.example.folkedex.ui.politician.PoliticianSelectionScreen
-import com.example.folkedex.ui.theme.ReportsScreen
+import com.example.folkedex.ui.report.ReportsScreen
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import okhttp3.internal.wait
+import androidx.compose.foundation.layout.Arrangement
+import com.example.folkedex.R
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,26 +77,53 @@ class MainActivity : ComponentActivity() {
             val context = LocalContext.current
             val dataStore = DataStore(context)
             val viewModel: PartyViewModel = viewModel(factory = PartyViewModelFactory(dataStore))
-            var isLoading by remember { mutableStateOf(true) }
+
+
+            val parties by viewModel.parties.collectAsState()
+            val politician = parties
+                .flatMap { it.politicians }
+         //   Log.d("api content test", politician.toString())
             LaunchedEffect(Unit) {
                 viewModel.fetchAndCachePartyData()
-                isLoading = false
+
+
+
             }
-            if (isLoading) {
+            LaunchedEffect(politician.isEmpty()) {
+                delay(5000) // Wait for 5 seconds
+
+            }
+            if (politician.isEmpty()) {
                 Box(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier
+                        .fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
-                    CircularProgressIndicator()
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            CircularProgressIndicator() // Display the loading indicator
+                            Spacer(modifier = Modifier.height(16.dp)) // Add space between the indicator and text
+                            Text("Loading Politicians") // Display the text below the indicator
+                        }
+                        Spacer(modifier = Modifier.width(16.dp)) // Add space between the column and the image
+                        Image(
+                            painter = painterResource(id = R.drawable.loading), // Replace with your image resource
+                            contentDescription = "Loading Icon",
+                            modifier = Modifier.size(100.dp) // Adjust size as needed
+                        )
+                    }
                 }
+
             } else {
                 // Show the main content
                 AppNavHost()
             }
-            val parties by viewModel.parties.collectAsState()
-            val politician = parties
-                .flatMap { it.politicians }
-            Log.d("api content test", politician.toString())
+
             //AppNavHost()
         }
     }
@@ -165,7 +206,19 @@ fun MainScreen(navController: NavHostController) {
     }
 }
 
+@Composable
+fun IndeterminateCircularIndicator(isLoading: Boolean) {
 
+if(isLoading){
+    CircularProgressIndicator(
+        modifier = Modifier.width(64.dp),
+        color = Color.Gray,
+        trackColor = Color.White
+    )
+   // Log.d("inside the loading screen", isLoading.toString())
+}
+
+}
 @Composable
 fun BottomTabBar(navController: NavHostController) {
     NavigationBar(

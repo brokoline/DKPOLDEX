@@ -7,4 +7,9 @@ interface ApiService {
     suspend fun getActors(
         @Query("\$skip") skip: Int = 0
     ): ActorResponse
+
+    @GET("Fil?\$top=10&\$orderby=opdateringsdato+desc")
+    suspend fun getFiles(
+       @Query("\$skip") skip: Int = 0
+    ): FileResponse
 }

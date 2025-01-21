@@ -1,6 +1,7 @@
 package com.example.folkedex.ui.politician
 
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -32,6 +33,7 @@ import com.example.folkedex.data.model.Actor
 import com.example.folkedex.domain.*
 import com.example.folkedex.ui.feature.PartyViewModel
 import com.example.folkedex.ui.feature.PartyViewModelFactory
+import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -42,6 +44,7 @@ fun PoliticianScreen(navController: NavController, name: String) {
     val dataStore = DataStore(context)
     val viewModel: PartyViewModel = viewModel(factory = PartyViewModelFactory(dataStore))
     val parties by viewModel.parties.collectAsState()
+
 
     // Retrieve politician and party information
     val politician = parties
@@ -55,95 +58,98 @@ fun PoliticianScreen(navController: NavController, name: String) {
     val favoritesHelper = remember { FavoritesHelper(context) }
     var isFavorite by remember { mutableStateOf(favoritesHelper.getFavorites().contains(name)) }
 
-    if (politician != null) {
-        val photoUrl = extractPoliPictureFromBiography(politician.biografi)
-        Scaffold(
-            topBar = {
-                if (party != null) {
-                    TopAppBar(
-                        title = { Text(politician.navn) },
-                        navigationIcon = {
-                            IconButton(onClick = { navController.popBackStack() }) {
-                                Icon(Icons.Default.ArrowBack, contentDescription = "Back")
-                            }
-                        },
-                        actions = {
-                            IconButton(
-                                onClick = {
-                                    if (isFavorite) {
-                                        favoritesHelper.removeFavorite(name)
-                                    } else {
-                                        favoritesHelper.addFavorite(name)
-                                    }
-                                    isFavorite = !isFavorite
+
+     if (politician != null) {
+            val photoUrl = extractPoliPictureFromBiography(politician.biografi)
+            Scaffold(
+                topBar = {
+                    if (party != null) {
+                        TopAppBar(
+                            title = { Text(politician.navn) },
+                            navigationIcon = {
+                                IconButton(onClick = { navController.popBackStack() }) {
+                                    Icon(Icons.Default.ArrowBack, contentDescription = "Back")
                                 }
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.Favorite,
-                                    contentDescription = "Favorite",
-                                    tint = if (isFavorite) Color.Red else Color.White
-                                )
-                            }
-                        },
-                        colors = TopAppBarDefaults.topAppBarColors(
-                            containerColor = party.cardColor,
-                            titleContentColor = Color.White,
-                            navigationIconContentColor = Color.White
-                        )
-                    )
-                }
-            },
-            content = { paddingValues ->
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(paddingValues)
-                        .padding(16.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    if (party != null && photoUrl != null) {
-                        AsyncImage(
-                            model = photoUrl,
-                            contentDescription = "Photo of ${politician.navn}",
-                            modifier = Modifier
-                                .size(300.dp)
-                                .padding(8.dp)
-                                .background(party.cardColor, shape = RoundedCornerShape(8.dp))
-                                .padding(4.dp),
-                            contentScale = ContentScale.Crop,
-                            placeholder = painterResource(R.drawable.flogo3),
-                        )
-                    } else {
-                        Image(
-                            painter = painterResource(R.drawable.missingphoto),
-                            contentDescription = "Photo of ${politician.navn}",
-                            modifier = Modifier
-                                .size(300.dp)
-                                .clip(RoundedCornerShape(33.dp))
-                                .padding(8.dp),
-                            contentScale = ContentScale.Crop,
+                            },
+                            actions = {
+                                IconButton(
+                                    onClick = {
+                                        if (isFavorite) {
+                                            favoritesHelper.removeFavorite(name)
+                                        } else {
+                                            favoritesHelper.addFavorite(name)
+                                        }
+                                        isFavorite = !isFavorite
+                                    }
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.Favorite,
+                                        contentDescription = "Favorite",
+                                        tint = if (isFavorite) Color.Red else Color.White
+                                    )
+                                }
+                            },
+                            colors = TopAppBarDefaults.topAppBarColors(
+                                containerColor = party.cardColor,
+                                titleContentColor = Color.White,
+                                navigationIconContentColor = Color.White
+                            )
                         )
                     }
+                },
+                content = { paddingValues ->
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(paddingValues)
+                            .padding(16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        if (party != null && photoUrl != null) {
+                            AsyncImage(
+                                model = photoUrl,
+                                contentDescription = "Photo of ${politician.navn}",
+                                modifier = Modifier
+                                    .size(300.dp)
+                                    .padding(8.dp)
+                                    .background(party.cardColor, shape = RoundedCornerShape(8.dp))
+                                    .padding(4.dp),
+                                contentScale = ContentScale.Crop,
+                                placeholder = painterResource(R.drawable.flogo3),
+                            )
+                        } else {
+                            Image(
+                                painter = painterResource(R.drawable.missingphoto),
+                                contentDescription = "Photo of ${politician.navn}",
+                                modifier = Modifier
+                                    .size(300.dp)
+                                    .clip(RoundedCornerShape(33.dp))
+                                    .padding(8.dp),
+                                contentScale = ContentScale.Crop,
+                            )
+                        }
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                        Spacer(modifier = Modifier.height(16.dp))
 
-                    PoliticianDetails(politician)
+                        PoliticianDetails(politician)
+                    }
                 }
-            }
-        )
-    } else {
-        Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = "Politician data not found",
-                style = MaterialTheme.typography.bodyLarge,
-                color = Color.Red
             )
+        } else {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "Politician data not found",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = Color.Red
+                )
+            }
         }
     }
-}
+
+
 
 @Composable
 fun PoliticianDetails(politician: Actor) {

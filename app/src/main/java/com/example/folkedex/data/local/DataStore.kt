@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.folkedex.data.model.Actor
+import com.example.folkedex.data.remote.FileData
 import com.example.folkedex.model.PartyData
 import kotlinx.coroutines.flow.first
 import kotlinx.serialization.decodeFromString
@@ -21,6 +22,7 @@ class DataStore(context: Context) {
     // Keys for storing data
     private val ACTORS_KEY = stringPreferencesKey("actors_data")
     private val PARTIES_KEY = stringPreferencesKey("parties_data")
+    private val FILES_KEY = stringPreferencesKey("files_data")
 
     /**
      * Saves the list of actors to DataStore.
@@ -61,6 +63,23 @@ class DataStore(context: Context) {
     suspend fun loadParties(): List<PartyData> {
         val preferences = datastore.data.first()
         val jsonString = preferences[PARTIES_KEY] ?: return emptyList()
+        return try {
+            Json.decodeFromString(jsonString)
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+
+    suspend fun saveFiles(files: List<FileData>) {
+        val jsonString = Json.encodeToString(files)
+        datastore.edit { preferences ->
+            preferences[FILES_KEY] = jsonString
+        }
+    }
+
+    suspend fun loadFiles(): List<FileData> {
+        val preferences = datastore.data.first()
+        val jsonString = preferences[FILES_KEY] ?: return emptyList()
         return try {
             Json.decodeFromString(jsonString)
         } catch (e: Exception) {

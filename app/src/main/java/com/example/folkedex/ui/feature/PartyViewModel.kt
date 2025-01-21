@@ -24,7 +24,7 @@ class PartyViewModel(private val dataStore: DataStore) : ViewModel() {
     // Load cached parties on initialization
     private fun loadCachedParties() {
         viewModelScope.launch {
-            _isLoading.value = true
+
             try {
                 val cachedActors = dataStore.loadActors()
                 if (cachedActors.isNotEmpty()) {
