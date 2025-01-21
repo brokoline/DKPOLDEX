@@ -26,7 +26,6 @@ import com.example.folkedex.ui.common.FolketingLogo
 @Composable
 fun PoliciesScreen(navController: NavHostController, partyData: PartyData) {
     Box(modifier = Modifier.fillMaxSize()) {
-        // Top bar med baggrund og logo
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -72,11 +71,10 @@ fun PoliciesScreen(navController: NavHostController, partyData: PartyData) {
             }
         }
 
-        // Policies-tekst i LazyColumn
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = 200.dp), // Start under topbaren
+                .padding(top = 200.dp),
             verticalArrangement = Arrangement.Top
         ) {
             item {
@@ -88,7 +86,8 @@ fun PoliciesScreen(navController: NavHostController, partyData: PartyData) {
                     textAlign = TextAlign.Start,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp) // Horisontal padding
+                        .background(color = Color.White)
+                        .padding(horizontal = 16.dp)
                 )
             }
         }

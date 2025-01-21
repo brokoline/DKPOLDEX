@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -33,27 +34,27 @@ fun NewsScreen(onBackClick: () -> Unit = {}, navController: NavController) {
     val newsList = listOf(
         NewsItem(
             title = "TV2 Politik",
-            description = "Nyheder om politik fra TV2.",
+            description = "News about politics from TV2.",
             url = "https://nyheder.tv2.dk/politik"
         ),
         NewsItem(
             title = "DR Politik",
-            description = "Seneste politiske nyheder fra DR.",
+            description = "Latest political news from DR.",
             url = "https://www.dr.dk/nyheder/politik"
         ),
         NewsItem(
             title = "Altinget Politik",
-            description = "Indblik i dansk politik fra Altinget.",
+            description = "Insight into Danish politics from Altinget.",
             url = "https://www.altinget.dk"
         ),
         NewsItem(
             title = "Regeringen.dk",
-            description = "Officielle nyheder og initiativer fra regeringen.",
+            description = "Official news and initiatives from the government.",
             url = "https://www.regeringen.dk"
         ),
         NewsItem(
-            title = "Folketinget",
-            description = "Dokumenter og sager fra Folketinget.",
+            title = "Folketinget,dk",
+            description = "Documents and cases from the Folketing.",
             url = "https://www.ft.dk/da/dokumenter/dokumentlister/nyeste-sager"
         )
     )
@@ -80,7 +81,7 @@ fun NewsScreen(onBackClick: () -> Unit = {}, navController: NavController) {
                     modifier = Modifier.padding(start = 16.dp)
                 ) {
                     Icon(
-                        imageVector = Icons.Default.ArrowBack,
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "Back",
                         tint = Color.White
                     )
@@ -110,9 +111,16 @@ fun NewsScreen(onBackClick: () -> Unit = {}, navController: NavController) {
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(paddingValues)
-                    .padding(horizontal = 26.dp)
-                    .padding(vertical = 26.dp)
+                    .background(color = Color.White)
+                    .padding(
+                        start = 46.dp,
+                        end = 46.dp,
+                        top = paddingValues.calculateTopPadding()
+                    ),
+                contentPadding = PaddingValues(
+                    top = 16.dp, // Adds space between top bar and first item
+                    bottom = 16.dp // Ensures proper space at the end of the list
+                )
             ) {
                 items(newsList) { news ->
                     NewsCard(newsItem = news)
@@ -121,6 +129,7 @@ fun NewsScreen(onBackClick: () -> Unit = {}, navController: NavController) {
         }
     )
 }
+
 
 @Composable
 fun NewsCard(newsItem: NewsItem) {

@@ -87,6 +87,7 @@ fun HistoryScreen(navController: NavHostController, partyData: PartyData) {
                     textAlign = TextAlign.Start,
                     modifier = Modifier
                         .fillMaxWidth()
+                        .background(color = Color.White)
                         .padding(horizontal = 16.dp)
                 )
             }
