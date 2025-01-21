@@ -97,6 +97,7 @@ fun ReportsScreen() {
                         onValueChange = { newText ->
                             searchQuery = newText
                         },
+                        onFocusChanged = {},
                         modifier = Modifier
                             .padding(horizontal = 15.dp)
                     )

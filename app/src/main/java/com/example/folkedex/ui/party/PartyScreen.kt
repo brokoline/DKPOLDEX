@@ -26,6 +26,7 @@ import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
 import com.example.folkedex.model.PartyData
 import com.example.folkedex.ui.common.FolketingLogo
+import com.example.folkedex.ui.common.FolketingLogoWhite
 
 
 @Composable
@@ -44,14 +45,25 @@ fun Party(partyData: PartyData, navController: NavHostController) {
                     .background(partyData.backgroundColor),
                 contentAlignment = Alignment.CenterStart
             ) {
-                FolketingLogo(
+                if ( partyData.path ==
+                        "Moderaterne" || partyData.path == "Socialdemokratiet"|| partyData.path == "Radikale Venstre" || partyData.path == "Socialistisk Folkeparti"|| partyData.path == "Enhedslisten"|| partyData.path == "Javnaðarflokkurin"|| partyData.path =="Inuit Ataqatigiit")  {
+                    FolketingLogoWhite(
+                        modifier = Modifier
+                            .align(Alignment.CenterEnd)
+                            .offset(x = -50.dp)
+                            .offset(y = -5.dp)
+                            .size(200.dp)
+                            .zIndex(0f)
+                    )
+                } else {
+                        FolketingLogo(
                     modifier = Modifier
                         .align(Alignment.CenterEnd)
                         .offset(x = -50.dp)
                         .offset(y = -5.dp)
                         .size(200.dp)
                         .zIndex(0f)
-                )
+                )}
                 IconButton(
                     onClick = { navController.popBackStack() },
                     modifier = Modifier.padding(start = 16.dp)
