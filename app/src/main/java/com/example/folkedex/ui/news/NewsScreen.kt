@@ -59,7 +59,7 @@ fun NewsScreen(onBackClick: () -> Unit = {}, navController: NavController) {
         ),
         NewsItem(
             title = "DanskErhverv,dk",
-            description = "News about business development, current political analyses and studies.",
+            description = "News about danish business development, current political analyses and studies.",
             url = "https://www.danskerhverv.dk/politik-og-analyser/"
         )
     )
