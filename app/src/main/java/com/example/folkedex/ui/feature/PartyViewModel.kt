@@ -1,7 +1,5 @@
 package com.example.folkedex.ui.feature
 
-import android.content.Context
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.folkedex.data.PartyRepository
@@ -14,12 +12,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class PartyViewModel(private val context: Context) : ViewModel() {
+class PartyViewModel(private val dataStore: DataStore) : ViewModel() {
     private val _parties = MutableStateFlow<List<PartyData>>(emptyList())
     val parties: StateFlow<List<PartyData>> = _parties
-
-    private val dataStore = DataStore(context)
-
+    private val _isLoading = MutableStateFlow(false) // Loading state
+    val isLoading: StateFlow<Boolean> = _isLoading
     init {
         loadCachedParties()
     }
@@ -27,6 +24,7 @@ class PartyViewModel(private val context: Context) : ViewModel() {
     // Load cached parties on initialization
     private fun loadCachedParties() {
         viewModelScope.launch {
+
             try {
                 val cachedActors = dataStore.loadActors()
                 if (cachedActors.isNotEmpty()) {
@@ -38,6 +36,8 @@ class PartyViewModel(private val context: Context) : ViewModel() {
             } catch (e: Exception) {
                 e.printStackTrace()
                 fetchPartiesWithPoliticians() // Fallback to fetching data if cache fails
+            } finally {
+                _isLoading.value = false
             }
         }
     }
@@ -45,8 +45,9 @@ class PartyViewModel(private val context: Context) : ViewModel() {
     // Fetch parties and save data to cache
     private fun fetchPartiesWithPoliticians() {
         viewModelScope.launch {
+            _isLoading.value = true
             try {
-                val actors = fetchActors(context)
+                val actors = fetchActors(dataStore)
                 val updatedParties = mapActorsToParties(actors, PartyRepository.parties)
                 _parties.value = updatedParties
 
@@ -54,6 +55,8 @@ class PartyViewModel(private val context: Context) : ViewModel() {
                 dataStore.saveActors(actors)
             } catch (e: Exception) {
                 e.printStackTrace()
+            } finally {
+                _isLoading.value = false
             }
         }
     }
@@ -61,8 +64,9 @@ class PartyViewModel(private val context: Context) : ViewModel() {
     // Explicitly fetch and cache data (can be triggered manually)
     fun fetchAndCachePartyData() {
         viewModelScope.launch {
+            _isLoading.value = true
             try {
-                val actors = fetchActors(context)
+                val actors = fetchActors(dataStore)
                 val updatedParties = mapActorsToParties(actors, PartyRepository.parties)
                 _parties.value = updatedParties
 
@@ -70,7 +74,16 @@ class PartyViewModel(private val context: Context) : ViewModel() {
                 dataStore.saveActors(actors)
             } catch (e: Exception) {
                 e.printStackTrace()
+            } finally {
+                _isLoading.value = false
             }
         }
     }
+    fun emptyCache(){
+        viewModelScope.launch{
+            _parties.value=emptyList()
+
+        }
+    }
+
 }

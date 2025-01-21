@@ -7,8 +7,7 @@ import com.example.folkedex.data.remote.RetrofitInstance
 object FetchActors {
 
 
-    suspend fun fetchActors(context: Context): List<Actor> {
-        val dataStoreManager = DataStore(context)
+    suspend fun fetchActors(dataStore: DataStore): List<Actor> {
         val allActors = mutableListOf<Actor>()
         var skip = 0
         val pageSize = 100
@@ -24,12 +23,12 @@ object FetchActors {
                 skip += pageSize
             }
 
-            dataStoreManager.saveActors(allActors)
+            dataStore.saveActors(allActors)
             allActors
         } catch (e: Exception) {
             e.printStackTrace()
 
-            dataStoreManager.loadActors()
+            dataStore.loadActors()
         }
     }
 

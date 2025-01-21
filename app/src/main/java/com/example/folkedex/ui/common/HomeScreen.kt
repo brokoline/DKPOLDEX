@@ -24,7 +24,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 
 
-
 @Composable
 fun HomeScreen(navController: NavHostController) {
     Box(
@@ -69,7 +68,8 @@ fun TopSectionWithSearchBar() {
         )
 
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize(),
             verticalArrangement = Arrangement.Bottom,
             horizontalAlignment = Alignment.Start
         ) {

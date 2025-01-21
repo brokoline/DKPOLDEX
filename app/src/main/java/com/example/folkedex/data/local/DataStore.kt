@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.folkedex.data.model.Actor
+import com.example.folkedex.data.remote.FileData
 import com.example.folkedex.model.PartyData
 import kotlinx.coroutines.flow.first
 import kotlinx.serialization.decodeFromString
@@ -14,18 +15,21 @@ import kotlinx.serialization.json.Json
 
 private val Context.dataStore by preferencesDataStore(name = "folkedex_datastore")
 
-class DataStore(private val context: Context) {
+class DataStore(context: Context) {
+
+    private val datastore = context.dataStore
 
     // Keys for storing data
     private val ACTORS_KEY = stringPreferencesKey("actors_data")
     private val PARTIES_KEY = stringPreferencesKey("parties_data")
+    private val FILES_KEY = stringPreferencesKey("files_data")
 
     /**
      * Saves the list of actors to DataStore.
      */
     suspend fun saveActors(actors: List<Actor>) {
         val jsonString = Json.encodeToString(actors)
-        context.dataStore.edit { preferences ->
+        datastore.edit { preferences ->
             preferences[ACTORS_KEY] = jsonString
         }
     }
@@ -34,7 +38,7 @@ class DataStore(private val context: Context) {
      * Loads the list of actors from DataStore.
      */
     suspend fun loadActors(): List<Actor> {
-        val preferences = context.dataStore.data.first()
+        val preferences = datastore.data.first()
         val jsonString = preferences[ACTORS_KEY] ?: return emptyList()
         return try {
             Json.decodeFromString(jsonString)
@@ -48,7 +52,7 @@ class DataStore(private val context: Context) {
      */
     suspend fun saveParties(parties: List<PartyData>) {
         val jsonString = Json.encodeToString(parties)
-        context.dataStore.edit { preferences ->
+        datastore.edit { preferences ->
             preferences[PARTIES_KEY] = jsonString
         }
     }
@@ -57,8 +61,25 @@ class DataStore(private val context: Context) {
      * Loads the list of parties from DataStore.
      */
     suspend fun loadParties(): List<PartyData> {
-        val preferences = context.dataStore.data.first()
+        val preferences = datastore.data.first()
         val jsonString = preferences[PARTIES_KEY] ?: return emptyList()
+        return try {
+            Json.decodeFromString(jsonString)
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+
+    suspend fun saveFiles(files: List<FileData>) {
+        val jsonString = Json.encodeToString(files)
+        datastore.edit { preferences ->
+            preferences[FILES_KEY] = jsonString
+        }
+    }
+
+    suspend fun loadFiles(): List<FileData> {
+        val preferences = datastore.data.first()
+        val jsonString = preferences[FILES_KEY] ?: return emptyList()
         return try {
             Json.decodeFromString(jsonString)
         } catch (e: Exception) {

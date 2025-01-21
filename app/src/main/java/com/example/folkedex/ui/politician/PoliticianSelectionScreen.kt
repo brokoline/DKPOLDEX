@@ -1,5 +1,6 @@
 package com.example.folkedex.ui.politician
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -30,6 +31,7 @@ import androidx.navigation.NavController
 import coil3.compose.AsyncImage
 import com.example.folkedex.R
 import com.example.folkedex.data.PartyRepository
+import com.example.folkedex.data.local.DataStore
 import com.example.folkedex.data.model.Actor
 import com.example.folkedex.domain.extractPartyFromBiography
 import com.example.folkedex.domain.extractPoliPictureFromBiography
@@ -49,9 +51,8 @@ fun PoliticianSelectionScreen(
     var searchQuery by remember { mutableStateOf("") }
 
     val context = LocalContext.current
-    val viewModel: PartyViewModel = viewModel(
-        factory = PartyViewModelFactory(context)
-    )
+    val dataStore = DataStore(context)
+    val viewModel: PartyViewModel = viewModel(factory = PartyViewModelFactory(dataStore))
 
     val parties by viewModel.parties.collectAsState()
     val politicians = parties.find { it.name == partyName }?.politicians.orEmpty()
@@ -105,7 +106,7 @@ fun PoliticianSelectionScreen(
     ) { innerPadding ->
         Box(modifier = Modifier.fillMaxSize()) {
             Image(
-                painter = painterResource(id = R.drawable.flogo),
+                painter = painterResource(id = R.drawable.flogo3),
                 contentDescription = "Folketing Logo",
                 modifier = Modifier
                     .size(3000.dp)

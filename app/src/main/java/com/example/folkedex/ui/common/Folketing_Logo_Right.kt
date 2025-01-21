@@ -16,7 +16,7 @@ fun FolketingLogo(
     modifier: Modifier = Modifier
 ) {
     Image(
-        painter = painterResource(id = R.drawable.flogo),
+        painter = painterResource(id = R.drawable.flogo3),
         contentDescription = "Folketing Logo",
         modifier = modifier
             .size(300.dp)

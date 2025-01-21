@@ -22,6 +22,7 @@ import androidx.compose.ui.zIndex
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.folkedex.data.FavoritesHelper
+import com.example.folkedex.data.local.DataStore
 import com.example.folkedex.ui.common.FolketingLogo
 import com.example.folkedex.ui.feature.PartyViewModel
 import com.example.folkedex.ui.feature.PartyViewModelFactory
@@ -34,7 +35,8 @@ fun FavoritesScreen(
     cardHeight: Dp = 160.dp
 ) {
     val context = LocalContext.current
-    val viewModel: PartyViewModel = viewModel(factory = PartyViewModelFactory(context))
+    val dataStore = DataStore(context)
+    val viewModel: PartyViewModel = viewModel(factory = PartyViewModelFactory(dataStore))
     val parties by viewModel.parties.collectAsState()
 
     val favoriteManager = FavoritesHelper(context)
