@@ -84,6 +84,7 @@ fun Party(partyData: PartyData, onBackClick: () -> Unit = {}, navController: Nav
             Column(
                 modifier = Modifier
                     .fillMaxSize()
+                    .background(color = Color.White)
                     .padding(paddingValues)
                     .padding(16.dp),
                 verticalArrangement = Arrangement.Center,
