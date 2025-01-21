@@ -133,6 +133,7 @@ fun NewsCard(newsItem: NewsItem) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp),
+            
         colors = CardDefaults.cardColors(
             containerColor = Color(0xFFF7C72E)
         )

@@ -57,15 +57,75 @@ fun ReportsScreen(
 
     Scaffold(
         topBar = {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(240.dp)
+                    .background(Color(0xFFAED581)),
+                contentAlignment = Alignment.CenterStart
+            ) {
+                FolketingLogo(
+                    modifier = Modifier
+                        .align(Alignment.CenterEnd)
+                        .offset(x = -50.dp)
+                        .offset(y = -25.dp)
+                        .size(205.dp)
+                        .zIndex(0f)
+                )
+                IconButton(
+                    onClick = {navController.popBackStack()},
+                    modifier = Modifier
+                        .padding(start = 16.dp)
+                        .align(Alignment.CenterStart)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "Tilbage",
+                        tint = Color.White
+                    )
+                }
 
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.align(Alignment.Center)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Info,
+                        contentDescription = "Reports Icon",
+                        tint = Color.White,
+                        modifier = Modifier
+                            .size(100.dp)
+                            .padding(bottom = 4.dp)
+                    )
+                    Text(
+                        "Reports",
+                        fontSize = 30.sp,
+                        color = Color.White,
+                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+                    )
+
+                    com.example.folkedex.ui.common.SearchBar(
+                        value = "searchQuery",
+                        onValueChange = { newText ->
+                            //searchQuery = "newText"
+                        },
+                        modifier = Modifier
+                            .padding(horizontal = 15.dp)
+                    )
+                }
+            }
         },
         content = { paddingValues ->
             LazyColumn(
+
                 state = listState, // Attach the LazyListState
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues)
             ) {
+                item {
+                    Spacer(modifier = Modifier.height(20.dp)) // Adjust the height as needed
+                }
                 items(reports) { report ->
                     ReportCard(
                         report = report,
@@ -118,7 +178,7 @@ fun ReportCard(report: FileData, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp)
+            .padding(vertical = 15.dp)
             .shadow(elevation = 8.dp, shape = RoundedCornerShape(16.dp))
             .clickable { onClick() },
         shape = RoundedCornerShape(16.dp),
@@ -127,6 +187,7 @@ fun ReportCard(report: FileData, onClick: () -> Unit) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
+                .height(110.dp)
                 .background(
                     brush = Brush.linearGradient(
                         colors = listOf(Color(0xFF689F38), Color(0xFFAED581))
