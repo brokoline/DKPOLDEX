@@ -102,19 +102,16 @@ fun TopSectionWithSearchBar(navController: NavHostController, context: Context) 
                 modifier = Modifier.padding(bottom = 8.dp)
             )
 
-            // Pass a unified suggestion handler to HomeSearchBar
             HomeSearchBar(
                 navController = navController,
                 context = context,
                 onSuggestionClick = { actor ->
                     actor?.let {
-                        // Navigate to actor details screen
                         navController.navigate("politician/${it.navn}")
                     }
                 },
                 OnSuggestionClick = { party ->
                     party?.let {
-                        // Navigate to party details screen
                         navController.navigate(it.path)
                     }
                 }
