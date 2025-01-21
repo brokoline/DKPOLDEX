@@ -1,7 +1,6 @@
 package com.example.folkedex.ui.common
 
 import android.content.Context
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -75,7 +74,6 @@ fun TopSectionWithSearchBar(navController: NavHostController, context: Context) 
             .padding(16.dp)
             .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Bottom))
     ) {
-
         FolketingLogo(
             modifier = Modifier
                 .align(Alignment.CenterEnd)
@@ -103,14 +101,24 @@ fun TopSectionWithSearchBar(navController: NavHostController, context: Context) 
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
-            HomeSearchBar(navController = navController, context = context) { suggestion ->
-                suggestion?.let {
-                    Log.d("HomeScreen", "Navigating to politician: ${it.navn}")
-                    navController.navigate("politician/${it.navn}")
-                } ?: run {
-                    Log.e("HomeScreen", "Suggestion was null or invalid")
+
+            // Pass a unified suggestion handler to HomeSearchBar
+            HomeSearchBar(
+                navController = navController,
+                context = context,
+                onSuggestionClick = { actor ->
+                    actor?.let {
+                        // Navigate to actor details screen
+                        navController.navigate("politician/${it.navn}")
+                    }
+                },
+                OnSuggestionClick = { party ->
+                    party?.let {
+                        // Navigate to party details screen
+                        navController.navigate(it.path)
+                    }
                 }
-            }
+            )
         }
     }
 }
