@@ -58,6 +58,9 @@ val  SiumutButton = Color(0xFF345995)
 val EnhedslistenBackground = Color(0xFFD10852)
 val  EnhedslistenButton = Color(0xFFD10852)
 
+val LøsgængerBackground = Color(0xFF898D8D)
+val  LøsgængerButton = Color(0xFF898D8D)
+
 val altSocialdemokratiet = Color(0xFFEC4C45)
 val altVenstre = Color(0xFF092F93)
 val altLiberalAlliance = Color(0xFF08304B)
@@ -73,7 +76,7 @@ val altSiumut = Color(0xFF345995)
 val altInuitAtaqatigiit = Color(0xFFB01116)
 val altSambandsflokkurin = Color(0xFF006CB4)
 val altJavnaðarflokkurin = Color(0xFFA70101)
-
+val  altLøsgænger = Color(0xFF898D8D)
 
 
 
