@@ -79,13 +79,7 @@ fun FavoritesScreen(
                         .size(205.dp)
                         .zIndex(0f)
                 )
-                IconButton(
-                    onClick = { navController.popBackStack() },
-                    modifier = Modifier
-                        .padding(start = 16.dp)
-                        .align(Alignment.CenterStart)
-                ) {
-                }
+
 
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -113,13 +107,12 @@ fun FavoritesScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(Color.White)
-                    .padding(paddingValues)
             ) {
                 LazyColumn(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .padding(20.dp)
-
+                        .fillMaxWidth()
+                        .padding(paddingValues)
+                        .padding(bottom = 20.dp)
                 ) {
                     if (favoritePoliticians.isEmpty()) {
                         item {
@@ -194,32 +187,27 @@ fun FavoritesScreen(
                             style = MaterialTheme.typography.titleMedium.copy(color = Color.Black),
                             modifier = Modifier
                                 .clickable {
-                                    scope.launch {
-                                        val message = exportFavoritesToFile(
-                                            context,
-                                            favoriteManager.getFavorites().toList()
-                                        )
-                                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-                                    }
+                                    val message = exportFavoritesToFile(
+                                        context,
+                                        favoriteManager.getFavorites().toList()
+                                    )
+                                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
                                 }
                                 .padding(horizontal = 8.dp)
                         )
-
-                        Spacer(modifier = Modifier.width(42.dp))
-
+                        Spacer(modifier = Modifier.width(52.dp))
                         Text(
                             text = "Reset Favorites",
                             style = MaterialTheme.typography.titleMedium.copy(color = Color.Red),
                             modifier = Modifier
                                 .clickable {
-                                    showConfirmationDialog.value = true
+                                    favoriteManager.clearFavorites()
+                                    Toast.makeText(context, "Favorites cleared!", Toast.LENGTH_SHORT).show()
                                 }
                                 .padding(horizontal = 8.dp)
                         )
                     }
                 }
-
-                // Confirmation dialog
                 if (showConfirmationDialog.value) {
                     AlertDialog(
                         onDismissRequest = { showConfirmationDialog.value = false },
@@ -247,3 +235,4 @@ fun FavoritesScreen(
         }
     )
 }
+
