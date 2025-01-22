@@ -77,6 +77,7 @@ object PartyRepository {
     val parties = listOf(
         PartyData(
             name = "Moderaterne",
+            structuredName = "Moderaterne",
             path = "Moderaterne",
             logoRes = R.drawable.moderaterne_logo,
             altLogo = R.drawable.moderaterne_logo,
@@ -111,6 +112,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Venstre",
+            structuredName = "Venstre",
             path = "Venstre",
             logoRes = R.drawable.venstre,
             altLogo = R.drawable.venstre_logo,
@@ -147,6 +149,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Socialdemokratiet",
+            structuredName = "Social \n demokratiet",
             path = "Socialdemokratiet",
             logoRes = R.drawable.socialdemokratiet,
             altLogo = R.drawable.socialdemokratiet_logo,
@@ -186,6 +189,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Radikale Venstre",
+            structuredName = "Radikale Venstre",
             path = "Radikale Venstre",
             logoRes = R.drawable.radikalevenstre,
             altLogo = R.drawable.radikale_venstre_logo,
@@ -221,6 +225,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Det Konservative Folkeparti",
+            structuredName = "Det Konservative\nFolkeparti",
             path = "Det Konservative Folkeparti",
             logoRes = R.drawable.konserative,
             altLogo = R.drawable.konserative,
@@ -264,6 +269,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Socialistisk Folkeparti",
+            structuredName = "Socialistisk Folkeparti",
             path = "Socialistisk Folkeparti",
             logoRes = R.drawable.socialistiskfolkeparti,
             altLogo = R.drawable.socialistisk_folkeparti_logo,
@@ -305,6 +311,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Liberal Alliance",
+            structuredName = "Liberal Alliance",
             path = "Liberal Alliance",
             logoRes = R.drawable.liberal_alliance_logo,
             altLogo = R.drawable.liberal_alliance_logo,
@@ -354,6 +361,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Dansk Folkeparti",
+            structuredName = "Dansk Folkeparti",
             path = "Dansk Folkeparti",
             logoRes = R.drawable.df,
             altLogo = R.drawable.dansk_folkeparti_logo,
@@ -402,6 +410,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Danmarksdemokraterne",
+            structuredName = "Danmarks\ndemokraterne",
             path = "Danmarksdemokraterne",
             logoRes = R.drawable.ddemkraterne,
             altLogo = R.drawable.danmarksdemokraterne_logo,
@@ -439,6 +448,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Enhedslisten",
+            structuredName = "Enhedslisten",
             path = "Enhedslisten",
             logoRes = R.drawable.enhedslisten,
             altLogo = R.drawable.enhedslisten_logo,
@@ -488,6 +498,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Alternativet",
+            structuredName = "Alternativet",
             path = "Alternativet",
             logoRes = R.drawable.alternativet,
             altLogo = R.drawable.alternativet_logo,
@@ -526,6 +537,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Sambandsflokkurin",
+            structuredName = "Sambands \n flokkurin",
             path = "Sambandsflokkurin",
             logoRes = R.drawable.sambands,
             altLogo = R.drawable.sambandsflokkurin_logo,
@@ -558,6 +570,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Javnaðarflokkurin",
+            structuredName = "Javnaðar \n flokkurin",
             path = "Javnaðarflokkurin",
             logoRes = R.drawable.javna,
             altLogo = R.drawable.javna,
@@ -597,6 +610,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Siumut",
+            structuredName = "Siumut",
             path = "Siumut",
             logoRes = R.drawable.siumut_logo,
             altLogo = R.drawable.siumut_logo,
@@ -633,6 +647,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Inuit Ataqatigiit",
+            structuredName = "Inuit Ataqatigiit",
             path = "Inuit Ataqatigiit",
             logoRes = R.drawable.inuit,
             altLogo = R.drawable.inuit_ataqatigiit_logo,
@@ -670,6 +685,7 @@ object PartyRepository {
         ),
         PartyData(
             name = "Uden for folketingsgrupperne",
+            structuredName = "Uden for folketings \n grupperne",
             path = "Uden for folketingsgrupperne",
             logoRes = R.drawable.loes,
             altLogo = R.drawable.loesgaengere,

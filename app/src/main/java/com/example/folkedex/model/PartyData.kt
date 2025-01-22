@@ -11,6 +11,7 @@ import com.example.folkedex.data.model.Actor
 
 data class PartyData(
     val name: String,
+    val structuredName: String,
     val path: String,
     @DrawableRes val logoRes: Int,
     @DrawableRes val altLogo: Int,
