@@ -20,6 +20,7 @@ data class PartyData(
     val backgroundColor: Color,
     val cardColor: Color,
     val buttonColor: Color,
+    val gradeColor: Color,
     val offsetX: Float = 0f,
     val offsetY: Float = 0f,
     val imageSize: Dp = 120.dp,

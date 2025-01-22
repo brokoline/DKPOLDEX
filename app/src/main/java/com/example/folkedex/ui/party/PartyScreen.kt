@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
@@ -136,10 +137,12 @@ fun Party(partyData: PartyData, navController: NavHostController) {
                     CustomButton(
                         text = "Politicians",
                         textColor = partyData.backColor,
-                        buttonColor = partyData.buttonColor,
+                        buttonColor = Brush.linearGradient(
+                            colors = listOf(partyData.buttonColor, partyData.gradeColor)
+                        ),
                         onClick = { navController.navigate("politicians/${partyData.name}") },
                         modifier = Modifier
-                            .width((screenWidth/2).dp)
+                            .width((screenWidth / 2).dp)
                             .padding(vertical = 4.dp),
                         partyData = partyData,
                         navController = navController,
@@ -147,10 +150,12 @@ fun Party(partyData: PartyData, navController: NavHostController) {
                     CustomButton(
                         text = "History",
                         textColor = partyData.backColor,
-                        buttonColor = partyData.buttonColor,
+                        buttonColor = Brush.linearGradient(
+                            colors = listOf(partyData.buttonColor, partyData.gradeColor)
+                        ),
                         onClick = { navController.navigate("com/example/folkedex/ui/history/${partyData.path}") },
                         modifier = Modifier
-                            .width((screenWidth/2).dp)
+                            .width((screenWidth / 2).dp)
                             .padding(vertical = 4.dp),
                         partyData = partyData,
                         navController = navController,
@@ -158,10 +163,12 @@ fun Party(partyData: PartyData, navController: NavHostController) {
                     CustomButton(
                         text = "Policies",
                         textColor = partyData.backColor,
-                        buttonColor = partyData.buttonColor,
+                        buttonColor = Brush.linearGradient(
+                            colors = listOf(partyData.buttonColor, partyData.gradeColor)
+                        ),
                         onClick = { navController.navigate("policies/${partyData.name}") },
                         modifier = Modifier
-                            .width((screenWidth/2).dp)
+                            .width((screenWidth / 2).dp)
                             .padding(vertical = 4.dp),
                         partyData = partyData,
                         navController = navController,
@@ -176,26 +183,25 @@ fun Party(partyData: PartyData, navController: NavHostController) {
 @Composable
 fun CustomButton(
     text: String,
-    buttonColor: Color,
+    buttonColor: Brush,
     textColor: Color,
     modifier: Modifier = Modifier,
     partyData: PartyData,
     navController: NavHostController,
     onClick: () -> Unit
 ) {
-    Button(
-        onClick = onClick,
-        colors = ButtonDefaults.buttonColors(containerColor = buttonColor),
-        shape = RoundedCornerShape(10.dp),
+    Box(
         modifier = modifier
             .shadow(elevation = 10.dp, shape = RoundedCornerShape(20.dp), clip = true)
-            .height(60.dp),
-        contentPadding = PaddingValues(horizontal = 16.dp)
+            .height(60.dp)
+            .background(buttonColor, shape = RoundedCornerShape(10.dp))
+            .clickable(onClick = onClick),
+        contentAlignment = Alignment.Center
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth()
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp)
         ) {
             Text(
                 text = text,
