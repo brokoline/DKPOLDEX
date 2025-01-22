@@ -5,7 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -39,8 +39,8 @@ fun HistoryScreen(navController: NavHostController, partyData: PartyData) {
                 FolketingLogoWhite(
                     modifier = Modifier
                         .align(Alignment.CenterEnd)
-                        .offset(x = -50.dp)
-                        .offset(y = -5.dp)
+                        .offset(x = (-50).dp)
+                        .offset(y = (-5).dp)
                         .size(200.dp)
                         .zIndex(0f)
                 )
@@ -48,8 +48,8 @@ fun HistoryScreen(navController: NavHostController, partyData: PartyData) {
                 FolketingLogo(
                     modifier = Modifier
                         .align(Alignment.CenterEnd)
-                        .offset(x = -50.dp)
-                        .offset(y = -5.dp)
+                        .offset(x = (-50).dp)
+                        .offset(y = (-5).dp)
                         .size(200.dp)
                         .zIndex(0f)
                 )}
@@ -58,7 +58,7 @@ fun HistoryScreen(navController: NavHostController, partyData: PartyData) {
                 modifier = Modifier.padding(start = 16.dp)
             ) {
                 Icon(
-                    imageVector = Icons.Default.ArrowBack,
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = "Back",
                     tint = partyData.backColor
                 )

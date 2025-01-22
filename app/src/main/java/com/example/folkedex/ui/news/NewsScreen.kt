@@ -11,7 +11,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,17 +23,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.folkedex.R
 import com.example.folkedex.ui.common.FolketingLogo
 
 data class NewsItem(val title: String, val description: String, val url: String)
 
 @Composable
-fun NewsScreen(onBackClick: () -> Unit = {}, navController: NavController) {
+fun NewsScreen(navController: NavController) {
     val newsList = listOf(
         NewsItem(
             title = "TV2 Politik",
@@ -80,8 +77,8 @@ fun NewsScreen(onBackClick: () -> Unit = {}, navController: NavController) {
                 FolketingLogo(
                     modifier = Modifier
                         .align(Alignment.CenterEnd)
-                        .offset(x = -50.dp)
-                        .offset(y = -5.dp)
+                        .offset(x = (-50).dp)
+                        .offset(y = (-5).dp)
                         .size(205.dp)
                         .zIndex(0f)
                 )
@@ -90,7 +87,7 @@ fun NewsScreen(onBackClick: () -> Unit = {}, navController: NavController) {
                     modifier = Modifier.padding(end = 8.dp)
                 ) {
                     Icon(
-                        imageVector = Icons.Default.ArrowBack,
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "Back",
                         tint = Color.White
                     )
@@ -126,8 +123,8 @@ fun NewsScreen(onBackClick: () -> Unit = {}, navController: NavController) {
                         top = paddingValues.calculateTopPadding()
                     ),
                 contentPadding = PaddingValues(
-                    top = 16.dp, // Adds space between top bar and first item
-                    bottom = 16.dp // Ensures proper space at the end of the list
+                    top = 16.dp,
+                    bottom = 16.dp
                 )
             ) {
                 items(newsList) { news ->
