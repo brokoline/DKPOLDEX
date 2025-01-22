@@ -47,6 +47,8 @@ fun ReportsScreen(navController: NavController) {
     val isLoading = viewModel.isLoading.collectAsState().value
     var searchQuery by remember { mutableStateOf("") }
 
+    val listState = rememberLazyListState()
+
     val filteredReports = if (searchQuery.isBlank()) {
         reports
     } else {
@@ -58,17 +60,19 @@ fun ReportsScreen(navController: NavController) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(200.dp)
-                    .background(Color(0xFFAED581)), // Grøn baggrund for Reports
+                    .height(240.dp) // Holder original højden på topbaren
+                    .background(Color(0xFFAED581)),
                 contentAlignment = Alignment.CenterStart
             ) {
                 FolketingLogo(
                     modifier = Modifier
                         .align(Alignment.CenterEnd)
-                        .offset(x = -50.dp, y = -5.dp)
+                        .offset(x = -50.dp)
+                        .offset(y = -25.dp)
                         .size(205.dp)
                         .zIndex(0f)
                 )
+
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.align(Alignment.Center)
@@ -88,11 +92,10 @@ fun ReportsScreen(navController: NavController) {
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     )
 
+                    // Søgebaren som forbliver identisk med den gamle kode
                     AltSearchBar(
                         value = searchQuery,
-                        onValueChange = { newText ->
-                            searchQuery = newText
-                        },
+                        onValueChange = { newText -> searchQuery = newText },
                         onFocusChanged = {},
                         modifier = Modifier
                             .padding(horizontal = 15.dp)
@@ -102,11 +105,12 @@ fun ReportsScreen(navController: NavController) {
         },
         content = { paddingValues ->
             LazyColumn(
+                state = listState,
                 modifier = Modifier
                     .fillMaxSize()
                     .background(color = Color.White)
                     .padding(
-                        start = 46.dp,
+                        start = 46.dp, // Ensrettet med ny kode
                         end = 46.dp,
                         top = paddingValues.calculateTopPadding()
                     ),
@@ -139,18 +143,31 @@ fun ReportsScreen(navController: NavController) {
             }
         }
     )
+
+    LaunchedEffect(listState) {
+        snapshotFlow {
+            val layoutInfo = listState.layoutInfo
+            val totalItemsCount = layoutInfo.totalItemsCount
+            val lastVisibleItemIndex = layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0
+            totalItemsCount to lastVisibleItemIndex
+        }.collect { (totalItemsCount, lastVisibleItemIndex) ->
+            if (lastVisibleItemIndex >= totalItemsCount - (if (isLoading) 2 else 1)) {
+                viewModel.loadNextPage()
+            }
+        }
+    }
 }
 
 @Composable
 fun ReportCard(report: FileData, onClick: () -> Unit) {
     Card(
-        onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xFFAED581) // Grøn farve for Reports
-        )
+            containerColor = Color(0xFFAED581) // Beholder grøn baggrund fra den nye kode
+        ),
+        onClick = onClick
     ) {
         Column(
             modifier = Modifier
@@ -172,6 +189,7 @@ fun ReportCard(report: FileData, onClick: () -> Unit) {
         }
     }
 }
+
 
 
 /*
