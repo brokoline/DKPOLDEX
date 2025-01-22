@@ -85,6 +85,16 @@ fun NewsScreen(onBackClick: () -> Unit = {}, navController: NavController) {
                         .size(205.dp)
                         .zIndex(0f)
                 )
+                IconButton(
+                    onClick = { navController.popBackStack() },
+                    modifier = Modifier.padding(end = 8.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "Back",
+                        tint = Color.White
+                    )
+                }
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.align(Alignment.Center)

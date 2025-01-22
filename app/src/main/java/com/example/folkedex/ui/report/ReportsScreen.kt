@@ -31,6 +31,7 @@ import com.example.folkedex.data.local.DataStore
 import androidx.compose.foundation.lazy.rememberLazyListState
 import android.net.Uri
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
@@ -71,7 +72,16 @@ fun ReportsScreen(navController: NavController) {
                         .size(205.dp)
                         .zIndex(0f)
                 )
-
+                IconButton(
+                    onClick = { navController.popBackStack() },
+                    modifier = Modifier.padding(end = 8.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "Back",
+                        tint = Color.White
+                    )
+                }
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.align(Alignment.Center)
