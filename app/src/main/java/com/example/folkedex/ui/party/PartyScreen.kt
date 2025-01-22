@@ -8,7 +8,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -50,8 +50,8 @@ fun Party(partyData: PartyData, navController: NavHostController) {
                     FolketingLogoWhite(
                         modifier = Modifier
                             .align(Alignment.CenterEnd)
-                            .offset(x = -50.dp)
-                            .offset(y = -5.dp)
+                            .offset(x = (-50).dp)
+                            .offset(y = (-5).dp)
                             .size(200.dp)
                             .zIndex(0f)
                     )
@@ -59,8 +59,8 @@ fun Party(partyData: PartyData, navController: NavHostController) {
                         FolketingLogo(
                     modifier = Modifier
                         .align(Alignment.CenterEnd)
-                        .offset(x = -50.dp)
-                        .offset(y = -5.dp)
+                        .offset(x = (-50).dp)
+                        .offset(y = (-5).dp)
                         .size(200.dp)
                         .zIndex(0f)
                 )}
@@ -69,7 +69,7 @@ fun Party(partyData: PartyData, navController: NavHostController) {
                     modifier = Modifier.padding(start = 16.dp)
                 ) {
                     Icon(
-                        imageVector = Icons.Default.ArrowBack,
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "Back",
                         tint = partyData.backColor
                     )

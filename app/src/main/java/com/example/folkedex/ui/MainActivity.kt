@@ -27,7 +27,6 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -49,7 +48,6 @@ import com.example.folkedex.ui.theme.DataScreen
 import com.example.folkedex.ui.theme.FavoritesScreen
 import com.example.folkedex.ui.news.NewsScreen
 import com.example.folkedex.ui.party.Party
-import androidx.compose.ui.platform.LocalContext
 
 
 import com.example.folkedex.ui.party.PartySelectionScreen
