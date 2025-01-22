@@ -1,6 +1,6 @@
 package com.example.folkedex.ui.feature
 
-import android.annotation.SuppressLint
+
 import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -28,10 +28,11 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.folkedex.data.PartyRepository.parties
 import com.example.folkedex.data.local.DataStore
 import com.example.folkedex.data.model.Actor
@@ -203,12 +204,16 @@ fun CollapsibleSearchTopAppBar(
                         contentDescription = "Back",
                         tint = Color.Black
                     )
+
                 }
+
+
             },
             actions = {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .padding(top = (0).dp)
                 ) {
                     Spacer(modifier = Modifier.width(48.dp))
                     if (scrollBehavior.state.collapsedFraction < 1f) {
@@ -219,6 +224,8 @@ fun CollapsibleSearchTopAppBar(
                             textAlign = TextAlign.Center,
                             modifier = Modifier
                                 .fillMaxWidth()
+                                .background(Color.Transparent)
+                                .padding(vertical = (5).dp)
                         )
                     }
                 }
@@ -226,7 +233,9 @@ fun CollapsibleSearchTopAppBar(
             title = {
                 if (scrollBehavior.state.collapsedFraction < 1f) {
                     Column(
-                        modifier = Modifier.fillMaxWidth().fillMaxHeight()
+                        modifier = Modifier
+                            .padding(top = (1).dp)
+                            .padding(bottom = (10).dp)
                             .background(Color.Transparent)
                     ) {
                         TextField(
@@ -256,6 +265,7 @@ fun CollapsibleSearchTopAppBar(
                                 cursorColor = Color.Black
                             ),
                             modifier = Modifier
+                                .background(Color.Transparent)
                                 .fillMaxWidth()
                                 .height(60.dp)
                                 .padding(horizontal = 16.dp)
@@ -263,7 +273,10 @@ fun CollapsibleSearchTopAppBar(
                     }
                 } else {
                 Column(
-                    modifier = Modifier.fillMaxWidth().fillMaxHeight().background(Color.Transparent)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight()
+                        .background(Color.Transparent)
                 ) {
                     /*Text(
                         text = title,
@@ -315,3 +328,15 @@ fun CollapsibleSearchTopAppBar(
                 .zIndex(1f),
         )
     }
+
+
+@Preview(
+    showSystemUi = true,
+    showBackground = true,
+    device = "spec:width=411dp,height=891dp,dpi=420"
+)
+@Composable
+fun PoliticianSelectionScreen() {
+    val navController = rememberNavController()
+    com.example.folkedex.ui.politician.PoliticianSelectionScreen(navController = navController)
+}
