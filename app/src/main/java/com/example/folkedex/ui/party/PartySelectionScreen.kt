@@ -14,6 +14,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -37,6 +38,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.folkedex.R
 import com.example.folkedex.data.PartyRepository
+import com.example.folkedex.data.local.DataStore
 import com.example.folkedex.model.PartyData
 import com.example.folkedex.ui.feature.PartyViewModel
 import com.example.folkedex.ui.feature.PartyViewModelFactory
@@ -52,37 +54,25 @@ fun PartySelectionScreen(
     cardWidth: Dp = 160.dp,
     cardHeight: Dp = 160.dp
 ) {
-    val context = LocalContext.current
-    val viewModel: PartyViewModel = viewModel(
-        factory = PartyViewModelFactory(context)
-    )
-
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val scrollState = rememberLazyListState()
-    LaunchedEffect(Unit) {
-        withContext(Dispatchers.IO) {
-            viewModel.fetchAndCachePartyData()
-        }
-    }
     Scaffold(
         modifier = Modifier
             .nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             CenterAlignedTopAppBar(
                 scrollBehavior = scrollBehavior,
-                navigationIcon = {
+                title = {
                     IconButton(
                         onClick = { navController.popBackStack() },
                         modifier = Modifier.padding(end = 8.dp)
                     ) {
                         Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            imageVector = Icons.Default.ArrowBack,
                             contentDescription = "Back",
                             tint = Color.Black
                         )
                     }
-                },
-                title = {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(
                             text = "FolkeDex",
@@ -109,7 +99,7 @@ fun PartySelectionScreen(
     ) { innerPadding ->
         Box(modifier = Modifier.fillMaxSize()) {
             Image(
-                painter = painterResource(id = R.drawable.flogo),
+                painter = painterResource(id = R.drawable.flogo3),
                 contentDescription = "folketinglogo",
                 modifier = Modifier
                     .size(3000.dp)

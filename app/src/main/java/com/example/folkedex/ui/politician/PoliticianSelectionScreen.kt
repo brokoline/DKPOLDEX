@@ -23,18 +23,23 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import coil3.compose.AsyncImage
 import com.example.folkedex.R
 import com.example.folkedex.data.PartyRepository
+import com.example.folkedex.data.local.DataStore
 import com.example.folkedex.data.model.Actor
 import com.example.folkedex.domain.extractPartyFromBiography
 import com.example.folkedex.domain.extractPoliPictureFromBiography
+import com.example.folkedex.ui.feature.CollapsibleSearchTopAppBar
 import com.example.folkedex.ui.feature.PartyViewModel
 import com.example.folkedex.ui.feature.PartyViewModelFactory
+import com.example.folkedex.ui.feature.AltSearchBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,9 +54,8 @@ fun PoliticianSelectionScreen(
     var searchQuery by remember { mutableStateOf("") }
 
     val context = LocalContext.current
-    val viewModel: PartyViewModel = viewModel(
-        factory = PartyViewModelFactory(context)
-    )
+    val dataStore = DataStore(context)
+    val viewModel: PartyViewModel = viewModel(factory = PartyViewModelFactory(dataStore))
 
     val parties by viewModel.parties.collectAsState()
     val politicians = parties.find { it.name == partyName }?.politicians.orEmpty()
@@ -62,54 +66,25 @@ fun PoliticianSelectionScreen(
     }
 
     Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier = Modifier
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            CenterAlignedTopAppBar(
+            CollapsibleSearchTopAppBar(
+                title = "FolkeDex: $partyName",
+                searchQuery = searchQuery,
+                onSearchQueryChange = { searchQuery = it },
+                onBackClicked = { navController.popBackStack() },
                 scrollBehavior = scrollBehavior,
-                navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back",
-                            tint = Color.Black
-                        )
-                    }
-                },
-                title = {
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = "FolkeDex: $partyName",
-                            color = Color.Black,
-                            style = MaterialTheme.typography.headlineSmall,
-                            textAlign = TextAlign.Center,
-                        )
-                        Spacer(modifier = Modifier.height(8.dp))
-                        com.example.folkedex.ui.common.SearchBar(
-                            value = searchQuery,
-                            onValueChange = { newValue -> searchQuery = newValue },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 16.dp)
-                                .height(48.dp)
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.largeTopAppBarColors(
-                    containerColor = Color.Transparent,
-                )
             )
         }
     ) { innerPadding ->
         Box(modifier = Modifier.fillMaxSize()) {
             Image(
-                painter = painterResource(id = R.drawable.flogo),
+                painter = painterResource(id = R.drawable.flogo3),
                 contentDescription = "Folketing Logo",
                 modifier = Modifier
                     .size(3000.dp)
-                    .background(color = Color.White)
+                    .background(color = Color.Transparent)
                     .padding(end = 16.dp)
                     .offset(x = 150.dp, y = (-300).dp)
                     .alpha(0.27f),
@@ -222,4 +197,15 @@ fun PoliticianCard(
             )
         }
     }
+}
+
+@Preview(
+    showSystemUi = true,
+    showBackground = true,
+    device = "spec:width=411dp,height=891dp,dpi=420"
+)
+@Composable
+fun PoliticianSelectionScreen() {
+    val navController = rememberNavController()
+    PoliticianSelectionScreen(navController = navController)
 }

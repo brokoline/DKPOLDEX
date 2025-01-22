@@ -1,6 +1,7 @@
 package com.example.folkedex.ui.politician
 
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -27,10 +28,12 @@ import coil3.compose.AsyncImage
 import com.example.folkedex.R
 import com.example.folkedex.data.FavoritesHelper
 import com.example.folkedex.data.PartyRepository
+import com.example.folkedex.data.local.DataStore
 import com.example.folkedex.data.model.Actor
 import com.example.folkedex.domain.*
 import com.example.folkedex.ui.feature.PartyViewModel
 import com.example.folkedex.ui.feature.PartyViewModelFactory
+import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,11 +41,12 @@ fun PoliticianScreen(navController: NavController, name: String) {
     val scrollState = rememberLazyListState()
 
     val context = LocalContext.current
-    val viewModel: PartyViewModel = viewModel(
-        factory = PartyViewModelFactory(context)
-    )
+    val dataStore = DataStore(context)
+    val viewModel: PartyViewModel = viewModel(factory = PartyViewModelFactory(dataStore))
     val parties by viewModel.parties.collectAsState()
 
+
+    // Retrieve politician and party information
     val politician = parties
         .flatMap { it.politicians }
         .find { it.navn == name }
@@ -110,7 +114,7 @@ fun PoliticianScreen(navController: NavController, name: String) {
                                 .background(party.cardColor, shape = RoundedCornerShape(8.dp))
                                 .padding(4.dp),
                             contentScale = ContentScale.Crop,
-                            placeholder = painterResource(R.drawable.flogo),
+                            placeholder = painterResource(R.drawable.flogo3),
                         )
                     } else {
                         Image(
@@ -124,25 +128,25 @@ fun PoliticianScreen(navController: NavController, name: String) {
                         )
                     }
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                        Spacer(modifier = Modifier.height(16.dp))
 
-                    PoliticianDetails(politician)
+                        PoliticianDetails(politician)
+                    }
                 }
-            }
-        )
-    } else {
-        Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = "Politician data not found",
-                style = MaterialTheme.typography.bodyLarge,
-                color = Color.Red
             )
+        } else {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "Politician data not found",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = Color.Red
+                )
+            }
         }
     }
-}
 
 @Composable
 fun PoliticianDetails(politician: Actor) {

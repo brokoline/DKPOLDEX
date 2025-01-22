@@ -1,48 +1,58 @@
-package com.example.folkedex.ui.theme
-//weee
+package com.example.folkedex.ui.report
+
+import android.content.Intent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Info // Importer et andet ikon, hvis det er passende
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.folkedex.data.remote.FileData
+import com.example.folkedex.data.local.DataStore
+import androidx.compose.foundation.lazy.rememberLazyListState
+import android.net.Uri
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import com.example.folkedex.ui.common.FolketingLogo
+import com.example.folkedex.ui.feature.AltSearchBar
 
-data class Report(val title: String, val link: String)
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ReportsScreen( onReportClick: (String) -> Unit = {}, navController: NavController) {
-
+fun ReportsScreen(navController: NavController) {
+    val context = LocalContext.current
+    val dataStore = DataStore(context)
+    val viewModel: ReportsViewModel = viewModel(factory = ReportsViewModelFactory(dataStore))
+    val reports = viewModel.files.collectAsState().value
+    val isLoading = viewModel.isLoading.collectAsState().value
     var searchQuery by remember { mutableStateOf("") }
 
-    val reports = listOf(
-        Report(title = "Budget Proposal 2023", link = "https://www.ft.dk/budget2023"),
-        Report(title = "Health Care Reform", link = "https://www.ft.dk/healthcarereform"),
-        Report(title = "Climate Action Plan", link = "https://www.ft.dk/climateaction"),
-    )
+    val listState = rememberLazyListState()
 
     val filteredReports = if (searchQuery.isBlank()) {
         reports
     } else {
-        reports.filter { it.title.contains(searchQuery, ignoreCase = true) }
+        reports.filter { it.titel.contains(searchQuery, ignoreCase = true) }
     }
 
     Scaffold(
@@ -63,18 +73,15 @@ fun ReportsScreen( onReportClick: (String) -> Unit = {}, navController: NavContr
                         .zIndex(0f)
                 )
                 IconButton(
-                    onClick = {navController.popBackStack()},
-                    modifier = Modifier
-                        .padding(start = 16.dp)
-                        .align(Alignment.CenterStart)
+                    onClick = { navController.popBackStack() },
+                    modifier = Modifier.padding(end = 8.dp)
                 ) {
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "Tilbage",
+                        contentDescription = "Back",
                         tint = Color.White
                     )
                 }
-
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.align(Alignment.Center)
@@ -94,11 +101,11 @@ fun ReportsScreen( onReportClick: (String) -> Unit = {}, navController: NavContr
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     )
 
-                    com.example.folkedex.ui.common.SearchBar(
+                    AltSearchBar(
                         value = searchQuery,
-                        onValueChange = { newText ->
-                            searchQuery = newText
-                        },
+                        onValueChange = { newText -> searchQuery = newText },
+                        onFocusChanged = {},
+                        placeholderText = "Search for a topic of interest...",
                         modifier = Modifier
                             .padding(horizontal = 15.dp)
                     )
@@ -107,26 +114,97 @@ fun ReportsScreen( onReportClick: (String) -> Unit = {}, navController: NavContr
         },
         content = { paddingValues ->
             LazyColumn(
+                state = listState,
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(paddingValues)
-                    .padding(horizontal = 26.dp)
-                    .padding(vertical = 26.dp)
+                    .background(color = Color.White)
+                    .padding(
+                        start = 46.dp,
+                        end = 46.dp,
+                        top = paddingValues.calculateTopPadding()
+                    ),
+                contentPadding = PaddingValues(
+                    top = 16.dp,
+                    bottom = 16.dp
+                )
             ) {
                 items(filteredReports) { report ->
                     ReportCard(
                         report = report,
-                        onClick = { onReportClick(report.link) }
+                        onClick = { report.fileUrl?.let { url ->
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                            context.startActivity(intent)
+                        }}
                     )
+                }
+                if (isLoading) {
+                    item {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CircularProgressIndicator()
+                        }
+                    }
                 }
             }
         }
     )
+
+    LaunchedEffect(listState) {
+        snapshotFlow {
+            val layoutInfo = listState.layoutInfo
+            val totalItemsCount = layoutInfo.totalItemsCount
+            val lastVisibleItemIndex = layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0
+            totalItemsCount to lastVisibleItemIndex
+        }.collect { (totalItemsCount, lastVisibleItemIndex) ->
+            if (lastVisibleItemIndex >= totalItemsCount - (if (isLoading) 2 else 1)) {
+                viewModel.loadNextPage()
+            }
+        }
+    }
 }
 
+@Composable
+fun ReportCard(report: FileData, onClick: () -> Unit) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color(0xFFAED581)
+        ),
+        onClick = onClick
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Text(
+                text = report.titel,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
+            Text(
+                text = report.fileUrl,
+                fontSize = 14.sp,
+                color = Color.White.copy(alpha = 0.8f),
+                modifier = Modifier.padding(top = 4.dp)
+            )
+        }
+    }
+}
+
+
+
+/*
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewReportsScreen() {
     ReportsScreen(navController = NavController(LocalContext.current))
 }
-
+*/

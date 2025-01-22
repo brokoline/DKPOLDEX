@@ -1,10 +1,12 @@
 package com.example.folkedex.ui.common
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -14,6 +16,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,11 +25,14 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-
+import com.example.folkedex.ui.feature.HomeSearchBar
 
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
+
+    val context = LocalContext.current
+
     Box(
         modifier = Modifier
             .background(color = Color.White)
@@ -34,7 +40,8 @@ fun HomeScreen(navController: NavHostController) {
             .consumeWindowInsets(WindowInsets.systemBars)
 
     ) {
-        TopSectionWithSearchBar()
+        TopSectionWithSearchBar(navController = navController, context = context)
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -49,7 +56,7 @@ fun HomeScreen(navController: NavHostController) {
 
 
 @Composable
-fun TopSectionWithSearchBar() {
+fun TopSectionWithSearchBar(navController: NavHostController, context: Context) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -58,7 +65,6 @@ fun TopSectionWithSearchBar() {
             .padding(16.dp)
             .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Bottom))
     ) {
-
         FolketingLogo(
             modifier = Modifier
                 .align(Alignment.CenterEnd)
@@ -69,7 +75,8 @@ fun TopSectionWithSearchBar() {
         )
 
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize(),
             verticalArrangement = Arrangement.Bottom,
             horizontalAlignment = Alignment.Start
         ) {
@@ -85,46 +92,23 @@ fun TopSectionWithSearchBar() {
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
-            var searchQuery = ""
-            SearchBar(value = searchQuery,
-                onValueChange = { searchQuery  = it })
+
+            HomeSearchBar(
+                navController = navController,
+                context = context,
+                onSuggestionClick = { actor ->
+                    actor?.let {
+                        navController.navigate("politician/${it.navn}")
+                    }
+                },
+                onAltSuggestionClick = { party ->
+                    party?.let {
+                        navController.navigate(it.path)
+                    }
+                }
+            )
         }
     }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun SearchBar(
-    modifier: Modifier = Modifier,
-    value: String,
-    onValueChange: (String) -> Unit
-) {
-    TextField(
-        value = value,
-        onValueChange = onValueChange,
-        leadingIcon = {
-            Icon(
-                imageVector = Icons.Default.Search,
-                contentDescription = "Search Icon"
-            )
-        },
-        placeholder = {
-            Text(text = "Search for Politician, Party, etc...")
-        },
-        shape = RoundedCornerShape(16.dp),
-        colors = TextFieldDefaults.colors(
-            focusedContainerColor = Color(0xFFF5F5F5),
-            unfocusedContainerColor = Color(0xFFF5F5F5),
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-            focusedTextColor = Color.Black,
-            unfocusedTextColor = Color.Black,
-            cursorColor = Color.Black
-        ),
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp)
-    )
 }
 
 @Composable

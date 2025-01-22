@@ -17,9 +17,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.folkedex.data.local.DataStore
 import com.example.folkedex.model.PartyData
 
-@Composable
+/*@Composable
 fun PartyListScreen(viewModel: PartyViewModel = viewModel(factory = PartyViewModelFactory(LocalContext.current)), navController: NavController) {
     val parties by viewModel.parties.collectAsState()
 
@@ -29,7 +30,7 @@ fun PartyListScreen(viewModel: PartyViewModel = viewModel(factory = PartyViewMod
         }
     }
 }
-
+*/
 @Composable
 fun PartyItem(party: PartyData) {
     Column(modifier = Modifier.padding(16.dp)) {
@@ -46,11 +47,11 @@ fun PartyItem(party: PartyData) {
         }
     }
 }
-class PartyViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
+class PartyViewModelFactory(private val dataStore: DataStore) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(PartyViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return PartyViewModel(context) as T
+            return PartyViewModel(dataStore) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
