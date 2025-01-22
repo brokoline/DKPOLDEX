@@ -85,8 +85,6 @@ fun NewsScreen(onBackClick: () -> Unit = {}, navController: NavController) {
                         .size(205.dp)
                         .zIndex(0f)
                 )
-
-
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.align(Alignment.Center)

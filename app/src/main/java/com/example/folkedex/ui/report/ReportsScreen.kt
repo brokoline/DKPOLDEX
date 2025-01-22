@@ -31,21 +31,20 @@ import com.example.folkedex.data.local.DataStore
 import androidx.compose.foundation.lazy.rememberLazyListState
 import android.net.Uri
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import com.example.folkedex.ui.common.FolketingLogo
+import com.example.folkedex.ui.feature.AltSearchBar
 
 @Composable
-fun ReportsScreen() {
+fun ReportsScreen(navController: NavController) {
     val context = LocalContext.current
     val dataStore = DataStore(context)
     val viewModel: ReportsViewModel = viewModel(factory = ReportsViewModelFactory(dataStore))
     val reports = viewModel.files.collectAsState().value
     val isLoading = viewModel.isLoading.collectAsState().value
     var searchQuery by remember { mutableStateOf("") }
-
 
     val listState = rememberLazyListState()
 
@@ -92,11 +91,9 @@ fun ReportsScreen() {
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     )
 
-                    com.example.folkedex.ui.common.SearchBar(
+                    AltSearchBar(
                         value = searchQuery,
-                        onValueChange = { newText ->
-                            searchQuery = newText
-                        },
+                        onValueChange = { newText -> searchQuery = newText },
                         onFocusChanged = {},
                         modifier = Modifier
                             .padding(horizontal = 15.dp)
@@ -106,27 +103,29 @@ fun ReportsScreen() {
         },
         content = { paddingValues ->
             LazyColumn(
-
                 state = listState,
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(paddingValues)
-                    .padding(horizontal = 26.dp)
-                    .padding(vertical = 26.dp)
+                    .background(color = Color.White)
+                    .padding(
+                        start = 46.dp,
+                        end = 46.dp,
+                        top = paddingValues.calculateTopPadding()
+                    ),
+                contentPadding = PaddingValues(
+                    top = 16.dp,
+                    bottom = 16.dp
+                )
             ) {
-                item {
-                    Spacer(modifier = Modifier.height(20.dp))
-                }
-                //items(reports) { report ->
                 items(filteredReports) { report ->
                     ReportCard(
                         report = report,
                         onClick = { report.fileUrl?.let { url ->
                             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                            context.startActivity(intent) }}
+                            context.startActivity(intent)
+                        }}
                     )
                 }
-
                 if (isLoading) {
                     item {
                         Box(
@@ -150,61 +149,46 @@ fun ReportsScreen() {
             val lastVisibleItemIndex = layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0
             totalItemsCount to lastVisibleItemIndex
         }.collect { (totalItemsCount, lastVisibleItemIndex) ->
-
-            if (lastVisibleItemIndex >= totalItemsCount - (if (isLoading) 2 else 1))  {
-
+            if (lastVisibleItemIndex >= totalItemsCount - (if (isLoading) 2 else 1)) {
                 viewModel.loadNextPage()
-
             }
         }
     }
-
 }
-
-
-
 
 @Composable
 fun ReportCard(report: FileData, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 15.dp)
-            .shadow(elevation = 8.dp, shape = RoundedCornerShape(16.dp))
-            .clickable { onClick() },
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.Transparent)
+            .padding(vertical = 8.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color(0xFFAED581)
+        ),
+        onClick = onClick
     ) {
-        Box(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(
-                    brush = Brush.linearGradient(
-                        colors = listOf(Color(0xFF689F38), Color(0xFFAED581))
-                    )
-                )
                 .padding(16.dp)
         ) {
-            Column {
-                Text(
-                    text = report.titel,
-                    style = MaterialTheme.typography.bodyLarge.copy(
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White
-                    )
-                )
-                Text(
-                    text = report.fileUrl,
-                    style = MaterialTheme.typography.bodyMedium.copy(
-                        fontSize = 14.sp,
-                        color = Color.White.copy(alpha = 0.8f)
-                    )
-                )
-            }
+            Text(
+                text = report.titel,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
+            Text(
+                text = report.fileUrl,
+                fontSize = 14.sp,
+                color = Color.White.copy(alpha = 0.8f),
+                modifier = Modifier.padding(top = 4.dp)
+            )
         }
     }
 }
+
+
 
 /*
 @Preview(showBackground = true, showSystemUi = true)
