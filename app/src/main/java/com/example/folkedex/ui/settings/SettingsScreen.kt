@@ -64,7 +64,7 @@ fun SettingsScreen(navController: NavController) {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(16.dp),
+                        .padding(10.dp),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -73,7 +73,7 @@ fun SettingsScreen(navController: NavController) {
                         style = MaterialTheme.typography.titleLarge.copy(color = Color.Black), // Larger text
                         textAlign = TextAlign.Center,
                         modifier = Modifier
-                            .padding(vertical = 12.dp) // Adjusted vertical padding
+                            .padding(vertical = 32.dp) // Adjusted vertical padding
                             .clickable {
                                 scope.launch {
                                     val message = exportFavoritesToFile(context, favoriteManager.getFavorites().toList())
@@ -86,7 +86,7 @@ fun SettingsScreen(navController: NavController) {
                         style = MaterialTheme.typography.titleLarge.copy(color = Color.Red), // Larger text
                         textAlign = TextAlign.Center,
                         modifier = Modifier
-                            .padding(vertical = 12.dp) // Adjusted vertical padding
+                            .padding(vertical = 15.dp)
                             .clickable {
                                 showConfirmationDialog.value = true
                             }
