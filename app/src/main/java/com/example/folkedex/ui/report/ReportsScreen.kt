@@ -31,7 +31,6 @@ import com.example.folkedex.data.local.DataStore
 import androidx.compose.foundation.lazy.rememberLazyListState
 import android.net.Uri
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
@@ -60,7 +59,7 @@ fun ReportsScreen(navController: NavController) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(240.dp) // Holder original højden på topbaren
+                    .height(240.dp)
                     .background(Color(0xFFAED581)),
                 contentAlignment = Alignment.CenterStart
             ) {
@@ -92,7 +91,6 @@ fun ReportsScreen(navController: NavController) {
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     )
 
-                    // Søgebaren som forbliver identisk med den gamle kode
                     AltSearchBar(
                         value = searchQuery,
                         onValueChange = { newText -> searchQuery = newText },
@@ -110,7 +108,7 @@ fun ReportsScreen(navController: NavController) {
                     .fillMaxSize()
                     .background(color = Color.White)
                     .padding(
-                        start = 46.dp, // Ensrettet med ny kode
+                        start = 46.dp,
                         end = 46.dp,
                         top = paddingValues.calculateTopPadding()
                     ),
@@ -165,7 +163,7 @@ fun ReportCard(report: FileData, onClick: () -> Unit) {
             .fillMaxWidth()
             .padding(vertical = 8.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xFFAED581) // Beholder grøn baggrund fra den nye kode
+            containerColor = Color(0xFFAED581)
         ),
         onClick = onClick
     ) {
