@@ -1,5 +1,6 @@
 package com.example.folkedex.ui.feature
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -297,11 +298,10 @@ fun CollapsibleSearchTopAppBar(
             }
             },
             colors = TopAppBarDefaults.largeTopAppBarColors(
-                //containerColor = MaterialTheme.colorScheme.background
                 containerColor = Color.Transparent
             ),
             modifier = Modifier
-                .background(Color.Transparent) // Prevent default elevation overlays
-                .zIndex(1f), // Ensure it appears above other content
+                .background(Color.Transparent)
+                .zIndex(1f),
         )
     }

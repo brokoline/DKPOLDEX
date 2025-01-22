@@ -28,17 +28,13 @@ import com.example.folkedex.ui.feature.PartyViewModel
 import com.example.folkedex.ui.feature.PartyViewModelFactory
 import com.example.folkedex.ui.politician.PoliticianCard
 import android.widget.Toast
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.text.style.TextAlign
 import com.example.folkedex.ui.settings.exportFavoritesToFile
-import kotlinx.coroutines.launch
 
 
 @Composable
@@ -135,7 +131,7 @@ fun FavoritesScreen(
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(vertical = 8.dp),
+                                    .padding(vertical = 6.dp),
                                 horizontalArrangement = Arrangement.SpaceEvenly
                             ) {
                                 rowPoliticians.forEach { politician ->
@@ -168,7 +164,7 @@ fun FavoritesScreen(
                         .background(Color.White)
                         .drawBehind {
                             drawLine(
-                                color = Color.Black,
+                                color = Color.Transparent,
                                 start = Offset(0f, 0f),
                                 end = Offset(size.width, 0f),
                                 strokeWidth = 2.dp.toPx()
