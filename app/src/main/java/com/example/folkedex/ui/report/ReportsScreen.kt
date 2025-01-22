@@ -90,12 +90,12 @@ fun ReportsScreen(navController: NavController) {
 
                     AltSearchBar(
                         value = searchQuery,
-                        onValueChange = { newText -> searchQuery = newText },
+                        onValueChange = { newText ->
+                            searchQuery = newText
+                        },
                         onFocusChanged = {},
                         modifier = Modifier
                             .padding(horizontal = 15.dp)
-                            .padding(top = 8.dp)
-                            .height(176.dp)
                     )
                 }
             }
