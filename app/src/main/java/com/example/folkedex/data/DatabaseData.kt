@@ -667,7 +667,7 @@ object PartyRepository {
 
         ),
         PartyData(
-            name = "Løsgængere",
+            name = "Uden for folketingsgrupperne",
             path = "Uden for folketingsgrupperne",
             logoRes = R.drawable.loes,
             altLogo = R.drawable.loesgaengere,
@@ -681,7 +681,7 @@ object PartyRepository {
             backgroundColor = LøsgængerBackground,
             cardColor = altLøsgænger,
             buttonColor = LøsgængerButton,
-            offsetX = 9f,
+            offsetX = 15f,
             offsetY = 15f,
             imageSize = 100.dp,
             logoSize = 120.dp,

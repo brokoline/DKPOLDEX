@@ -53,8 +53,11 @@ fun HistoryScreen(navController: NavHostController, partyData: PartyData) {
 
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.offset(x = partyData.offsetX.dp, y = partyData.offsetY.dp)
-            ) {
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .offset(x = partyData.offsetX.dp, y = partyData.offsetY.dp)
+            )  {
                 Image(
                     painter = painterResource(id = partyData.logoRes),
                     contentDescription = "Centered Image",
