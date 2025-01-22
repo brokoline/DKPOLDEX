@@ -191,7 +191,7 @@ fun CollapsibleSearchTopAppBar(
     onBackClicked: () -> Unit,
     scrollBehavior: TopAppBarScrollBehavior
 ) {
-    scrollBehavior.state.collapsedFraction == 1f
+    scrollBehavior.state.collapsedFraction
         LargeTopAppBar(
             scrollBehavior = scrollBehavior,
             navigationIcon = {
