@@ -1,5 +1,6 @@
 package com.example.folkedex.ui.feature
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -24,7 +25,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -58,7 +58,6 @@ fun HomeSearchBar(
     val filteredSuggestions = suggestions.filter { it.contains(query.text, ignoreCase = true) }
 
     Box(modifier = modifier.fillMaxWidth()) {
-        // Search TextField
         TextField(
             value = query,
             onValueChange = { newQuery -> query = newQuery },
@@ -86,14 +85,13 @@ fun HomeSearchBar(
                 .padding(vertical = 4.dp)
         )
 
-        // Suggestions Dropdown (LazyColumn)
         if (query.text.isNotEmpty() && filteredSuggestions.isNotEmpty()) {
             LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .offset(y = 60.dp) // Offset to appear below the TextField
+                    .offset(y = 60.dp)
                     .background(Color.White)
-                    .heightIn(max = 200.dp) // Limit height of the dropdown
+                    .heightIn(max = 200.dp)
             ) {
                 items(filteredSuggestions) { suggestion ->
                     Text(
@@ -143,7 +141,6 @@ fun navigateToRoute(suggestion: String, navController: NavController) {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AltSearchBar(
     modifier: Modifier = Modifier,
@@ -184,6 +181,7 @@ fun AltSearchBar(
     )
 }
 
+@SuppressLint("SuspiciousIndentation")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CollapsibleSearchTopAppBar(
@@ -193,7 +191,7 @@ fun CollapsibleSearchTopAppBar(
     onBackClicked: () -> Unit,
     scrollBehavior: TopAppBarScrollBehavior
 ) {
-    val collapsed = scrollBehavior.state.collapsedFraction == 1f
+    scrollBehavior.state.collapsedFraction == 1f
         LargeTopAppBar(
             scrollBehavior = scrollBehavior,
             navigationIcon = {
@@ -300,11 +298,10 @@ fun CollapsibleSearchTopAppBar(
             }
             },
             colors = TopAppBarDefaults.largeTopAppBarColors(
-                //containerColor = MaterialTheme.colorScheme.background
                 containerColor = Color.Transparent
             ),
             modifier = Modifier
-                .background(Color.Transparent) // Prevent default elevation overlays
-                .zIndex(1f), // Ensure it appears above other content
+                .background(Color.Transparent)
+                .zIndex(1f),
         )
     }

@@ -7,7 +7,6 @@ import com.example.folkedex.R
 import com.example.folkedex.data.model.Actor
 import com.example.folkedex.domain.extractPartyFromBiography
 import com.example.folkedex.model.PartyData
-import com.example.folkedex.model.PoliticianData
 import com.example.folkedex.ui.common.SearchableItem
 import com.example.folkedex.ui.theme.AlternativetBackground
 import com.example.folkedex.ui.theme.AlternativetButton
