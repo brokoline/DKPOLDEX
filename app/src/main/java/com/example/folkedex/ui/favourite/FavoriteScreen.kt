@@ -131,7 +131,7 @@ fun FavoritesScreen(
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(vertical = 1.dp),
+                                    .padding(vertical = 6.dp),
                                 horizontalArrangement = Arrangement.SpaceEvenly
                             ) {
                                 rowPoliticians.forEach { politician ->
