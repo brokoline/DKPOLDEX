@@ -164,7 +164,7 @@ fun MainScreen(navController: NavHostController) {
                     Text(text = "Party data not found", color = Color.Red, modifier = Modifier.fillMaxSize())
                 }
             }
-            composable("reports") { ReportsScreen() }
+            composable("reports") { ReportsScreen(navController = navController) }
             composable("bills") { BillScreen(navController = navController) }
             composable("com/example/folkedex/ui/history/{partyPath}") { backStackEntry ->
                 val partyPath = backStackEntry.arguments?.getString("partyPath")
