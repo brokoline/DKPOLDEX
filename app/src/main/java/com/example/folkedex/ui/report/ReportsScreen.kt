@@ -95,6 +95,7 @@ fun ReportsScreen(navController: NavController) {
                         value = searchQuery,
                         onValueChange = { newText -> searchQuery = newText },
                         onFocusChanged = {},
+                        placeholderText = "Search for a topic of interest...",
                         modifier = Modifier
                             .padding(horizontal = 15.dp)
                     )

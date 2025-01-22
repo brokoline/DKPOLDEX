@@ -24,6 +24,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -148,7 +149,8 @@ fun AltSearchBar(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
-    onFocusChanged: (Boolean) -> Unit
+    onFocusChanged: (Boolean) -> Unit,
+    placeholderText: String
 ) {
 
     TextField(
@@ -161,7 +163,7 @@ fun AltSearchBar(
             )
         },
         placeholder = {
-            Text(text = "Search for Politician, Party, etc...")
+            Text(text = placeholderText)
         },
         shape = RoundedCornerShape(16.dp),
         colors = TextFieldDefaults.colors(
