@@ -8,18 +8,26 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.LargeTopAppBar
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import com.example.folkedex.data.PartyRepository.parties
 import com.example.folkedex.data.local.DataStore
@@ -173,3 +181,128 @@ fun AltSearchBar(
             }
     )
 }
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun CollapsibleSearchTopAppBar(
+    title: String,
+    searchQuery: String,
+    onSearchQueryChange: (String) -> Unit,
+    onBackClicked: () -> Unit,
+    scrollBehavior: TopAppBarScrollBehavior
+) {
+    val collapsed = scrollBehavior.state.collapsedFraction == 1f
+        LargeTopAppBar(
+            scrollBehavior = scrollBehavior,
+            navigationIcon = {
+                IconButton(onClick = onBackClicked) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = "Back",
+                        tint = Color.Black
+                    )
+                }
+                if (scrollBehavior.state.collapsedFraction < 1f) {
+                    Text(
+                        text = title,
+                        color = Color.Black,
+                        style = MaterialTheme.typography.headlineSmall,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    )
+                }
+            },
+            title = {
+                if (scrollBehavior.state.collapsedFraction < 1f) {
+                    Column(
+                        modifier = Modifier.fillMaxWidth().fillMaxHeight()
+                            .background(Color.Transparent)
+                    ) {
+                        TextField(
+                            value = searchQuery,
+                            onValueChange = onSearchQueryChange,
+                            leadingIcon = {
+                                Icon(
+                                    imageVector = Icons.Default.Search,
+                                    contentDescription = "Search Icon"
+                                )
+                            },
+                            placeholder = {
+                                Text(
+                                    text = "Search for a specific Politician"
+                                )
+                            },
+                            textStyle = MaterialTheme.typography.bodySmall.copy(
+                                color = Color.Black
+                            ),
+                            colors = TextFieldDefaults.colors(
+                                focusedContainerColor = Color.White,
+                                unfocusedContainerColor = Color.White,
+                                focusedIndicatorColor = Color.Transparent,
+                                unfocusedIndicatorColor = Color.Transparent,
+                                focusedTextColor = Color.Black,
+                                unfocusedTextColor = Color.Black,
+                                cursorColor = Color.Black
+                            ),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(60.dp)
+                                .padding(horizontal = 16.dp)
+                        )
+                    }
+                } else {
+                Column(
+                    modifier = Modifier.fillMaxWidth().fillMaxHeight().background(Color.Transparent)
+                ) {
+                    /*Text(
+                        text = title,
+                        color = Color.Black,
+                        style = MaterialTheme.typography.headlineSmall,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    )*/
+                    /*TextField(
+                        value = searchQuery,
+                        onValueChange = onSearchQueryChange,
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Default.Search,
+                                contentDescription = "Search Icon"
+                            )
+                        },
+                        placeholder = {
+                            Text(
+                                text = "Search for a specific Politician"
+                            )
+                        },
+                        textStyle = MaterialTheme.typography.bodySmall.copy(
+                            color = Color.Black
+                        ),
+                        colors = TextFieldDefaults.colors(
+                            focusedContainerColor = Color.White,
+                            unfocusedContainerColor = Color.White,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            focusedTextColor = Color.Black,
+                            unfocusedTextColor = Color.Black,
+                            cursorColor = Color.Black
+                        ),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(60.dp)
+                            .padding(horizontal = 16.dp)
+                    )*/
+                }
+            }
+            },
+            colors = TopAppBarDefaults.largeTopAppBarColors(
+                //containerColor = MaterialTheme.colorScheme.background
+                containerColor = Color.Transparent
+            ),
+            modifier = Modifier
+                .background(Color.Transparent) // Prevent default elevation overlays
+                .zIndex(1f), // Ensure it appears above other content
+        )
+    }

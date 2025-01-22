@@ -36,7 +36,7 @@ import com.example.folkedex.data.local.DataStore
 import com.example.folkedex.data.model.Actor
 import com.example.folkedex.domain.extractPartyFromBiography
 import com.example.folkedex.domain.extractPoliPictureFromBiography
-import com.example.folkedex.ui.common.CollapsibleSearchTopAppBar
+import com.example.folkedex.ui.feature.CollapsibleSearchTopAppBar
 import com.example.folkedex.ui.feature.PartyViewModel
 import com.example.folkedex.ui.feature.PartyViewModelFactory
 import com.example.folkedex.ui.feature.AltSearchBar
@@ -207,5 +207,5 @@ fun PoliticianCard(
 @Composable
 fun PoliticianSelectionScreen() {
     val navController = rememberNavController()
-    com.example.folkedex.ui.politician.PoliticianSelectionScreen(navController = navController)
+    PoliticianSelectionScreen(navController = navController)
 }
