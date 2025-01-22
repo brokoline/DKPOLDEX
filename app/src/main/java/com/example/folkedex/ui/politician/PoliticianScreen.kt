@@ -50,7 +50,7 @@ fun PoliticianScreen(navController: NavController, name: String) {
     val parties by viewModel.parties.collectAsState()
 
 
-    // Retrieve politician and party information
+
     val politician = parties
         .flatMap { it.politicians }
         .find { it.navn == name }
@@ -184,7 +184,6 @@ fun PoliticianDetails(politician: Actor) {
                 )
 
                 if (key == "Email" && value != "?") {
-                    // Make email clickable
                     Text(
                         text = value,
                         style = MaterialTheme.typography.bodyMedium.copy(
