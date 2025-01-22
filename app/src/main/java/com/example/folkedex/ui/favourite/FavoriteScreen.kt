@@ -170,9 +170,9 @@ fun FavoritesScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(50.dp) // Height of the bottom bar
+                        .height(50.dp)
                         .align(Alignment.BottomCenter)
-                        .background(Color.White) // Transparent black background
+                        .background(Color.White)
                         .drawBehind {
                             drawLine(
                                 color = Color.Black,
@@ -185,9 +185,9 @@ fun FavoritesScreen(
                     Row(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(horizontal = 16.dp), // Padding for the entire row
-                        horizontalArrangement = Arrangement.Center, // Align buttons closer together
-                        verticalAlignment = Alignment.CenterVertically // Center-align the buttons vertically
+                            .padding(horizontal = 16.dp),
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
                             text = "Export Favorites",
@@ -202,10 +202,10 @@ fun FavoritesScreen(
                                         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
                                     }
                                 }
-                                .padding(horizontal = 8.dp) // Padding around this button
+                                .padding(horizontal = 8.dp)
                         )
 
-                        Spacer(modifier = Modifier.width(16.dp)) // Adjust space between buttons
+                        Spacer(modifier = Modifier.width(42.dp))
 
                         Text(
                             text = "Reset Favorites",
@@ -214,7 +214,7 @@ fun FavoritesScreen(
                                 .clickable {
                                     showConfirmationDialog.value = true
                                 }
-                                .padding(horizontal = 8.dp) // Padding around this button
+                                .padding(horizontal = 8.dp)
                         )
                     }
                 }

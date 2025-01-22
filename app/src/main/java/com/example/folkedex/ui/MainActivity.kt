@@ -228,12 +228,6 @@ fun BottomTabBar(navController: NavHostController) {
             selected = navController.currentDestination?.route == "favorites",
             onClick = { navController.navigate("favorites") { popUpTo("home") } }
         )
-        NavigationBarItem(
-            icon = { Icon(Icons.Default.Settings, contentDescription = "Settings", /*modifier = Modifier.padding(top = 10.dp),*/ tint = Color.Gray) },
-            label = { Text("Settings", /*fontSize = 20.sp,*/ color = Color.Gray) },
-            selected = navController.currentDestination?.route == "settings",
-            onClick = { navController.navigate("settings") { popUpTo("home") } }
-        )
     }
 }
 
