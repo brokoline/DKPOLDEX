@@ -1,9 +1,11 @@
 package com.example.folkedex.ui.politician
 
 
-import android.util.Log
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,6 +23,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -33,7 +36,8 @@ import com.example.folkedex.data.model.Actor
 import com.example.folkedex.domain.*
 import com.example.folkedex.ui.feature.PartyViewModel
 import com.example.folkedex.ui.feature.PartyViewModelFactory
-import kotlinx.coroutines.delay
+import androidx.compose.runtime.remember
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -147,7 +151,6 @@ fun PoliticianScreen(navController: NavController, name: String) {
             }
         }
     }
-
 @Composable
 fun PoliticianDetails(politician: Actor) {
     val details = mapOf(
@@ -159,6 +162,8 @@ fun PoliticianDetails(politician: Actor) {
         "Email" to (extractPoliMailFromBiography(politician.biografi) ?: "?"),
         "Phone" to (extractPoliPhoneFromBiography(politician.biografi) ?: "?")
     )
+
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -177,12 +182,46 @@ fun PoliticianDetails(politician: Actor) {
                     style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
                     color = Color.Black
                 )
-                Text(
-                    text = value,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = Color.DarkGray,
-                    textAlign = TextAlign.End
-                )
+
+                if (key == "Email" && value != "?") {
+                    // Make email clickable
+                    Text(
+                        text = value,
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            color = Color.Blue,
+                            textDecoration = TextDecoration.Underline
+                        ),
+                        textAlign = TextAlign.End,
+                        modifier = Modifier.clickable {
+                            val intent = Intent(Intent.ACTION_SENDTO).apply {
+                                data = Uri.parse("mailto:$value")
+                            }
+                            context.startActivity(intent)
+                        }
+                    )
+                } else if (key == "Phone" && value != "?") {
+                    Text(
+                        text = value,
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            color = Color.Blue,
+                            textDecoration = TextDecoration.Underline
+                        ),
+                        textAlign = TextAlign.End,
+                        modifier = Modifier.clickable {
+                            val intent = Intent(Intent.ACTION_DIAL).apply {
+                                data = Uri.parse("tel:$value")
+                            }
+                            context.startActivity(intent)
+                        }
+                    )
+                } else {
+                    Text(
+                        text = value,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = Color.DarkGray,
+                        textAlign = TextAlign.End
+                    )
+                }
             }
         }
     }
