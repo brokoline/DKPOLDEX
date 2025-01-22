@@ -48,8 +48,6 @@ import com.example.folkedex.ui.theme.DataScreen
 import com.example.folkedex.ui.theme.FavoritesScreen
 import com.example.folkedex.ui.news.NewsScreen
 import com.example.folkedex.ui.party.Party
-
-
 import com.example.folkedex.ui.party.PartySelectionScreen
 import com.example.folkedex.data.PartyRepository
 import com.example.folkedex.data.local.DataStore
@@ -60,6 +58,8 @@ import com.example.folkedex.ui.politician.PoliticianSelectionScreen
 import com.example.folkedex.ui.report.ReportsScreen
 import kotlinx.coroutines.delay
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.folkedex.R
 
 class MainActivity : ComponentActivity() {
@@ -75,7 +75,6 @@ class MainActivity : ComponentActivity() {
             val parties by viewModel.parties.collectAsState()
             val politician = parties
                 .flatMap { it.politicians }
-         //   Log.d("api content test", politician.toString())
             LaunchedEffect(Unit) {
                 viewModel.fetchAndCachePartyData()
 
@@ -83,7 +82,7 @@ class MainActivity : ComponentActivity() {
 
             }
             LaunchedEffect(politician.isEmpty()) {
-                delay(5000) // Wait for 5 seconds
+                delay(5000)
 
             }
             if (politician.isEmpty()) {
@@ -99,25 +98,22 @@ class MainActivity : ComponentActivity() {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            CircularProgressIndicator() // Display the loading indicator
-                            Spacer(modifier = Modifier.height(16.dp)) // Add space between the indicator and text
-                            Text("Loading Politicians") // Display the text below the indicator
+                            CircularProgressIndicator()
+                            Spacer(modifier = Modifier.height(16.dp))
+                            Text("Loading Politicians")
                         }
-                        Spacer(modifier = Modifier.width(16.dp)) // Add space between the column and the image
+                        Spacer(modifier = Modifier.width(16.dp))
                         Image(
-                            painter = painterResource(id = R.drawable.loading), // Replace with your image resource
+                            painter = painterResource(id = R.drawable.loading),
                             contentDescription = "Loading Icon",
-                            modifier = Modifier.size(100.dp) // Adjust size as needed
+                            modifier = Modifier.size(100.dp)
                         )
                     }
                 }
 
             } else {
-                // Show the main content
                 AppNavHost()
             }
-
-            //AppNavHost()
         }
     }
 }
@@ -141,7 +137,7 @@ fun MainScreen(navController: NavHostController) {
             modifier = Modifier.padding(paddingValues)
         ) {
             composable("home") {
-                HomeScreen(navController = navController) // No context needed
+                HomeScreen(navController = navController)
             }
             composable("favorites") { FavoritesScreen(navController = navController) }
             composable("com/example/folkedex/ui/news") { NewsScreen(navController = navController) }
@@ -205,12 +201,16 @@ if(isLoading){
         color = Color.Gray,
         trackColor = Color.White
     )
-   // Log.d("inside the loading screen", isLoading.toString())
 }
 
 }
 @Composable
 fun BottomTabBar(navController: NavHostController) {
+
+    val currentBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = currentBackStackEntry?.destination
+    val currentRoute = currentDestination?.route
+
     NavigationBar(
         containerColor = Color.White
     ) {
@@ -218,13 +218,23 @@ fun BottomTabBar(navController: NavHostController) {
             icon = { Icon(Icons.Default.Home, contentDescription = "Home", /*modifier = Modifier.padding(top = 10.dp),*/ tint = Color.Gray) },
             label = { Text("Home", /*fontSize = 20.sp,*/ color = Color.Gray) },
             selected = navController.currentDestination?.route == "home",
-            onClick = { navController.navigate("home") { popUpTo("home") { inclusive = true } } }
+            onClick = { if (currentRoute != "home") { navController.navigate("home") { popUpTo(navController.graph.startDestinationId) { inclusive = true } } } },
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = Color.Black,
+                unselectedIconColor = Color.Gray,
+                indicatorColor = Color.LightGray
+            )
         )
         NavigationBarItem(
             icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites", /*modifier = Modifier.padding(top = 10.dp),*/ tint = Color.Gray) },
             label = { Text("Favorites", /*fontSize = 20.sp,*/ color = Color.Gray) },
             selected = navController.currentDestination?.route == "favorites",
-            onClick = { navController.navigate("favorites") { popUpTo("home") } }
+            onClick = { if (currentRoute != "favorites") { navController.navigate("favorites") { popUpTo(navController.graph.startDestinationId) } } },
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = Color.Black,
+                unselectedIconColor = Color.Gray,
+                indicatorColor = Color.LightGray
+            )
         )
     }
 }
