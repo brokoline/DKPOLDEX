@@ -27,6 +27,19 @@ import com.example.folkedex.ui.common.FolketingLogo
 import com.example.folkedex.ui.feature.PartyViewModel
 import com.example.folkedex.ui.feature.PartyViewModelFactory
 import com.example.folkedex.ui.politician.PoliticianCard
+import android.widget.Toast
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.text.style.TextAlign
+import com.example.folkedex.ui.settings.exportFavoritesToFile
+import kotlinx.coroutines.launch
+
 
 @Composable
 fun FavoritesScreen(
@@ -45,6 +58,9 @@ fun FavoritesScreen(
     val favoritePoliticians = parties
         .flatMap { it.politicians }
         .filter { favorites.contains(it.navn) }
+
+    val scope = rememberCoroutineScope()
+    val showConfirmationDialog = remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
@@ -102,34 +118,130 @@ fun FavoritesScreen(
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(horizontal = 26.dp)
-                        .padding(vertical = 26.dp)
-                ) {
-                    items(favoritePoliticians.chunked(2)) { rowPoliticians ->
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(vertical = 8.dp),
-                            horizontalArrangement = Arrangement.SpaceEvenly
-                        ) {
-                            rowPoliticians.forEach { politician ->
-                                PoliticianCard(
-                                    politicianData = politician,
-                                    cardWidth = cardWidth,
-                                    cardHeight = cardHeight,
-                                    navController = navController
-                                )
-                            }
+                        .padding(20.dp)
 
-                            if (rowPoliticians.size == 1) {
-                                Spacer(
-                                    modifier = Modifier
-                                        .width(cardWidth)
-                                        .height(cardHeight)
+                ) {
+                    if (favoritePoliticians.isEmpty()) {
+                        item {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(16.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    text = "No favorites yet.",
+                                    fontSize = 20.sp,
+                                    color = Color.Gray,
+                                    fontWeight = FontWeight.Medium
                                 )
                             }
                         }
+                    } else {
+                        items(favoritePoliticians.chunked(2)) { rowPoliticians ->
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 8.dp),
+                                horizontalArrangement = Arrangement.SpaceEvenly
+                            ) {
+                                rowPoliticians.forEach { politician ->
+                                    PoliticianCard(
+                                        politicianData = politician,
+                                        cardWidth = cardWidth,
+                                        cardHeight = cardHeight,
+                                        navController = navController
+                                    )
+                                }
+
+                                if (rowPoliticians.size == 1) {
+                                    Spacer(
+                                        modifier = Modifier
+                                            .width(cardWidth)
+                                            .height(cardHeight)
+                                    )
+                                }
+                            }
+                        }
                     }
+                }
+
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(50.dp) // Height of the bottom bar
+                        .align(Alignment.BottomCenter)
+                        .background(Color.White) // Transparent black background
+                        .drawBehind {
+                            drawLine(
+                                color = Color.Black,
+                                start = Offset(0f, 0f),
+                                end = Offset(size.width, 0f),
+                                strokeWidth = 2.dp.toPx()
+                            )
+                        }
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(horizontal = 16.dp), // Padding for the entire row
+                        horizontalArrangement = Arrangement.Center, // Align buttons closer together
+                        verticalAlignment = Alignment.CenterVertically // Center-align the buttons vertically
+                    ) {
+                        Text(
+                            text = "Export Favorites",
+                            style = MaterialTheme.typography.titleMedium.copy(color = Color.Black),
+                            modifier = Modifier
+                                .clickable {
+                                    scope.launch {
+                                        val message = exportFavoritesToFile(
+                                            context,
+                                            favoriteManager.getFavorites().toList()
+                                        )
+                                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+                                .padding(horizontal = 8.dp) // Padding around this button
+                        )
+
+                        Spacer(modifier = Modifier.width(16.dp)) // Adjust space between buttons
+
+                        Text(
+                            text = "Reset Favorites",
+                            style = MaterialTheme.typography.titleMedium.copy(color = Color.Red),
+                            modifier = Modifier
+                                .clickable {
+                                    showConfirmationDialog.value = true
+                                }
+                                .padding(horizontal = 8.dp) // Padding around this button
+                        )
+                    }
+                }
+
+                // Confirmation dialog
+                if (showConfirmationDialog.value) {
+                    AlertDialog(
+                        onDismissRequest = { showConfirmationDialog.value = false },
+                        confirmButton = {
+                            TextButton(
+                                onClick = {
+                                    favoriteManager.clearFavorites()
+                                    showConfirmationDialog.value = false
+                                    Toast.makeText(context, "Favorites cleared!", Toast.LENGTH_SHORT).show()
+                                }
+                            ) {
+                                Text("Confirm", color = Color.Red)
+                            }
+                        },
+                        dismissButton = {
+                            TextButton(onClick = { showConfirmationDialog.value = false }) {
+                                Text("Cancel")
+                            }
+                        },
+                        title = { Text("Reset your favorites") },
+                        text = { Text("Are you sure you want to reset all your favorites? This action cannot be undone.") }
+                    )
                 }
             }
         }
