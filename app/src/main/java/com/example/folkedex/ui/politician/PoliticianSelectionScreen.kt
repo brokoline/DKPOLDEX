@@ -8,8 +8,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -39,7 +37,6 @@ import com.example.folkedex.domain.extractPoliPictureFromBiography
 import com.example.folkedex.ui.feature.CollapsibleSearchTopAppBar
 import com.example.folkedex.ui.feature.PartyViewModel
 import com.example.folkedex.ui.feature.PartyViewModelFactory
-import com.example.folkedex.ui.feature.AltSearchBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -78,12 +75,15 @@ fun PoliticianSelectionScreen(
             )
         }
     ) { innerPadding ->
-        Box(modifier = Modifier.fillMaxSize()) {
+        Box(modifier = Modifier
+            .background(Color.White)
+            .fillMaxSize()) {
             Image(
                 painter = painterResource(id = R.drawable.flogo3),
                 contentDescription = "Folketing Logo",
                 modifier = Modifier
                     .size(3000.dp)
+                    .background(Color.White)
                     .background(color = Color.Transparent)
                     .padding(end = 16.dp)
                     .offset(x = 150.dp, y = (-300).dp)
@@ -93,6 +93,7 @@ fun PoliticianSelectionScreen(
             LazyColumn(
                 state = scrollState,
                 modifier = Modifier
+                    .background(Color.Transparent)
                     .fillMaxSize()
                     .padding(top = innerPadding.calculateTopPadding()),
                 horizontalAlignment = Alignment.CenterHorizontally

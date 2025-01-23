@@ -194,7 +194,7 @@ fun FavoritesScreen(
                         Spacer(modifier = Modifier.width(52.dp))
                         Text(
                             text = "Reset Favorites",
-                            style = MaterialTheme.typography.titleMedium.copy(color = Color.Red),
+                            style = MaterialTheme.typography.titleMedium.copy(color = Color.Black),
                             modifier = Modifier
                                 .clickable {
                                     favoriteManager.clearFavorites()

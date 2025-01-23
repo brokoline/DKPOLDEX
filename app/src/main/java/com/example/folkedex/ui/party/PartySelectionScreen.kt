@@ -70,6 +70,8 @@ fun PartySelectionScreen(
                             color = Color.Black,
                             fontSize = MaterialTheme.typography.headlineLarge.fontSize,
                             textAlign = TextAlign.Center,
+                            modifier = Modifier
+                                .background(Color.Transparent),
                         )
                         Text(
                             text = "Select the relevant party",
@@ -77,6 +79,7 @@ fun PartySelectionScreen(
                                 fontSize = MaterialTheme.typography.titleLarge.fontSize
                             ),
                             modifier = Modifier
+                                .background(Color.Transparent)
                                 .fillMaxWidth(),
                             textAlign = TextAlign.Center
                         )
@@ -93,6 +96,7 @@ fun PartySelectionScreen(
                 painter = painterResource(id = R.drawable.flogo3),
                 contentDescription = "folketinglogo",
                 modifier = Modifier
+                    .background(Color.White)
                     .size(3000.dp)
                     .padding(end = 16.dp)
                     .offset(x = 150.dp, y = (-300).dp)
@@ -102,6 +106,7 @@ fun PartySelectionScreen(
             LazyColumn(
                 state = scrollState,
                 modifier = Modifier
+                    .background(Color.Transparent)
                     .fillMaxSize()
                     .padding(
                         top = innerPadding.calculateTopPadding()
