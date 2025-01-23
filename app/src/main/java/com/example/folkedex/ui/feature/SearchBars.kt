@@ -3,6 +3,7 @@ package com.example.folkedex.ui.feature
 
 import android.content.Context
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -195,98 +196,50 @@ fun CollapsibleSearchTopAppBar(
     scrollBehavior: TopAppBarScrollBehavior
 ) {
     scrollBehavior.state.collapsedFraction
-        LargeTopAppBar(
-            scrollBehavior = scrollBehavior,
-            navigationIcon = {
-                IconButton(onClick = onBackClicked) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Back",
-                        tint = Color.Black
-                    )
+    LargeTopAppBar(
+        scrollBehavior = scrollBehavior,
+        navigationIcon = {
+            IconButton(onClick = onBackClicked) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = "Back",
+                    tint = Color.Black
+                )
 
-                }
+            }
 
 
-            },
-            actions = {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .padding(top = (0).dp)
-                ) {
-                    Spacer(modifier = Modifier.width(48.dp))
-                    if (scrollBehavior.state.collapsedFraction < 1f) {
-                        Text(
-                            text = title,
-                            color = Color.Black,
-                            style = MaterialTheme.typography.headlineSmall,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .background(Color.Transparent)
-                                .padding(vertical = (5).dp)
-                        )
-                    }
-                }
-            },
-            title = {
+        },
+        actions = {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .padding(top = (0).dp)
+            ) {
+                Spacer(modifier = Modifier.width(48.dp))
                 if (scrollBehavior.state.collapsedFraction < 1f) {
-                    Column(
-                        modifier = Modifier
-                            .padding(top = (1).dp)
-                            .padding(bottom = (10).dp)
-                            .background(Color.Transparent)
-                    ) {
-                        TextField(
-                            value = searchQuery,
-                            onValueChange = onSearchQueryChange,
-                            leadingIcon = {
-                                Icon(
-                                    imageVector = Icons.Default.Search,
-                                    contentDescription = "Search Icon"
-                                )
-                            },
-                            placeholder = {
-                                Text(
-                                    text = "Search for a specific Politician"
-                                )
-                            },
-                            textStyle = MaterialTheme.typography.bodySmall.copy(
-                                color = Color.Black
-                            ),
-                            colors = TextFieldDefaults.colors(
-                                focusedContainerColor = Color.White,
-                                unfocusedContainerColor = Color.White,
-                                focusedIndicatorColor = Color.Transparent,
-                                unfocusedIndicatorColor = Color.Transparent,
-                                focusedTextColor = Color.Black,
-                                unfocusedTextColor = Color.Black,
-                                cursorColor = Color.Black
-                            ),
-                            modifier = Modifier
-                                .background(Color.Transparent)
-                                .fillMaxWidth()
-                                .height(60.dp)
-                                .padding(horizontal = 16.dp)
-                        )
-                    }
-                } else {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight()
-                        .background(Color.Transparent)
-                ) {
-                    /*Text(
+                    Text(
                         text = title,
                         color = Color.Black,
                         style = MaterialTheme.typography.headlineSmall,
                         textAlign = TextAlign.Center,
                         modifier = Modifier
                             .fillMaxWidth()
-                    )*/
-                    /*TextField(
+                            .background(Color.Transparent)
+                            .padding(vertical = (5).dp)
+                    )
+                }
+            }
+        },
+        title = {
+            if (scrollBehavior.state.collapsedFraction < 1f) {
+                Column(
+                    modifier = Modifier
+                        .padding(top = (1).dp)
+                        .padding(bottom = (10).dp)
+                        .background(Color.Transparent)
+                ) {
+                    TextField(
                         value = searchQuery,
                         onValueChange = onSearchQueryChange,
                         leadingIcon = {
@@ -313,21 +266,33 @@ fun CollapsibleSearchTopAppBar(
                             cursorColor = Color.Black
                         ),
                         modifier = Modifier
+                            .background(Color.Transparent)
                             .fillMaxWidth()
                             .height(60.dp)
                             .padding(horizontal = 16.dp)
-                    )*/
+                            .border(1.dp, Color.LightGray, shape = MaterialTheme.shapes.small)
+                    )
+                }
+            } else {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight()
+                        .background(Color.Transparent)
+                ) {
+
                 }
             }
-            },
-            colors = TopAppBarDefaults.largeTopAppBarColors(
-                containerColor = Color.Transparent
-            ),
-            modifier = Modifier
-                .background(Color.Transparent)
-                .zIndex(1f),
-        )
-    }
+        },
+        colors = TopAppBarDefaults.largeTopAppBarColors(
+            containerColor = Color.Transparent
+        ),
+        modifier = Modifier
+            .background(Color.Transparent)
+            .zIndex(1f),
+    )
+}
+
 
 
 @Preview(
