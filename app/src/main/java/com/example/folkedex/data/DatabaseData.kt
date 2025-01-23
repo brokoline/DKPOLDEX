@@ -226,7 +226,7 @@ Core Areas:
         ),
         PartyData(
             name = "Socialdemokratiet",
-            structuredName = "Social \n demokratiet",
+            structuredName = "Social- \n demokratiet",
             path = "Socialdemokratiet",
             logoRes = R.drawable.socialdemokratiet,
             altLogo = R.drawable.socialdemokratiet_logo,
@@ -606,7 +606,7 @@ Core Areas:
         ),
         PartyData(
             name = "Danmarksdemokraterne",
-            structuredName = "Danmarks\ndemokraterne",
+            structuredName = "Danmarks-\ndemokraterne",
             path = "Danmarksdemokraterne",
             logoRes = R.drawable.ddemkraterne,
             altLogo = R.drawable.danmarksdemokraterne_logo,
@@ -781,7 +781,7 @@ Core Areas:
         ),
         PartyData(
             name = "Sambandsflokkurin",
-            structuredName = "Sambands \n flokkurin",
+            structuredName = "Sambands-\n flokkurin",
             path = "Sambandsflokkurin",
             logoRes = R.drawable.sambands,
             altLogo = R.drawable.sambandsflokkurin_logo,
@@ -838,7 +838,7 @@ Core Areas:
         ),
         PartyData(
             name = "Javnaðarflokkurin",
-            structuredName = "Javnaðar \n flokkurin",
+            structuredName = "Javnaðar-\n flokkurin",
             path = "Javnaðarflokkurin",
             logoRes = R.drawable.javna,
             altLogo = R.drawable.javna,
@@ -1009,7 +1009,7 @@ Core Areas:
         ),
         PartyData(
             name = "Uden for folketingsgrupperne",
-            structuredName = "Uden for folketings \n grupperne",
+            structuredName = "Uden for folketings-\n grupperne",
             path = "Uden for folketingsgrupperne",
             logoRes = R.drawable.loes,
             altLogo = R.drawable.loesgaengere,
