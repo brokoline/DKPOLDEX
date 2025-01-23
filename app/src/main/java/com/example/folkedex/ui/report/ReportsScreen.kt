@@ -172,9 +172,17 @@ fun ReportCard(report: FileData, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp),
+            .padding(vertical = 8.dp)
+            .background(
+                brush = Brush.horizontalGradient(
+                    colors = listOf(
+                        Color(0xFFAED581),
+                        Color(0xFFD4F5A7)
+                    )
+                ),
+            ),
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xFFAED581)
+            containerColor = Color.Transparent
         ),
         onClick = onClick
     ) {
