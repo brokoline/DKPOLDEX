@@ -1,5 +1,6 @@
 package com.example.folkedex.ui.history
 
+import android.webkit.WebView
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -18,6 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
 import com.example.folkedex.model.PartyData
@@ -65,9 +67,12 @@ fun HistoryScreen(navController: NavHostController, partyData: PartyData) {
             }
 
             Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.offset(x = partyData.offsetX.dp, y = partyData.offsetY.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                Spacer(modifier = Modifier.weight(1.5f))
                 Image(
                     painter = painterResource(id = partyData.logoRes),
                     contentDescription = "Centered Image",
@@ -80,7 +85,9 @@ fun HistoryScreen(navController: NavHostController, partyData: PartyData) {
                     fontSize = partyData.textSize,
                     color = partyData.backColor,
                     style = androidx.compose.material3.MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+
                 )
+                Spacer(modifier = Modifier.weight(0.5f))
             }
         }
 
@@ -91,16 +98,14 @@ fun HistoryScreen(navController: NavHostController, partyData: PartyData) {
             verticalArrangement = Arrangement.Top
         ) {
             item {
-                Text(
-                    text = partyData.history,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Normal,
-                    color = Color.Black,
-                    textAlign = TextAlign.Start,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(color = Color.White)
-                        .padding(horizontal = 16.dp)
+                AndroidView(
+                    factory = { context ->
+                        WebView(context).apply {
+                            settings.javaScriptEnabled = false
+                            loadDataWithBaseURL(null, partyData.history, "text/html", "UTF-8", null)
+                        }
+                    },
+                    modifier = Modifier.fillMaxSize()
                 )
             }
         }

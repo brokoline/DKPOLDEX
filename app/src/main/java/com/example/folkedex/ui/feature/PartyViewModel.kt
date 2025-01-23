@@ -15,7 +15,8 @@ import kotlinx.coroutines.launch
 class PartyViewModel(private val dataStore: DataStore) : ViewModel() {
     private val _parties = MutableStateFlow<List<PartyData>>(emptyList())
     val parties: StateFlow<List<PartyData>> = _parties
-    private val _isLoading = MutableStateFlow(false) // Loading state
+    private val _isLoading = MutableStateFlow(false)
+
     val isLoading: StateFlow<Boolean> = _isLoading
     init {
         loadCachedParties()

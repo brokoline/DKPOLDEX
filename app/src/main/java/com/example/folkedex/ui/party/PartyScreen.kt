@@ -76,9 +76,12 @@ fun Party(partyData: PartyData, navController: NavHostController) {
                 }
 
                 Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.offset(x = partyData.offsetX.dp, y = partyData.offsetY.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
+                    Spacer(modifier = Modifier.weight(1.5f))
                     Image(
                         painter = painterResource(id = partyData.logoRes),
                         contentDescription = "Centered Image",
@@ -88,8 +91,13 @@ fun Party(partyData: PartyData, navController: NavHostController) {
                         partyData.path,
                         fontSize = partyData.textSize,
                         color = partyData.backColor,
-                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+                                modifier = Modifier
+                                .fillMaxWidth()
+                            .padding(horizontal = 16.dp),
+                        textAlign = TextAlign.Center
                     )
+                    Spacer(modifier = Modifier.weight(0.5f))
                 }
             }
         },

@@ -1,6 +1,7 @@
 package com.example.folkedex.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -62,7 +63,12 @@ import com.example.folkedex.ui.politician.PoliticianSelectionScreen
 import com.example.folkedex.ui.report.ReportsScreen
 import kotlinx.coroutines.delay
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import com.example.folkedex.R
+import com.example.folkedex.data.model.Actor
+import com.example.folkedex.ui.settings.SettingsScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,42 +90,14 @@ class MainActivity : ComponentActivity() {
 
 
             }
-            LaunchedEffect(politician.isEmpty()) {
-                delay(5000) // Wait for 5 seconds
-
-            }
-            if (politician.isEmpty()) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            CircularProgressIndicator() // Display the loading indicator
-                            Spacer(modifier = Modifier.height(16.dp)) // Add space between the indicator and text
-                            Text("Loading Politicians") // Display the text below the indicator
-                        }
-                        Spacer(modifier = Modifier.width(16.dp)) // Add space between the column and the image
-                        Image(
-                            painter = painterResource(id = R.drawable.loading), // Replace with your image resource
-                            contentDescription = "Loading Icon",
-                            modifier = Modifier.size(100.dp) // Adjust size as needed
-                        )
-                    }
-                }
-
-            } else {
-                // Show the main content
+            if (politician.isEmpty()){
+                LoadingScreen(politician = politician)
+            }else
+            {
                 AppNavHost()
             }
 
-            //AppNavHost()
+
         }
     }
 }
@@ -147,7 +125,7 @@ fun MainScreen(navController: NavHostController) {
             }
             composable("favorites") { FavoritesScreen(navController = navController) }
             composable("com/example/folkedex/ui/news") { NewsScreen(navController = navController) }
-            composable("settings") { com.example.folkedex.ui.settings.SettingsScreen(navController) }
+            composable("settings") { SettingsScreen(navController) }
             composable("folkedex") { PartySelectionScreen(navController = navController) }
             composable("com/example/folkedex/ui/issues") { IssuesScreen(navController = navController) }
             composable("politician/{name}") { backStackEntry ->
@@ -198,19 +176,7 @@ fun MainScreen(navController: NavHostController) {
     }
 }
 
-@Composable
-fun IndeterminateCircularIndicator(isLoading: Boolean) {
 
-if(isLoading){
-    CircularProgressIndicator(
-        modifier = Modifier.width(64.dp),
-        color = Color.Gray,
-        trackColor = Color.White
-    )
-   // Log.d("inside the loading screen", isLoading.toString())
-}
-
-}
 @Composable
 fun BottomTabBar(navController: NavHostController) {
     NavigationBar(
@@ -236,4 +202,52 @@ fun BottomTabBar(navController: NavHostController) {
         )
     }
 }
+@Composable
+fun LoadingScreen( politician: List<Actor>){
 
+
+
+
+    val timer = remember { mutableIntStateOf(0) }
+    val maxWaitTime = 10 // Max wait time in seconds
+    val isTimedOut = timer.value >= maxWaitTime
+
+
+    LaunchedEffect(Unit) {
+        while (timer.value < maxWaitTime && politician.isEmpty()) {
+            delay(1000L) // Wait for 1 second
+            timer.value++ // Increment the timer
+            Log.d("timer", timer.value.toString())
+        }
+    }
+    if (politician.isEmpty() && !isTimedOut) {
+        // Show loading screen
+        Box(
+            modifier = Modifier
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    CircularProgressIndicator() // Display the loading indicator
+                    Spacer(modifier = Modifier.height(16.dp)) // Add space between the indicator and text
+                    Text("Loading Politicians") // Display the text below the indicator
+                }
+                Spacer(modifier = Modifier.width(16.dp)) // Add space between the column and the image
+                Image(
+                    painter = painterResource(id = R.drawable.loading), // Replace with your image resource
+                    contentDescription = "Loading Icon",
+                    modifier = Modifier.size(100.dp) // Adjust size as needed
+                )
+            }
+        }
+    } else {
+        // Show the main content
+        AppNavHost()
+    }
+}
