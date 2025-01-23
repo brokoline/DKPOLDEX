@@ -1,5 +1,6 @@
 package com.example.folkedex.ui
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -59,6 +60,7 @@ import com.example.folkedex.ui.report.ReportsScreen
 import kotlinx.coroutines.delay
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.core.view.WindowCompat
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.folkedex.R
 
@@ -127,6 +129,8 @@ fun AppNavHost() {
 
 @Composable
 fun MainScreen(navController: NavHostController) {
+    SetTopBarIconsColorBasedOnRoute(navController)
+
     Scaffold(
         contentWindowInsets = WindowInsets(0.dp),
         bottomBar = { BottomTabBar(navController) }
@@ -239,3 +243,22 @@ fun BottomTabBar(navController: NavHostController) {
     }
 }
 
+@Composable
+fun SetTopBarIconsColorBasedOnRoute(navController: NavHostController) {
+    val context = LocalContext.current
+    val window = (context as? Activity)?.window
+
+    val currentBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = currentBackStackEntry?.destination?.route
+
+    LaunchedEffect(currentRoute) {
+        window?.let {
+            val insetsController = WindowCompat.getInsetsController(it, it.decorView)
+            insetsController?.isAppearanceLightStatusBars = when (currentRoute) {
+                "folkedex", "politicians/{partyName}" -> true
+                "Moderaterne", "Socialdemokratiet", "Radikale Venstre", "Socialistisk Folkeparti", "Enhedslisten", "Javnaðarflokkurin", "Inuit Ataqatigiit" -> true
+                else -> false
+            }
+        }
+    }
+}
