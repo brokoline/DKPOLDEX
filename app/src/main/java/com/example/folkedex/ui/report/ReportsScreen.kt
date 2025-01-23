@@ -173,6 +173,7 @@ fun ReportCard(report: FileData, onClick: () -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp)
+            .shadow(elevation = 8.dp, shape = RoundedCornerShape(16.dp))
             .background(
                 brush = Brush.horizontalGradient(
                     colors = listOf(
