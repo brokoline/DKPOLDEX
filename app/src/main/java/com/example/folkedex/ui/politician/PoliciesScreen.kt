@@ -1,11 +1,12 @@
 package com.example.folkedex.ui.politician
 
+import android.webkit.WebView
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -13,15 +14,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
 import com.example.folkedex.model.PartyData
 import com.example.folkedex.ui.common.FolketingLogo
 import com.example.folkedex.ui.common.FolketingLogoWhite
-
 
 @Composable
 fun PoliciesScreen(navController: NavHostController, partyData: PartyData) {
@@ -33,13 +32,11 @@ fun PoliciesScreen(navController: NavHostController, partyData: PartyData) {
                 .background(partyData.backgroundColor),
             contentAlignment = Alignment.CenterStart
         ) {
-            if ( partyData.path ==
-                "Moderaterne" || partyData.path == "Socialdemokratiet"|| partyData.path == "Radikale Venstre" || partyData.path == "Socialistisk Folkeparti"|| partyData.path == "Enhedslisten"|| partyData.path == "Javnaðarflokkurin"|| partyData.path =="Inuit Ataqatigiit")  {
+            if (partyData.path in listOf("Moderaterne", "Socialdemokratiet", "Radikale Venstre", "Socialistisk Folkeparti", "Enhedslisten", "Javnaðarflokkurin", "Inuit Ataqatigiit")) {
                 FolketingLogoWhite(
                     modifier = Modifier
                         .align(Alignment.CenterEnd)
-                        .offset(x = -50.dp)
-                        .offset(y = -5.dp)
+                        .offset(x = (-50).dp, y = (-5).dp)
                         .size(200.dp)
                         .zIndex(0f)
                 )
@@ -47,17 +44,17 @@ fun PoliciesScreen(navController: NavHostController, partyData: PartyData) {
                 FolketingLogo(
                     modifier = Modifier
                         .align(Alignment.CenterEnd)
-                        .offset(x = -50.dp)
-                        .offset(y = -5.dp)
+                        .offset(x = (-50).dp, y = (-5).dp)
                         .size(200.dp)
                         .zIndex(0f)
-                )}
+                )
+            }
             IconButton(
                 onClick = { navController.popBackStack() },
                 modifier = Modifier.padding(start = 16.dp)
             ) {
                 Icon(
-                    imageVector = Icons.Default.ArrowBack,
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = "Back",
                     tint = partyData.backColor
                 )
@@ -69,19 +66,20 @@ fun PoliciesScreen(navController: NavHostController, partyData: PartyData) {
             ) {
                 Image(
                     painter = painterResource(id = partyData.logoRes),
-                    contentDescription = "Centered Image",
+                    contentDescription = "Party Logo",
                     modifier = Modifier
                         .size(partyData.imageSize)
                         .padding(bottom = 4.dp)
                 )
                 Text(
-                    partyData.path,
+                    text = partyData.path,
                     fontSize = partyData.textSize,
                     color = partyData.backColor,
-                    style = androidx.compose.material3.MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                 )
             }
         }
+
 
         LazyColumn(
             modifier = Modifier
@@ -90,19 +88,19 @@ fun PoliciesScreen(navController: NavHostController, partyData: PartyData) {
             verticalArrangement = Arrangement.Top
         ) {
             item {
-                Text(
-                    text = partyData.policies,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Normal,
-                    color = Color.Black,
-                    textAlign = TextAlign.Start,
+                AndroidView(
+                    factory = { context ->
+                        WebView(context).apply {
+                            settings.javaScriptEnabled = false
+                            loadDataWithBaseURL(null, partyData.policies, "text/html", "UTF-8", null)
+                        }
+                    },
                     modifier = Modifier
+                        .background(Color.White)
                         .fillMaxWidth()
-                        .background(color = Color.White)
                         .padding(horizontal = 16.dp)
                 )
             }
         }
     }
 }
-
