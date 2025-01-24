@@ -8,7 +8,7 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/flogo3"
-        android:label="@string/app_name"
+        android:label="1FolkeDex"
         android:roundIcon="@drawable/flogo3"
         android:supportsRtl="true"
         android:theme="@style/Theme.FolkeDex"
@@ -16,7 +16,6 @@
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.FolkeDex" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
