@@ -1,4 +1,4 @@
-package com.example.folkedex.ui.common
+package com.example.folkedex.model
 
 data class SearchableItem(
     val label: String,

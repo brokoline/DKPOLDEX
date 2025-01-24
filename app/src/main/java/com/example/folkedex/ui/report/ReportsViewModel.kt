@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.folkedex.data.local.DataStore
-import com.example.folkedex.data.remote.FileData
-import com.example.folkedex.ui.feature.FetchReports
+import com.example.folkedex.data.model.FileData
+import com.example.folkedex.data.remote.FetchReports
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -16,9 +16,9 @@ class ReportsViewModel(private val dataStore: DataStore) : ViewModel() {
 
     private val _isLoading = MutableStateFlow(false)
     val isLoading = _isLoading.asStateFlow()
-    private var currentPage = 0 // Tracks the current page index
-    private val pageSize = 10 // Number of files per page
-    private var isLastPage = false // Tracks if the last page has been reached
+    private var currentPage = 0
+    private val pageSize = 10
+    private var isLastPage = false
 
     init {
         loadNextPage()
@@ -44,7 +44,7 @@ class ReportsViewModel(private val dataStore: DataStore) : ViewModel() {
 
         viewModelScope.launch {
             try {
-                val response = FetchReports.fetchReports(dataStore, currentPage * pageSize, pageSize)
+                val response = FetchReports.fetchReports(dataStore, currentPage * pageSize)
                 Log.d("ReportsViewModel", "Fetched ${response.size} files")
                 if (response.isEmpty()) {
                     isLastPage = true
@@ -61,11 +61,7 @@ class ReportsViewModel(private val dataStore: DataStore) : ViewModel() {
                 Log.d("ReportsViewModel", "Finished loading page")
             }
         }
-
     }
-
-
-
 }
 
 class ReportsViewModelFactory(private val dataStore: DataStore) : ViewModelProvider.Factory {

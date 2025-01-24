@@ -1,5 +1,7 @@
-package com.example.folkedex.ui.theme
+package com.example.folkedex.ui.favourite
 
+import android.content.Context
+import android.os.Environment
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -21,20 +23,22 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.zIndex
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.folkedex.data.FavoritesHelper
+import com.example.folkedex.data.local.FavoritesHelper
 import com.example.folkedex.data.local.DataStore
 import com.example.folkedex.ui.common.FolketingLogo
-import com.example.folkedex.ui.feature.PartyViewModel
-import com.example.folkedex.ui.feature.PartyViewModelFactory
+import com.example.folkedex.ui.party.PartyViewModel
+import com.example.folkedex.ui.party.PartyViewModelFactory
 import com.example.folkedex.ui.politician.PoliticianCard
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
-import com.example.folkedex.ui.settings.exportFavoritesToFile
+import java.io.File
+import java.io.FileOutputStream
 
 
 @Composable
@@ -49,7 +53,7 @@ fun FavoritesScreen(
     val parties by viewModel.parties.collectAsState()
 
     val favoriteManager = FavoritesHelper(context)
-    val favorites = favoriteManager.getFavorites()
+    var favorites by remember { mutableStateOf(favoriteManager.getFavorites()) }
 
     val favoritePoliticians = parties
         .flatMap { it.politicians }
@@ -194,11 +198,10 @@ fun FavoritesScreen(
                         Spacer(modifier = Modifier.width(52.dp))
                         Text(
                             text = "Reset Favorites",
-                            style = MaterialTheme.typography.titleMedium.copy(color = Color.Red),
+                            style = MaterialTheme.typography.titleMedium.copy(color = Color.Black),
                             modifier = Modifier
                                 .clickable {
-                                    favoriteManager.clearFavorites()
-                                    Toast.makeText(context, "Favorites cleared!", Toast.LENGTH_SHORT).show()
+                                    showConfirmationDialog.value = true
                                 }
                                 .padding(horizontal = 8.dp)
                         )
@@ -211,6 +214,7 @@ fun FavoritesScreen(
                             TextButton(
                                 onClick = {
                                     favoriteManager.clearFavorites()
+                                    favorites = favoriteManager.getFavorites()
                                     showConfirmationDialog.value = false
                                     Toast.makeText(context, "Favorites cleared!", Toast.LENGTH_SHORT).show()
                                 }
@@ -231,4 +235,24 @@ fun FavoritesScreen(
         }
     )
 }
+fun exportFavoritesToFile(context: Context, favorites: List<String>): String {
+    if (favorites.isEmpty()) {
+        return "You have no favorites to export."
+    }
+
+    val exportDir = File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "Folkedex")
+    if (!exportDir.exists()) {
+        exportDir.mkdirs()
+    }
+
+    val exportFile = File(exportDir, "favorites.txt")
+    FileOutputStream(exportFile).use { output ->
+        favorites.forEach { favorite ->
+            output.write("$favorite\n".toByteArray())
+        }
+    }
+
+    return "Favorites exported to: ${exportFile.absolutePath}"
+}
+
 

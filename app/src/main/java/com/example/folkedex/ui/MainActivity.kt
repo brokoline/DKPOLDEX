@@ -1,5 +1,6 @@
 package com.example.folkedex.ui
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -27,7 +28,6 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -40,29 +40,30 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.folkedex.ui.common.HomeScreen
 import com.example.folkedex.ui.history.HistoryScreen
-import com.example.folkedex.ui.politician.PoliciesScreen
+import com.example.folkedex.ui.policies.PoliciesScreen
 import com.example.folkedex.ui.politician.PoliticianScreen
 import com.example.folkedex.ui.bill.BillScreen
 import com.example.folkedex.ui.theme.DataScreen
-import com.example.folkedex.ui.theme.FavoritesScreen
+import com.example.folkedex.ui.favourite.FavoritesScreen
 import com.example.folkedex.ui.news.NewsScreen
 import com.example.folkedex.ui.party.Party
-import androidx.compose.ui.platform.LocalContext
-
-
 import com.example.folkedex.ui.party.PartySelectionScreen
-import com.example.folkedex.data.PartyRepository
+import com.example.folkedex.data.local.PartyRepository
 import com.example.folkedex.data.local.DataStore
-import com.example.folkedex.ui.feature.PartyViewModel
-import com.example.folkedex.ui.feature.PartyViewModelFactory
 import com.example.folkedex.ui.theme.IssuesScreen
 import com.example.folkedex.ui.politician.PoliticianSelectionScreen
 import com.example.folkedex.ui.report.ReportsScreen
 import kotlinx.coroutines.delay
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.core.view.WindowCompat
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.folkedex.R
+import com.example.folkedex.data.model.Actor
+import com.example.folkedex.ui.home.HomeScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,55 +72,26 @@ class MainActivity : ComponentActivity() {
         setContent {
             val context = LocalContext.current
             val dataStore = DataStore(context)
-            val viewModel: PartyViewModel = viewModel(factory = PartyViewModelFactory(dataStore))
+            val viewModel: MainActivityViewModel = viewModel(factory = MainActivityViewModelFactory(dataStore))
 
 
             val parties by viewModel.parties.collectAsState()
             val politician = parties
                 .flatMap { it.politicians }
-         //   Log.d("api content test", politician.toString())
             LaunchedEffect(Unit) {
                 viewModel.fetchAndCachePartyData()
 
 
 
             }
-            LaunchedEffect(politician.isEmpty()) {
-                delay(5000) // Wait for 5 seconds
-
-            }
-            if (politician.isEmpty()) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            CircularProgressIndicator() // Display the loading indicator
-                            Spacer(modifier = Modifier.height(16.dp)) // Add space between the indicator and text
-                            Text("Loading Politicians") // Display the text below the indicator
-                        }
-                        Spacer(modifier = Modifier.width(16.dp)) // Add space between the column and the image
-                        Image(
-                            painter = painterResource(id = R.drawable.loading), // Replace with your image resource
-                            contentDescription = "Loading Icon",
-                            modifier = Modifier.size(100.dp) // Adjust size as needed
-                        )
-                    }
-                }
-
-            } else {
-                // Show the main content
+            if (politician.isEmpty()){
+                LoadingScreen(politician = politician)
+            }else
+            {
                 AppNavHost()
             }
 
-            //AppNavHost()
+
         }
     }
 }
@@ -133,6 +105,8 @@ fun AppNavHost() {
 
 @Composable
 fun MainScreen(navController: NavHostController) {
+    SetTopBarIconsColorBasedOnRoute(navController)
+
     Scaffold(
         contentWindowInsets = WindowInsets(0.dp),
         bottomBar = { BottomTabBar(navController) }
@@ -143,11 +117,10 @@ fun MainScreen(navController: NavHostController) {
             modifier = Modifier.padding(paddingValues)
         ) {
             composable("home") {
-                HomeScreen(navController = navController) // No context needed
+                HomeScreen(navController = navController)
             }
             composable("favorites") { FavoritesScreen(navController = navController) }
             composable("com/example/folkedex/ui/news") { NewsScreen(navController = navController) }
-            composable("settings") { com.example.folkedex.ui.settings.SettingsScreen(navController) }
             composable("folkedex") { PartySelectionScreen(navController = navController) }
             composable("com/example/folkedex/ui/issues") { IssuesScreen(navController = navController) }
             composable("politician/{name}") { backStackEntry ->
@@ -198,36 +171,99 @@ fun MainScreen(navController: NavHostController) {
     }
 }
 
-@Composable
-fun IndeterminateCircularIndicator(isLoading: Boolean) {
 
-if(isLoading){
-    CircularProgressIndicator(
-        modifier = Modifier.width(64.dp),
-        color = Color.Gray,
-        trackColor = Color.White
-    )
-   // Log.d("inside the loading screen", isLoading.toString())
-}
-
-}
 @Composable
 fun BottomTabBar(navController: NavHostController) {
+
+    val currentBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = currentBackStackEntry?.destination
+    val currentRoute = currentDestination?.route
+
     NavigationBar(
         containerColor = Color.White
     ) {
         NavigationBarItem(
-            icon = { Icon(Icons.Default.Home, contentDescription = "Home", /*modifier = Modifier.padding(top = 10.dp),*/ tint = Color.Gray) },
-            label = { Text("Home", /*fontSize = 20.sp,*/ color = Color.Gray) },
+            icon = { Icon(Icons.Default.Home, contentDescription = "Home", tint = Color.Gray) },
+            label = { Text("Home", color = Color.Gray) },
             selected = navController.currentDestination?.route == "home",
-            onClick = { navController.navigate("home") { popUpTo("home") { inclusive = true } } }
+            onClick = { if (currentRoute != "home") { navController.navigate("home") { popUpTo(navController.graph.startDestinationId) { inclusive = true } } } },
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = Color.Black,
+                unselectedIconColor = Color.Gray,
+                indicatorColor = Color.LightGray
+            )
         )
         NavigationBarItem(
-            icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites", /*modifier = Modifier.padding(top = 10.dp),*/ tint = Color.Gray) },
-            label = { Text("Favorites", /*fontSize = 20.sp,*/ color = Color.Gray) },
+            icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites", tint = Color.Gray) },
+            label = { Text("Favorites", color = Color.Gray) },
             selected = navController.currentDestination?.route == "favorites",
-            onClick = { navController.navigate("favorites") { popUpTo("home") } }
+            onClick = { if (currentRoute != "favorites") { navController.navigate("favorites") { popUpTo(navController.graph.startDestinationId) } } },
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = Color.Black,
+                unselectedIconColor = Color.Gray,
+                indicatorColor = Color.LightGray
+            )
         )
     }
 }
+@Composable
+fun LoadingScreen( politician: List<Actor>){
+    val timer = remember { mutableIntStateOf(0) }
+    val maxWaitTime = 10
+    val isTimedOut = timer.value >= maxWaitTime
 
+    LaunchedEffect(Unit) {
+        while (timer.value < maxWaitTime && politician.isEmpty()) {
+            delay(1000L)
+            timer.value++
+
+        }
+    }
+    if (politician.isEmpty() && !isTimedOut) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    CircularProgressIndicator()
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text("Loading Politicians")
+                }
+                Spacer(modifier = Modifier.width(16.dp))
+                Image(
+                    painter = painterResource(id = R.drawable.loading),
+                    contentDescription = "Loading Icon",
+                    modifier = Modifier.size(100.dp)
+                )
+            }
+        }
+    } else {
+        AppNavHost()
+    }
+}
+@Composable
+fun SetTopBarIconsColorBasedOnRoute(navController: NavHostController) {
+    val context = LocalContext.current
+    val window = (context as? Activity)?.window
+
+    val currentBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = currentBackStackEntry?.destination?.route
+
+    LaunchedEffect(currentRoute) {
+        window?.let {
+            val insetsController = WindowCompat.getInsetsController(it, it.decorView)
+            insetsController?.isAppearanceLightStatusBars = when (currentRoute) {
+                "folkedex", "politicians/{partyName}", "com/example/folkedex/ui/history/{partyPath}", "policies/{partyName}" -> true
+                "Moderaterne", "Socialdemokratiet", "Radikale Venstre", "Socialistisk Folkeparti", "Enhedslisten", "Javnaðarflokkurin", "Inuit Ataqatigiit" -> true
+                else -> false
+            }
+        }
+    }
+}

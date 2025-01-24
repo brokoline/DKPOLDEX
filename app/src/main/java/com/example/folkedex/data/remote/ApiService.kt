@@ -1,4 +1,6 @@
 package com.example.folkedex.data.remote
+import com.example.folkedex.data.model.ActorResponse
+import com.example.folkedex.data.model.FileResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

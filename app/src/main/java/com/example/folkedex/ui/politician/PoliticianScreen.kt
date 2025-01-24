@@ -1,52 +1,75 @@
 package com.example.folkedex.ui.politician
 
 
-import android.util.Log
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil3.compose.AsyncImage
 import com.example.folkedex.R
-import com.example.folkedex.data.FavoritesHelper
-import com.example.folkedex.data.PartyRepository
 import com.example.folkedex.data.local.DataStore
+import com.example.folkedex.data.local.FavoritesHelper
+import com.example.folkedex.data.local.PartyRepository
 import com.example.folkedex.data.model.Actor
-import com.example.folkedex.domain.*
-import com.example.folkedex.ui.feature.PartyViewModel
-import com.example.folkedex.ui.feature.PartyViewModelFactory
-import kotlinx.coroutines.delay
+import com.example.folkedex.utilities.extractPartyFromBiography
+import com.example.folkedex.utilities.extractPoliAgeFromBiography
+import com.example.folkedex.utilities.extractPoliEducationFromBiography
+import com.example.folkedex.utilities.extractPoliMailFromBiography
+import com.example.folkedex.utilities.extractPoliPhoneFromBiography
+import com.example.folkedex.utilities.extractPoliPictureFromBiography
+import com.example.folkedex.utilities.extractPoliProfFromBiography
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PoliticianScreen(navController: NavController, name: String) {
-    val scrollState = rememberLazyListState()
-
     val context = LocalContext.current
     val dataStore = DataStore(context)
-    val viewModel: PartyViewModel = viewModel(factory = PartyViewModelFactory(dataStore))
+    val viewModel: PoliticianViewModel = viewModel(factory = PoliticianViewModelFactory(dataStore))
     val parties by viewModel.parties.collectAsState()
 
-
-    // Retrieve politician and party information
     val politician = parties
         .flatMap { it.politicians }
         .find { it.navn == name }
@@ -80,11 +103,21 @@ fun PoliticianScreen(navController: NavController, name: String) {
                                     isFavorite = !isFavorite
                                 }
                             ) {
-                                Icon(
-                                    imageVector = Icons.Default.Favorite,
-                                    contentDescription = "Favorite",
-                                    tint = if (isFavorite) Color.Red else Color.White
-                                )
+                                Box {
+                                    Icon(
+                                        imageVector = Icons.Default.Favorite,
+                                        contentDescription = null,
+                                        tint = Color.Black,
+                                        modifier = Modifier
+                                            .scale(1.1f)
+                                    )
+
+                                    Icon(
+                                        imageVector = Icons.Default.Favorite,
+                                        contentDescription = "Favorite",
+                                        tint = if (isFavorite) Color.Red else Color.White
+                                    )
+                                }
                             }
                         },
                         colors = TopAppBarDefaults.topAppBarColors(
@@ -147,7 +180,6 @@ fun PoliticianScreen(navController: NavController, name: String) {
             }
         }
     }
-
 @Composable
 fun PoliticianDetails(politician: Actor) {
     val details = mapOf(
@@ -159,6 +191,8 @@ fun PoliticianDetails(politician: Actor) {
         "Email" to (extractPoliMailFromBiography(politician.biografi) ?: "?"),
         "Phone" to (extractPoliPhoneFromBiography(politician.biografi) ?: "?")
     )
+
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -177,12 +211,45 @@ fun PoliticianDetails(politician: Actor) {
                     style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
                     color = Color.Black
                 )
-                Text(
-                    text = value,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = Color.DarkGray,
-                    textAlign = TextAlign.End
-                )
+
+                if (key == "Email" && value != "?") {
+                    Text(
+                        text = value,
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            color = Color.Blue,
+                            textDecoration = TextDecoration.Underline
+                        ),
+                        textAlign = TextAlign.End,
+                        modifier = Modifier.clickable {
+                            val intent = Intent(Intent.ACTION_SENDTO).apply {
+                                data = Uri.parse("mailto:$value")
+                            }
+                            context.startActivity(intent)
+                        }
+                    )
+                } else if (key == "Phone" && value != "?") {
+                    Text(
+                        text = value,
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            color = Color.Blue,
+                            textDecoration = TextDecoration.Underline
+                        ),
+                        textAlign = TextAlign.End,
+                        modifier = Modifier.clickable {
+                            val intent = Intent(Intent.ACTION_DIAL).apply {
+                                data = Uri.parse("tel:$value")
+                            }
+                            context.startActivity(intent)
+                        }
+                    )
+                } else {
+                    Text(
+                        text = value,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = Color.DarkGray,
+                        textAlign = TextAlign.End
+                    )
+                }
             }
         }
     }

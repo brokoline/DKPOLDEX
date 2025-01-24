@@ -1,4 +1,4 @@
-package com.example.folkedex.ui.common
+package com.example.folkedex.ui.home
 
 import android.content.Context
 import androidx.compose.foundation.background
@@ -16,12 +16,11 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
+import com.example.folkedex.ui.common.FolketingLogo
 import com.example.folkedex.ui.feature.HomeSearchBar
 
 
@@ -42,10 +41,11 @@ fun HomeScreen(navController: NavHostController) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = 230.dp)
+                .padding(top = 110.dp, bottom = 10.dp)
                 .background(color = Color.White)
+
         ) {
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(150.dp))
             PoliticianCategoryGrid(navController)
         }
     }
@@ -61,6 +61,7 @@ fun TopSectionWithSearchBar(navController: NavHostController, context: Context) 
             .background(Color(0xFFFF6F61))
             .padding(16.dp)
             .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Bottom))
+            .zIndex(1f)
     ) {
         FolketingLogo(
             modifier = Modifier
@@ -113,29 +114,31 @@ fun PoliticianCategoryGrid(navController: NavHostController) {
     val categories = listOf(
         "FolkeDex" to Pair(Color(0xFFFF6E60), Color(0xFFFFB1A5)),
         "Reports" to Pair(Color(0xFF6B9F39), Color(0xFFAED582)),
-        //"Issues" to Pair(Color(0xFF722424), Color(0xFFEAAFAF)),
         "News" to Pair(Color(0xFFFFCE4B), Color(0xFFFFE49A))
-        //"Bills" to Pair(Color(0xFF0A9180), Color(0xFF73C4BB)),
-        //"Data" to Pair(Color(0xFF2C4F80), Color(0xFF4D8BDE))
     )
 
     Column(
-        //verticalArrangement = Arrangement.spacedBy(4.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
+            .fillMaxHeight()
+            .padding(horizontal = 50.dp)
     ) {
         categories.chunked(1).forEach { rowCategories ->
             Row(
-                //horizontalArrangement = Arrangement.spacedBy(8.dp),
+
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 rowCategories.forEach { (text, color) ->
                     Box(
                         modifier = Modifier
-                            .weight(1f)
-                            .aspectRatio(2.5f)
+                            .weight(1.0f)
+                            .aspectRatio(2.7f)
+
+
                     ) {
+
                         CategoryCard(
                             text = text,
                             startColor = color.first,
@@ -143,12 +146,8 @@ fun PoliticianCategoryGrid(navController: NavHostController) {
                             onClick = {
                                 when (text) {
                                     "FolkeDex" -> navController.navigate("folkedex")
-                                    //"Issues" -> navController.navigate("com/example/folkedex/ui/issues")
                                     "Reports" -> navController.navigate("reports")
-                                    //"Bills" -> navController.navigate("testapi")
                                     "News" -> navController.navigate("com/example/folkedex/ui/news")
-                                    //"Data" -> navController.navigate("com/example/folkedex/data")
-
                                 }
                             }
                         )
@@ -191,6 +190,7 @@ fun CategoryCard(text: String, startColor: Color, endColor: Color, onClick: () -
                         )
                     ),
                 contentAlignment = Alignment.Center
+
             ) {
                 Text(
                     text = text,
@@ -205,13 +205,4 @@ fun CategoryCard(text: String, startColor: Color, endColor: Color, onClick: () -
 }
 
 
-@Preview(
-    showSystemUi = true,
-    showBackground = true,
-    device = "spec:width=411dp,height=891dp,dpi=420"
-)
-@Composable
-fun HomeScreen() {
-    val navController = rememberNavController()
-    HomeScreen(navController = navController)
-}
+

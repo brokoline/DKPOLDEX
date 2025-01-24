@@ -1,6 +1,5 @@
-package com.example.folkedex.data.remote
+package com.example.folkedex.data.model
 
-import com.example.folkedex.data.model.Actor
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

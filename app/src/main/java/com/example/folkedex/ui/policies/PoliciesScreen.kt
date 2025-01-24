@@ -1,14 +1,24 @@
-package com.example.folkedex.ui.history
+package com.example.folkedex.ui.policies
 
 import android.webkit.WebView
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,7 +34,7 @@ import com.example.folkedex.data.model.PartyData
 import com.example.folkedex.ui.common.FolkeLogo
 
 @Composable
-fun HistoryScreen(navController: NavHostController, partyData: PartyData) {
+fun PoliciesScreen(navController: NavHostController, partyData: PartyData) {
     Box(modifier = Modifier.fillMaxSize()) {
         Box(
             modifier = Modifier
@@ -61,17 +71,16 @@ fun HistoryScreen(navController: NavHostController, partyData: PartyData) {
                         .padding(bottom = 4.dp)
                 )
                 Text(
-                    partyData.path,
+                    text = partyData.path,
                     fontSize = partyData.textSize,
                     color = partyData.backColor,
-                    style = androidx.compose.material3.MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                     textAlign = TextAlign.Center
-
-
                 )
                 Spacer(modifier = Modifier.weight(0.5f))
             }
         }
+
 
         LazyColumn(
             modifier = Modifier
@@ -84,7 +93,7 @@ fun HistoryScreen(navController: NavHostController, partyData: PartyData) {
                     factory = { context ->
                         WebView(context).apply {
                             settings.javaScriptEnabled = false
-                            loadDataWithBaseURL(null, partyData.history, "text/html", "UTF-8", null)
+                            loadDataWithBaseURL(null, partyData.policies, "text/html", "UTF-8", null)
                         }
                     },
                     modifier = Modifier
