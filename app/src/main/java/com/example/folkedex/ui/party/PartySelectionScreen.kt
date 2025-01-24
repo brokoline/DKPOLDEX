@@ -5,7 +5,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -13,7 +12,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -59,7 +58,7 @@ fun PartySelectionScreen(
                         modifier = Modifier.padding(end = 8.dp)
                     ) {
                         Icon(
-                            imageVector = Icons.Default.ArrowBack,
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Back",
                             tint = Color.Black
                         )
@@ -70,6 +69,8 @@ fun PartySelectionScreen(
                             color = Color.Black,
                             fontSize = MaterialTheme.typography.headlineLarge.fontSize,
                             textAlign = TextAlign.Center,
+                            modifier = Modifier
+                                .background(Color.Transparent),
                         )
                         Text(
                             text = "Select the relevant party",
@@ -77,6 +78,7 @@ fun PartySelectionScreen(
                                 fontSize = MaterialTheme.typography.titleLarge.fontSize
                             ),
                             modifier = Modifier
+                                .background(Color.Transparent)
                                 .fillMaxWidth(),
                             textAlign = TextAlign.Center
                         )
@@ -93,6 +95,7 @@ fun PartySelectionScreen(
                 painter = painterResource(id = R.drawable.flogo3),
                 contentDescription = "folketinglogo",
                 modifier = Modifier
+                    .background(Color.White)
                     .size(3000.dp)
                     .padding(end = 16.dp)
                     .offset(x = 150.dp, y = (-300).dp)
@@ -102,6 +105,7 @@ fun PartySelectionScreen(
             LazyColumn(
                 state = scrollState,
                 modifier = Modifier
+                    .background(Color.Transparent)
                     .fillMaxSize()
                     .padding(
                         top = innerPadding.calculateTopPadding()
@@ -178,7 +182,7 @@ fun PartyCard(
 
 
         Text(
-            text = partyData.name,
+            text = partyData.structuredName,
             style = MaterialTheme.typography.bodyLarge.copy(
                 fontSize = MaterialTheme.typography.bodyLarge.fontSize * 1.4f
             ),

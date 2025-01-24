@@ -9,6 +9,7 @@ import androidx.compose.ui.unit.sp
 
 data class PartyData(
     val name: String,
+    val structuredName: String,
     val path: String,
     @DrawableRes val logoRes: Int,
     @DrawableRes val altLogo: Int,
@@ -18,6 +19,7 @@ data class PartyData(
     val backgroundColor: Color,
     val cardColor: Color,
     val buttonColor: Color,
+    val gradeColor: Color,
     val offsetX: Float = 0f,
     val offsetY: Float = 0f,
     val imageSize: Dp = 120.dp,

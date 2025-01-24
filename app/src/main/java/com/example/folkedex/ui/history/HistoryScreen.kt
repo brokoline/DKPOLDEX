@@ -6,15 +6,17 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.zIndex
@@ -33,13 +35,11 @@ fun HistoryScreen(navController: NavHostController, partyData: PartyData) {
                 .background(partyData.backgroundColor),
             contentAlignment = Alignment.CenterStart
         ) {
-            if ( partyData.path ==
-                "Moderaterne" || partyData.path == "Socialdemokratiet"|| partyData.path == "Radikale Venstre" || partyData.path == "Socialistisk Folkeparti"|| partyData.path == "Enhedslisten"|| partyData.path == "Javnaðarflokkurin"|| partyData.path =="Inuit Ataqatigiit")  {
+            if (partyData.path in listOf("Moderaterne", "Socialdemokratiet", "Radikale Venstre", "Socialistisk Folkeparti", "Enhedslisten", "Javnaðarflokkurin", "Inuit Ataqatigiit")) {
                 FolketingLogoWhite(
                     modifier = Modifier
                         .align(Alignment.CenterEnd)
-                        .offset(x = -50.dp)
-                        .offset(y = -5.dp)
+                        .offset(x = (-50).dp, y = (-5).dp)
                         .size(200.dp)
                         .zIndex(0f)
                 )
@@ -47,17 +47,17 @@ fun HistoryScreen(navController: NavHostController, partyData: PartyData) {
                 FolketingLogo(
                     modifier = Modifier
                         .align(Alignment.CenterEnd)
-                        .offset(x = -50.dp)
-                        .offset(y = -5.dp)
+                        .offset(x = (-50).dp, y = (-5).dp)
                         .size(200.dp)
                         .zIndex(0f)
-                )}
+                )
+            }
             IconButton(
                 onClick = { navController.popBackStack() },
                 modifier = Modifier.padding(start = 16.dp)
             ) {
                 Icon(
-                    imageVector = Icons.Default.ArrowBack,
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = "Back",
                     tint = partyData.backColor
                 )
@@ -72,7 +72,7 @@ fun HistoryScreen(navController: NavHostController, partyData: PartyData) {
                 Spacer(modifier = Modifier.weight(1.5f))
                 Image(
                     painter = painterResource(id = partyData.logoRes),
-                    contentDescription = "Centered Image",
+                    contentDescription = "Party Logo",
                     modifier = Modifier
                         .size(partyData.imageSize)
                         .padding(bottom = 4.dp)
@@ -102,8 +102,10 @@ fun HistoryScreen(navController: NavHostController, partyData: PartyData) {
                             loadDataWithBaseURL(null, partyData.history, "text/html", "UTF-8", null)
                         }
                     },
-                    modifier = Modifier.fillMaxSize()
-                )
+                    modifier = Modifier
+                        .background(Color.White)
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp)
             }
         }
     }

@@ -1,7 +1,7 @@
 package com.example.folkedex.ui
 
+import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -28,7 +28,6 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -78,7 +77,6 @@ class MainActivity : ComponentActivity() {
             val parties by viewModel.parties.collectAsState()
             val politician = parties
                 .flatMap { it.politicians }
-         //   Log.d("api content test", politician.toString())
             LaunchedEffect(Unit) {
                 viewModel.fetchAndCachePartyData()
 
@@ -106,6 +104,8 @@ fun AppNavHost() {
 
 @Composable
 fun MainScreen(navController: NavHostController) {
+    SetTopBarIconsColorBasedOnRoute(navController)
+
     Scaffold(
         contentWindowInsets = WindowInsets(0.dp),
         bottomBar = { BottomTabBar(navController) }
@@ -116,7 +116,7 @@ fun MainScreen(navController: NavHostController) {
             modifier = Modifier.padding(paddingValues)
         ) {
             composable("home") {
-                HomeScreen(navController = navController) // No context needed
+                HomeScreen(navController = navController)
             }
             composable("favorites") { FavoritesScreen(navController = navController) }
             composable("com/example/folkedex/ui/news") { NewsScreen(navController = navController) }
@@ -174,6 +174,11 @@ fun MainScreen(navController: NavHostController) {
 
 @Composable
 fun BottomTabBar(navController: NavHostController) {
+
+    val currentBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = currentBackStackEntry?.destination
+    val currentRoute = currentDestination?.route
+
     NavigationBar(
         containerColor = Color.White
     ) {
@@ -181,19 +186,23 @@ fun BottomTabBar(navController: NavHostController) {
             icon = { Icon(Icons.Default.Home, contentDescription = "Home", /*modifier = Modifier.padding(top = 10.dp),*/ tint = Color.Gray) },
             label = { Text("Home", /*fontSize = 20.sp,*/ color = Color.Gray) },
             selected = navController.currentDestination?.route == "home",
-            onClick = { navController.navigate("home") { popUpTo("home") { inclusive = true } } }
+            onClick = { if (currentRoute != "home") { navController.navigate("home") { popUpTo(navController.graph.startDestinationId) { inclusive = true } } } },
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = Color.Black,
+                unselectedIconColor = Color.Gray,
+                indicatorColor = Color.LightGray
+            )
         )
         NavigationBarItem(
             icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites", /*modifier = Modifier.padding(top = 10.dp),*/ tint = Color.Gray) },
             label = { Text("Favorites", /*fontSize = 20.sp,*/ color = Color.Gray) },
             selected = navController.currentDestination?.route == "favorites",
-            onClick = { navController.navigate("favorites") { popUpTo("home") } }
-        )
-        NavigationBarItem(
-            icon = { Icon(Icons.Default.Settings, contentDescription = "Settings", /*modifier = Modifier.padding(top = 10.dp),*/ tint = Color.Gray) },
-            label = { Text("Settings", /*fontSize = 20.sp,*/ color = Color.Gray) },
-            selected = navController.currentDestination?.route == "settings",
-            onClick = { navController.navigate("settings") { popUpTo("home") } }
+            onClick = { if (currentRoute != "favorites") { navController.navigate("favorites") { popUpTo(navController.graph.startDestinationId) } } },
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = Color.Black,
+                unselectedIconColor = Color.Gray,
+                indicatorColor = Color.LightGray
+            )
         )
     }
 }
@@ -201,6 +210,25 @@ fun BottomTabBar(navController: NavHostController) {
 fun LoadingScreen( politician: List<Actor>){
 
 
+@Composable
+fun SetTopBarIconsColorBasedOnRoute(navController: NavHostController) {
+    val context = LocalContext.current
+    val window = (context as? Activity)?.window
+
+    val currentBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = currentBackStackEntry?.destination?.route
+
+    LaunchedEffect(currentRoute) {
+        window?.let {
+            val insetsController = WindowCompat.getInsetsController(it, it.decorView)
+            insetsController?.isAppearanceLightStatusBars = when (currentRoute) {
+                "folkedex", "politicians/{partyName}" -> true
+                "Moderaterne", "Socialdemokratiet", "Radikale Venstre", "Socialistisk Folkeparti", "Enhedslisten", "Javnaðarflokkurin", "Inuit Ataqatigiit" -> true
+                else -> false
+            }
+        }
+    }
+}
 
 
     val timer = remember { mutableIntStateOf(0) }

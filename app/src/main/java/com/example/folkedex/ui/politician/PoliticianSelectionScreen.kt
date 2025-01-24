@@ -75,12 +75,15 @@ fun PoliticianSelectionScreen(
             )
         }
     ) { innerPadding ->
-        Box(modifier = Modifier.fillMaxSize()) {
+        Box(modifier = Modifier
+            .background(Color.White)
+            .fillMaxSize()) {
             Image(
                 painter = painterResource(id = R.drawable.flogo3),
                 contentDescription = "Folketing Logo",
                 modifier = Modifier
                     .size(3000.dp)
+                    .background(Color.White)
                     .background(color = Color.Transparent)
                     .padding(end = 16.dp)
                     .offset(x = 150.dp, y = (-300).dp)
@@ -90,6 +93,7 @@ fun PoliticianSelectionScreen(
             LazyColumn(
                 state = scrollState,
                 modifier = Modifier
+                    .background(Color.Transparent)
                     .fillMaxSize()
                     .padding(top = innerPadding.calculateTopPadding()),
                 horizontalAlignment = Alignment.CenterHorizontally
