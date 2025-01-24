@@ -127,7 +127,7 @@ fun PoliticianCategoryGrid(navController: NavHostController) {
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
-            .padding(horizontal = 70.dp)
+            .padding(horizontal = 50.dp)
     ) {
        // Spacer(modifier = Modifier.weight(0.9f))
         categories.chunked(1).forEach { rowCategories ->
