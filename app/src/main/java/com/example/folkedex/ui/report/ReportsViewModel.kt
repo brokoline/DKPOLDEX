@@ -16,9 +16,9 @@ class ReportsViewModel(private val dataStore: DataStore) : ViewModel() {
 
     private val _isLoading = MutableStateFlow(false)
     val isLoading = _isLoading.asStateFlow()
-    private var currentPage = 0 // Tracks the current page index
-    private val pageSize = 10 // Number of files per page
-    private var isLastPage = false // Tracks if the last page has been reached
+    private var currentPage = 0
+    private val pageSize = 10
+    private var isLastPage = false
 
     init {
         loadNextPage()
@@ -44,7 +44,7 @@ class ReportsViewModel(private val dataStore: DataStore) : ViewModel() {
 
         viewModelScope.launch {
             try {
-                val response = FetchReports.fetchReports(dataStore, currentPage * pageSize, pageSize)
+                val response = FetchReports.fetchReports(dataStore, currentPage * pageSize)
                 Log.d("ReportsViewModel", "Fetched ${response.size} files")
                 if (response.isEmpty()) {
                     isLastPage = true
@@ -61,11 +61,7 @@ class ReportsViewModel(private val dataStore: DataStore) : ViewModel() {
                 Log.d("ReportsViewModel", "Finished loading page")
             }
         }
-
     }
-
-
-
 }
 
 class ReportsViewModelFactory(private val dataStore: DataStore) : ViewModelProvider.Factory {

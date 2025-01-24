@@ -62,11 +62,6 @@ import com.example.folkedex.ui.theme.*
 object PartyRepository {
     fun mapActorsToParties(actors: List<Actor>, parties: List<PartyData>): List<PartyData> {
         val actorsByParty = actors.groupBy { actor -> extractPartyFromBiography(actor.biografi)?.trim()
-            /*val partyName =
-            when (partyName) {
-                "Uden for folketingsgrupperne" -> "Løsgængere"
-                else -> partyName
-            }*/
         }
         return parties.map { party ->
             val matchingActors = actorsByParty[party.path] ?: emptyList()

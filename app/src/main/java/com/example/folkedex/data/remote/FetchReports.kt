@@ -6,7 +6,7 @@ import com.example.folkedex.data.local.DataStore
 import com.example.folkedex.data.model.FileData
 
 object FetchReports {
-    suspend fun fetchReports(dataStore: DataStore, skip: Int = 0, pageSize: Int = 10): List<FileData> {
+    suspend fun fetchReports(dataStore: DataStore, skip: Int = 0): List<FileData> {
         return try {
             val response = RetrofitInstance.api.getFiles(skip)
             val reportsBatch = response.value

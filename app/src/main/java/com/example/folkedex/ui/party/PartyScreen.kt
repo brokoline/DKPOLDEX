@@ -5,11 +5,26 @@ import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,11 +38,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
 import com.example.folkedex.data.model.PartyData
-import com.example.folkedex.ui.common.FolketingLogo
-import com.example.folkedex.ui.common.FolketingLogoWhite
+import com.example.folkedex.ui.common.FolkeLogo
 
 
 @Composable
@@ -35,7 +48,6 @@ fun Party(partyData: PartyData, navController: NavHostController) {
     val context = LocalContext.current
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp
-    val screenHeight = configuration.screenHeightDp
 
     Scaffold(
         topBar = {
@@ -46,25 +58,8 @@ fun Party(partyData: PartyData, navController: NavHostController) {
                     .background(partyData.backgroundColor),
                 contentAlignment = Alignment.CenterStart
             ) {
-                if ( partyData.path ==
-                        "Moderaterne" || partyData.path == "Socialdemokratiet"|| partyData.path == "Radikale Venstre" || partyData.path == "Socialistisk Folkeparti"|| partyData.path == "Enhedslisten"|| partyData.path == "Javnaðarflokkurin"|| partyData.path =="Inuit Ataqatigiit")  {
-                    FolketingLogoWhite(
-                        modifier = Modifier
-                            .align(Alignment.CenterEnd)
-                            .offset(x = (-50).dp)
-                            .offset(y = (-5).dp)
-                            .size(200.dp)
-                            .zIndex(0f)
-                    )
-                } else {
-                        FolketingLogo(
-                    modifier = Modifier
-                        .align(Alignment.CenterEnd)
-                        .offset(x = (-50).dp)
-                        .offset(y = (-5).dp)
-                        .size(200.dp)
-                        .zIndex(0f)
-                )}
+                FolkeLogo(partyData)
+
                 IconButton(
                     onClick = { navController.popBackStack() },
                     modifier = Modifier.padding(start = 16.dp)
@@ -144,42 +139,36 @@ fun Party(partyData: PartyData, navController: NavHostController) {
                 ) {
                     CustomButton(
                         text = "Politicians",
-                        textColor = partyData.backColor,
                         buttonColor = Brush.linearGradient(
                             colors = listOf(partyData.buttonColor, partyData.gradeColor)
                         ),
-                        onClick = { navController.navigate("politicians/${partyData.name}") },
+                        textColor = partyData.backColor,
                         modifier = Modifier
                             .width((screenWidth / 2).dp)
                             .padding(vertical = 4.dp),
-                        partyData = partyData,
-                        navController = navController,
+                        onClick = { navController.navigate("politicians/${partyData.name}") },
                     )
                     CustomButton(
                         text = "History",
-                        textColor = partyData.backColor,
                         buttonColor = Brush.linearGradient(
                             colors = listOf(partyData.buttonColor, partyData.gradeColor)
                         ),
-                        onClick = { navController.navigate("com/example/folkedex/ui/history/${partyData.path}") },
+                        textColor = partyData.backColor,
                         modifier = Modifier
                             .width((screenWidth / 2).dp)
                             .padding(vertical = 4.dp),
-                        partyData = partyData,
-                        navController = navController,
+                        onClick = { navController.navigate("com/example/folkedex/ui/history/${partyData.path}") },
                     )
                     CustomButton(
                         text = "Policies",
-                        textColor = partyData.backColor,
                         buttonColor = Brush.linearGradient(
                             colors = listOf(partyData.buttonColor, partyData.gradeColor)
                         ),
-                        onClick = { navController.navigate("policies/${partyData.name}") },
+                        textColor = partyData.backColor,
                         modifier = Modifier
                             .width((screenWidth / 2).dp)
                             .padding(vertical = 4.dp),
-                        partyData = partyData,
-                        navController = navController,
+                        onClick = { navController.navigate("policies/${partyData.name}") },
                     )
                 }
             }
@@ -194,8 +183,6 @@ fun CustomButton(
     buttonColor: Brush,
     textColor: Color,
     modifier: Modifier = Modifier,
-    partyData: PartyData,
-    navController: NavHostController,
     onClick: () -> Unit
 ) {
     Box(

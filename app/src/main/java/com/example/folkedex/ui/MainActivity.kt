@@ -45,11 +45,9 @@ import com.example.folkedex.ui.policies.PoliciesScreen
 import com.example.folkedex.ui.politician.PoliticianScreen
 import com.example.folkedex.ui.bill.BillScreen
 import com.example.folkedex.ui.theme.DataScreen
-import com.example.folkedex.ui.theme.FavoritesScreen
+import com.example.folkedex.ui.favourite.FavoritesScreen
 import com.example.folkedex.ui.news.NewsScreen
 import com.example.folkedex.ui.party.Party
-
-
 import com.example.folkedex.ui.party.PartySelectionScreen
 import com.example.folkedex.data.local.PartyRepository
 import com.example.folkedex.data.local.DataStore
@@ -65,7 +63,7 @@ import androidx.core.view.WindowCompat
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.folkedex.R
 import com.example.folkedex.data.model.Actor
-import com.example.folkedex.ui.settings.SettingsScreen
+import com.example.folkedex.ui.home.HomeScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -123,7 +121,6 @@ fun MainScreen(navController: NavHostController) {
             }
             composable("favorites") { FavoritesScreen(navController = navController) }
             composable("com/example/folkedex/ui/news") { NewsScreen(navController = navController) }
-            composable("settings") { SettingsScreen(navController) }
             composable("folkedex") { PartySelectionScreen(navController = navController) }
             composable("com/example/folkedex/ui/issues") { IssuesScreen(navController = navController) }
             composable("politician/{name}") { backStackEntry ->
@@ -186,8 +183,8 @@ fun BottomTabBar(navController: NavHostController) {
         containerColor = Color.White
     ) {
         NavigationBarItem(
-            icon = { Icon(Icons.Default.Home, contentDescription = "Home", /*modifier = Modifier.padding(top = 10.dp),*/ tint = Color.Gray) },
-            label = { Text("Home", /*fontSize = 20.sp,*/ color = Color.Gray) },
+            icon = { Icon(Icons.Default.Home, contentDescription = "Home", tint = Color.Gray) },
+            label = { Text("Home", color = Color.Gray) },
             selected = navController.currentDestination?.route == "home",
             onClick = { if (currentRoute != "home") { navController.navigate("home") { popUpTo(navController.graph.startDestinationId) { inclusive = true } } } },
             colors = NavigationBarItemDefaults.colors(
@@ -197,8 +194,8 @@ fun BottomTabBar(navController: NavHostController) {
             )
         )
         NavigationBarItem(
-            icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites", /*modifier = Modifier.padding(top = 10.dp),*/ tint = Color.Gray) },
-            label = { Text("Favorites", /*fontSize = 20.sp,*/ color = Color.Gray) },
+            icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites", tint = Color.Gray) },
+            label = { Text("Favorites", color = Color.Gray) },
             selected = navController.currentDestination?.route == "favorites",
             onClick = { if (currentRoute != "favorites") { navController.navigate("favorites") { popUpTo(navController.graph.startDestinationId) } } },
             colors = NavigationBarItemDefaults.colors(
@@ -211,43 +208,18 @@ fun BottomTabBar(navController: NavHostController) {
 }
 @Composable
 fun LoadingScreen( politician: List<Actor>){
-
-
-@Composable
-fun SetTopBarIconsColorBasedOnRoute(navController: NavHostController) {
-    val context = LocalContext.current
-    val window = (context as? Activity)?.window
-
-    val currentBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = currentBackStackEntry?.destination?.route
-
-    LaunchedEffect(currentRoute) {
-        window?.let {
-            val insetsController = WindowCompat.getInsetsController(it, it.decorView)
-            insetsController?.isAppearanceLightStatusBars = when (currentRoute) {
-                "folkedex", "politicians/{partyName}" -> true
-                "Moderaterne", "Socialdemokratiet", "Radikale Venstre", "Socialistisk Folkeparti", "Enhedslisten", "Javnaðarflokkurin", "Inuit Ataqatigiit" -> true
-                else -> false
-            }
-        }
-    }
-}
-
-
     val timer = remember { mutableIntStateOf(0) }
-    val maxWaitTime = 10 // Max wait time in seconds
+    val maxWaitTime = 10
     val isTimedOut = timer.value >= maxWaitTime
-
 
     LaunchedEffect(Unit) {
         while (timer.value < maxWaitTime && politician.isEmpty()) {
-            delay(1000L) // Wait for 1 second
-            timer.value++ // Increment the timer
+            delay(1000L)
+            timer.value++
 
         }
     }
     if (politician.isEmpty() && !isTimedOut) {
-        // Show loading screen
         Box(
             modifier = Modifier
                 .fillMaxSize(),
@@ -260,20 +232,19 @@ fun SetTopBarIconsColorBasedOnRoute(navController: NavHostController) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    CircularProgressIndicator() // Display the loading indicator
-                    Spacer(modifier = Modifier.height(16.dp)) // Add space between the indicator and text
-                    Text("Loading Politicians") // Display the text below the indicator
+                    CircularProgressIndicator()
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text("Loading Politicians")
                 }
-                Spacer(modifier = Modifier.width(16.dp)) // Add space between the column and the image
+                Spacer(modifier = Modifier.width(16.dp))
                 Image(
-                    painter = painterResource(id = R.drawable.loading), // Replace with your image resource
+                    painter = painterResource(id = R.drawable.loading),
                     contentDescription = "Loading Icon",
-                    modifier = Modifier.size(100.dp) // Adjust size as needed
+                    modifier = Modifier.size(100.dp)
                 )
             }
         }
     } else {
-        // Show the main content
         AppNavHost()
     }
 }
@@ -289,7 +260,7 @@ fun SetTopBarIconsColorBasedOnRoute(navController: NavHostController) {
         window?.let {
             val insetsController = WindowCompat.getInsetsController(it, it.decorView)
             insetsController?.isAppearanceLightStatusBars = when (currentRoute) {
-                "folkedex", "politicians/{partyName}" -> true
+                "folkedex", "politicians/{partyName}", "com/example/folkedex/ui/history/{partyPath}", "policies/{partyName}" -> true
                 "Moderaterne", "Socialdemokratiet", "Radikale Venstre", "Socialistisk Folkeparti", "Enhedslisten", "Javnaðarflokkurin", "Inuit Ataqatigiit" -> true
                 else -> false
             }

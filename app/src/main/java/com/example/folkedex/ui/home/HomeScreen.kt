@@ -1,4 +1,4 @@
-package com.example.folkedex.ui
+package com.example.folkedex.ui.home
 
 import android.content.Context
 import androidx.compose.foundation.background
@@ -16,12 +16,10 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.folkedex.ui.common.FolketingLogo
 import com.example.folkedex.ui.feature.HomeSearchBar
 
@@ -116,10 +114,7 @@ fun PoliticianCategoryGrid(navController: NavHostController) {
     val categories = listOf(
         "FolkeDex" to Pair(Color(0xFFFF6E60), Color(0xFFFFB1A5)),
         "Reports" to Pair(Color(0xFF6B9F39), Color(0xFFAED582)),
-        //"Issues" to Pair(Color(0xFF722424), Color(0xFFEAAFAF)),
         "News" to Pair(Color(0xFFFFCE4B), Color(0xFFFFE49A))
-        //"Bills" to Pair(Color(0xFF0A9180), Color(0xFF73C4BB)),
-        //"Data" to Pair(Color(0xFF2C4F80), Color(0xFF4D8BDE))
     )
 
     Column(
@@ -129,14 +124,12 @@ fun PoliticianCategoryGrid(navController: NavHostController) {
             .fillMaxHeight()
             .padding(horizontal = 50.dp)
     ) {
-       // Spacer(modifier = Modifier.weight(0.9f))
         categories.chunked(1).forEach { rowCategories ->
             Row(
 
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                //Spacer(modifier = Modifier.weight(0.1f))
                 rowCategories.forEach { (text, color) ->
                     Box(
                         modifier = Modifier
@@ -153,12 +146,8 @@ fun PoliticianCategoryGrid(navController: NavHostController) {
                             onClick = {
                                 when (text) {
                                     "FolkeDex" -> navController.navigate("folkedex")
-                                    //"Issues" -> navController.navigate("com/example/folkedex/ui/issues")
                                     "Reports" -> navController.navigate("reports")
-                                    //"Bills" -> navController.navigate("testapi")
                                     "News" -> navController.navigate("com/example/folkedex/ui/news")
-                                    //"Data" -> navController.navigate("com/example/folkedex/data")
-
                                 }
                             }
                         )

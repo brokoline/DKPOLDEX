@@ -18,12 +18,10 @@ class MainActivityViewModel(private val dataStore: DataStore) : ViewModel() {
     val parties: StateFlow<List<PartyData>> = _parties
     private val _isLoading = MutableStateFlow(false)
 
-    val isLoading: StateFlow<Boolean> = _isLoading
     init {
         loadCachedParties()
     }
 
-    // Load cached parties on initialization
     private fun loadCachedParties() {
         viewModelScope.launch {
 
@@ -37,14 +35,13 @@ class MainActivityViewModel(private val dataStore: DataStore) : ViewModel() {
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
-                fetchPartiesWithPoliticians() // Fallback to fetching data if cache fails
+                fetchPartiesWithPoliticians()
             } finally {
                 _isLoading.value = false
             }
         }
     }
 
-    // Fetch parties and save data to cache
     private fun fetchPartiesWithPoliticians() {
         viewModelScope.launch {
             _isLoading.value = true
@@ -52,8 +49,6 @@ class MainActivityViewModel(private val dataStore: DataStore) : ViewModel() {
                 val actors = fetchActors(dataStore)
                 val updatedParties = mapActorsToParties(actors, PartyRepository.parties)
                 _parties.value = updatedParties
-
-                // Save actors to cache
                 dataStore.saveActors(actors)
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -62,7 +57,6 @@ class MainActivityViewModel(private val dataStore: DataStore) : ViewModel() {
             }
         }
     }
-
 
     fun fetchAndCachePartyData() {
         viewModelScope.launch {
@@ -72,7 +66,6 @@ class MainActivityViewModel(private val dataStore: DataStore) : ViewModel() {
                 val updatedParties = mapActorsToParties(actors, PartyRepository.parties)
                 _parties.value = updatedParties
 
-                // Save actors to cache
                 dataStore.saveActors(actors)
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -81,13 +74,6 @@ class MainActivityViewModel(private val dataStore: DataStore) : ViewModel() {
             }
         }
     }
-    fun emptyCache(){
-        viewModelScope.launch{
-            _parties.value=emptyList()
-
-        }
-    }
-
 }
 class MainActivityViewModelFactory(private val dataStore: DataStore) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

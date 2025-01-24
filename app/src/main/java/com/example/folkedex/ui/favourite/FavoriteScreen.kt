@@ -1,5 +1,7 @@
-package com.example.folkedex.ui.theme
+package com.example.folkedex.ui.favourite
 
+import android.content.Context
+import android.os.Environment
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -35,7 +37,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
-import com.example.folkedex.ui.settings.exportFavoritesToFile
+import java.io.File
+import java.io.FileOutputStream
 
 
 @Composable
@@ -232,4 +235,24 @@ fun FavoritesScreen(
         }
     )
 }
+fun exportFavoritesToFile(context: Context, favorites: List<String>): String {
+    if (favorites.isEmpty()) {
+        return "You have no favorites to export."
+    }
+
+    val exportDir = File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "Folkedex")
+    if (!exportDir.exists()) {
+        exportDir.mkdirs()
+    }
+
+    val exportFile = File(exportDir, "favorites.txt")
+    FileOutputStream(exportFile).use { output ->
+        favorites.forEach { favorite ->
+            output.write("$favorite\n".toByteArray())
+        }
+    }
+
+    return "Favorites exported to: ${exportFile.absolutePath}"
+}
+
 

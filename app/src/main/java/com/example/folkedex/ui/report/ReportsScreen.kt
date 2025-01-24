@@ -206,13 +206,3 @@ fun ReportCard(report: FileData, onClick: () -> Unit) {
         }
     }
 }
-
-
-
-/*
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun PreviewReportsScreen() {
-    ReportsScreen(navController = NavController(LocalContext.current))
-}
-*/

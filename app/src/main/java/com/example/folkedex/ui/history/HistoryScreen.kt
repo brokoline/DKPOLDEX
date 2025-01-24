@@ -16,14 +16,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
 import com.example.folkedex.data.model.PartyData
-import com.example.folkedex.ui.common.FolketingLogo
-import com.example.folkedex.ui.common.FolketingLogoWhite
+import com.example.folkedex.ui.common.FolkeLogo
 
 @Composable
 fun HistoryScreen(navController: NavHostController, partyData: PartyData) {
@@ -35,23 +32,8 @@ fun HistoryScreen(navController: NavHostController, partyData: PartyData) {
                 .background(partyData.backgroundColor),
             contentAlignment = Alignment.CenterStart
         ) {
-            if (partyData.path in listOf("Moderaterne", "Socialdemokratiet", "Radikale Venstre", "Socialistisk Folkeparti", "Enhedslisten", "Javnaðarflokkurin", "Inuit Ataqatigiit")) {
-                FolketingLogoWhite(
-                    modifier = Modifier
-                        .align(Alignment.CenterEnd)
-                        .offset(x = (-50).dp, y = (-5).dp)
-                        .size(200.dp)
-                        .zIndex(0f)
-                )
-            } else {
-                FolketingLogo(
-                    modifier = Modifier
-                        .align(Alignment.CenterEnd)
-                        .offset(x = (-50).dp, y = (-5).dp)
-                        .size(200.dp)
-                        .zIndex(0f)
-                )
-            }
+            FolkeLogo(partyData)
+
             IconButton(
                 onClick = { navController.popBackStack() },
                 modifier = Modifier.padding(start = 16.dp)
