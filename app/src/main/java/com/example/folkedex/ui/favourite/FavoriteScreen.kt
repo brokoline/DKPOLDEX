@@ -21,11 +21,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.zIndex
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.folkedex.data.FavoritesHelper
+import com.example.folkedex.data.local.FavoritesHelper
 import com.example.folkedex.data.local.DataStore
 import com.example.folkedex.ui.common.FolketingLogo
-import com.example.folkedex.ui.feature.PartyViewModel
-import com.example.folkedex.ui.feature.PartyViewModelFactory
+import com.example.folkedex.ui.party.PartyViewModel
+import com.example.folkedex.ui.party.PartyViewModelFactory
 import com.example.folkedex.ui.politician.PoliticianCard
 
 @Composable

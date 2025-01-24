@@ -1,11 +1,9 @@
-package com.example.folkedex.ui.feature
+package com.example.folkedex.data.remote
 
 
 
-import android.util.Log
 import com.example.folkedex.data.local.DataStore
-import com.example.folkedex.data.remote.FileData
-import com.example.folkedex.data.remote.RetrofitInstance
+import com.example.folkedex.data.model.FileData
 
 object FetchReports {
     suspend fun fetchReports(dataStore: DataStore, skip: Int = 0, pageSize: Int = 10): List<FileData> {
@@ -13,7 +11,7 @@ object FetchReports {
             val response = RetrofitInstance.api.getFiles(skip)
             val reportsBatch = response.value
 
-            // Save fetched data to DataStore if needed
+
             if (reportsBatch.isNotEmpty()) {
                 val allReports = dataStore.loadFiles().toMutableList()
                 allReports.addAll(reportsBatch)
@@ -23,7 +21,7 @@ object FetchReports {
             reportsBatch
         } catch (e: Exception) {
             e.printStackTrace()
-            // Fallback to locally cached data in case of error
+
             emptyList()
         }
     }

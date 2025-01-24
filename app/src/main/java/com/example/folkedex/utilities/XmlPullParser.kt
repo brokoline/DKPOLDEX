@@ -1,4 +1,4 @@
-package com.example.folkedex.domain
+package com.example.folkedex.utilities
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserFactory
 

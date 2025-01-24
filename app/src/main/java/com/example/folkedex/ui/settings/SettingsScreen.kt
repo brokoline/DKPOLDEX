@@ -21,10 +21,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.folkedex.R
-import com.example.folkedex.data.FavoritesHelper
+import com.example.folkedex.data.local.FavoritesHelper
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream

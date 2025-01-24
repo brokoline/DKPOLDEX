@@ -1,14 +1,13 @@
-package com.example.folkedex.data
+package com.example.folkedex.data.local
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.folkedex.R
 import com.example.folkedex.data.model.Actor
-import com.example.folkedex.domain.extractPartyFromBiography
-import com.example.folkedex.model.PartyData
-import com.example.folkedex.model.PoliticianData
-import com.example.folkedex.ui.common.SearchableItem
+import com.example.folkedex.utilities.extractPartyFromBiography
+import com.example.folkedex.data.model.PartyData
+import com.example.folkedex.model.SearchableItem
 import com.example.folkedex.ui.theme.AlternativetBackground
 import com.example.folkedex.ui.theme.AlternativetButton
 import com.example.folkedex.ui.theme.DanmarksdemokraterneBackground
@@ -55,9 +54,6 @@ import com.example.folkedex.ui.theme.altSocialdemokratiet
 import com.example.folkedex.ui.theme.altSocialistiskFolkeparti
 import com.example.folkedex.ui.theme.altVenstre
 import com.example.folkedex.ui.theme.*
-
-
-
 
 
 object PartyRepository {

@@ -1,4 +1,4 @@
-package com.example.folkedex.model
+package com.example.folkedex.data.model
 
 import androidx.annotation.DrawableRes
 import androidx.compose.ui.graphics.Color
@@ -6,8 +6,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.folkedex.model.PoliticianData
-import com.example.folkedex.data.model.Actor
 
 data class PartyData(
     val name: String,

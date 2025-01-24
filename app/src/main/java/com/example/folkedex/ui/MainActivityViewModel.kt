@@ -1,19 +1,19 @@
-package com.example.folkedex.ui.feature
+package com.example.folkedex.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.folkedex.data.PartyRepository
-import com.example.folkedex.data.PartyRepository.mapActorsToParties
+import com.example.folkedex.data.local.PartyRepository
+import com.example.folkedex.data.local.PartyRepository.mapActorsToParties
 import com.example.folkedex.data.local.DataStore
 
-import com.example.folkedex.model.PartyData
-import com.example.folkedex.ui.feature.FetchActors.fetchActors
+import com.example.folkedex.data.model.PartyData
+import com.example.folkedex.data.remote.FetchActors.fetchActors
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class PartyViewModel(private val dataStore: DataStore) : ViewModel() {
+class MainActivityViewModel(private val dataStore: DataStore) : ViewModel() {
     private val _parties = MutableStateFlow<List<PartyData>>(emptyList())
     val parties: StateFlow<List<PartyData>> = _parties
     private val _isLoading = MutableStateFlow(false)
@@ -63,7 +63,7 @@ class PartyViewModel(private val dataStore: DataStore) : ViewModel() {
         }
     }
 
-    // Explicitly fetch and cache data (can be triggered manually)
+
     fun fetchAndCachePartyData() {
         viewModelScope.launch {
             _isLoading.value = true
@@ -89,11 +89,11 @@ class PartyViewModel(private val dataStore: DataStore) : ViewModel() {
     }
 
 }
-class PartyViewModelFactory(private val dataStore: DataStore) : ViewModelProvider.Factory {
+class MainActivityViewModelFactory(private val dataStore: DataStore) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(PartyViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(MainActivityViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return PartyViewModel(dataStore) as T
+            return MainActivityViewModel(dataStore) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

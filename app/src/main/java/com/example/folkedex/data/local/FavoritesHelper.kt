@@ -1,4 +1,4 @@
-package com.example.folkedex.data
+package com.example.folkedex.data.local
 
 import android.content.Context
 import android.content.SharedPreferences

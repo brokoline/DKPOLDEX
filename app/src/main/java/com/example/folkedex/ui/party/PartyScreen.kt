@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
-import com.example.folkedex.model.PartyData
+import com.example.folkedex.data.model.PartyData
 import com.example.folkedex.ui.common.FolketingLogo
 import com.example.folkedex.ui.common.FolketingLogoWhite
 

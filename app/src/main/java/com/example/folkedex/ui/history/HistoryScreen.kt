@@ -13,16 +13,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
-import com.example.folkedex.model.PartyData
+import com.example.folkedex.data.model.PartyData
 import com.example.folkedex.ui.common.FolketingLogo
 import com.example.folkedex.ui.common.FolketingLogoWhite
 

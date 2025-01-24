@@ -1,7 +1,6 @@
 package com.example.folkedex.ui.politician
 
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -26,14 +25,19 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil3.compose.AsyncImage
 import com.example.folkedex.R
-import com.example.folkedex.data.FavoritesHelper
-import com.example.folkedex.data.PartyRepository
+import com.example.folkedex.data.local.FavoritesHelper
+import com.example.folkedex.data.local.PartyRepository
 import com.example.folkedex.data.local.DataStore
 import com.example.folkedex.data.model.Actor
-import com.example.folkedex.domain.*
-import com.example.folkedex.ui.feature.PartyViewModel
-import com.example.folkedex.ui.feature.PartyViewModelFactory
-import kotlinx.coroutines.delay
+import com.example.folkedex.ui.party.PartyViewModel
+import com.example.folkedex.ui.party.PartyViewModelFactory
+import com.example.folkedex.utilities.extractPartyFromBiography
+import com.example.folkedex.utilities.extractPoliAgeFromBiography
+import com.example.folkedex.utilities.extractPoliEducationFromBiography
+import com.example.folkedex.utilities.extractPoliMailFromBiography
+import com.example.folkedex.utilities.extractPoliPhoneFromBiography
+import com.example.folkedex.utilities.extractPoliPictureFromBiography
+import com.example.folkedex.utilities.extractPoliProfFromBiography
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -42,7 +46,7 @@ fun PoliticianScreen(navController: NavController, name: String) {
 
     val context = LocalContext.current
     val dataStore = DataStore(context)
-    val viewModel: PartyViewModel = viewModel(factory = PartyViewModelFactory(dataStore))
+    val viewModel: PoliticianViewModel = viewModel(factory = PoliticianViewModelFactory(dataStore))
     val parties by viewModel.parties.collectAsState()
 
 

@@ -8,8 +8,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -31,15 +29,14 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil3.compose.AsyncImage
 import com.example.folkedex.R
-import com.example.folkedex.data.PartyRepository
+import com.example.folkedex.data.local.PartyRepository
 import com.example.folkedex.data.local.DataStore
 import com.example.folkedex.data.model.Actor
-import com.example.folkedex.domain.extractPartyFromBiography
-import com.example.folkedex.domain.extractPoliPictureFromBiography
+import com.example.folkedex.utilities.extractPartyFromBiography
+import com.example.folkedex.utilities.extractPoliPictureFromBiography
 import com.example.folkedex.ui.feature.CollapsibleSearchTopAppBar
-import com.example.folkedex.ui.feature.PartyViewModel
-import com.example.folkedex.ui.feature.PartyViewModelFactory
-import com.example.folkedex.ui.feature.AltSearchBar
+import com.example.folkedex.ui.party.PartyViewModel
+import com.example.folkedex.ui.party.PartyViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -55,7 +52,7 @@ fun PoliticianSelectionScreen(
 
     val context = LocalContext.current
     val dataStore = DataStore(context)
-    val viewModel: PartyViewModel = viewModel(factory = PartyViewModelFactory(dataStore))
+    val viewModel: PoliticianViewModel = viewModel(factory = PoliticianViewModelFactory(dataStore))
 
     val parties by viewModel.parties.collectAsState()
     val politicians = parties.find { it.name == partyName }?.politicians.orEmpty()

@@ -41,30 +41,25 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.folkedex.ui.common.HomeScreen
 import com.example.folkedex.ui.history.HistoryScreen
-import com.example.folkedex.ui.politician.PoliciesScreen
+import com.example.folkedex.ui.policies.PoliciesScreen
 import com.example.folkedex.ui.politician.PoliticianScreen
 import com.example.folkedex.ui.bill.BillScreen
 import com.example.folkedex.ui.theme.DataScreen
 import com.example.folkedex.ui.theme.FavoritesScreen
 import com.example.folkedex.ui.news.NewsScreen
 import com.example.folkedex.ui.party.Party
-import androidx.compose.ui.platform.LocalContext
 
 
 import com.example.folkedex.ui.party.PartySelectionScreen
-import com.example.folkedex.data.PartyRepository
+import com.example.folkedex.data.local.PartyRepository
 import com.example.folkedex.data.local.DataStore
-import com.example.folkedex.ui.feature.PartyViewModel
-import com.example.folkedex.ui.feature.PartyViewModelFactory
 import com.example.folkedex.ui.theme.IssuesScreen
 import com.example.folkedex.ui.politician.PoliticianSelectionScreen
 import com.example.folkedex.ui.report.ReportsScreen
 import kotlinx.coroutines.delay
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import com.example.folkedex.R
 import com.example.folkedex.data.model.Actor
@@ -77,7 +72,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val context = LocalContext.current
             val dataStore = DataStore(context)
-            val viewModel: PartyViewModel = viewModel(factory = PartyViewModelFactory(dataStore))
+            val viewModel: MainActivityViewModel = viewModel(factory = MainActivityViewModelFactory(dataStore))
 
 
             val parties by viewModel.parties.collectAsState()

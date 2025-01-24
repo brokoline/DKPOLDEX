@@ -1,8 +1,6 @@
-package com.example.folkedex.ui.feature
-import android.content.Context
+package com.example.folkedex.data.remote
 import com.example.folkedex.data.model.Actor
 import com.example.folkedex.data.local.DataStore
-import com.example.folkedex.data.remote.RetrofitInstance
 
 object FetchActors {
 
