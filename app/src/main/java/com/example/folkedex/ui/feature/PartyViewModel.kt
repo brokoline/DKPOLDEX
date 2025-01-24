@@ -1,6 +1,7 @@
 package com.example.folkedex.ui.feature
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.folkedex.data.PartyRepository
 import com.example.folkedex.data.PartyRepository.mapActorsToParties
@@ -87,4 +88,13 @@ class PartyViewModel(private val dataStore: DataStore) : ViewModel() {
         }
     }
 
+}
+class PartyViewModelFactory(private val dataStore: DataStore) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(PartyViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return PartyViewModel(dataStore) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
+    }
 }
