@@ -26,9 +26,12 @@ import com.example.folkedex.data.model.FileData
 import com.example.folkedex.data.local.DataStore
 import androidx.compose.foundation.lazy.rememberLazyListState
 import android.net.Uri
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import com.example.folkedex.ui.common.FolketingLogo

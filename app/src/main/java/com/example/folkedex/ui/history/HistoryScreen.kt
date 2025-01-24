@@ -106,6 +106,7 @@ fun HistoryScreen(navController: NavHostController, partyData: PartyData) {
                         .background(Color.White)
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp)
+                )
             }
         }
     }

@@ -58,8 +58,11 @@ import com.example.folkedex.ui.politician.PoliticianSelectionScreen
 import com.example.folkedex.ui.report.ReportsScreen
 import kotlinx.coroutines.delay
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.core.view.WindowCompat
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.folkedex.R
 import com.example.folkedex.data.model.Actor
 import com.example.folkedex.ui.settings.SettingsScreen
@@ -240,7 +243,7 @@ fun SetTopBarIconsColorBasedOnRoute(navController: NavHostController) {
         while (timer.value < maxWaitTime && politician.isEmpty()) {
             delay(1000L) // Wait for 1 second
             timer.value++ // Increment the timer
-            Log.d("timer", timer.value.toString())
+
         }
     }
     if (politician.isEmpty() && !isTimedOut) {
@@ -272,5 +275,24 @@ fun SetTopBarIconsColorBasedOnRoute(navController: NavHostController) {
     } else {
         // Show the main content
         AppNavHost()
+    }
+}
+@Composable
+fun SetTopBarIconsColorBasedOnRoute(navController: NavHostController) {
+    val context = LocalContext.current
+    val window = (context as? Activity)?.window
+
+    val currentBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = currentBackStackEntry?.destination?.route
+
+    LaunchedEffect(currentRoute) {
+        window?.let {
+            val insetsController = WindowCompat.getInsetsController(it, it.decorView)
+            insetsController?.isAppearanceLightStatusBars = when (currentRoute) {
+                "folkedex", "politicians/{partyName}" -> true
+                "Moderaterne", "Socialdemokratiet", "Radikale Venstre", "Socialistisk Folkeparti", "Enhedslisten", "Javnaðarflokkurin", "Inuit Ataqatigiit" -> true
+                else -> false
+            }
+        }
     }
 }

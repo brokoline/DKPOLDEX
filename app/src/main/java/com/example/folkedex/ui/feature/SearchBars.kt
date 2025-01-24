@@ -33,7 +33,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.folkedex.data.PartyRepository.parties
 import com.example.folkedex.data.local.PartyRepository.parties
 import com.example.folkedex.data.local.DataStore
 import com.example.folkedex.data.model.Actor
