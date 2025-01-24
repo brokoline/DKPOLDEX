@@ -32,6 +32,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import com.example.folkedex.ui.settings.exportFavoritesToFile
@@ -49,7 +50,7 @@ fun FavoritesScreen(
     val parties by viewModel.parties.collectAsState()
 
     val favoriteManager = FavoritesHelper(context)
-    val favorites = favoriteManager.getFavorites()
+    var favorites by remember { mutableStateOf(favoriteManager.getFavorites()) }
 
     val favoritePoliticians = parties
         .flatMap { it.politicians }
@@ -197,8 +198,7 @@ fun FavoritesScreen(
                             style = MaterialTheme.typography.titleMedium.copy(color = Color.Black),
                             modifier = Modifier
                                 .clickable {
-                                    favoriteManager.clearFavorites()
-                                    Toast.makeText(context, "Favorites cleared!", Toast.LENGTH_SHORT).show()
+                                    showConfirmationDialog.value = true
                                 }
                                 .padding(horizontal = 8.dp)
                         )
@@ -211,6 +211,7 @@ fun FavoritesScreen(
                             TextButton(
                                 onClick = {
                                     favoriteManager.clearFavorites()
+                                    favorites = favoriteManager.getFavorites()
                                     showConfirmationDialog.value = false
                                     Toast.makeText(context, "Favorites cleared!", Toast.LENGTH_SHORT).show()
                                 }
