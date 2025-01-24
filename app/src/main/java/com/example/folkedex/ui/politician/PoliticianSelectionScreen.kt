@@ -35,8 +35,6 @@ import com.example.folkedex.data.model.Actor
 import com.example.folkedex.utilities.extractPartyFromBiography
 import com.example.folkedex.utilities.extractPoliPictureFromBiography
 import com.example.folkedex.ui.feature.CollapsibleSearchTopAppBar
-import com.example.folkedex.ui.party.PartyViewModel
-import com.example.folkedex.ui.party.PartyViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
